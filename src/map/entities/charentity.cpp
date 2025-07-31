@@ -39,7 +39,6 @@
 #include "packets/inventory_finish.h"
 #include "packets/key_items.h"
 #include "packets/lock_on.h"
-#include "packets/menu_raisetractor.h"
 #include "packets/message_special.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
@@ -51,15 +50,13 @@
 #include "ai/helpers/targetfind.h"
 #include "ai/states/ability_state.h"
 #include "ai/states/attack_state.h"
-#include "ai/states/death_state.h"
-#include "ai/states/inactive_state.h"
 #include "ai/states/item_state.h"
 #include "ai/states/magic_state.h"
-#include "ai/states/raise_state.h"
 #include "ai/states/range_state.h"
 #include "ai/states/weaponskill_state.h"
 
 #include "ability.h"
+#include "aman.h"
 #include "attack.h"
 #include "automatonentity.h"
 #include "battlefield.h"
@@ -99,6 +96,7 @@
 
 CCharEntity::CCharEntity()
 : m_PlayTime(0s)
+, m_AMAN(this)
 {
     TracyZoneScoped;
     objtype     = TYPE_PC;
@@ -260,7 +258,6 @@ CCharEntity::CCharEntity()
     m_ActionOffsetPos  = {};
     m_previousLocation = {};
 
-    m_mentorUnlocked   = false;
     m_jobMasterDisplay = false;
     m_EffectsChanged   = false;
 
@@ -365,7 +362,6 @@ CCharEntity::~CCharEntity()
     destroy(Container);
     destroy(UContainer);
     destroy(CraftContainer);
-    destroy(PJobPoints);
     destroy(PLatentEffectContainer);
 
     PGuildShop = nullptr;
@@ -545,11 +541,6 @@ bool CCharEntity::isAway() const
     return playerConfig.AwayFlg;
 }
 
-bool CCharEntity::isMentor() const
-{
-    return playerConfig.MentorFlg;
-}
-
 bool CCharEntity::hasAutoTargetEnabled() const
 {
     return !playerConfig.AutoTargetOffFlg;
@@ -580,6 +571,12 @@ void CCharEntity::setPetZoningInfo()
             petZoningInfo.jugDuration  = PPetEntity->getJugDuration();
             [[fallthrough]];
         case PET_TYPE::AVATAR:
+            if (PPetEntity->m_PetID == PETID_ALEXANDER || PPetEntity->m_PetID == PETID_ODIN)
+            {
+                // Alexander and Odin cannot persist through zoning.
+                break;
+            }
+            [[fallthrough]];
         case PET_TYPE::AUTOMATON:
         case PET_TYPE::WYVERN:
             petZoningInfo.petLevel = PPetEntity->getSpawnLevel();
@@ -608,7 +605,7 @@ void CCharEntity::resetPetZoningInfo()
     petZoningInfo.jugDuration  = 0s;
 }
 
-bool CCharEntity::shouldPetPersistThroughZoning()
+auto CCharEntity::shouldPetPersistThroughZoning() const -> bool
 {
     PET_TYPE petType{};
     auto     PPetEntity = dynamic_cast<CPetEntity*>(PPet);
@@ -720,9 +717,9 @@ uint8 CCharEntity::getAutomatonElementCapacity(uint8 element)
  *
  ************************************************************************/
 
-CItemContainer* CCharEntity::getStorage(uint8 LocationID)
+auto CCharEntity::getStorage(const uint8 locationId) const -> CItemContainer*
 {
-    switch (LocationID)
+    switch (locationId)
     {
         case LOC_INVENTORY:
             return m_Inventory.get();
@@ -762,8 +759,18 @@ CItemContainer* CCharEntity::getStorage(uint8 LocationID)
             return m_RecycleBin.get();
     }
 
-    ShowWarning("Unhandled or Invalid Location ID (%d) passed to function.", LocationID);
+    ShowWarning("Unhandled or Invalid Location ID (%d) passed to function.", locationId);
     return nullptr;
+}
+
+auto CCharEntity::aman() -> CAMANContainer&
+{
+    if (!m_AMAN.isInitialized())
+    {
+        m_AMAN.init();
+    }
+
+    return m_AMAN;
 }
 
 int8 CCharEntity::getShieldSize()
@@ -893,16 +900,17 @@ timer::duration CCharEntity::GetPlayTime(bool needUpdate)
     return m_PlayTime;
 }
 
-CItemEquipment* CCharEntity::getEquip(SLOTTYPE slot)
+auto CCharEntity::getEquip(const SLOTTYPE slot) const -> CItemEquipment*
 {
-    uint8           loc  = equip[slot];
-    uint8           est  = equipLoc[slot];
+    const uint8     loc  = equip[slot];
+    const uint8     est  = equipLoc[slot];
     CItemEquipment* item = nullptr;
 
     if (loc != 0)
     {
-        item = (CItemEquipment*)getStorage(est)->GetItem(loc);
+        item = static_cast<CItemEquipment*>(getStorage(est)->GetItem(loc));
     }
+
     return item;
 }
 
@@ -1606,23 +1614,27 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
 
                             actionTarget.additionalEffect = effect;
 
-                            // Despite appearances, ws_points_skillchain is not a multiplier it is just an amount "per element"
-                            auto wsPointsSkillchain = settings::get<uint8>("map.WS_POINTS_SKILLCHAIN");
+                            // Despite appearances, ws_points_skillchain is not a multiplier it is just an amount "per skillchain level"
+                            const auto wsPointsSkillchain = settings::get<uint8>("map.WS_POINTS_SKILLCHAIN");
                             if (effect >= 7 && effect < 15)
                             {
-                                wspoints += (1 * wsPointsSkillchain); // 1 element
+                                wspoints += (1 * wsPointsSkillchain); // Level 1
                             }
                             else if (effect >= 3)
                             {
-                                wspoints += (2 * wsPointsSkillchain); // 2 elements
+                                wspoints += (2 * wsPointsSkillchain); // Level 2
                             }
                             else
                             {
-                                wspoints += (4 * wsPointsSkillchain); // 4 elements
+                                wspoints += (3 * wsPointsSkillchain); // Level 3
                             }
                         }
                     }
                     // check for ws points
+                    // TODO: As a general rule, mobs not granting EXP do not give WSP
+                    // The following exceptions apply:
+                    // - PC targeted weaponskills always give WSP
+                    // - A handful of content: Besieged, DI
                     if (charutils::CheckMob(this->GetMLevel(), PTarget->GetMLevel()) > EMobDifficulty::TooWeak)
                     {
                         charutils::AddWeaponSkillPoints(this, damslot, wspoints);
@@ -1848,7 +1860,9 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             CPetEntity* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
             CPetSkill*  PPetSkill  = battleutils::GetPetSkill(PAbility->getID());
 
-            if (PPetEntity && PPetEntity->getPetType() != PET_TYPE::JUG_PET && PPetSkill) // is a real pet (not charmed or a jugpet which is mob-like) and has pet ability - don't display msg and notify pet
+            // is a real pet (charmed pets won't return a valid PPetEntity)
+            // and has pet ability in the pet_skills sql table
+            if (PPetEntity && PPetSkill) // don't display msg and notify pet
             {
                 actionList_t& actionList     = action.getNewActionList();
                 actionList.ActionTargetID    = PTarget->id;
@@ -1860,6 +1874,19 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 actionTarget.messageID       = 0;
 
                 auto PPetTarget = PTarget->targid;
+
+                // set primary target for jug ready abilities (JA targets the player, but the pet acts like a mob and makes its own decision on the skill target)
+                if (PPetEntity->getPetType() == PET_TYPE::JUG_PET)
+                {
+                    if (PPetSkill->getValidTargets() & TARGET_ENEMY)
+                    {
+                        PPetTarget = PPetEntity->GetBattleTargetID();
+                    }
+                    else
+                    {
+                        PPetTarget = PPetEntity->targid;
+                    }
+                }
 
                 PPetEntity->PAI->PetSkill(PPetTarget, PPetSkill->getID());
             }
@@ -2107,7 +2134,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     actionTarget_t& actionTarget = actionList.getNewActionTarget();
     actionTarget.reaction        = REACTION::HIT;   // 0x10
     actionTarget.speceffect      = SPECEFFECT::HIT; // 0x60 (SPECEFFECT_HIT + SPECEFFECT_RECOIL)
-    actionTarget.messageID       = 352;
+    actionTarget.messageID       = MSGBASIC_RANGED_ATTACK_HIT;
 
     CItemWeapon* PItem = (CItemWeapon*)this->getEquip(SLOT_RANGED);
     CItemWeapon* PAmmo = (CItemWeapon*)this->getEquip(SLOT_AMMO);
@@ -2167,7 +2194,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 if (isCritical)
                 {
                     actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
-                    actionTarget.messageID  = 353;
+                    actionTarget.messageID  = MSGBASIC_RANGED_ATTACK_CRIT;
                 }
 
                 // at least 1 hit occured
@@ -2233,10 +2260,40 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     // if a hit did occur (even without barrage)
     if (hitOccured)
     {
+        // Critical Hits don't get distance messaging
+        if (actionTarget.messageID != MSGBASIC_RANGED_ATTACK_CRIT)
+        {
+            auto rangedPenaltyFunction = lua["xi"]["combat"]["ranged"]["attackDistancePenalty"];
+            auto distancePenaltyResult = rangedPenaltyFunction(this, PTarget);
+            int  distancePenalty       = 0;
+
+            if (!distancePenaltyResult.valid())
+            {
+                sol::error err = distancePenaltyResult;
+                ShowError("charentity::OnRangedAttack: %s", err.what());
+            }
+            else
+            {
+                distancePenalty = distancePenaltyResult.get_type() == sol::type::number ? distancePenaltyResult.get<int16>(0) : 0;
+            }
+
+            if (distancePenalty == 0)
+            {
+                actionTarget.messageID = MSGBASIC_RANGED_ATTACK_PUMMELS;
+            }
+            else if (distancePenalty <= 15)
+            {
+                actionTarget.messageID = MSGBASIC_RANGED_ATTACK_SQUARELY;
+            }
+            else
+            {
+                actionTarget.messageID = MSGBASIC_RANGED_ATTACK_HIT;
+            }
+        }
+
         // any misses with barrage cause remaining shots to miss, meaning we must check Action.reaction
         if ((actionTarget.reaction & REACTION::MISS) != REACTION::NONE && StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE))
         {
-            actionTarget.messageID  = 352;
             actionTarget.reaction   = REACTION::HIT;
             actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
         }
@@ -3195,7 +3252,7 @@ void CCharEntity::clearTriggerAreas()
     charTriggerAreaIDs.clear();
 }
 
-bool CCharEntity::isInEvent()
+auto CCharEntity::isInEvent() const -> bool
 {
     return currentEvent->eventId != -1;
 }
@@ -3307,9 +3364,9 @@ void CCharEntity::setLocked(bool locked)
     }
 }
 
-int32 CCharEntity::getCharVar(std::string const& charVarName)
+auto CCharEntity::getCharVar(std::string const& varName) const -> int32
 {
-    if (auto charVar = charVarCache.find(charVarName); charVar != charVarCache.end())
+    if (auto charVar = charVarCache.find(varName); charVar != charVarCache.end())
     {
         std::pair cachedVarData = charVar->second;
 
@@ -3321,9 +3378,9 @@ int32 CCharEntity::getCharVar(std::string const& charVarName)
         }
     }
 
-    auto value = charutils::FetchCharVar(this->id, charVarName);
+    const auto value = charutils::FetchCharVar(this->id, varName);
 
-    charVarCache[charVarName] = value;
+    charVarCache[varName] = value;
     return value.first;
 }
 
