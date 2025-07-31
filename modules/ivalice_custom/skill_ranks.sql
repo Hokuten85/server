@@ -1,0 +1,25 @@
+UPDATE skill_ranks SET thf = 5, dnc = 5, pup = 2 WHERE name = 'hand2hand';
+UPDATE skill_ranks SET war = 3, rdm = 1, thf = 1, brd = 3, rng = 3 WHERE name = 'dagger';
+UPDATE skill_ranks SET war = 3, rdm = 1, thf = 5, brd = 5, blu = 1 WHERE name = 'sword';
+UPDATE skill_ranks SET drk = 1 WHERE name = 'great sword';
+UPDATE skill_ranks SET war = 1, rng = 3 WHERE name = 'axe';
+UPDATE skill_ranks SET war = 3 WHERE name = 'polearm';
+UPDATE skill_ranks SET nin = 1 WHERE name = 'katana';
+UPDATE skill_ranks SET war = 3, pld = 1 WHERE name = 'club';
+UPDATE skill_ranks SET war = 3 WHERE name = 'staff';
+UPDATE skill_ranks SET rng = 1, sam = 2 WHERE name = 'archery';
+UPDATE skill_ranks SET rng = 1, cor = 1 WHERE name = 'marksmanship';
+UPDATE skill_ranks SET nin = 1 WHERE name = 'throwing';
+UPDATE skill_ranks SET mnk = 1 WHERE name = 'guarding';
+UPDATE skill_ranks SET pld = 1 WHERE name = 'divine';
+UPDATE skill_ranks SET rdm = 2 WHERE name = 'enhancing';
+UPDATE skill_ranks SET rdm = 5 WHERE name = 'elemental';
+UPDATE skill_ranks SET drk = 1 WHERE name = 'dark';
+UPDATE skill_ranks SET smn = 1 WHERE name = 'summoning';
+UPDATE skill_ranks SET nin = 1 WHERE name = 'ninjutsu';
+UPDATE skill_ranks SET brd = 1 WHERE name = 'singing';
+UPDATE skill_ranks SET brd = 1 WHERE name = 'string';
+UPDATE skill_ranks SET brd = 1 WHERE name = 'wind';
+UPDATE skill_ranks SET geo = 1 WHERE name = 'geomancy';
+UPDATE skill_ranks SET geo = 1 WHERE name = 'handbell';
+
