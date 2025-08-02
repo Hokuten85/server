@@ -35,7 +35,7 @@ local pTable =
     [xi.magic.spell.AQUAVEIL     ] = { 1, xi.effect.AQUAVEIL,       1,    1,  600, true,  true,  0 },
 
     -- Auspice
-    [xi.magic.spell.AUSPICE      ] = { 1, xi.effect.AUSPICE,       55,    0,  180, true,  false, 0 },
+    [xi.magic.spell.AUSPICE      ] = { 1, xi.effect.AUSPICE,       55,    0,  300, true,  false, 0 },
 
     -- Bar-Element
     [xi.magic.spell.BARAERO      ] = { 1, xi.effect.BARAERO,        1,    0,  480, true,  true,  0 },
@@ -93,22 +93,22 @@ local pTable =
     [xi.magic.spell.EMBRAVA      ] = { 1, xi.effect.EMBRAVA,        5,    0,   90, true,  true,  0 },
 
     -- En-Spell
-    [xi.magic.spell.ENAERO       ] = { 1, xi.effect.ENAERO,        20,    0,  180, true,  false, 0 },
-    [xi.magic.spell.ENBLIZZARD   ] = { 1, xi.effect.ENBLIZZARD,    22,    0,  180, true,  false, 0 },
-    [xi.magic.spell.ENFIRE       ] = { 1, xi.effect.ENFIRE,        24,    0,  180, true,  false, 0 },
-    [xi.magic.spell.ENSTONE      ] = { 1, xi.effect.ENSTONE,       18,    0,  180, true,  false, 0 },
-    [xi.magic.spell.ENTHUNDER    ] = { 1, xi.effect.ENTHUNDER,     16,    0,  180, true,  false, 0 },
-    [xi.magic.spell.ENWATER      ] = { 1, xi.effect.ENWATER,       27,    0,  180, true,  false, 0 },
-    [xi.magic.spell.ENAERO_II    ] = { 2, xi.effect.ENAERO_II,     54,    0,  180, true,  false, 0 },
-    [xi.magic.spell.ENBLIZZARD_II] = { 2, xi.effect.ENBLIZZARD_II, 56,    0,  180, true,  false, 0 },
-    [xi.magic.spell.ENFIRE_II    ] = { 2, xi.effect.ENFIRE_II,     58,    0,  180, true,  false, 0 },
-    [xi.magic.spell.ENSTONE_II   ] = { 2, xi.effect.ENSTONE_II,    52,    0,  180, true,  false, 0 },
-    [xi.magic.spell.ENTHUNDER_II ] = { 2, xi.effect.ENTHUNDER_II,  50,    0,  180, true,  false, 0 },
-    [xi.magic.spell.ENWATER_II   ] = { 2, xi.effect.ENWATER_II,    60,    0,  180, true,  false, 0 },
+    [xi.magic.spell.ENAERO       ] = { 1, xi.effect.ENAERO,        20,    0,  300, true,  false, 0 },
+    [xi.magic.spell.ENBLIZZARD   ] = { 1, xi.effect.ENBLIZZARD,    22,    0,  300, true,  false, 0 },
+    [xi.magic.spell.ENFIRE       ] = { 1, xi.effect.ENFIRE,        24,    0,  300, true,  false, 0 },
+    [xi.magic.spell.ENSTONE      ] = { 1, xi.effect.ENSTONE,       18,    0,  300, true,  false, 0 },
+    [xi.magic.spell.ENTHUNDER    ] = { 1, xi.effect.ENTHUNDER,     16,    0,  300, true,  false, 0 },
+    [xi.magic.spell.ENWATER      ] = { 1, xi.effect.ENWATER,       27,    0,  300, true,  false, 0 },
+    [xi.magic.spell.ENAERO_II    ] = { 2, xi.effect.ENAERO_II,     54,    0,  300, true,  false, 0 },
+    [xi.magic.spell.ENBLIZZARD_II] = { 2, xi.effect.ENBLIZZARD_II, 56,    0,  300, true,  false, 0 },
+    [xi.magic.spell.ENFIRE_II    ] = { 2, xi.effect.ENFIRE_II,     58,    0,  300, true,  false, 0 },
+    [xi.magic.spell.ENSTONE_II   ] = { 2, xi.effect.ENSTONE_II,    52,    0,  300, true,  false, 0 },
+    [xi.magic.spell.ENTHUNDER_II ] = { 2, xi.effect.ENTHUNDER_II,  50,    0,  300, true,  false, 0 },
+    [xi.magic.spell.ENWATER_II   ] = { 2, xi.effect.ENWATER_II,    60,    0,  300, true,  false, 0 },
 
     -- Flurry
-    [xi.magic.spell.FLURRY       ] = { 1, xi.effect.FLURRY_II,     48,   15,  180, true,  false, 0 }, -- Thats the actual effect. Not a typo.
-    [xi.magic.spell.FLURRY_II    ] = { 2, xi.effect.FLURRY_II,     96,   30,  180, true,  false, 0 }, -- Thats the actual effect. Not a typo.
+    [xi.magic.spell.FLURRY       ] = { 1, xi.effect.FLURRY_II,     48,   15,  300, true,  false, 0 }, -- Thats the actual effect. Not a typo.
+    [xi.magic.spell.FLURRY_II    ] = { 2, xi.effect.FLURRY_II,     96,   30,  300, true,  false, 0 }, -- Thats the actual effect. Not a typo.
 
     -- Foil
     [xi.magic.spell.FOIL         ] = { 1, xi.effect.FOIL,          58,  150,   30, true,  false, 3 },
@@ -123,14 +123,14 @@ local pTable =
     [xi.magic.spell.GAIN_CHR     ] = { 1, xi.effect.CHR_BOOST,      1,    5,  300, true,  false, 0 },
 
     -- Haste
-    [xi.magic.spell.HASTE        ] = { 1, xi.effect.HASTE,         40, 1465,  180, true,  false, 0 },
-    [xi.magic.spell.HASTE_II     ] = { 2, xi.effect.HASTE,         96, 2998,  180, true,  false, 0 },
-    [xi.magic.spell.HASTEGA      ] = { 1, xi.effect.HASTE,         48, 1494,  180, false, false, 0 },
+    [xi.magic.spell.HASTE        ] = { 1, xi.effect.HASTE,         40, 1465,  300, true,  false, 0 },
+    [xi.magic.spell.HASTE_II     ] = { 2, xi.effect.HASTE,         96, 2998,  300, true,  false, 0 },
+    [xi.magic.spell.HASTEGA      ] = { 1, xi.effect.HASTE,         48, 1494,  300, false, false, 0 },
     -- [xi.magic.spell.HASTEGA_II   ] = { 2, xi.effect.HASTE,         99, 2998,  180, false, false, 0 },
 
     -- Phalanx
-    [xi.magic.spell.PHALANX      ] = { 1, xi.effect.PHALANX,       33,    0,  180, true,  false, 0 },
-    [xi.magic.spell.PHALANX_II   ] = { 2, xi.effect.PHALANX,       75,    0,  240, true,  false, 0 },
+    [xi.magic.spell.PHALANX      ] = { 1, xi.effect.PHALANX,       33,    0,  300, true,  false, 0 },
+    [xi.magic.spell.PHALANX_II   ] = { 2, xi.effect.PHALANX,       75,    0,  300, true,  false, 0 },
 
     -- Protect / Protectra
     [xi.magic.spell.PROTECT      ] = { 1, xi.effect.PROTECT,        7,   20, 1800, false, false, 0 },
@@ -145,16 +145,16 @@ local pTable =
     [xi.magic.spell.PROTECTRA_V  ] = { 5, xi.effect.PROTECT,       75,  220, 1800, false, false, 0 },
 
     -- Refresh
-    [xi.magic.spell.REFRESH      ] = { 1, xi.effect.REFRESH,       41,    3,  150, true,  true,  0 },
-    [xi.magic.spell.REFRESH_II   ] = { 2, xi.effect.REFRESH,       82,    6,  150, true,  true,  0 },
-    [xi.magic.spell.REFRESH_III  ] = { 3, xi.effect.REFRESH,       99,    9,  150, true,  true,  0 },
+    [xi.magic.spell.REFRESH      ] = { 1, xi.effect.REFRESH,       41,    3,  300, true,  true,  0 },
+    [xi.magic.spell.REFRESH_II   ] = { 2, xi.effect.REFRESH,       82,    6,  300, true,  true,  0 },
+    [xi.magic.spell.REFRESH_III  ] = { 3, xi.effect.REFRESH,       99,    9,  300, true,  true,  0 },
 
     -- Regen
-    [xi.magic.spell.REGEN        ] = { 1, xi.effect.REGEN,         21,    5,   75, true,  false, 0 },
-    [xi.magic.spell.REGEN_II     ] = { 2, xi.effect.REGEN,         44,   12,   60, true,  false, 0 },
-    [xi.magic.spell.REGEN_III    ] = { 3, xi.effect.REGEN,         66,   20,   60, true,  false, 0 },
-    [xi.magic.spell.REGEN_IV     ] = { 4, xi.effect.REGEN,         86,   30,   60, true,  false, 0 },
-    [xi.magic.spell.REGEN_V      ] = { 5, xi.effect.REGEN,         99,   40,   60, true,  false, 0 },
+    [xi.magic.spell.REGEN        ] = { 1, xi.effect.REGEN,         21,    5,  300, true,  false, 0 },
+    [xi.magic.spell.REGEN_II     ] = { 2, xi.effect.REGEN,         44,   12,  300, true,  false, 0 },
+    [xi.magic.spell.REGEN_III    ] = { 3, xi.effect.REGEN,         66,   20,  300, true,  false, 0 },
+    [xi.magic.spell.REGEN_IV     ] = { 4, xi.effect.REGEN,         86,   30,  300, true,  false, 0 },
+    [xi.magic.spell.REGEN_V      ] = { 5, xi.effect.REGEN,         99,   40,  300, true,  false, 0 },
 
     -- Shell / Shellra
     [xi.magic.spell.SHELL        ] = { 1, xi.effect.SHELL,         18, 1055, 1800, false, false, 0 },
@@ -172,23 +172,23 @@ local pTable =
     [xi.magic.spell.STONESKIN    ] = { 1, xi.effect.STONESKIN,     28,    0,  300, true,  false, 0 },
 
     -- -Spikes
-    [xi.magic.spell.BLAZE_SPIKES ] = { 1, xi.effect.BLAZE_SPIKES,   1,    0,  180, true,  false, 0 },
-    [xi.magic.spell.ICE_SPIKES   ] = { 1, xi.effect.ICE_SPIKES,     1,    0,  180, true,  false, 0 },
-    [xi.magic.spell.SHOCK_SPIKES ] = { 1, xi.effect.SHOCK_SPIKES,   1,    0,  180, true,  false, 0 },
+    [xi.magic.spell.BLAZE_SPIKES ] = { 1, xi.effect.BLAZE_SPIKES,   1,    0,  300, true,  false, 0 },
+    [xi.magic.spell.ICE_SPIKES   ] = { 1, xi.effect.ICE_SPIKES,     1,    0,  300, true,  false, 0 },
+    [xi.magic.spell.SHOCK_SPIKES ] = { 1, xi.effect.SHOCK_SPIKES,   1,    0,  300, true,  false, 0 },
 
     -- -storm
-    [xi.magic.spell.AURORASTORM  ] = { 1, xi.effect.AURORASTORM,   48,    2,  180, true,  true, 0 },
-    [xi.magic.spell.FIRESTORM    ] = { 1, xi.effect.FIRESTORM,     44,    2,  180, true,  true, 0 },
-    [xi.magic.spell.HAILSTORM    ] = { 1, xi.effect.HAILSTORM,     45,    2,  180, true,  true, 0 },
-    [xi.magic.spell.RAINSTORM    ] = { 1, xi.effect.RAINSTORM,     42,    2,  180, true,  true, 0 },
-    [xi.magic.spell.SANDSTORM    ] = { 1, xi.effect.SANDSTORM,     41,    2,  180, true,  true, 0 },
-    [xi.magic.spell.THUNDERSTORM ] = { 1, xi.effect.THUNDERSTORM,  46,    2,  180, true,  true, 0 },
-    [xi.magic.spell.VOIDSTORM    ] = { 1, xi.effect.VOIDSTORM,     47,    2,  180, true,  true, 0 },
-    [xi.magic.spell.WINDSTORM    ] = { 1, xi.effect.WINDSTORM,     43,    2,  180, true,  true, 0 },
+    [xi.magic.spell.AURORASTORM  ] = { 1, xi.effect.AURORASTORM,   48,    2,  300, true,  true, 0 },
+    [xi.magic.spell.FIRESTORM    ] = { 1, xi.effect.FIRESTORM,     44,    2,  300, true,  true, 0 },
+    [xi.magic.spell.HAILSTORM    ] = { 1, xi.effect.HAILSTORM,     45,    2,  300, true,  true, 0 },
+    [xi.magic.spell.RAINSTORM    ] = { 1, xi.effect.RAINSTORM,     42,    2,  300, true,  true, 0 },
+    [xi.magic.spell.SANDSTORM    ] = { 1, xi.effect.SANDSTORM,     41,    2,  300, true,  true, 0 },
+    [xi.magic.spell.THUNDERSTORM ] = { 1, xi.effect.THUNDERSTORM,  46,    2,  300, true,  true, 0 },
+    [xi.magic.spell.VOIDSTORM    ] = { 1, xi.effect.VOIDSTORM,     47,    2,  300, true,  true, 0 },
+    [xi.magic.spell.WINDSTORM    ] = { 1, xi.effect.WINDSTORM,     43,    2,  300, true,  true, 0 },
 
     -- Temper
-    [xi.magic.spell.TEMPER       ] = { 1, xi.effect.MULTI_STRIKES, 95,    5,  180, true,  false, 0 },
-    [xi.magic.spell.TEMPER_II    ] = { 2, xi.effect.MULTI_STRIKES, 99,    5,  180, true,  false, 0 },
+    [xi.magic.spell.TEMPER       ] = { 1, xi.effect.MULTI_STRIKES, 95,    5,  300, true,  false, 0 },
+    [xi.magic.spell.TEMPER_II    ] = { 2, xi.effect.MULTI_STRIKES, 99,    5,  300, true,  false, 0 },
 }
 
 -- Enhancing Spell Base Potency function.
