@@ -171,38 +171,38 @@ local pTable =
 -- Ninjutsu spells: https://www.ffxiah.com/forum/topic/56749/updated-ninjutsu-damage-formulae/
 --                                       1          2     3        4   5      6  7
 -- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I, M0 },
-    [xi.magic.spell.DOTON_ICHI    ] = { xi.mod.INT,    0,   16,    1,   16,  25, 0 },
-    [xi.magic.spell.DOTON_NI      ] = { xi.mod.INT,    0,   69,    1,   69, 113, 0 },
-    [xi.magic.spell.DOTON_SAN     ] = { xi.mod.INT,    0,  134,    2,  134, 118, 0 },
-    [xi.magic.spell.HUTON_ICHI    ] = { xi.mod.INT,    0,   16,    1,   16,  25, 0 },
-    [xi.magic.spell.HUTON_NI      ] = { xi.mod.INT,    0,   69,    1,   69, 113, 0 },
-    [xi.magic.spell.HUTON_SAN     ] = { xi.mod.INT,    0,  134,    2,  134, 118, 0 },
-    [xi.magic.spell.HYOTON_ICHI   ] = { xi.mod.INT,    0,   16,    1,   16,  25, 0 },
-    [xi.magic.spell.HYOTON_NI     ] = { xi.mod.INT,    0,   69,    1,   69, 113, 0 },
-    [xi.magic.spell.HYOTON_SAN    ] = { xi.mod.INT,    0,  134,    2,  134, 118, 0 },
-    [xi.magic.spell.KATON_ICHI    ] = { xi.mod.INT,    0,   16,    1,   16,  25, 0 },
-    [xi.magic.spell.KATON_NI      ] = { xi.mod.INT,    0,   69,    1,   69, 113, 0 },
-    [xi.magic.spell.KATON_SAN     ] = { xi.mod.INT,    0,  134,    2,  134, 118, 0 },
-    [xi.magic.spell.RAITON_ICHI   ] = { xi.mod.INT,    0,   16,    1,   16,  25, 0 },
-    [xi.magic.spell.RAITON_NI     ] = { xi.mod.INT,    0,   69,    1,   69, 113, 0 },
-    [xi.magic.spell.RAITON_SAN    ] = { xi.mod.INT,    0,  134,    2,  134, 118, 0 },
-    [xi.magic.spell.SUITON_ICHI   ] = { xi.mod.INT,    0,   16,    1,   16,  25, 0 },
-    [xi.magic.spell.SUITON_NI     ] = { xi.mod.INT,    0,   69,    1,   69, 113, 0 },
-    [xi.magic.spell.SUITON_SAN    ] = { xi.mod.INT,    0,  134,    2,  134, 118, 0 },
+    [xi.magic.spell.DOTON_ICHI    ] = { xi.mod.INT,    0,   16,    1,   50,  25, 0 },
+    [xi.magic.spell.DOTON_NI      ] = { xi.mod.INT,    0,   69,    1,  100, 113, 0 },
+    [xi.magic.spell.DOTON_SAN     ] = { xi.mod.INT,    0,  134,    2,  150, 118, 0 },
+    [xi.magic.spell.HUTON_ICHI    ] = { xi.mod.INT,    0,   16,    1,   50,  25, 0 },
+    [xi.magic.spell.HUTON_NI      ] = { xi.mod.INT,    0,   69,    1,  100, 113, 0 },
+    [xi.magic.spell.HUTON_SAN     ] = { xi.mod.INT,    0,  134,    2,  150, 118, 0 },
+    [xi.magic.spell.HYOTON_ICHI   ] = { xi.mod.INT,    0,   16,    1,   50,  25, 0 },
+    [xi.magic.spell.HYOTON_NI     ] = { xi.mod.INT,    0,   69,    1,  100, 113, 0 },
+    [xi.magic.spell.HYOTON_SAN    ] = { xi.mod.INT,    0,  134,    2,  150, 118, 0 },
+    [xi.magic.spell.KATON_ICHI    ] = { xi.mod.INT,    0,   16,    1,   50,  25, 0 },
+    [xi.magic.spell.KATON_NI      ] = { xi.mod.INT,    0,   69,    1,  100, 113, 0 },
+    [xi.magic.spell.KATON_SAN     ] = { xi.mod.INT,    0,  134,    2,  150, 118, 0 },
+    [xi.magic.spell.RAITON_ICHI   ] = { xi.mod.INT,    0,   16,    1,   50,  25, 0 },
+    [xi.magic.spell.RAITON_NI     ] = { xi.mod.INT,    0,   69,    1,  100, 113, 0 },
+    [xi.magic.spell.RAITON_SAN    ] = { xi.mod.INT,    0,  134,    2,  150, 118, 0 },
+    [xi.magic.spell.SUITON_ICHI   ] = { xi.mod.INT,    0,   16,    1,   50,  25, 0 },
+    [xi.magic.spell.SUITON_NI     ] = { xi.mod.INT,    0,   69,    1,  100, 113, 0 },
+    [xi.magic.spell.SUITON_SAN    ] = { xi.mod.INT,    0,  134,    2,  150, 118, 0 },
 
 -- Divine spells: https://nw6yx36onohv5j6wmzoba3nllq-ac4c6men2g7xr2a-wiki-ffo-jp.translate.goog/html/1963.html
 --                                       1          2     3        4   5      6  7
 -- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I, M0 },
-    [xi.magic.spell.BANISH        ] = { xi.mod.MND,    0,   14,    1,   14,  25, 0 },
-    [xi.magic.spell.BANISH_II     ] = { xi.mod.MND,    0,   85,    1,   85, 113, 0 },
-    [xi.magic.spell.BANISH_III    ] = { xi.mod.MND,    0,  198,  1.5,  198, 250, 0 },
-    [xi.magic.spell.BANISH_IV     ] = { xi.mod.MND,    0,  420,  1.5,  420, 400, 0 }, -- Enemy only. Stats unknown/unchecked.
-    [xi.magic.spell.BANISHGA      ] = { xi.mod.MND,    0,   50,    1,   50,  46, 0 },
-    [xi.magic.spell.BANISHGA_II   ] = { xi.mod.MND,    0,  180,    1,  180, 133, 0 },
-    [xi.magic.spell.BANISHGA_III  ] = { xi.mod.MND,    0,  480,  1.5,  480, 450, 0 }, -- Enemy only. Stats unknown.
-    [xi.magic.spell.BANISHGA_IV   ] = { xi.mod.MND,    0,  600,  1.5,  600, 600, 0 }, -- Enemy only. Stats unknown.
-    [xi.magic.spell.HOLY          ] = { xi.mod.MND,    0,  125,    1,  125, 150, 0 },
-    [xi.magic.spell.HOLY_II       ] = { xi.mod.MND,    0,  250,    2,  250, 300, 0 },
+    [xi.magic.spell.BANISH        ] = { xi.mod.MND,    0,   14,    1,   85,  25, 0 },
+    [xi.magic.spell.BANISH_II     ] = { xi.mod.MND,    0,   85,    1,  200, 113, 0 },
+    [xi.magic.spell.BANISH_III    ] = { xi.mod.MND,    0,  198,  1.5,  350, 250, 0 },
+    [xi.magic.spell.BANISH_IV     ] = { xi.mod.MND,    0,  420,  1.5,  600, 400, 0 }, -- Enemy only. Stats unknown/unchecked.
+    [xi.magic.spell.BANISHGA      ] = { xi.mod.MND,    0,   50,    1,  200,  46, 0 },
+    [xi.magic.spell.BANISHGA_II   ] = { xi.mod.MND,    0,  180,    1,  400, 133, 0 },
+    [xi.magic.spell.BANISHGA_III  ] = { xi.mod.MND,    0,  480,  1.5,  700, 450, 0 }, -- Enemy only. Stats unknown.
+    [xi.magic.spell.BANISHGA_IV   ] = { xi.mod.MND,    0,  600,  1.5,  800, 600, 0 }, -- Enemy only. Stats unknown.
+    [xi.magic.spell.HOLY          ] = { xi.mod.MND,    0,  125,    1,  300, 150, 0 },
+    [xi.magic.spell.HOLY_II       ] = { xi.mod.MND,    0,  250,    2,  400, 300, 0 },
 
 -- Dark spells.
 --                                       1          2     3     4      5      6    7    8    9     10    11    12    13
