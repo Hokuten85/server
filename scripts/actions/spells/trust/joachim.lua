@@ -38,6 +38,18 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.TARGET, { ai.c.ALWAYS, 0 }, { ai.r.RATTACK, 0, 0 }, 60)
 
     mob:setAutoAttackEnabled(false)
+	
+	if mob:getMainLvl() >= 4 then
+		mob:addMod(xi.mod.MINUET_EFFECT, 2)
+	end
+	
+	if mob:getMainLvl() >= 32 then
+		mob:addMod(xi.mod.MADRIGAL_EFFECT, 2)
+	end
+	
+	if mob:getMainLvl() >= 36 then
+		mob:addMod(xi.mod.MARCH_EFFECT, 2)
+	end
 
     mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.MID_RANGE)
 end
