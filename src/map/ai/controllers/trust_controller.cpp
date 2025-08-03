@@ -24,6 +24,7 @@
 #include "ability.h"
 #include "ai/helpers/gambits_container.h"
 #include "ai/states/despawn_state.h"
+#include "ai/states/ability_state.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/range_state.h"
 #include "enmity_container.h"
@@ -36,6 +37,7 @@
 #include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/charutils.h"
+#include <utils/trustutils.h>
 
 namespace
 {
@@ -128,15 +130,61 @@ void CTrustController::DoCombatTick(timer::time_point tick)
     }
 
     // If busy, don't run around!
-    if (POwner->PAI->IsCurrentState<CMagicState>() || POwner->PAI->IsCurrentState<CRangeState>())
+    if (POwner->PAI->IsCurrentState<CAbilityState>() || POwner->PAI->IsCurrentState<CMagicState>() || POwner->PAI->IsCurrentState<CRangeState>())
     {
         return;
     }
 
     CTrustEntity* PTrust  = static_cast<CTrustEntity*>(POwner);
     CCharEntity*  PMaster = static_cast<CCharEntity*>(POwner->PMaster);
-    PTarget               = POwner->GetBattleTarget();
 
+    if (!actionQueue->empty())
+    {
+        auto action = actionQueue->front();
+        PTarget     = (CBattleEntity*)POwner->GetEntity(action->targId);
+
+        if (PTarget != nullptr && !PTarget->isDead())
+        {
+            if (action->action_type == ACTION_TYPE::SPELL)
+            {
+                auto PSpell = spell::GetSpell(static_cast<SpellID>(action->actionId));
+                if (action->requiresMove)
+                {
+                    auto spelldistance = ((PSpell->getValidTarget() == TARGET_SELF && PSpell->getAOE() == SPELLAOE_RADIAL && PSpell->getRange() == 0) ||
+                                          (PSpell->getValidTarget() && TARGET_PLAYER_PARTY_PIANISSIMO && PSpell->getAOE() == SPELLAOE_PIANISSIMO && !POwner->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO)))
+                                             ? spell::GetSpellRadius(PSpell, POwner)
+                                             : PSpell->getRange();
+
+                    if (distance(POwner->loc.p, PTarget->loc.p) > spelldistance)
+                    {
+                        PathOutToDistance(PTarget, std::max(0.0f, spelldistance - 2.5f)); // set path distance to inside casting range
+                        POwner->PAI->PathFind->FollowPath(m_Tick);
+                        return;
+                    }
+                    else
+                    {
+                        action->requiresMove = false;
+                    }
+                }
+
+                this->Cast(action->targId, static_cast<SpellID>(action->actionId));
+                actionQueue->pop();
+            }
+            else if (action->action_type == ACTION_TYPE::JA)
+            {
+                this->Ability(action->targId, action->actionId);
+                actionQueue->pop();
+            }
+        }
+        else
+        {
+            actionQueue->pop();
+        }
+
+        return;
+    }
+
+    PTarget = POwner->GetBattleTarget();
     if (PTarget)
     {
         if (POwner->PAI->CanFollowPath() && POwner->GetSpeed() > 0)
@@ -407,7 +455,16 @@ bool CTrustController::Ability(uint16 targid, uint16 abilityid)
 {
     TracyZoneScoped;
 
-    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, abilityid, 0s))
+    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, abilityid, 0s) ||
+        POwner->StatusEffectContainer->HasStatusEffect({ EFFECT_AMNESIA, EFFECT_IMPAIRMENT }) ||
+        !trustutils::hasAbility(static_cast<CTrustEntity*>(POwner), abilityid))
+    {
+        return false;
+    }
+
+    CAbility* PAbility = ability::GetAbility(abilityid);
+    auto      PTarget  = POwner->PAI->TargetFind->getValidTarget(targid, PAbility->getValidTarget());
+    if (PTarget != nullptr && distance(POwner->loc.p, PTarget->loc.p) > PAbility->getRange())
     {
         return false;
     }
@@ -453,6 +510,11 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
         return false;
     }
 
+    if (POwner->StatusEffectContainer->HasStatusEffect({ EFFECT_SILENCE, EFFECT_MUTE, EFFECT_OMERTA })) // Silenced
+    {
+        return false;
+    }
+
     auto* PSpell = spell::GetSpell(spellid);
     if (PSpell->getValidTarget() == TARGET_SELF)
     {
@@ -462,6 +524,20 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
     auto PTarget      = (CBattleEntity*)POwner->GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
     auto PSpellFamily = PSpell->getSpellFamily();
     bool canCast      = true;
+    auto castdistance = (PSpell->getValidTarget() == TARGET_SELF && PSpell->getAOE() == SPELLAOE_RADIAL && PSpell->getRange() == 0)
+                            ? spell::GetSpellRadius(PSpell, POwner)
+                            : PSpell->getRange();
+
+    if (distance(POwner->loc.p, PTarget->loc.p) > castdistance) // check casting distance
+    {
+        if (static_cast<CTrustEntity*>(POwner)->getMobMod(MOBMOD_TRUST_DISTANCE) != TRUST_MOVEMENT_TYPE::MELEE) // melee characters don't move to cast
+        {
+            QueueAction_t* newAction = new QueueAction_t{ ACTION_TYPE::SPELL, targid, static_cast<uint16>(spellid), true };
+            actionQueue->push(newAction);
+        }
+
+        return false;
+    }
 
     // clang-format off
     static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)

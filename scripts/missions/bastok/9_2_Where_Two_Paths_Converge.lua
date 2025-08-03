@@ -22,6 +22,7 @@ mission.reward =
     rank = 10,
     gil = 100000,
     title = xi.title.HERO_AMONG_HEROES,
+    item = randomColoredDrop,
 }
 
 local handleAcceptMission = function(player, csid, option, npc)

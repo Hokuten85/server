@@ -857,6 +857,23 @@ namespace charutils
             PChar->m_FieldChocobo = rset->get<uint32>("field_chocobo");
         }
 
+        fmtQuery = "SELECT modid, value"
+                   " FROM char_mods"
+                   " WHERE charid = ?";
+
+        rset = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount())
+        {
+            while (rset->next())
+            {
+                Mod   ModID    = (Mod)rset->get<UINT>("modid");
+                int16 ModValue = (int16)rset->get<UINT>("value");
+
+                PChar->addModifier(ModID, ModValue);
+                PChar->setCharMod(ModID, ModValue);
+            }
+        }
+
         // TODO: LoadCharFlagsFromSQL
         fmtQuery = "SELECT gmModeEnabled, gmHiddenEnabled FROM char_flags WHERE charid = ?";
 
@@ -4519,7 +4536,7 @@ namespace charutils
                                     exp *= 1.5f;
                                     break;
                                 default:
-                                    exp *= 1.55f;
+                                    exp *= 1.55f + + PMember->expChain.chainNumber * 0.005f;
                                     break;
                             }
                         }
@@ -7648,5 +7665,17 @@ namespace charutils
 
         ForceRezone(PChar);
         return true;
+    }
+
+    void AddCharMod(CCharEntity* PChar, Mod type, int value)
+    {
+        PChar->addModifier(type, value);
+        PChar->addCharMod(type, value);
+
+        if (!db::preparedStmt("INSERT INTO char_mods (charid, modid, value) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE value = ?;",
+                              PChar->id, (int)type, PChar->getCharMod(type), PChar->getCharMod(type)))
+        {
+            ShowError("Error writing char mod for: '%s'", PChar->name.c_str());
+        }
     }
 }; // namespace charutils

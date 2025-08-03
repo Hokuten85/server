@@ -54,6 +54,10 @@ xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, prima
     calcParams.skillType = attack.weaponType
     calcParams.tpUsed = tp
 
+    wsParams.atk100 = wsParams.atk100 or 1
+    wsParams.atk200 = wsParams.atk200 or 1
+    wsParams.atk300 = wsParams.atk300 or 1
+
     -- Send our wsParams off to calculate our raw WS damage, hits landed, and shadows absorbed
     calcParams = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
     local finaldmg = calcParams.finalDmg
@@ -107,6 +111,10 @@ xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, t
     }
 
     local rangedDamage = attacker:getRangedDmg() * (1 + attacker:getMod(xi.mod.AUTO_RANGED_DAMAGEP) / 100)
+
+    wsParams.atk100 = wsParams.atk100 or 1
+    wsParams.atk200 = wsParams.atk200 or 1
+    wsParams.atk300 = wsParams.atk300 or 1
 
     local calcParams =
     {

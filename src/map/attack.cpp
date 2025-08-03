@@ -571,14 +571,14 @@ void CAttack::ProcessDamage()
         (behind(m_attacker->loc.p, m_victim->loc.p, 64) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
          m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBT)))
     {
-        m_bonusBasePhysicalDamage += m_attacker->DEX() * (1.0f + m_attacker->getMod(Mod::SNEAK_ATK_DEX) / 100.0f);
+        m_bonusBasePhysicalDamage += m_attacker->DEX() * (1.0f + m_attacker->getMod(Mod::SNEAK_ATK_DEX) / 100.0f) * 1.2f;
         m_isSA = true;
     }
 
     // Trick attack.
     if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attackRound->GetTAEntity() != nullptr)
     {
-        m_bonusBasePhysicalDamage += m_attacker->AGI() * (1.0f + m_attacker->getMod(Mod::TRICK_ATK_AGI) / 100.0f);
+        m_bonusBasePhysicalDamage += m_attacker->AGI() * (1.0f + m_attacker->getMod(Mod::TRICK_ATK_AGI) / 100.0f) * 1.2f;
         m_isTA = true;
     }
 

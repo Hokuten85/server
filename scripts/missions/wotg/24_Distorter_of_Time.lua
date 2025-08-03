@@ -11,6 +11,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DISTORTER
 mission.reward =
 {
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.THE_WILL_OF_THE_WORLD },
+    item = randomColoredDrop,
 }
 
 mission.sections =

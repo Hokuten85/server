@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.IN_A_HAZ
 
 quest.reward =
 {
-    item = xi.item.FULLMETAL_BULLET,
+    item = { xi.item.FULLMETAL_BULLET, randomColoredDrop },
 }
 
 quest.sections =

@@ -1120,10 +1120,10 @@ void CCharEntity::PostTick()
             // clang-format on
         }
         // Do not send an update packet when only the position has change
-        if (updatemask ^ UPDATE_POS)
-        {
+        /*if (updatemask ^ UPDATE_POS)
+        {*/
             pushPacket<CCharStatusPacket>(this);
-        }
+        //}
         updatemask = 0;
     }
 }
@@ -1748,6 +1748,11 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         else
         {
             action.recast = PAbility->getRecastTime() - meritRecastReduction;
+        }
+
+        if (PAbility->getID() == ABILITY_THIRD_EYE && this->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN))
+        {
+            action.recast /= 2;
         }
 
         if (PAbility->getID() == ABILITY_LIGHT_ARTS || PAbility->getID() == ABILITY_DARK_ARTS || PAbility->getRecastId() == 231) // stratagems
@@ -2503,12 +2508,12 @@ void CCharEntity::OnRaise()
         // add weakness effect (75% reduction in HP/MP)
         if (GetLocalVar("MijinGakure") == 0)
         {
-            auto weaknessTime = 5min;
+            auto weaknessTime = 2min;
 
             // Arise has a reduced weakness time of 3 mins
             if (m_hasArise)
             {
-                weaknessTime = 3min;
+                weaknessTime = 1min;
             }
 
             CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, m_weaknessLvl, 0s, weaknessTime);
@@ -3457,4 +3462,18 @@ bool CCharEntity::startSynth(SKILLTYPE synthSkill)
         return PAI->Internal_Synth(synthSkill);
     }
     return false;
+}
+
+void CCharEntity::setCharMod(Mod type, int16 value)
+{
+    m_charModStat[type] = value;
+}
+int16 CCharEntity::getCharMod(Mod type)
+{
+    return m_charModStat[type];
+}
+
+void CCharEntity::addCharMod(Mod type, int16 value)
+{
+    m_charModStat[type] += value;
 }

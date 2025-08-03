@@ -1102,6 +1102,9 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs: 1157 and onward
+
+    ENMITY_CAP           = 3000,
+    CRITHITDMG_SLOT      = 3001,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

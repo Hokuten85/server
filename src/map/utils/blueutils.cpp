@@ -164,7 +164,7 @@ namespace blueutils
                 // make sure the difference between spell skill and player is at most 31 points
                 if (playerSkillLvl >= skillLvlForSpell - 31)
                 {
-                    auto chanceToLearn = 33 + PBlueMage->getMod(Mod::BLUE_LEARN_CHANCE);
+                    auto chanceToLearn = 67 + PBlueMage->getMod(Mod::BLUE_LEARN_CHANCE);
                     if (xirand::GetRandomNumber(100) < chanceToLearn)
                     {
                         if (charutils::addSpell(PBlueMage, static_cast<uint16>(PSpell->getID())))
@@ -321,7 +321,7 @@ namespace blueutils
         }
         else
         {
-            uint8 points = std::clamp(((level - 1) / 10) * 5 + 10, 0, 55);
+            uint8 points = std::clamp(((level - 1) / 10) * 5 + 20, 0, 55);
             if (level >= 75)
             {
                 points = points + PChar->PMeritPoints->GetMeritValue(MERIT_ASSIMILATION, PChar);

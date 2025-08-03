@@ -12,6 +12,7 @@ local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.ONE_TO_BE_F
 mission.reward =
 {
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.CHAINS_AND_BONDS },
+    item = randomColoredDrop,
 }
 
 mission.sections =

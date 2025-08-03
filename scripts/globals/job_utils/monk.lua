@@ -87,6 +87,11 @@ xi.job_utils.monk.useChiBlast = function(player, target, ability)
     target:takeDamage(dmg, player, xi.attackType.BREATH, xi.damageType.ELEMENTAL)
     target:updateClaim(player)
     player:delStatusEffect(xi.effect.BOOST)
+	
+	local merits = player:getMerit(xi.merit.PENANCE)
+	if merits > 0 then
+		target:addStatusEffect(xi.effect.INHIBIT_TP, 25, 0, merits)
+	end
 
     return dmg
 end
@@ -99,18 +104,18 @@ xi.job_utils.monk.useCounterstance = function(player, target, ability)
 end
 
 xi.job_utils.monk.useDodge = function(player, target, ability)
-    player:addStatusEffect(xi.effect.DODGE, 0, 0, 30)
+    player:addStatusEffect(xi.effect.DODGE, 0, 0, 180)
 end
 
 xi.job_utils.monk.useFocus = function(player, target, ability)
-    player:addStatusEffect(xi.effect.FOCUS, 0, 0, 30)
+    player:addStatusEffect(xi.effect.FOCUS, 0, 0, 180)
 end
 
 xi.job_utils.monk.useFootwork = function(player, target, ability)
     local kickDmg = 20 + player:getWeaponDmg()
     local kickAttPercent = 25 + player:getMod(xi.mod.FOOTWORK_ATT_BONUS)
 
-    player:addStatusEffect(xi.effect.FOOTWORK, kickDmg, 0, 60, 0, kickAttPercent)
+    player:addStatusEffect(xi.effect.FOOTWORK, kickDmg, 0, 180, 0, kickAttPercent)
 end
 
 xi.job_utils.monk.useFormlessStrikes = function(player, target, ability)

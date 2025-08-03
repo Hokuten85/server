@@ -13,6 +13,7 @@ mission.reward =
 {
     title       = xi.title.NAGMOLADAS_UNDERLING,
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.THE_SECRETS_OF_WORSHIP },
+    item = randomColoredDrop,
 }
 
 mission.sections =

@@ -518,6 +518,10 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
                     return false;
                 }
             }
+            else if (m_findType == FIND_TYPE::PLAYER_PLAYER && PTarget->PMaster->objtype == TYPE_PC)
+            {
+                return PTarget->objtype == TYPE_PET || PTarget->objtype == TYPE_TRUST;
+            }
             else if (m_findType == FIND_TYPE::MONSTER_MONSTER || m_findType == FIND_TYPE::PLAYER_PLAYER)
             {
                 return PTarget->objtype == TYPE_TRUST;
@@ -617,6 +621,11 @@ CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTa
     if (validTargetFlags & TARGET_PET)
     {
         return m_PBattleEntity->PPet;
+    }
+
+    if (PTarget->objtype == TYPE_PET && PTarget->isDead())
+    {
+        return nullptr;
     }
 
     bool ignoreBattleId  = (validTargetFlags & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID;

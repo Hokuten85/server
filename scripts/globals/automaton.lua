@@ -181,13 +181,13 @@ local regenRefreshFormulas =
 local function getRegenModValue(pet, attachmentName, numManeuvers)
     local petMaxHP = pet:getMaxHP()
 
-    return regenRefreshFormulas[attachmentName][1][numManeuvers + 1] + petMaxHP * (regenRefreshFormulas[attachmentName][2][numManeuvers + 1] / 100)
+    return regenRefreshFormulas[attachmentName][1][math.min(numManeuvers + 1, 3)] + petMaxHP * (regenRefreshFormulas[attachmentName][2][numManeuvers + 1] / 100)
 end
 
 local function getRefreshModValue(pet, attachmentName, numManeuvers)
     local petMaxMP = pet:getMaxMP()
 
-    return regenRefreshFormulas[attachmentName][1][numManeuvers + 1] + petMaxMP * (regenRefreshFormulas[attachmentName][2][numManeuvers + 1] / 100)
+    return regenRefreshFormulas[attachmentName][1][math.min(numManeuvers + 1, 3)] + petMaxMP * (regenRefreshFormulas[attachmentName][2][numManeuvers + 1] / 100)
 end
 
 local function isOpticFiber(attachmentName)
@@ -268,7 +268,7 @@ xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
         elseif modList[1] == xi.mod.REFRESH then
             modValue = getRefreshModValue(pet, attachmentName, maneuvers)
         else
-            modValue = modList[2][maneuvers + 1]
+            modValue = modList[2][math.min(maneuvers + 1, 4)]
         end
 
         -- Apply Automaton Performance Boost if applicable.
@@ -368,12 +368,12 @@ xi.automaton.onUseManeuver = function(player, target, ability, action)
 
         local bonus = 1 + (pupLevel / 15) + target:getMod(xi.mod.MANEUVER_BONUS)
 
-        if target:getActiveManeuverCount() == 3 then
+        if target:getActiveManeuverCount() == 4 then
             target:removeOldestManeuver()
         end
 
         local duration = player:getPet():getLocalVar('MANEUVER_DURATION')
-        target:addStatusEffect(maneuverInfo[1], bonus, 0, utils.clamp(duration, 60, 300))
+        target:addStatusEffect(maneuverInfo[1], bonus, 0, utils.clamp(duration, 120, 300))
     end
 
     return target:getOverloadChance(maneuverInfo[2] - 1)

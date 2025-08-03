@@ -32,6 +32,7 @@
 
 #include <set>
 #include <utility>
+#include <ability.h>
 
 namespace gambits
 {
@@ -114,6 +115,7 @@ namespace gambits
         EN_MOB_WEAKNESS     = 13,
         STORM_MOB_WEAKNESS  = 14,
         HELIX_MOB_WEAKNESS  = 15,
+        BEST_DOUBLE_UP      = 30,
     };
 
     enum class G_TP_TRIGGER : uint16
@@ -288,6 +290,8 @@ namespace gambits
         bool TryTrustSkill();
         bool PartyHasHealer();
         bool PartyHasTank();
+
+        bool EnqueueJA(const uint16 abilityId, const uint16 targid);
 
         CTrustEntity*         POwner;
         timer::time_point     m_lastAction;

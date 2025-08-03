@@ -29,7 +29,7 @@ local fishRewards =
         gil = 800,
         items =
         {
-            { chance = 1.3, itemId = xi.item.MERCURIAL_SWORD },
+            { chance = 10.0, itemId = xi.item.MERCURIAL_SWORD },
         }
     },
 
@@ -74,7 +74,7 @@ local fishRewards =
         gil = 475,
         items =
         {
-            { chance = 0.4, itemId = xi.item.STOLID_BREASTPLATE },
+            { chance = 10.0, itemId = xi.item.STOLID_BREASTPLATE },
         }
     },
 
@@ -120,7 +120,7 @@ local fishRewards =
         title = xi.title.ACE_ANGLER,
         items =
         {
-            { chance = 1.4, itemId = xi.item.TRIDENT },
+            { chance = 10.0, itemId = xi.item.TRIDENT },
         }
     },
 
@@ -185,7 +185,7 @@ local fishRewards =
         gil = 250,
         items =
         {
-            { chance = 4.9, itemId = xi.item.DRONE_EARRING },
+            { chance = 10.0, itemId = xi.item.DRONE_EARRING },
         }
     },
 
@@ -213,7 +213,7 @@ local fishRewards =
         gil = 50,
         items =
         {
-            { chance = 2.5, itemId = xi.item.TINY_TATHLUM },
+            { chance = 10.0, itemId = xi.item.TINY_TATHLUM },
         }
     },
 
@@ -268,7 +268,7 @@ local fishRewards =
         gil = 487,
         items =
         {
-            { chance = 1.8, itemId = xi.item.MERCURIAL_SPEAR },
+            { chance = 10.0, itemId = xi.item.MERCURIAL_SPEAR },
         }
     },
 
@@ -277,7 +277,7 @@ local fishRewards =
         gil = 300,
         items =
         {
-            { chance = 3.2, itemId = xi.item.SOLON_TORQUE },
+            { chance = 10.0, itemId = xi.item.SOLON_TORQUE },
         }
     },
 
@@ -496,6 +496,14 @@ local fishRewards =
         items =
         {
             { chance = 5, itemId = xi.item.STINKY_SUBLIGAR }, -- guessing 5%. Wiki unknown
+        }
+    },
+    [xi.item.APKALLUFA] =
+    {
+        gil = 95,
+        items =
+        {
+            { chance = 10, itemId = xi.item.SCROLL_OF_ICE_SPIKES }, -- guessing 5%. Wiki unknown
         }
     },
 }

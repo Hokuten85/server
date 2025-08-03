@@ -52,6 +52,8 @@ public:
     void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action) override;
 
     uint32 m_TrustID{};
+
+    uint8 m_Abilities[62];
 };
 
 #endif

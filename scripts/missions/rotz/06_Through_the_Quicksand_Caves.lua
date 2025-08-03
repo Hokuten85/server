@@ -11,6 +11,7 @@ local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THROU
 mission.reward =
 {
     nextMission = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CHAMBER_OF_ORACLES },
+    item = randomColoredDrop,
 }
 
 mission.sections =

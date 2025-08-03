@@ -221,12 +221,55 @@ xi.job_utils.corsair.useCuttingCards = function(caster, target, ability, action)
     return total
 end
 
+local luckyNumbers =
+{
+    [xi.jobAbility.CORSAIRS_ROLL   ] = {5,9},
+    [xi.jobAbility.NINJA_ROLL      ] = {4,8},
+    [xi.jobAbility.HUNTERS_ROLL	   ] = {4,8},
+    [xi.jobAbility.CHAOS_ROLL      ] = {4,8},
+    [xi.jobAbility.MAGUSS_ROLL     ] = {2,6},
+    [xi.jobAbility.HEALERS_ROLL    ] = {3,7},
+    [xi.jobAbility.DRACHEN_ROLL    ] = {4,8},
+    [xi.jobAbility.CHORAL_ROLL     ] = {2,6},
+    [xi.jobAbility.MONKS_ROLL      ] = {3,7},
+    [xi.jobAbility.BEAST_ROLL      ] = {4,8},
+    [xi.jobAbility.SAMURAI_ROLL    ] = {2,6},
+    [xi.jobAbility.EVOKERS_ROLL    ] = {5,9},
+    [xi.jobAbility.ROGUES_ROLL     ] = {5,9},
+    [xi.jobAbility.WARLOCKS_ROLL   ] = {4,8},
+    [xi.jobAbility.FIGHTERS_ROLL   ] = {5,9},
+    [xi.jobAbility.PUPPET_ROLL     ] = {3,7},
+    [xi.jobAbility.GALLANTS_ROLL   ] = {3,7},
+    [xi.jobAbility.WIZARDS_ROLL    ] = {5,9},
+    [xi.jobAbility.DANCERS_ROLL    ] = {3,7},
+    [xi.jobAbility.SCHOLARS_ROLL   ] = {2,6},
+    [xi.jobAbility.NATURALISTS_ROLL] = {3,7},
+    [xi.jobAbility.RUNEISTS_ROLL   ] = {4,8},
+}
+
+local rollWeights = {
+	[1]  = {1,1,2,2,3,3,4,4,5,5,6,6},
+	[2]  = {1,1,2,2,3,3,4,4,5,5,6,6},
+	[3]  = {1,1,2,2,3,3,4,4,5,5,6,6},
+	[4]  = {1,1,2,2,3,3,4,4,5,5,6,6},
+	[5]  = {1,1,2,2,3,3,4,4,5,5,6,6},
+	[6]  = {1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,5,6,6},
+	[7]  = {1,1,1,2,2,2,3,3,3,4,4,4,4,5,5,6,6},
+	[8]  = {1,1,1,2,2,2,3,3,3,3,4,4,5,5,6,6},
+	[9]  = {1,1,1,2,2,2,2,3,3,4,4,5,5,6,6},
+	[10] = {1,1,1,1,2,2,3,3,4,4,5,5,6,6},
+}
+
 xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
     if caster:getID() == target:getID() then -- the COR handles all the calculations
         local duEffect = caster:getStatusEffect(xi.effect.DOUBLE_UP_CHANCE)
         local prevRoll = caster:getStatusEffect(duEffect:getSubPower())
         local roll     = prevRoll:getSubPower()
         local job      = duEffect:getTier()
+		
+		local abilityId = GetAbility(duEffect:getSubType()):getID()
+		local lucky = luckyNumbers[abilityId][1]
+		local unlucky = luckyNumbers[abilityId][2]
 
         caster:setLocalVar('corsairActiveRoll', duEffect:getSubType())
 
@@ -241,7 +284,13 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
 
             caster:delStatusEffect(xi.effect.SNAKE_EYE)
         else
-            roll = roll + math.random(1, 6)
+            local weights = rollWeights[roll]
+			if weights then
+				local weightedRoll = math.random(#weights)
+				roll = roll + weights[weightedRoll]
+			else
+				roll = roll + math.random(6)
+			end
         end
 
         if roll >= 12 then -- bust
@@ -249,7 +298,7 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
             caster:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
         end
 
-        if roll == 11 then
+        if roll == 11 or roll == lucky then
             caster:resetRecast(xi.recast.ABILITY, 193)
         end
 

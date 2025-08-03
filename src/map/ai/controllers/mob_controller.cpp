@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -216,6 +216,7 @@ void CMobController::TryLink()
     // Handle monster linking if they are close enough
     if (PMob->PParty != nullptr && !PMob->getMobMod(MOBMOD_ONE_WAY_LINKING))
     {
+        auto superLink = PMob->getMobMod(MOBMOD_SUPERLINK);
         for (auto& member : PMob->PParty->members)
         {
             auto* PPartyMember = dynamic_cast<CMobEntity*>(member);
@@ -226,7 +227,7 @@ void CMobController::TryLink()
                 continue;
             }
 
-            if (PPartyMember->PAI->IsRoaming() && PPartyMember->CanLink(&PMob->loc.p, PMob->getMobMod(MOBMOD_SUPERLINK)))
+            if (PPartyMember->PAI->IsRoaming() && PPartyMember->CanLink(&PMob->loc.p, superLink))
             {
                 PPartyMember->PAI->Engage(PTarget->targid);
             }

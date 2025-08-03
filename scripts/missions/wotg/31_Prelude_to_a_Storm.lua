@@ -14,6 +14,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.PRELUDE_T
 mission.reward =
 {
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.STORMS_CRESCENDO },
+    item = randomColoredDrop,
 }
 
 local rewardItems =

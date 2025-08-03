@@ -23,6 +23,7 @@ mission.reward =
     gil     = 3000,
     keyItem = xi.ki.ADVENTURERS_CERTIFICATE,
     title   = xi.title.CERTIFIED_ADVENTURER,
+    item = randomColoredDrop,
 }
 
 local handleAcceptMission = function(player, csid, option, npc)

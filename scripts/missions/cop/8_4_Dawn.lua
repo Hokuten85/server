@@ -17,6 +17,7 @@ local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
 mission.reward =
 {
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE },
+    item = randomColoredDrop,
 }
 
 local ringItems =

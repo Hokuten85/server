@@ -16,6 +16,7 @@ mission.reward =
 {
     title = xi.title.ANCIENT_FLAME_FOLLOWER,
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.AN_INVITATION_WEST },
+    item = randomColoredDrop,
 }
 
 -- Some helper functions require access to this mission class in order to operate.  The below

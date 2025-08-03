@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2025 LandSandBoat Dev Teams
@@ -63,7 +63,7 @@ void GP_CLI_COMMAND_MERITS::process(MapSession* PSession, CCharEntity* PChar) co
 
         case GP_CLI_COMMAND_MERITS_KIND::EditMode:
         {
-            if (PChar->m_moghouseID) // Note: This has been verified as allowed in a shared mog house.
+            if (true) // Note: This has been verified as allowed in a shared mog house.
             {
                 if (const auto merit = static_cast<MERIT_TYPE>(Param2 << 1); PChar->PMeritPoints->IsMeritExist(merit))
                 {

@@ -837,3 +837,7 @@ end
 xi.mission.setMustZone = function(player, areaId, missionId)
     player:setLocalVar(getVarPrefix(areaId, missionId) .. 'mustZone', 1)
 end
+
+randomColoredDrop = function()
+	return xi.items.RED_DROP+math.random(0,7)
+end

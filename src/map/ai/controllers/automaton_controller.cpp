@@ -515,6 +515,17 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
                         highestEnmity = enmity_obj->second.CE + enmity_obj->second.VE;
                         PCastTarget   = PMember;
                     }
+
+                    if (PMember->PPet != nullptr && PMember->PPet->status != STATUS_TYPE::DISAPPEAR)
+                    {
+                        auto enmity_obj = enmityList->find(PMember->PPet->id);
+                        if (enmity_obj != enmityList->end() && highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE &&
+                            PMember->PPet->GetHPP() <= threshold && distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
+                        {
+                            highestEnmity = enmity_obj->second.CE + enmity_obj->second.VE;
+                            PCastTarget = PMember->PPet;
+                        }
+                    }
                 }
             });
         }
@@ -522,6 +533,17 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
         {
             static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
             {
+                if (PMember->PPet != nullptr && PMember->PPet->status != STATUS_TYPE::DISAPPEAR) // Pets first then PC to prioritize PC
+                {
+                    if (PMember->PPet->id != PAutomaton->PMaster->id && distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
+                    {
+                        if (PMember->PPet->GetHPP() <= threshold)
+                        {
+                            PCastTarget = PMember->PPet;
+                        }
+                    }
+                }
+
                 if (PMember->id != PAutomaton->PMaster->id && distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
                 {
                     if (PMember->GetHPP() <= threshold)
@@ -734,10 +756,7 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 castPriority.emplace_back(SpellID::Dispel);
             }
-            break;
-        }
-        default:
-        {
+
             if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DIA))
             {
                 if (maneuvers.dark) // Dark -> Bio

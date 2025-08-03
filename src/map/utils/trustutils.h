@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2024 LandSandBoat Dev Teams
@@ -32,4 +32,8 @@ namespace trustutils
     // We cache all of this so we don't have to hit the database every time a trust is spawned
     void LoadTrustList();
     auto SpawnTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*;
+
+    void  BuildingTrustAbilityTable(CTrustEntity* PTrust);
+    int32 hasAbility(CTrustEntity* PTrust, uint16 AbilityID);
+    int32 addAbility(CTrustEntity* PTrust, uint16 AbilityID);
 }; // namespace trustutils

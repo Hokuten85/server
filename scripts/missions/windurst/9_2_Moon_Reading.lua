@@ -19,7 +19,7 @@ local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.M
 mission.reward =
 {
     gil   = 100000,
-    item  = xi.item.WINDURSTIAN_FLAG,
+    item  = { xi.item.WINDURSTIAN_FLAG, randomColoredDrop },
     rank  = 10,
     title = xi.title.VESTAL_CHAMBERLAIN,
 }

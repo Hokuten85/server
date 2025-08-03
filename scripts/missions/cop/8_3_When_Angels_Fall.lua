@@ -19,6 +19,7 @@ local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS
 mission.reward =
 {
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.DAWN },
+    item = randomColoredDrop,
 }
 
 local ebonPanel =

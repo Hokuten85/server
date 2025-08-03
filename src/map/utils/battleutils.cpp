@@ -677,6 +677,8 @@ namespace battleutils
         uint32  obi[8]                 = { 15435, 15436, 15437, 15438, 15439, 15440, 15441, 15442 };
         Mod     resistarray[8]         = { Mod::FIRE_MEVA, Mod::ICE_MEVA, Mod::WIND_MEVA, Mod::EARTH_MEVA,
                                            Mod::THUNDER_MEVA, Mod::WATER_MEVA, Mod::LIGHT_MEVA, Mod::DARK_MEVA };
+        Mod     mdefarray[8]           = { Mod::FIRE_SDT, Mod::ICE_SDT, Mod::WIND_SDT, Mod::EARTH_SDT,
+                                           Mod::THUNDER_SDT, Mod::WATER_SDT, Mod::LIGHT_SDT, Mod::DARK_SDT };
         bool    obiBonus               = false;
 
         double half      = (double)(PDefender->getMod(resistarray[element - 1])) / 100;
@@ -740,6 +742,8 @@ namespace battleutils
         {
             dBonus -= 0.25f;
         }
+
+        dBonus -= (float)(PDefender->getMod(mdefarray[element - 1])) / 10000; // negative value is increase in damage, positive is decrease in damage
 
         damage = (int32)(damage * resist);
         damage = (int32)(damage * dBonus);
@@ -2427,9 +2431,9 @@ namespace battleutils
                 }
 
                 // account for attacker's subtle blow which reduces the baseTP gain for the defender
-                float sBlow1    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW) + sBlowMerit), -50.0f, 50.0f);
+                float sBlow1    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW) + sBlowMerit), -50.0f, 60.0f);
                 float sBlow2    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW_II) + tandemBlowBonus), -50.0f, 50.0f);
-                float sBlowMult = ((100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f);
+                float sBlowMult = ((100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 85.0f)) / 100.0f);
 
                 // mobs hit get basetp+30 whereas pcs hit get basetp/3
                 if (PDefender->objtype == TYPE_PC || (PDefender->objtype == TYPE_PET && PDefender->PMaster && PDefender->PMaster->objtype == TYPE_PC))
@@ -2833,7 +2837,7 @@ namespace battleutils
             bool isOffhand   = attackNumber == 1;
             bool isTwoHanded = targ_weapon && targ_weapon->isTwoHanded();
 
-            if (isOffhand || isTwoHanded)
+            if ((isOffhand || isTwoHanded) && !targ_weapon->isHandToHand())
             {
                 maxHitRate = 95;
             }
@@ -4223,7 +4227,7 @@ namespace battleutils
 
             if (ERROR_SLOTID == (SlotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(toolID)))
             {
-                if (PChar->GetMJob() == JOB_NIN)
+                if (PChar->GetMJob() == JOB_NIN || PChar->GetSJob() == JOB_NIN)
                 {
                     switch (toolID)
                     {
@@ -4516,7 +4520,7 @@ namespace battleutils
 
             if (bonusDamage >= 1)
             {
-                m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(bonusDamage * stalwartSoulBonus)));
+                m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(bonusDamage * stalwartSoulBonus * 0.5f)));
 
                 if (m_PChar->GetMJob() == JOB_DRK)
                 {
@@ -4655,17 +4659,21 @@ namespace battleutils
         {
             shotCount += 4;
         }
-        else if (lvl < 90)
+        else if (lvl < 76)
         {
             shotCount += 5;
         }
-        else if (lvl < 99)
+        else if (lvl < 90)
         {
             shotCount += 6;
         }
-        else
+        else if (lvl < 99)
         {
             shotCount += 7;
+        }
+        else
+        {
+            shotCount += 8;
         }
 
         shotCount += PChar->getMod(Mod::BARRAGE_COUNT);
@@ -6027,6 +6035,11 @@ namespace battleutils
 
         for (auto&& PTrait : *traitList)
         {
+            if (PTrait->getID() >= 150 && PEntity->objtype == TYPE_MOB)
+            {
+                continue;
+            }
+
             if (level >= PTrait->getLevel() && PTrait->getLevel() > 0)
             {
                 bool add = true;
@@ -6916,5 +6929,28 @@ namespace battleutils
             }
         }
         return 1.0;
+    }
+
+    int32 getTraitValue(CBattleEntity* PEntity, uint8 TraitID)
+    {
+        if (PEntity->objtype == TYPE_PC)
+        {
+            for (uint8 j = 0; j < PEntity->TraitList.size(); ++j)
+            {
+                CTrait* PEntityTrait = PEntity->TraitList.at(j);
+
+                if (PEntityTrait->getID() == TraitID)
+                {
+                    return PEntityTrait->getValue();
+                }
+            }
+        }
+        else
+        {
+            ShowError("charutils::getTraitValue Attempt to reference a trait from a non-character entity: %s %i", PEntity->name.c_str(), PEntity->id);
+            return 0;
+        }
+
+        return 0;
     }
 }; // namespace battleutils

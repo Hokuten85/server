@@ -16,15 +16,15 @@ end
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 58) -- 145 total weapaon damage
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 58) -- 145 total weapon damage
     mob:setMod(xi.mod.MDEF, 20)
     mob:setMod(xi.mod.ATT, 462)
     mob:setMod(xi.mod.DEF, 500)
     mob:setMod(xi.mod.EVA, 370)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addImmunity(xi.immunity.STUN)
+    --mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    --mob:addImmunity(xi.immunity.DARK_SLEEP)
+    --mob:addImmunity(xi.immunity.STUN)
 
     -- Despawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)

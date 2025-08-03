@@ -20,6 +20,7 @@ mission.reward =
 {
     gil  = 5000,
     rank = 4,
+    item = randomColoredDrop,
 }
 
 local handleAcceptMission = function(player, csid, option, npc)

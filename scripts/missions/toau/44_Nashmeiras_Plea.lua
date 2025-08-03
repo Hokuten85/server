@@ -13,6 +13,7 @@ mission.reward =
 {
     title       = xi.title.PREVENTER_OF_RAGNAROK,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.RAGNAROK },
+    item = randomColoredDrop,
 }
 
 mission.sections =

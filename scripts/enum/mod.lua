@@ -1065,4 +1065,7 @@ xi.mod =
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
     -- For Next ID, see modifier.h
+	
+	ENMITY_CAP           = 3000,
+	CRITHITDMG_SLOT		 = 3001,
 }

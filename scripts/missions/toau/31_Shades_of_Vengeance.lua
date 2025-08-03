@@ -12,6 +12,7 @@ mission.reward =
 {
     title       = xi.title.NASHMEIRAS_MERCENARY,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.IN_THE_BLOOD },
+    item = randomColoredDrop,
 }
 
 mission.sections =

@@ -485,7 +485,7 @@ namespace synthutils
             }
 
             // Skill is involved.
-            successRate     = 95;                                 // Assume sucess rate is maxed.
+            successRate     = 99;                                 // Assume sucess rate is maxed.
             randomRoll      = 1 + xirand::GetRandomNumber(100);   // Random call must be called for each involved skill. 1 to 100 both included.
             currentHQTier   = 0;                                  // This is reset at the start of every loop. "finalHQTier" is not.
             synthDifficulty = getSynthDifficulty(PChar, skillID); // Get synth difficulty for current skill.

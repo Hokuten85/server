@@ -33,6 +33,8 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     else
         skill:setMsg(xi.msg.basic.JA_MISS_2)
     end
+	
+	target:addEnmity(automaton, 450, 900)
 
     return xi.effect.FLASH
 end

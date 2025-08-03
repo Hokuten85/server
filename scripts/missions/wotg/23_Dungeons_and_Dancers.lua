@@ -12,6 +12,7 @@ mission.reward =
 {
     keyItem     = xi.ki.UMBRA_BUG,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.DISTORTER_OF_TIME },
+    item = randomColoredDrop,
 }
 
 mission.sections =

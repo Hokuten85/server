@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BLOOD_OF
 
 quest.reward =
 {
-    item  = xi.item.RAM_STAFF,
+    item  = { xi.item.RAM_STAFF, randomColoredDrop },
     title = xi.title.HOUSE_AURCHIAT_RETAINER,
 }
 

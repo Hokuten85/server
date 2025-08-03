@@ -58,6 +58,7 @@
 #include "weapon_skill.h"
 
 #include <cstring>
+#include <ai/controllers/player_controller.h>
 
 namespace
 {
@@ -87,7 +88,7 @@ namespace
 
     constexpr int             RECAST_SEAL           = 1;
     constexpr int             RECAST_GEODE          = 2;
-    constexpr timer::duration SPECIAL_DROP_COOLDOWN = 5min; // 5 minutes between special drops
+    constexpr timer::duration SPECIAL_DROP_COOLDOWN = 1min; // 5 minutes between special drops
 } // namespace
 
 CMobEntity::CMobEntity()
@@ -928,6 +929,13 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             }
         });
 
+        if (this->GetMLevel() >= 85 && this->m_Type & MOBTYPE::MOBTYPE_NOTORIOUS) 
+        {
+            uint16 itemId = coloredDrops[xirand::GetRandomNumber(coloredDrops.size())];
+            loot.drops.Items.emplace_back(DROP_TYPE::DROP_NORMAL, itemId, 50);
+            loot.drops.Items.emplace_back(DROP_TYPE::DROP_NORMAL, 1312, 150); // Angel Skin
+        }
+
         // Ungrouped drops. This are affected by TH UNLESS they have an specified fixed rate.
         loot.ForEachItem([&](const DropItem_t& item)
         {
@@ -954,7 +962,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     {
         // Check for seal drops
         // Only one type of seal can drop per mob
-        if (xirand::GetRandomNumber(100) < 20 && CanAddSpecial(RECAST_SEAL))
+        if (xirand::GetRandomNumber(100) < 99 && CanAddSpecial(RECAST_SEAL))
         {
             const auto seals = GetEligibleSeals();
             AddItemToPool(seals[xirand::GetRandomNumber(seals.size())]);
@@ -1161,6 +1169,17 @@ void CMobEntity::Die()
     if (PBattlefield != nullptr)
     {
         PBattlefield->handleDeath(this);
+    }
+
+        // On Mob death, reset the attack timer to zero if this mob is the current target
+    EnmityList_t* enmityList = PEnmityContainer->GetEnmityList();
+    for (auto& it : *enmityList)
+    {
+        EnmityObject_t& PEnmityObject = it.second;
+        if (PEnmityObject.PEnmityOwner && PEnmityObject.PEnmityOwner->objtype == ENTITYTYPE::TYPE_PC && PEnmityObject.PEnmityOwner->m_TargID == this->targid)
+        {
+            static_cast<CPlayerController*>(PEnmityObject.PEnmityOwner->PAI->GetController())->setLastAttackTime(timer::now());
+        }
     }
 
     PEnmityContainer->Clear();

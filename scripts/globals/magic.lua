@@ -191,7 +191,8 @@ function isValidHealTarget(caster, target)
             (target:getObjType() == xi.objType.PC or
             target:getObjType() == xi.objType.MOB or
             target:getObjType() == xi.objType.TRUST or
-            target:getObjType() == xi.objType.FELLOW)
+            target:getObjType() == xi.objType.FELLOW or
+            target:getObjType() == xi.objType.PET)
 end
 
 -- TODO: This must be destroyed

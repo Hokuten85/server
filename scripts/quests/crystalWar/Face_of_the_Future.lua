@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.FACE_OF_
 
 quest.reward =
 {
-    item  = xi.item.GRIFFON_RING,
+    item  = { xi.item.GRIFFON_RING, randomColoredDrop },
     title = xi.title.FANGMONGER_FORESTALLER,
 }
 

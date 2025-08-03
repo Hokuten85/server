@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BONDS_TH
 
 quest.reward =
 {
-    item = xi.item.BEHEMOTH_HORN,
+    item = { xi.item.BEHEMOTH_HORN, randomColoredDrop },
 }
 
 quest.sections =

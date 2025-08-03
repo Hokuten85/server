@@ -15,6 +15,7 @@ local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.RETUR
 mission.reward =
 {
     nextMission = { xi.mission.log_id.ZILART, xi.mission.id.zilart.ROMAEVE },
+    item = randomColoredDrop,
 }
 
 -- Bits

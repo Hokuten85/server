@@ -13,6 +13,7 @@ mission.reward =
 {
     keyItem     = xi.ki.MOONSHADE_EARRING,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.WHERE_IT_ALL_BEGAN },
+    item = randomColoredDrop,
 }
 
 mission.sections =

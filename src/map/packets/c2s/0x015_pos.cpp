@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2025 LandSandBoat Dev Teams
@@ -53,6 +53,8 @@ void GP_CLI_COMMAND_POS::process(MapSession* PSession, CCharEntity* PChar) const
         PChar->loc.p.rotation != newRotation;
     // clang-format on
 
+    bool isUpdate = moved || PChar->updatemask & UPDATE_POS;
+
     // Cache previous location
     PChar->m_previousLocation = PChar->loc;
 
@@ -68,7 +70,7 @@ void GP_CLI_COMMAND_POS::process(MapSession* PSession, CCharEntity* PChar) const
         PChar->m_TargID = newTargID;
     }
 
-    if (moved)
+    if (isUpdate)
     {
         PChar->updatemask |= UPDATE_POS; // Indicate that we want to update this PChar's PChar->loc or targID
 

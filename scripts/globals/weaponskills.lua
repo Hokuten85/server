@@ -175,7 +175,7 @@ xi.weaponskills.getRangedHitRate = function(attacker, target, bonus)
     local hitrate = (75 + hitdiff) / 100
 
     -- Applying hitrate caps
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
+    hitrate = utils.clamp(hitrate, 0.2, 0.99)
 
     return hitrate
 end
@@ -268,7 +268,9 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
     if not wsParams.formless then
         adjustedDamage = target:physicalDmgTaken(adjustedDamage, attackTbl.damageType)
 
-        if attackTbl.weaponType == xi.skill.HAND_TO_HAND then
+        if attacker:getEquipID(attackTbl.slot) == 18767 then -- if birdbanes WS with piercing damage
+			adjustedDamage = adjustedDamage * target:getMod(xi.mod.PIERCE_SDT) / 1000
+        elseif attackTbl.weaponType == xi.skill.HAND_TO_HAND then
             adjustedDamage = adjustedDamage * (1 + target:getMod(xi.mod.HTH_SDT) / 10000)
         elseif
             attackTbl.weaponType == xi.skill.DAGGER or
@@ -1080,7 +1082,7 @@ xi.weaponskills.getHitRate = function(attacker, target, bonus)
     local hitrate = (75 + hitdiff) / 100
 
     -- Applying hitrate caps
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
+    hitrate = utils.clamp(hitrate, 0.2, 0.99)
 
     return hitrate
 end

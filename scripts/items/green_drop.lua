@@ -17,6 +17,14 @@ end
 itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.AGI_BOOST, 5, 0, 900)
     target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 3600)
+	
+	if target:getCharMod(xi.mod.AGI) < 20 then
+		target:addCharMod(xi.mod.AGI,1)
+		if target:getCharMod(xi.mod.AGI) == 20 then
+			target:PrintToPlayer("You have reached the max enhancement for this stat. Additional usage of Yellow Drops is allowed")
+			target:PrintToPlayer("but only the medicine effect will be applied.")
+		end
+	end
 end
 
 return itemObject

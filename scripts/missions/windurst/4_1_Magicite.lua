@@ -32,6 +32,7 @@ mission.reward =
     rank = 5,
     gil = 10000,
     keyItem = xi.ki.MESSAGE_TO_JEUNO_WINDURST,
+    item = randomColoredDrop,
 }
 
 mission.sections =

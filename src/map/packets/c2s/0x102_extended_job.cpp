@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2025 LandSandBoat Dev Teams
@@ -224,11 +224,13 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
         {
             if (pupData.Slots[static_cast<uint8_t>(AutomatonSlot::Head)] != 0)
             {
+                PChar->removePetModifiers((CPetEntity*)PChar->PPet);
                 puppetutils::setHead(PChar, pupData.Slots[static_cast<uint8_t>(AutomatonSlot::Head)]);
                 petutils::CalculateAutomatonStats(PChar, PChar->PPet);
             }
             else if (pupData.Slots[static_cast<uint8_t>(AutomatonSlot::Frame)] != 0)
             {
+                PChar->removePetModifiers((CPetEntity*)PChar->PPet);
                 puppetutils::setFrame(PChar, pupData.Slots[static_cast<uint8_t>(AutomatonSlot::Frame)]);
                 petutils::CalculateAutomatonStats(PChar, PChar->PPet);
             }

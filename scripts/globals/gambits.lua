@@ -116,6 +116,7 @@ ai.select =
     EN_MOB_WEAKNESS     = 13,
     STORM_MOB_WEAKNESS  = 14,
     HELIX_MOB_WEAKNESS  = 15,
+	BEST_DOUBLE_UP      = 30,
 }
 ai.s = ai.select
 

@@ -1157,7 +1157,7 @@ uint16 CBattleEntity::DEF()
 
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_COUNTERSTANCE, 0))
     {
-        return DEF / 2;
+        return DEF * 0.85;
     }
     // use max to prevent underflow
     return std::max(1, DEF + (DEF * m_modStat[Mod::DEFP] / 100) + std::min<int16>((DEF * m_modStat[Mod::FOOD_DEFP] / 100), m_modStat[Mod::FOOD_DEF_CAP]));
@@ -1259,6 +1259,10 @@ void CBattleEntity::SetSLevel(uint8 slvl)
     {
         m_slvl = m_mlvl; // All mobs have a 1:1 ratio of MainJob/Subjob
     }
+    else if (this->objtype == TYPE_TRUST)
+    {
+        m_slvl = slvl;
+    }
     else
     {
         auto ratio = settings::get<uint8>("map.SUBJOB_RATIO");
@@ -1331,6 +1335,10 @@ void CBattleEntity::addEquipModifiers(std::vector<CModifier>* modList, uint8 ite
                 {
                     m_modStat[Mod::SUB_DMG_RANK] += i.getModAmount();
                 }
+                else if (i.getModID() == Mod::MAIN_DMG_RATING)
+                {
+                    m_modStat[Mod::SUB_DMG_RATING] += i.getModAmount();
+                }
                 else
                 {
                     m_modStat[i.getModID()] += i.getModAmount();
@@ -1385,6 +1393,10 @@ void CBattleEntity::addEquipModifiers(std::vector<CModifier>* modList, uint8 ite
                 if (i.getModID() == Mod::MAIN_DMG_RANK)
                 {
                     m_modStat[Mod::SUB_DMG_RANK] += modAmount;
+                }
+                else if (i.getModID() == Mod::MAIN_DMG_RATING)
+                {
+                    m_modStat[Mod::SUB_DMG_RATING] += modAmount;
                 }
                 else
                 {
@@ -1462,6 +1474,10 @@ void CBattleEntity::delEquipModifiers(std::vector<CModifier>* modList, uint8 ite
                 {
                     m_modStat[Mod::SUB_DMG_RANK] -= i.getModAmount();
                 }
+                else if (i.getModID() == Mod::MAIN_DMG_RATING)
+                {
+                    m_modStat[Mod::SUB_DMG_RATING] -= i.getModAmount();
+                }
                 else
                 {
                     m_modStat[i.getModID()] -= i.getModAmount();
@@ -1516,6 +1532,10 @@ void CBattleEntity::delEquipModifiers(std::vector<CModifier>* modList, uint8 ite
                 if (i.getModID() == Mod::MAIN_DMG_RANK)
                 {
                     m_modStat[Mod::SUB_DMG_RANK] -= modAmount;
+                }
+                else if (i.getModID() == Mod::MAIN_DMG_RATING)
+                {
+                    m_modStat[Mod::SUB_DMG_RATING] -= modAmount;
                 }
                 else
                 {

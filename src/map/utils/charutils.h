@@ -299,6 +299,8 @@ namespace charutils
     void updateMannequins(CCharEntity* PChar);
 
     bool raceChange(CCharEntity* PChar, CharRace newRace, CharFace newFace, CharSize newSize);
+
+    void AddCharMod(CCharEntity* PChar, Mod type, int value);
 }; // namespace charutils
 
 #endif // _CHARUTILS_H

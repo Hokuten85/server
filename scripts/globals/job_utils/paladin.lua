@@ -71,7 +71,7 @@ xi.job_utils.paladin.useChivalry = function(player, target, ability)
 end
 
 xi.job_utils.paladin.useCover = function(player, target, ability)
-    local baseDuration = 15
+    local baseDuration = 60
     local bonusTime    = utils.clamp(math.floor((player:getStat(xi.mod.VIT) + player:getStat(xi.mod.MND) - target:getStat(xi.mod.VIT) * 2) / 4), 0, 15)
     local jpValue      = player:getJobPointLevel(xi.jp.COVER_DURATION)
     local duration     = baseDuration + bonusTime + player:getMerit(xi.merit.COVER_EFFECT_LENGTH) + player:getMod(xi.mod.COVER_DURATION) + jpValue
