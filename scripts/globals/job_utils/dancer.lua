@@ -16,13 +16,13 @@ xi.job_utils.dancer = xi.job_utils.dancer or {}
 local waltzAbilities =
 {
 --  [Ability ID] =     { tpCost, statMultiplier, baseHp }
-    [xi.jobAbility.CURING_WALTZ    ] = { 200, 0.25,  60 },
-    [xi.jobAbility.CURING_WALTZ_II ] = { 350, 0.50, 130 },
-    [xi.jobAbility.CURING_WALTZ_III] = { 500, 0.75, 270 },
-    [xi.jobAbility.CURING_WALTZ_IV ] = { 650, 1.00, 450 },
-    [xi.jobAbility.CURING_WALTZ_V  ] = { 800, 1.25, 600 },
-    [xi.jobAbility.DIVINE_WALTZ    ] = { 400, 0.25,  60 },
-    [xi.jobAbility.DIVINE_WALTZ_II ] = { 800, 0.75, 270 },
+    [xi.jobAbility.CURING_WALTZ    ] = { 100, 0.25,  60 },
+    [xi.jobAbility.CURING_WALTZ_II ] = { 200, 0.50, 130 },
+    [xi.jobAbility.CURING_WALTZ_III] = { 300, 0.75, 270 },
+    [xi.jobAbility.CURING_WALTZ_IV ] = { 400, 1.00, 450 },
+    [xi.jobAbility.CURING_WALTZ_V  ] = { 500, 1.25, 600 },
+    [xi.jobAbility.DIVINE_WALTZ    ] = { 200, 0.25,  60 },
+    [xi.jobAbility.DIVINE_WALTZ_II ] = { 400, 0.75, 270 },
 }
 
 local animationTable =
@@ -245,14 +245,14 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
     local hitType          = missId
     local stepDurationGift = player:getJobPointLevel(xi.jp.STEP_DURATION)
     local debuffStacks     = 1
-    local debuffDuration   = 60 + stepDurationGift
+    local debuffDuration   = 120 + stepDurationGift
 
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(xi.effect.TRANCE) then
         player:delTP(100 + player:getMod(xi.mod.STEP_TP_CONSUMED))
     end
 
-    if math.random() <= xi.weaponskills.getHitRate(player, target, 10 + player:getMod(xi.mod.STEP_ACCURACY)) then
+    if math.random() <= xi.weaponskills.getHitRate(player, target, 100 + player:getMod(xi.mod.STEP_ACCURACY)) then
         local maxSteps         = player:getMainJob() == xi.job.DNC and 10 or 5
         local debuffEffect     = target:getStatusEffect(stepEffect)
         local origDebuffStacks = 0
@@ -342,7 +342,7 @@ xi.job_utils.dancer.useReverseFlourishAbility = function(player, target, ability
     local tpGained             = 0
 
     local usedMoves = math.min(numMoves, 5)
-    tpGained = (95 + reverseFlourishBonus) * usedMoves + (5 + gearMod) * usedMoves ^ 2 + 30 * numMerits
+    tpGained = (150 + reverseFlourishBonus) * usedMoves + (5 + gearMod) * usedMoves ^ 2 + 30 * numMerits
 
     player:addTP(tpGained)
     setFinishingMoves(player, numMoves - usedMoves)
@@ -366,7 +366,7 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
     setFinishingMoves(player, numMoves - 1)
 
     if
-        math.random() <= xi.weaponskills.getHitRate(player, target, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)) or
+        math.random() <= xi.weaponskills.getHitRate(player, target, 100 + player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)) or
         (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
     then
         local spell  = GetSpell(xi.magic.spell.GRAVITY)
@@ -378,7 +378,7 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
         }
 
         local resistRate = applyResistanceEffect(player, target, spell, params)
-        if resistRate > 0.25 then
+        if resistRate > 0.10 then
             target:delStatusEffectSilent(xi.effect.WEIGHT)
             target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60 * resistRate)
         else
@@ -403,7 +403,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
     setFinishingMoves(player, numMoves - 1)
 
     if
-        math.random() <= xi.weaponskills.getHitRate(player, target, 100) or
+        math.random() <= xi.weaponskills.getHitRate(player, target, 200) or
         (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
     then
         local hitType = 3
@@ -428,7 +428,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         local pdif                 = xi.combat.physical.calculateMeleePDIF(player, target, weaponType, 1.0, false, applyLevelCorrection, false, 0.0, false, xi.slot.MAIN, false)
         local dmg                  = baseDmg * pdif
 
-        if applyResistanceEffect(player, target, spell, params) > 0.25 then
+        if applyResistanceEffect(player, target, spell, params) > 0.10 then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 2)
         else
             ability:setMsg(xi.msg.basic.JA_DAMAGE)
