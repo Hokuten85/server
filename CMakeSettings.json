@@ -13,37 +13,37 @@
       "variables": [
         {
           "name": "FETCHCONTENT_BASE_DIR",
-          "value": "H:\\Source\\Repos/repos/server/build/x64-Release/_deps",
+          "value": "C:/Users/Kelly/source/repos/server/build/x64-Release/_deps",
           "type": "PATH"
         },
         {
           "name": "LuaJIT_LIBRARY",
-          "value": "H:\\Source\\Repos/server/ext/luajit/lib64/libluajit_64.lib",
+          "value": "C:/Users/Kelly/source/repos/server/ext/luajit/lib64/libluajit_64.lib",
           "type": "FILEPATH"
         },
         {
           "name": "MARIADB_LIBRARY",
-          "value": "H:\\Source\\Repos/server/ext/mariadb/lib64/libmariadb64.lib",
+          "value": "C:/Users/Kelly/source/repos/server/ext/mariadb/lib64/libmariadb64.lib",
           "type": "FILEPATH"
         },
         {
           "name": "MARIADBCPP_LIBRARY",
-          "value": "H:\\Source\\Repos/server/ext/mariadbcpp/lib64/mariadbcpp.lib",
+          "value": "C:/Users/Kelly/source/repos/server/ext/mariadbcpp/lib64/mariadbcpp.lib",
           "type": "FILEPATH"
         },
         {
           "name": "OpenSSLlibcrypto_LIBRARY",
-          "value": "H:\\Source\\Repos/server/ext/openssl/lib64/libcrypto.lib",
+          "value": "C:/Users/Kelly/source/repos/server/ext/openssl/lib64/libcrypto.lib",
           "type": "FILEPATH"
         },
         {
           "name": "OpenSSLlibssl_LIBRARY",
-          "value": "H:\\Source\\Repos/server/ext/openssl/lib64/libssl.lib",
+          "value": "C:/Users/Kelly/source/repos/server/ext/openssl/lib64/libssl.lib",
           "type": "FILEPATH"
         },
         {
           "name": "ZeroMQ_LIBRARY",
-          "value": "H:\\Source\\Repos/server/ext/zmq/lib64/libzmq_64.lib",
+          "value": "C:/Users/Kelly/source/repos/server/ext/zmq/lib64/libzmq_64.lib",
           "type": "FILEPATH"
         }
       ]
