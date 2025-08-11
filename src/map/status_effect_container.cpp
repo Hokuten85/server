@@ -602,22 +602,25 @@ void CStatusEffectContainer::DeleteStatusEffects()
     TracyZoneScoped;
     bool update_icons    = false;
     bool effects_removed = false;
-    for (auto effect_iter = m_StatusEffectSet.begin(); effect_iter != m_StatusEffectSet.end();)
+    if (m_StatusEffectSet.size() > 0)
     {
-        CStatusEffect* PStatusEffect = *effect_iter;
-        if (PStatusEffect->deleted)
+        for (auto effect_iter = m_StatusEffectSet.begin(); effect_iter != m_StatusEffectSet.end();)
         {
-            if (PStatusEffect->GetIcon() != 0)
+            CStatusEffect* PStatusEffect = *effect_iter;
+            if (PStatusEffect->deleted)
             {
-                update_icons = true;
+                if (PStatusEffect->GetIcon() != 0)
+                {
+                    update_icons = true;
+                }
+                effect_iter = m_StatusEffectSet.erase(effect_iter);
+                destroy(PStatusEffect);
+                effects_removed = true;
             }
-            effect_iter = m_StatusEffectSet.erase(effect_iter);
-            destroy(PStatusEffect);
-            effects_removed = true;
-        }
-        else
-        {
-            ++effect_iter;
+            else
+            {
+                ++effect_iter;
+            }
         }
     }
 

@@ -613,3 +613,8 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
                                                     // TODO: figure out a good way to differentiate between the two. There does not seem to be a functional difference.
     }
 }
+
+int8 CTrustEntity::getShieldSize()
+{
+    return 3;
+}
