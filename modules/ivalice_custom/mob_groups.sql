@@ -38,4 +38,6 @@ AND mg.respawntime > 600;
 
 UPDATE mob_groups SET minLevel = 60, maxLevel = 67 WHERE zoneid = 169 AND minLevel >= 85; -- reduce level of 85+ mobs in Toraimarai_Canal
 
---UPDATE mob_groups SET minLevel = 86, maxLevel = 90 WHERE groupid = 25 AND zoneid = 193; -- Targe_Beetle
+--UPDATE mob_groups SET minLevel = 86, maxLevel = 90 WHERE groupid = 25 AND zoneid = 193; -- Targe_Beetle 
+
+UPDATE mob_pools SET spellList = 0 WHERE poolid = 5967 AND name = 'qultada';
