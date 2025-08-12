@@ -112,6 +112,17 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 }
 
+bool CMagicState::CheckTarget()
+{
+    if (m_targid != 0)
+    {
+        auto PTarget = m_PEntity->GetEntity(m_targid);
+        UpdateTarget(PTarget);
+    }
+
+    return this->GetTarget() != nullptr;
+}
+
 bool CMagicState::Update(timer::time_point tick)
 {
     action_t    action;
@@ -341,7 +352,7 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast)
         return false;
     }
 
-    if (m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_SILENCE, EFFECT_MUTE }))
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_SILENCE, EFFECT_MUTE, EFFECT_HEALING }))
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_UNABLE_TO_CAST_SPELLS);
         return false;

@@ -104,7 +104,7 @@ CBattleEntity::~CBattleEntity()
 
 bool CBattleEntity::isDead()
 {
-    return (health.hp <= 0 || status == STATUS_TYPE::DISAPPEAR || PAI->IsCurrentState<CDeathState>() || PAI->IsCurrentState<CDespawnState>());
+    return (health.hp <= 0 || status == STATUS_TYPE::DISAPPEAR || (PAI && PAI->IsCurrentState<CDeathState>()) || (PAI && PAI->IsCurrentState<CDespawnState>()));
 }
 
 bool CBattleEntity::isAlive()
@@ -1826,6 +1826,12 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     auto*          PActionTarget   = static_cast<CBattleEntity*>(state.GetTarget());
     CBattleEntity* POriginalTarget = PActionTarget;
     bool           IsMagicCovered  = false;
+
+    // Check that the target id hasn't been released since starting the spell cast.
+    if (!state.CheckTarget())
+    {
+        return;
+    }
 
     luautils::OnSpellPrecast(this, PSpell);
 

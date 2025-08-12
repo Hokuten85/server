@@ -38,6 +38,7 @@ class CMagicState : public CState
 {
 public:
     CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid, uint8 flags = 0);
+    virtual bool CheckTarget();
     virtual bool Update(timer::time_point tick) override;
     virtual void Cleanup(timer::time_point tick) override;
     virtual bool CanChangeState() override;

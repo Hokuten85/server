@@ -168,7 +168,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
         }
 
         // do not include pets in monster AoE buffs
-        if (m_findType == FIND_TYPE::MONSTER_MONSTER && m_PTarget->PMaster == nullptr)
+        if (m_findType == FIND_TYPE::MONSTER_MONSTER && m_PTarget != nullptr && m_PTarget->PMaster == nullptr)
         {
             withPet = PETS_CAN_AOE_BUFF;
         }
@@ -433,6 +433,11 @@ validEntity will check if the given entity can be targeted in the AoE.
 */
 bool CTargetFind::validEntity(CBattleEntity* PTarget)
 {
+    if (PTarget == nullptr || PTarget->id == 0)
+    {
+        return false;
+    }
+
     // Check if entity is already in list
     // TODO: Does it make sense to use a hashmap here instead?
     if (std::find(m_targets.begin(), m_targets.end(), PTarget) != m_targets.end())
@@ -618,14 +623,14 @@ CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTa
         return nullptr;
     }
 
-    if (validTargetFlags & TARGET_PET)
-    {
-        return m_PBattleEntity->PPet;
-    }
-
     if (PTarget->objtype == TYPE_PET && PTarget->isDead())
     {
         return nullptr;
+    }
+
+    if (validTargetFlags & TARGET_PET)
+    {
+        return m_PBattleEntity->PPet;
     }
 
     bool ignoreBattleId  = (validTargetFlags & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID;

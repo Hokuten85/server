@@ -507,6 +507,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         else
         {
             PChar->PPet->status = STATUS_TYPE::DISAPPEAR;
+            PChar->PPet->PMaster = nullptr;
             if (static_cast<CPetEntity*>(PChar->PPet)->getPetType() == PET_TYPE::AVATAR)
             {
                 PChar->setModifier(Mod::AVATAR_PERPETUATION, 0);

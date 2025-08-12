@@ -1473,7 +1473,7 @@ namespace battleutils
 
                 attackerID = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetSubID();
 
-                if (PAttacker->objtype == TYPE_PC && PAttacker->PParty != nullptr)
+                if (PAttacker->objtype == TYPE_PC && PAttacker->PParty != nullptr && PAttacker->PParty->GetLeader()->PParty != nullptr)
                 {
                     if (PChar)
                     {

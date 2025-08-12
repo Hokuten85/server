@@ -1171,14 +1171,14 @@ void CMobEntity::Die()
         PBattlefield->handleDeath(this);
     }
 
-        // On Mob death, reset the attack timer to zero if this mob is the current target
+    // On Mob death, reset the attack timer to zero if this mob is the current target
     EnmityList_t* enmityList = PEnmityContainer->GetEnmityList();
     for (auto& it : *enmityList)
     {
         EnmityObject_t& PEnmityObject = it.second;
         if (PEnmityObject.PEnmityOwner && PEnmityObject.PEnmityOwner->objtype == ENTITYTYPE::TYPE_PC && PEnmityObject.PEnmityOwner->m_TargID == this->targid)
         {
-            static_cast<CPlayerController*>(PEnmityObject.PEnmityOwner->PAI->GetController())->setLastAttackTime(timer::now());
+            static_cast<CPlayerController*>(PEnmityObject.PEnmityOwner->PAI->GetController())->setLastAttackTime(timer::time_point());
         }
     }
 

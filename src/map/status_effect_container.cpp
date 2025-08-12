@@ -1890,16 +1890,6 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                         PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                         PEffect->AddEffectFlag(EFFECTFLAG_ALWAYS_EXPIRING);
                         PMember->StatusEffectContainer->AddStatusEffect(PEffect, EffectNotice::Silent);
-
-                        if (PMember->PPet != nullptr &&
-                            m_POwner->loc.zone->GetID() == PMember->PPet->loc.zone->GetID() &&
-                            distance(m_POwner->loc.p, PMember->PPet->loc.p) <= aura_range &&
-                            PMember->PPet->status != STATUS_TYPE::DISAPPEAR)
-                        {
-                            PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
-                            PEffect->AddEffectFlag(EFFECTFLAG_ALWAYS_EXPIRING);
-                            PMember->PPet->StatusEffectContainer->AddStatusEffect(PEffect, EffectNotice::Silent);
-                        }
                     }
                 }
             });

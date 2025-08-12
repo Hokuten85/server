@@ -2734,6 +2734,10 @@ void CCharEntity::Die()
         charutils::DelExperiencePoints(this, retainPercent, 0);
     }
 
+    // fix to despawn pet if player dies.
+    if (this->PPet != nullptr)
+        petutils::DespawnPet(this);
+
     luautils::OnPlayerDeath(this);
 }
 
