@@ -20685,6 +20685,7 @@ return {
     [26231] = {id=26231,en="STR+10 DEX+10 AGI+10\nAccuracy+20 Attack+20\nRanged Accuracy+20\nRanged Attack+20\nPhysical damage limit +10%",ja="STR+10 DEX+10 AGI+10\n命中+20 攻+20 飛命+20 飛攻+20\n物理ダメージ上限+10%"},
     [26232] = {id=26232,en="\"Magic Def. Bonus\"+6\nBesieged:\nMagic Accuracy+50\n\"Refresh\"+5",ja="魔防+6\nビシージ:魔命+50 リフレシュ+5"},
     [26233] = {id=26233,en="DEF:30 VIT+10\nBesieged: Damage taken -50%",ja="防30 VIT+10\nビシージ:被ダメージ-50%"},
+    [26235] = {id=26235,en="Enchantment: Teleport (Arrapago Reef)",ja="エンチャント:テレポ（アラパゴ暗礁域）"},
     [26240] = {id=26240,en="DEF:17 HP+50 MP+50 STR+4 DEX+4\nVIT+4 AGI+4 INT+4 MND+4 CHR+4\n\"Resist Poison\"+15 \"Resist Stun\"+15",ja="防17 HP+50 MP+50 STR+4 DEX+4 VIT+4\nAGI+4 INT+4 MND+4 CHR+4\nレジストポイズン+15 レジストスタン+15"},
     [26241] = {id=26241,en="DEF:15 Pet: Attack+16\n\"Magic Atk. Bonus\"+16\nCritical hit rate +3%",ja="防15 ペット:攻+16 魔攻+16\nクリティカルヒット+3%"},
     [26242] = {id=26242,en="DEF:21 STR+5 Attack+25 Enmity+5",ja="防21 STR+5 攻+25 敵対心+5 "},
