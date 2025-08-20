@@ -462,7 +462,7 @@ void CMagicState::SpendCost()
         {
             CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
 
-            cost = (int16)(cost * (1.f - (float)((PChar->PJobPoints->GetJobPointValue(JP_QUICK_MAGIC_EFFECT) * 2) / 100)));
+            cost = (int16)(cost * (1.0f - (float)((PChar->PJobPoints->GetJobPointValue(JP_QUICK_MAGIC_EFFECT) * 2) / 100)));
         }
 
         // conserve mp
@@ -470,7 +470,7 @@ void CMagicState::SpendCost()
 
         if (xirand::GetRandomNumber(100) < rate)
         {
-            cost = (int16)(cost * (xirand::GetRandomNumber(8.f, 16.f) / 16.0f));
+            cost = (int16)(cost * (xirand::GetRandomNumber(8.0f, 16.0f) / 16.0f));
         }
 
         m_PEntity->addMP(-cost);
