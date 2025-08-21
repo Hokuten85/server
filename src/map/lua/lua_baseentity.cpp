@@ -1959,7 +1959,7 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
             }
 
             auto wait  = pointData["wait"];
-            point.wait = wait.valid() ? std::chrono::seconds(wait.get<uint32>()) : 0s;
+            point.wait = wait.valid() ? std::chrono::milliseconds(wait.get<uint32>()) : 0s;
             points.emplace_back(point);
         }
     }
@@ -2585,32 +2585,40 @@ void CLuaBaseEntity::leaveGame()
 
 /************************************************************************
  *  Function: sendEmote()
- *  Purpose : Makes a player entity emit an emote.
- *  Example : player:sendEmote(npc, xi.emote.EXCAVATION, xi.emoteMode.MOTION)
- *  Notes   : Currently only used for HELM animations.
+ *  Purpose : Makes a player or NPC entity emit an emote.
+ *  Example : npc:sendEmote(npc2, xi.emote.HURRAY, xi.emoteMode.MOTION)
+ *  Notes   : Target is optional.
  ************************************************************************/
 
-void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
+void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode) const
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    const auto* PTarget   = target ? target->GetBaseEntity() : nullptr;
+    const auto  emoteID   = static_cast<Emote>(emID);
+    const auto  emoteMode = static_cast<EmoteMode>(emMode);
+
+    if (auto* PEntity = dynamic_cast<CNpcEntity*>(m_PBaseEntity))
     {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        auto targetId     = PTarget ? PTarget->id : PEntity->id;
+        auto targetTargId = PTarget ? PTarget->targid : PEntity->targid;
+        PEntity->loc.zone->PushPacket(PEntity,
+                                      CHAR_INRANGE,
+                                      std::make_unique<CCharEmotionPacket>(PEntity, targetId, targetTargId, emoteID, emoteMode));
+
         return;
     }
 
-    if (target)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        auto* const PChar   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-        auto* const PTarget = target->GetBaseEntity();
+        auto targetId     = PTarget ? PTarget->id : PChar->id;
+        auto targetTargId = PTarget ? PTarget->targid : PChar->targid;
+        PChar->loc.zone->PushPacket(PChar,
+                                    CHAR_INRANGE_SELF,
+                                    std::make_unique<CCharEmotionPacket>(PChar, targetId, targetTargId, emoteID, emoteMode, 0));
 
-        if (PChar && PTarget)
-        {
-            const auto emoteID   = static_cast<Emote>(emID);
-            const auto emoteMode = static_cast<EmoteMode>(emMode);
-
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CCharEmotionPacket>(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
-        }
+        return;
     }
+
+    ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
 }
 
 /************************************************************************
@@ -4293,6 +4301,17 @@ bool CLuaBaseEntity::delContainerItems(sol::object const& containerID)
     auto* PChar          = static_cast<CCharEntity*>(m_PBaseEntity);
     auto* PItemContainer = PChar->getStorage(location);
     uint8 containerSize  = PItemContainer->GetSize();
+
+    // ensure we unequip equipped items before deletion
+    for (uint8 equipmentSlot = 0; equipmentSlot <= 15; equipmentSlot++)
+    {
+        if (PChar->equipLoc[equipmentSlot] == location)
+        {
+            // UnequipItem doesn't consider SLOT_MAIN removing SLOT_SUB, so we say to Equip nothing in this equipment slot
+            // this is the same thing that equipset_set packet does to remove a slot
+            charutils::EquipItem(PChar, 0, equipmentSlot, 0);
+        }
+    }
 
     for (uint8 i = 1; i <= containerSize; ++i)
     {
@@ -11555,6 +11574,12 @@ uint8 CLuaBaseEntity::checkSoloPartyAlliance()
 
 bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& minRange)
 {
+    if (PLuaBaseEntity == nullptr)
+    {
+        ShowWarning("CLuaBaseEntity::checkKillCredit() - PLuaBaseEntity received null value.");
+        return false;
+    }
+
     if (m_PBaseEntity->objtype != TYPE_PC || (PLuaBaseEntity && PLuaBaseEntity->GetBaseEntity()->objtype != TYPE_MOB))
     {
         ShowWarning("CLuaBaseEntity::checkKillCredit() - Non-PC type calling function, or PLuaBaseEntity is not a MOB.");
@@ -11592,6 +11617,12 @@ bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object
  ************************************************************************/
 uint8 CLuaBaseEntity::checkDifficulty(CLuaBaseEntity* PLuaBaseEntity)
 {
+    if (PLuaBaseEntity == nullptr)
+    {
+        ShowWarning("CLuaBaseEntity::checkDifficulty() - PLuaBaseEntity received null value.");
+        return 0;
+    }
+
     CMobEntity*  PMob  = dynamic_cast<CMobEntity*>(PLuaBaseEntity->GetBaseEntity());
     CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -15359,6 +15390,17 @@ int32 CLuaBaseEntity::checkDamageCap(int32 damage)
     if (auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity))
     {
         return battleutils::CheckAndApplyDamageCap(damage, PBattle);
+    }
+
+    ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+    return 0;
+}
+
+auto CLuaBaseEntity::handleSevereDamage(int32 damage, bool isPhysical) -> int32
+{
+    if (auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        return battleutils::HandleSevereDamage(PBattle, damage, isPhysical);
     }
 
     ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
@@ -19941,6 +19983,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("takeSpellDamage", CLuaBaseEntity::takeSpellDamage);
     SOL_REGISTER("takeSwipeLungeDamage", CLuaBaseEntity::takeSwipeLungeDamage);
     SOL_REGISTER("checkDamageCap", CLuaBaseEntity::checkDamageCap);
+    SOL_REGISTER("handleSevereDamage", CLuaBaseEntity::handleSevereDamage);
 
     // Pets and Automations
     SOL_REGISTER("spawnPet", CLuaBaseEntity::spawnPet);
