@@ -255,6 +255,7 @@ function finalMagicAdjustments(caster, target, spell, dmg)
 
     dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, spell:getElement()))
     dmg = math.floor(dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement()))
+    dmg = math.floor(target:handleSevereDamage(dmg, false))
 
     if dmg > 0 then
         dmg = dmg - target:getMod(xi.mod.PHALANX)
@@ -293,6 +294,7 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
 
     dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, ele))
     dmg = math.floor(dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, ele))
+    dmg = math.floor(target:handleSevereDamage(dmg, false))
 
     if dmg > 0 then
         dmg = dmg - target:getMod(xi.mod.PHALANX)
