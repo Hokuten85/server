@@ -736,6 +736,74 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
 
     switch (PAutomaton->getHead())
     {
+        case HEAD_HARLEQUIN:
+        case HEAD_SHARPSHOT:
+        {
+            if (maneuvers.dark && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DIA))
+            {
+                castPriority.emplace_back(SpellID::Bio_II);
+            }
+
+            if (maneuvers.light && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_BIO))
+            {
+                castPriority.emplace_back(SpellID::Dia_II);
+            }
+
+           if (maneuvers.dark && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DIA))
+           {
+               castPriority.emplace_back(SpellID::Bio);
+           }
+
+           if (maneuvers.light && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_BIO))
+           {
+               castPriority.emplace_back(SpellID::Dia);
+           }
+
+           if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_POISON))
+           {
+               if (maneuvers.water) // Water -> Poison
+               {
+                   castPriority.emplace_back(SpellID::Poison_II);
+                   castPriority.emplace_back(SpellID::Poison);
+               }
+               else
+               {
+                   defaultPriority.emplace_back(SpellID::Poison_II);
+                   defaultPriority.emplace_back(SpellID::Poison);
+               }
+           }
+
+           if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_SILENCE))
+           {
+               // Wind -> Silence
+               (maneuvers.wind ? castPriority : defaultPriority).emplace_back(SpellID::Silence);
+           }
+
+           if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_SLOW))
+           {
+               // Earth -> Slow
+               (maneuvers.earth ? castPriority : defaultPriority).emplace_back(SpellID::Slow);
+           }
+
+           if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_BLINDNESS))
+           {
+               // Dark -> Blind
+               (maneuvers.dark ? castPriority : defaultPriority).emplace_back(SpellID::Blind);
+           }
+
+           if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_PARALYSIS))
+           {
+               // Ice -> Paralyze
+               (maneuvers.ice ? castPriority : defaultPriority).emplace_back(SpellID::Paralyze);
+           }
+
+           if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_ADDLE))
+           {
+               // Fire -> Addle
+               (maneuvers.fire ? castPriority : defaultPriority).emplace_back(SpellID::Addle);
+           }
+           break;
+        }
         case HEAD_STORMWAKER:
         {
             bool dispel = false;
