@@ -109,3 +109,25 @@ void MapApplication::requestExit()
         mapEngine->requestExit();
     }
 }
+
+void MapApplication::run()
+{
+    ShowInfo("Creating engine");
+    engine_ = createEngine();
+
+    if (engine_)
+    {
+        ShowInfo("Initializing engine");
+        engine_->onInitialize();
+
+        registerCommands(console());
+    }
+
+    markLoaded();
+    auto* mapEngine = dynamic_cast<MapEngine*>(engine_.get());
+
+    while (Application::isRunning())
+    {
+        mapEngine->gameLoop();
+    }
+}
