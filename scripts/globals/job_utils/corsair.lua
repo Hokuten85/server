@@ -224,28 +224,37 @@ end
 
 local luckyNumbers =
 {
-    [xi.jobAbility.CORSAIRS_ROLL   ] = {5,9},
-    [xi.jobAbility.NINJA_ROLL      ] = {4,8},
-    [xi.jobAbility.HUNTERS_ROLL	   ] = {4,8},
-    [xi.jobAbility.CHAOS_ROLL      ] = {4,8},
-    [xi.jobAbility.MAGUSS_ROLL     ] = {2,6},
-    [xi.jobAbility.HEALERS_ROLL    ] = {3,7},
-    [xi.jobAbility.DRACHEN_ROLL    ] = {4,8},
-    [xi.jobAbility.CHORAL_ROLL     ] = {2,6},
-    [xi.jobAbility.MONKS_ROLL      ] = {3,7},
-    [xi.jobAbility.BEAST_ROLL      ] = {4,8},
-    [xi.jobAbility.SAMURAI_ROLL    ] = {2,6},
-    [xi.jobAbility.EVOKERS_ROLL    ] = {5,9},
-    [xi.jobAbility.ROGUES_ROLL     ] = {5,9},
-    [xi.jobAbility.WARLOCKS_ROLL   ] = {4,8},
-    [xi.jobAbility.FIGHTERS_ROLL   ] = {5,9},
-    [xi.jobAbility.PUPPET_ROLL     ] = {3,7},
-    [xi.jobAbility.GALLANTS_ROLL   ] = {3,7},
-    [xi.jobAbility.WIZARDS_ROLL    ] = {5,9},
-    [xi.jobAbility.DANCERS_ROLL    ] = {3,7},
-    [xi.jobAbility.SCHOLARS_ROLL   ] = {2,6},
-    [xi.jobAbility.NATURALISTS_ROLL] = {3,7},
-    [xi.jobAbility.RUNEISTS_ROLL   ] = {4,8},
+    [xi.effect.CORSAIRS_ROLL   ] = {5,9},
+    [xi.effect.NINJA_ROLL      ] = {4,8},
+    [xi.effect.HUNTERS_ROLL	   ] = {4,8},
+    [xi.effect.CHAOS_ROLL      ] = {4,8},
+    [xi.effect.MAGUSS_ROLL     ] = {2,6},
+    [xi.effect.HEALERS_ROLL    ] = {3,7},
+    [xi.effect.DRACHEN_ROLL    ] = {4,8},
+    [xi.effect.CHORAL_ROLL     ] = {2,6},
+    [xi.effect.MONKS_ROLL      ] = {3,7},
+    [xi.effect.BEAST_ROLL      ] = {4,8},
+    [xi.effect.SAMURAI_ROLL    ] = {2,6},
+    [xi.effect.EVOKERS_ROLL    ] = {5,9},
+    [xi.effect.ROGUES_ROLL     ] = {5,9},
+    [xi.effect.WARLOCKS_ROLL   ] = {4,8},
+    [xi.effect.FIGHTERS_ROLL   ] = {5,9},
+    [xi.effect.PUPPET_ROLL     ] = {3,7},
+    [xi.effect.GALLANTS_ROLL   ] = {3,7},
+    [xi.effect.WIZARDS_ROLL    ] = {5,9},
+    [xi.effect.DANCERS_ROLL    ] = {3,7},
+    [xi.effect.SCHOLARS_ROLL   ] = {2,6},
+    [xi.effect.NATURALISTS_ROLL] = {3,7},
+    [xi.effect.RUNEISTS_ROLL   ] = {4,8},
+	[xi.effect.BOLTERS_ROLL    ] = {3,9},   
+	[xi.effect.CASTERS_ROLL    ] = {2,7},   
+	[xi.effect.COURSERS_ROLL   ] = {3,9},  
+	[xi.effect.BLITZERS_ROLL   ] = {4,9},  
+	[xi.effect.TACTICIANS_ROLL ] = {5,8},
+	[xi.effect.ALLIES_ROLL     ] = {3,10},    
+	[xi.effect.MISERS_ROLL     ] = {5,7},    
+	[xi.effect.COMPANIONS_ROLL ] = {2,10},
+	[xi.effect.AVENGERS_ROLL   ] = {4,8},
 }
 
 local rollWeights = {
@@ -267,10 +276,10 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
         local prevRoll = caster:getStatusEffect(duEffect:getSubPower())
         local roll     = prevRoll:getSubPower()
         local job      = duEffect:getTier()
-		
-		local abilityId = GetAbility(duEffect:getSubType()):getID()
-		local lucky = luckyNumbers[abilityId][1]
-		local unlucky = luckyNumbers[abilityId][2]
+						
+		local effectId = prevRoll:getEffectType()
+		local lucky = luckyNumbers[effectId][1]
+		local unlucky = luckyNumbers[effectId][2]
 
         caster:setLocalVar('corsairActiveRoll', duEffect:getSourceTypeParam())
 

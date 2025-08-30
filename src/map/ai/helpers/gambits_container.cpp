@@ -619,31 +619,32 @@ namespace gambits
 
                             if (roll == effects::GetLuckyRollInfo(prevRoll->GetStatusID()).lucky || roll == 11)
                             {
-                                break; // do nothing with double up
+                                // do nothing with double up
                             }
                             else if (roll <= 6)
                             {
                                 controller->Ability(target->targid, ABILITY::ABILITY_DOUBLE_UP);
                             }
+                            // if roll is 10 and we have snake eye available, then use it
                             else if (roll == 10 &&
                                      !static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, ABILITY::ABILITY_SNAKE_EYE, 0s) &&
                                      trustutils::hasAbility(static_cast<CTrustEntity*>(POwner), ABILITY::ABILITY_SNAKE_EYE))
                             {
                                 controller->Ability(target->targid, ABILITY::ABILITY_SNAKE_EYE);
                                 EnqueueJA(ABILITY::ABILITY_DOUBLE_UP, target->targid);
-                                return;
                             }
+                            // if we have an 11 or a lucky, then keep rolling on less than ideal rolls
                             else if (POwner->StatusEffectContainer->CheckForElevenRoll())
                             {
                                 controller->Ability(target->targid, ABILITY::ABILITY_DOUBLE_UP);
                             }
+                            // if we got here, then we are over 6, no 11 or lucky roll, and we've landed on unlucky. If we have snake eye to get off unlucky, then use it.
                             else if (roll == effects::GetLuckyRollInfo(prevRoll->GetStatusID()).unlucky &&
                                      !static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, ABILITY::ABILITY_SNAKE_EYE, 0s) &&
                                      trustutils::hasAbility(static_cast<CTrustEntity*>(POwner), ABILITY::ABILITY_SNAKE_EYE))
                             {
                                 controller->Ability(target->targid, ABILITY::ABILITY_SNAKE_EYE);
                                 EnqueueJA(ABILITY::ABILITY_DOUBLE_UP, target->targid);
-                                return;
                             }
                         }
                     }
