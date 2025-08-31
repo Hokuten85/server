@@ -51,6 +51,4 @@ public:
 
 private:
     MapConfig engineConfig_{};
-
-    void requestExit() override;
 };

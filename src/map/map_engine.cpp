@@ -457,8 +457,3 @@ auto MapEngine::zones() const -> std::map<uint16, CZone*>&
 {
     return g_PZoneList;
 }
-
-void MapEngine::requestExit()
-{
-    ioContext_.stop();
-}
