@@ -1171,7 +1171,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     target:handleAfflatusMiseryDamage(finalDamage)
 
     -- Handle Enmity.
-    target:updateEnmityFromDamage(caster, finalDamage)
+    target:updateEnmityFromDamage(caster, finalDamage / 2)
 
     -- Add "Magic Burst!" message
     if magicBurst > 1 then
