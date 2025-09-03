@@ -40,6 +40,8 @@
 #include "weapon_skill.h"
 #include <recast_container.h>
 
+#include <ranges>
+
 namespace gambits
 {
     // Return a new unique identifier for a gambit
