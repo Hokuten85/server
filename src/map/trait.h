@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CTRAIT_H
-#define _CTRAIT_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -242,5 +241,3 @@ namespace traits
 
     TraitList_t* GetTraits(uint8 JobID);
 }; // namespace traits
-
-#endif
