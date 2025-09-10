@@ -655,7 +655,7 @@ namespace gambits
                 {
                     if (action.select == G_SELECT::SPECIFIC)
                     {
-                        controller->MobSkill(target->targid, action.select_arg);
+                        controller->MobSkill(target->targid, action.select_arg, std::nullopt);
                     }
                 }
             }
@@ -1059,7 +1059,7 @@ namespace gambits
                 {
                     target = POwner->GetBattleTarget();
                 }
-                controller->MobSkill(target->targid, chosen_skill->skill_id);
+                controller->MobSkill(target->targid, chosen_skill->skill_id, std::nullopt);
             }
             return true;
         }

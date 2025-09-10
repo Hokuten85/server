@@ -19,11 +19,9 @@
 ===========================================================================
 */
 
-#ifndef _STATUSEFFECTCONTAINER_H
-#define _STATUSEFFECTCONTAINER_H
+#pragma once
 
 #include "common/cbasetypes.h"
-#include "common/task_manager.h"
 
 #include <set>
 
@@ -171,5 +169,3 @@ namespace effects
 
     LuckyRoll_t GetLuckyRollInfo(uint16 effect);
 }; // namespace effects
-
-#endif
