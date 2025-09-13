@@ -64,6 +64,8 @@ xi.mobSkill =
 
     TRANSMOGRIFICATION       =  487, -- Mammet-800
 
+    SELF_DESTRUCT            =  511,
+
     DANSE_MACABRE            =  533,
 
     TREMOROUS_TREAD          =  540, -- Mammet-800
@@ -233,11 +235,15 @@ xi.mobSkill =
     VOID_OF_REPENTANCE       = 2146,
     DIVINE_JUDGMENT          = 2147,
 
+    GRIM_GLOWER              = 2156,
+
     PEDAL_PIROUETTE          = 2210,
 
     HELL_SCISSORS            = 2221,
 
     QUEASYSHROOM_2           = 2232,
+
+    OPPRESSIVE_GLARE         = 2392,
 
     ROAR_3                   = 2406,
 
