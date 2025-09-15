@@ -2084,6 +2084,11 @@ CZone* CZoneEntities::GetZone()
     return m_zone;
 }
 
+auto CZoneEntities::GetEffectCheckTime() const -> timer::time_point
+{
+    return m_EffectCheckTime;
+}
+
 EntityList_t CZoneEntities::GetCharList() const
 {
     return m_charList;
