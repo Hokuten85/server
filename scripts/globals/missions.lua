@@ -840,5 +840,5 @@ xi.mission.setMustZone = function(player, areaId, missionId)
 end
 
 randomColoredDrop = function()
-	return xi.items.RED_DROP+math.random(0,7)
+	return xi.item.RED_DROP + math.random(0,7)
 end

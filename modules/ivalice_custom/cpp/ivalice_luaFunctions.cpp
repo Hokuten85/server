@@ -6,7 +6,6 @@
 #include <algorithm>
 
 #include "common/logging.h"
-#include "common/sql.h"
 #include "map/entities/charentity.h"
 #include "map/lua/luautils.h"
 #include "map/utils/battleutils.h"
