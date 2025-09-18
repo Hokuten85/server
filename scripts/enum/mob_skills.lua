@@ -77,12 +77,16 @@ xi.mobSkill =
 
     BLOOD_WEAPON_1           =  695,
 
+    CHARM                    =  710,
+
     MEIKYO_SHISUI_1          =  730, -- Tenzen, etc...
     MIJIN_GAKURE_1           =  731, -- Season's Greetings KSNM 30 (Ulagohvsdi Tlugvi)
 
     CALL_WYVERN              =  732,
 
     FAMILIAR_1               =  740, -- "Tango with a Tracker" Shikaree X
+
+    GREAT_WHIRLWIND_1        =  803,
 
     DISPELLING_WIND          =  813,
     DEADLY_DRIVE             =  814,
