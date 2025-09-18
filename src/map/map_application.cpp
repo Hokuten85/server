@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2025 LandSandBoat Dev Teams
@@ -120,27 +120,5 @@ void MapApplication::run()
     while (!taskManager->getTaskList().empty())
     {
         taskManager->getTaskList().pop();
-    }
-}
-
-void MapApplication::run()
-{
-    ShowInfo("Creating engine");
-    engine_ = createEngine();
-
-    if (engine_)
-    {
-        ShowInfo("Initializing engine");
-        engine_->onInitialize();
-
-        registerCommands(console());
-    }
-
-    markLoaded();
-    auto* mapEngine = dynamic_cast<MapEngine*>(engine_.get());
-
-    while (Application::isRunning())
-    {
-        mapEngine->gameLoop();
     }
 }
