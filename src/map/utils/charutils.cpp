@@ -7649,7 +7649,7 @@ namespace charutils
         PChar->addModifier(type, value);
         PChar->addCharMod(type, value);
 
-        if (!db::preparedStmt("REPLACE INTO char_mods (charid, modid, value) VALUES(?, ?, ?)", PChar->id, (int)type, PChar->getCharMod(type)))
+        if (!db::preparedStmt("INSERT INTO char_mods (charid, modid, value) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE value = ?", PChar->id, (int)type, PChar->getCharMod(type), PChar->getCharMod(type)))
         {
             ShowError("Error writing char mod for: '%s'", PChar->name.c_str());
         }

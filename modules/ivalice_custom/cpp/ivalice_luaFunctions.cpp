@@ -13,6 +13,7 @@
 #include "map/packets/char_update.h"
 #include "map/packets/char_stats.h"
 #include "map/packets/char_skills.h"
+#include <packets/char_status.h>
 
 namespace
 {
@@ -55,7 +56,7 @@ class IvaliceFuncModule : public CPPModule
             PChar->addHP(PChar->GetMaxHP());
             PChar->addMP(PChar->GetMaxMP());
 
-            PChar->pushPacket<CCharUpdatePacket>(PChar, ENTITYUPDATE::ENTITY_UPDATE, PChar->updatemask);
+            PChar->pushPacket<CCharStatusPacket>(PChar);
             PChar->pushPacket<CCharStatsPacket>(PChar);
             PChar->pushPacket<CCharSkillsPacket>(PChar);
 

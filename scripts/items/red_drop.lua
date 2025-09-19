@@ -14,7 +14,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user, item)
     target:addStatusEffect(xi.effect.STR_BOOST, 5, 0, 900)
     target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 3600)
 	
