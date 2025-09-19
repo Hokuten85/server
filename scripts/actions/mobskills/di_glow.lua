@@ -1,9 +1,6 @@
 -----------------------------------
--- Familiar
--- pet powers increase.
--- Note: can use even without a pet
+--  Glow before Wrath of Zeus or Lightning Spear
 -----------------------------------
----@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -11,11 +8,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.pet.applyFamiliarBuffs(mob, mob:getPet())
-
-    skill:setMsg(xi.msg.basic.FAMILIAR_MOB)
-
-    return 0
+    skill:setMsg(xi.msg.basic.NONE)
+    return 0 -- cosmetic move only
 end
 
 return mobskillObject
