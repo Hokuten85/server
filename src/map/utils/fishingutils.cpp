@@ -31,13 +31,13 @@
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/chat_message.h"
-#include "packets/entity_animation.h"
 #include "packets/fishing.h"
-#include "packets/inventory_finish.h"
 #include "packets/message_special.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/message_text.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x038_schedulor.h"
 #include "packets/s2c/0x043_talknumname.h"
 #include "packets/s2c/0x052_eventucoff.h"
 
@@ -49,6 +49,7 @@
 
 #include "battleutils.h"
 #include "charutils.h"
+#include "enums/four_cc.h"
 #include "enums/key_items.h"
 #include "enums/weather.h"
 #include "item_container.h"
@@ -1358,7 +1359,7 @@ namespace fishingutils
 
                     if (SendUpdate)
                     {
-                        PChar->pushPacket<CInventoryFinishPacket>();
+                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
                     }
                 }
             }
@@ -1393,7 +1394,7 @@ namespace fishingutils
                 uint8 location = PRanged->getLocationID();
                 charutils::UpdateItem(PChar, location, PRanged->getSlotID(), -1);
                 charutils::AddItem(PChar, location, PRod->brokenRodId, 1);
-                PChar->pushPacket<CInventoryFinishPacket>();
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             }
         }
     }
@@ -2730,7 +2731,7 @@ namespace fishingutils
                     // send then response sense message
                     SendSenseMessage(PChar, response);
                     // play the sweating animation
-                    PChar->pushPacket<CEntityAnimationPacket>(PChar, PChar, "hitl");
+                    PChar->pushPacket<GP_SERV_COMMAND_SCHEDULOR>(PChar, PChar, FourCC::Sweating);
                     PChar->updatemask |= UPDATE_HP;
                     // send the fishing packet
                     PChar->animation = ANIMATION_FISHING_FISH;
