@@ -29,9 +29,9 @@
 #include "items.h"
 #include "latent_effect_container.h"
 #include "packets/char_recast.h"
-#include "packets/chocobo_digging.h"
-#include "packets/inventory_finish.h"
 #include "packets/message_system.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x02f_dig.h"
 #include "packets/s2c/0x052_eventucoff.h"
 #include "recast_container.h"
 #include "status_effect.h"
@@ -327,8 +327,8 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             if (luautils::OnChocoboDig(PChar))
             {
                 charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -1);
-                PChar->pushPacket<CInventoryFinishPacket>();
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CChocoboDiggingPacket>(PChar));
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_DIG>(PChar));
             }
         }
         break;
