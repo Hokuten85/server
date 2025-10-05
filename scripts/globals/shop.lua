@@ -60,7 +60,7 @@ end
 xi.shop.curioVendorMoogle = function(player, stock)
     local log = -1
 
-    player:createShop(#stock / 3, log)
+    player:createShop(#stock, log)
 
     for _, stockItem in ipairs(stock) do
         if player:hasKeyItem(stockItem[3]) then
@@ -545,12 +545,13 @@ xi.shop.curioVendorMoogleStock =
 
     [xi.shop.curio.scrolls] =
     {
-        { xi.item.SCROLL_OF_INSTANT_WARP,      500, xi.ki.RHAPSODY_IN_WHITE },
-        { xi.item.SCROLL_OF_INSTANT_RERAISE,   500, xi.ki.RHAPSODY_IN_WHITE },
-        { xi.item.SCROLL_OF_INSTANT_RETRACE,   500, xi.ki.RHAPSODY_IN_AZURE },
-        { xi.item.SCROLL_OF_INSTANT_PROTECT,   500, xi.ki.RHAPSODY_IN_WHITE },
-        { xi.item.SCROLL_OF_INSTANT_SHELL,     500, xi.ki.RHAPSODY_IN_WHITE },
-        { xi.item.SCROLL_OF_INSTANT_STONESKIN, 500, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.SCROLL_OF_INSTANT_WARP,       500, xi.ki.RHAPSODY_IN_WHITE },
+        { xi.item.SCROLL_OF_INSTANT_RERAISE,    500, xi.ki.RHAPSODY_IN_WHITE },
+		{ xi.item.SCROLL_OF_INSTANT_PROTECT,    500, xi.ki.RHAPSODY_IN_WHITE },
+        { xi.item.SCROLL_OF_INSTANT_SHELL,      500, xi.ki.RHAPSODY_IN_WHITE },
+		{ xi.item.ANCIENT_BEASTCOIN,           1000, xi.ki.RHAPSODY_IN_WHITE },
+        { xi.item.SCROLL_OF_INSTANT_RETRACE,    500, xi.ki.RHAPSODY_IN_AZURE },
+        { xi.item.SCROLL_OF_INSTANT_STONESKIN,  500, xi.ki.RHAPSODY_IN_UMBER },
     },
 
     [xi.shop.curio.keys] =
