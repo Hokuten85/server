@@ -43,7 +43,7 @@ static uint8 upgrade[10][45] = {
       51, 51 } // Max merits
 };
 
-#define MAX_LIMIT_POINTS 10000
+#define MAX_LIMIT_POINTS 5000
 
 // TODO: Transfer all this to the database
 
