@@ -405,8 +405,8 @@ xi.pets.avatar.getLightSpiritSpell = function(pet)
 
     local distance  = pet:checkDistance(master) -- starts as distance to master, updated to be distance to the posTarget
     local hpp       = 100
-    local alliance  = master:getAlliance()
-    local party     = master:getParty()
+    local alliance  = master:getPartyWithTrusts()
+    local party     = master:getPartyWithTrusts()
 
     for _, member in pairs(alliance) do
         local tempHPP = member:getHPP()
