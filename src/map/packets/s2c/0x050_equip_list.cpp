@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2020 - Kreidos | github.com/kreidos
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,13 @@
 ===========================================================================
 */
 
-#ifndef _CROESPARKPACKET_H
-#define _CROESPARKPACKET_H
+#include "0x050_equip_list.h"
 
-#include "common/cbasetypes.h"
-
-#include "basic.h"
-
-class CCharEntity;
-
-class CRoeSparkUpdatePacket : public CBasicPacket
+GP_SERV_COMMAND_EQUIP_LIST::GP_SERV_COMMAND_EQUIP_LIST(const uint8 slotId, const SLOTTYPE equipSlot, const CONTAINER_ID containerId)
 {
-public:
-    CRoeSparkUpdatePacket(CCharEntity* PChar);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.PropertyItemIndex = slotId;
+    packet.EquipKind         = equipSlot;
+    packet.Category          = containerId;
+}

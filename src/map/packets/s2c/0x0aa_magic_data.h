@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,16 +19,21 @@
 ===========================================================================
 */
 
-#include <cstring>
+#pragma once
 
-#include "char_spells.h"
+#include "base.h"
 
-#include "entities/charentity.h"
+class CCharEntity;
 
-CCharSpellsPacket::CCharSpellsPacket(CCharEntity* PChar)
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00AA
+// This packet is sent by the server to populate the clients list of available magic spells.
+class GP_SERV_COMMAND_MAGIC_DATA final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MAGIC_DATA, GP_SERV_COMMAND_MAGIC_DATA>
 {
-    this->setType(0xAA);
-    this->setSize(0x84);
+public:
+    struct PacketData
+    {
+        uint8_t MagicDataTbl[128]; // PS2: MagicDataTbl
+    };
 
-    ref<xi::bitset<1024>>(0x04) = PChar->m_SpellList;
-}
+    GP_SERV_COMMAND_MAGIC_DATA(const CCharEntity* PChar);
+};

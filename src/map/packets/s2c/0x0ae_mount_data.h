@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2020 - Kreidos | github.com/kreidos
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,21 @@
 ===========================================================================
 */
 
-#ifndef _CROEQUESTLOGPACKET_H
-#define _CROEQUESTLOGPACKET_H
+#pragma once
 
-#include "common/cbasetypes.h"
-
-#include "basic.h"
+#include "base.h"
 
 class CCharEntity;
 
-class CRoeQuestLogPacket : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00AE
+// This packet is sent by the server to populate the clients mount information.
+class GP_SERV_COMMAND_MOUNT_DATA final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MOUNT_DATA, GP_SERV_COMMAND_MOUNT_DATA>
 {
 public:
-    CRoeQuestLogPacket(CCharEntity* PChar, uint8 order);
-};
+    struct PacketData
+    {
+        uint8_t MountDataTbl[8];
+    };
 
-#endif
+    GP_SERV_COMMAND_MOUNT_DATA(const CCharEntity* PChar);
+};

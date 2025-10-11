@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,17 +19,14 @@
 ===========================================================================
 */
 
-#ifndef _CEQUIPPACKET_H
-#define _CEQUIPPACKET_H
+#include "0x112_roe_log.h"
 
-#include "common/cbasetypes.h"
+#include "entities/charentity.h"
 
-#include "basic.h"
-
-class CEquipPacket : public CBasicPacket
+GP_SERV_COMMAND_ROE_LOG::GP_SERV_COMMAND_ROE_LOG(const CCharEntity* PChar, const uint8 order)
 {
-public:
-    CEquipPacket(uint8 EquipSlot, uint8 SlotID, uint8 containerID);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.Offset = order;
+    std::memcpy(packet.Data, &(PChar->m_eminenceLog.complete[order * 128]), 128);
+}

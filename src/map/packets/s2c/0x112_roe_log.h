@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,16 +19,25 @@
 ===========================================================================
 */
 
-#include <cstring>
+#pragma once
 
-#include "char_mounts.h"
+#include "common/cbasetypes.h"
 
-#include "entities/charentity.h"
+#include "base.h"
 
-CCharMountsPacket::CCharMountsPacket(CCharEntity* PChar)
+class CCharEntity;
+
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0112
+// This packet is sent by the server to update the clients Records of Eminence quest log information.
+class GP_SERV_COMMAND_ROE_LOG final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_ROE_LOG, GP_SERV_COMMAND_ROE_LOG>
 {
-    this->setType(0xAE);
-    this->setSize(0x0C);
+public:
+    struct PacketData
+    {
+        uint8_t  Data[128];
+        uint16_t Offset;
+        uint16_t padding00;
+    };
 
-    std::memcpy(buffer_.data() + 0x04, &(PChar->keys.tables[6].keyList), 0x0C);
-}
+    GP_SERV_COMMAND_ROE_LOG(const CCharEntity* PChar, uint8 order);
+};

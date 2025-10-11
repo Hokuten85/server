@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2020 - Kreidos | github.com/kreidos
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,22 @@
 ===========================================================================
 */
 
-#ifndef _CROEUPDATEPACKET_H
-#define _CROEUPDATEPACKET_H
+#pragma once
 
-#include "common/cbasetypes.h"
-
-#include "basic.h"
+#include "base.h"
 
 class CCharEntity;
 
-class CRoeUpdatePacket : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0062
+// This packet is sent by the server to update the clients skill base information.
+class GP_SERV_COMMAND_CLISTATUS2 final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_CLISTATUS2, GP_SERV_COMMAND_CLISTATUS2>
 {
 public:
-    CRoeUpdatePacket(CCharEntity* PChar);
-};
+    struct PacketData
+    {
+        uint32_t CommandRecast[31]; // PS2: CommandRecast
+        uint16_t skill_base[64];    // PS2: skill_base
+    };
 
-#endif
+    GP_SERV_COMMAND_CLISTATUS2(const CCharEntity* PChar);
+};

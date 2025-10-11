@@ -54453,10 +54453,10 @@ INSERT INTO `mob_spawn_points` VALUES (17391794,40,'Orcish_Bowshooter','Orcish B
 INSERT INTO `mob_spawn_points` VALUES (17391795,40,'Orcish_Footsoldier','Orcish Footsoldier',2,258.173,-4.649,41.105,62);
 INSERT INTO `mob_spawn_points` VALUES (17391796,40,'Orcish_Gladiator','Orcish Gladiator',3,233.083,3.3,60.691,226);
 INSERT INTO `mob_spawn_points` VALUES (17391797,40,'Orcish_Trooper','Orcish Trooper',4,257.135,-0.068,57.565,151);
-INSERT INTO `mob_spawn_points` VALUES (17391798,42,'Orcish_Bowshooter','Orcish Bowshooter',1,229.114,3.067,59.17,184);
-INSERT INTO `mob_spawn_points` VALUES (17391799,42,'Orcish_Footsoldier','Orcish Footsoldier',2,247.386,2.219,62,3);
-INSERT INTO `mob_spawn_points` VALUES (17391800,42,'Orcish_Gladiator','Orcish Gladiator',3,0,0,0,0);
-INSERT INTO `mob_spawn_points` VALUES (17391801,42,'Orcish_Trooper','Orcish Trooper',4,245.068,2.735,60.426,238);
+INSERT INTO `mob_spawn_points` VALUES (17391798,41,'Orcish_Bowshooter','Orcish Bowshooter',1,229.114,3.067,59.17,184);
+INSERT INTO `mob_spawn_points` VALUES (17391799,41,'Orcish_Footsoldier','Orcish Footsoldier',2,247.386,2.219,62,3);
+INSERT INTO `mob_spawn_points` VALUES (17391800,41,'Orcish_Gladiator','Orcish Gladiator',3,0,0,0,0);
+INSERT INTO `mob_spawn_points` VALUES (17391801,41,'Orcish_Trooper','Orcish Trooper',4,245.068,2.735,60.426,238);
 INSERT INTO `mob_spawn_points` VALUES (17391802,0,'Orcish_Overlord','Orcish Overlord',16,218.046,-3.017,-101.239,58);
 INSERT INTO `mob_spawn_points` VALUES (17391803,0,'Overlord_Bakgodek','Overlord Bakgodek',17,225.168,-2.974,-110.339,29);
 INSERT INTO `mob_spawn_points` VALUES (17391804,0,'Bugaboo','Bugaboo',18,107.583,-2.06,-144.1,162);
