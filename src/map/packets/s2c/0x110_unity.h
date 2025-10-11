@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,23 +19,29 @@
 ===========================================================================
 */
 
-#include "common/timer.h"
+#pragma once
 
-#include <cstring>
+#include "common/cbasetypes.h"
 
-#include "entities/charentity.h"
+#include "base.h"
 
-#include "char_skills.h"
+class CCharEntity;
 
-CCharSkillsPacket::CCharSkillsPacket(CCharEntity* PChar)
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0110
+// This packet is sent by the server to update the client's Unity quest information.
+class GP_SERV_COMMAND_UNITY final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_UNITY, GP_SERV_COMMAND_UNITY>
 {
-    this->setType(0x62);
-    this->setSize(0x100);
+public:
+    struct PacketData
+    {
+        uint32_t Sparks : 24;
+        uint32_t unused00 : 8;
+        uint16_t Deeds;
+        uint16_t Plaudits; // XiPackets: Documented as padding00
+        uint8_t  RoEUnityShared;
+        uint8_t  RoEUnityLeader;
+        uint8_t  unknown0E[6];
+    };
 
-    std::memcpy(buffer_.data() + 0x80, &PChar->WorkingSkills, 128);
-
-    // remove automaton skills from this menu (they are in another packet)
-    ref<uint16>(0xAC) = 0x8000;
-    ref<uint16>(0xAE) = 0x8000;
-    ref<uint16>(0xB0) = 0x8000;
-}
+    GP_SERV_COMMAND_UNITY(const CCharEntity* PChar);
+};

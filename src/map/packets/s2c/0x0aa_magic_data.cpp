@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,15 @@
 ===========================================================================
 */
 
-#include <cstring>
+#include "0x0aa_magic_data.h"
 
-#include "char_abilities.h"
+#include <cstring>
 
 #include "entities/charentity.h"
 
-CCharAbilitiesPacket::CCharAbilitiesPacket(CCharEntity* PChar)
+GP_SERV_COMMAND_MAGIC_DATA::GP_SERV_COMMAND_MAGIC_DATA(const CCharEntity* PChar)
 {
-    this->setType(0xAC);
-    this->setSize(0xE4);
+    auto& packet = this->data();
 
-    std::memcpy(buffer_.data() + 0x04, PChar->m_WeaponSkills, 32);
-    std::memcpy(buffer_.data() + 0x44, PChar->m_Abilities, 64);
-    std::memcpy(buffer_.data() + 0x84, PChar->m_PetCommands, 64);
-    std::memcpy(buffer_.data() + 0xC4, PChar->m_TraitList, 18);
+    std::memcpy(packet.MagicDataTbl, &PChar->m_SpellList, sizeof(packet.MagicDataTbl));
 }

@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,25 +19,29 @@
 ===========================================================================
 */
 
-#ifndef _CLINKSHELLEQUIPPACKET_H
-#define _CLINKSHELLEQUIPPACKET_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
-#include "basic.h"
-
-/************************************************************************
- *                                                                       *
- *  We send Linkshellid to which the search is carried out.             *
- *                                                                       *
- ************************************************************************/
+#include "base.h"
 
 class CCharEntity;
 
-class CLinkshellEquipPacket : public CBasicPacket
+struct record_t
 {
-public:
-    CLinkshellEquipPacket(CCharEntity* PChar, uint8 number);
+    uint32_t Id : 12;
+    uint32_t Count : 20;
 };
 
-#endif
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0111
+// This packet is sent by the server to update the client's current set of Records of Eminence quest information.
+class GP_SERV_COMMAND_ROE_ACTIVELOG final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_ROE_ACTIVELOG, GP_SERV_COMMAND_ROE_ACTIVELOG>
+{
+public:
+    struct PacketData
+    {
+        record_t records[64];
+    };
+
+    GP_SERV_COMMAND_ROE_ACTIVELOG(const CCharEntity* PChar);
+};
