@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,26 +19,14 @@
 ===========================================================================
 */
 
-#ifndef _CMERITPOINTSCATEGORIESPACKET_H_
-#define _CMERITPOINTSCATEGORIESPACKET_H_
+#include "0x03e_shop_open.h"
 
-#include "common/cbasetypes.h"
+#include "entities/charentity.h"
+#include "trade_container.h"
 
-#include "merit.h"
-
-#include "basic.h"
-
-class CCharEntity;
-
-class CMeritPointsCategoriesPacket : public CBasicPacket
+GP_SERV_COMMAND_SHOP_OPEN::GP_SERV_COMMAND_SHOP_OPEN(const CCharEntity* PChar)
 {
-public:
-    CMeritPointsCategoriesPacket(CCharEntity* PChar);
-    CMeritPointsCategoriesPacket(const CCharEntity* PChar, MERIT_TYPE merit);
+    auto& packet = this->data();
 
-private:
-    // offset should be a uint16!!! Why assert fail?!
-    void MeritPointsCategoriesPacket(const CCharEntity* PChar, uint8 offset);
-};
-
-#endif
+    packet.ShopListNum = PChar->Container->getItemsCount();
+}

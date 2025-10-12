@@ -35,8 +35,12 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x039_mapschedulor.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03a_magicschedulor.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03a_magicschedulor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03c_shop_list.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03c_shop_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03d_shop_sell.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03d_shop_sell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03e_shop_open.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03e_shop_open.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03f_shop_buy.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03f_shop_buy.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x041_black_list.h
@@ -74,6 +78,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x06f_combine_ans.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x070_combine_inf.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x070_combine_inf.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x076_group_effects.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x076_group_effects.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x082_guild_buy.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x082_guild_buy.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x083_guild_buylist.h
@@ -84,6 +90,12 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x085_guild_selllist.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x086_guild_open.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x086_guild_open.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x08c_merit.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x08c_merit.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x08d_job_points.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x08d_job_points.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0a0_map_group.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0a0_map_group.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0aa_magic_data.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0aa_magic_data.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ac_command_data.h
@@ -92,10 +104,18 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ae_mount_data.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0b4_config.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0b4_config.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0c8_group_tbl.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0c8_group_tbl.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0fa_myroom_operation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0fa_myroom_operation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ca_inspect_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ca_inspect_message.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0dc_group_solicit_req.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0dc_group_solicit_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0dd_group_list.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0dd_group_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0e1_group_checkid.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0e1_group_checkid.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f4_tracking_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f4_tracking_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f5_tracking_pos.h

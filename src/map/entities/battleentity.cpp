@@ -2044,7 +2044,10 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         auto* PEminenceTarget = this;
         if (const auto* PTrust = dynamic_cast<CTrustEntity*>(this))
         {
-            PEminenceTarget = static_cast<CBattleEntity*>(PTrust->PMaster);
+            if (PTrust->PMaster)
+            {
+                PEminenceTarget = static_cast<CBattleEntity*>(PTrust->PMaster);
+            }
         }
 
         if (PEminenceTarget == PTarget || // Casting on self or ally

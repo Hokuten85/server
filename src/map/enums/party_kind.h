@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,10 @@
 ===========================================================================
 */
 
-#ifndef _CSHOPITEMSPACKET_H
-#define _CSHOPITEMSPACKET_H
+#pragma once
 
-#include "common/cbasetypes.h"
-
-#include "basic.h"
-
-class CCharEntity;
-
-class CShopItemsPacket : public CBasicPacket
+enum class PartyKind : uint8_t
 {
-public:
-    CShopItemsPacket(CCharEntity* PChar);
+    Party    = 0,
+    Alliance = 5,
 };
-
-#endif
