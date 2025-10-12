@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,14 +19,30 @@
 ===========================================================================
 */
 
-#include "shop_menu.h"
-#include "entities/charentity.h"
-#include "trade_container.h"
+#pragma once
 
-CShopMenuPacket::CShopMenuPacket(CCharEntity* PChar)
+#include "base.h"
+#include <vector>
+
+class CCharEntity;
+struct partymemberbuffs_t
 {
-    this->setType(0x3E);
-    this->setSize(0x08);
+    uint32_t UniqueNo;
+    uint16_t ActIndex;
+    uint16_t padding06;
+    uint64_t Bits;
+    uint8_t  Buffs[32];
+};
 
-    ref<uint8>(0x04) = PChar->Container->getItemsCount();
-}
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0076
+// This packet is sent by the server to update party members' buff information
+class GP_SERV_COMMAND_GROUP_EFFECTS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_GROUP_EFFECTS, GP_SERV_COMMAND_GROUP_EFFECTS>
+{
+public:
+    struct PacketData
+    {
+        partymemberbuffs_t Members[5]; // PS2: (New; did not exist.)
+    };
+
+    explicit GP_SERV_COMMAND_GROUP_EFFECTS(const std::vector<CCharEntity*>& membersList);
+};

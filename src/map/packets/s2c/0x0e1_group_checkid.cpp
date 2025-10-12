@@ -1,33 +1,35 @@
-﻿/*
+/*
 ===========================================================================
-  Copyright (c) 2021 Ixion Dev Teams
+
+  Copyright (c) 2025 LandSandBoat Dev Teams
+
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
+
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
+
 ===========================================================================
 */
 
-#ifndef _CJOBPOINTUPDATEPACKET_H
-#define _CJOBPOINTUPDATEPACKET_H
+#include "0x0e1_group_checkid.h"
 
-#include "common/cbasetypes.h"
+#include "entities/charentity.h"
+#include "party.h"
 
-#include "basic.h"
-#include "job_points.h"
-
-class CCharEntity;
-
-class CJobPointUpdatePacket : public CBasicPacket
+GP_SERV_COMMAND_GROUP_CHECKID::GP_SERV_COMMAND_GROUP_CHECKID(const CCharEntity* PChar)
 {
-public:
-    CJobPointUpdatePacket(CCharEntity* PChar, JOBPOINT_TYPE jpType);
-};
+    auto& packet = this->data();
 
-#endif
+    if (PChar != nullptr && PChar->PParty != nullptr)
+    {
+        packet.GroupID = PChar->PParty->GetPartyID();
+    }
+}
