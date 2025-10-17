@@ -28,8 +28,7 @@
 #include "packets/char_job_extra.h"
 #include "packets/s2c/0x0aa_magic_data.h"
 
-#include "packets/char_stats.h"
-#include "packets/message_basic.h"
+#include "packets/s2c/0x061_clistatus.h"
 
 #include "battleutils.h"
 #include "blue_spell.h"
@@ -38,6 +37,7 @@
 #include "job_points.h"
 #include "merit.h"
 #include "modifier.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "party.h"
 #include "spell.h"
 
@@ -166,7 +166,7 @@ namespace blueutils
                     {
                         if (charutils::addSpell(PBlueMage, static_cast<uint16>(PSpell->getID())))
                         {
-                            PBlueMage->pushPacket<CMessageBasicPacket>(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MSGBASIC_LEARNS_SPELL);
+                            PBlueMage->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MSGBASIC_LEARNS_SPELL);
                             charutils::SaveSpell(PBlueMage, static_cast<uint16>(PSpell->getID()));
                             PBlueMage->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(PBlueMage);
                         }
@@ -209,7 +209,7 @@ namespace blueutils
         charutils::BuildingCharTraitsTable(PChar);
         PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
         PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
-        PChar->pushPacket<CCharStatsPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
         charutils::CalculateStats(PChar);
         PChar->UpdateHealth();
         SaveSetSpells(PChar);
