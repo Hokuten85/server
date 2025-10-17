@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -98,11 +98,12 @@ namespace daily
 
     void LoadDailyItems()
     {
-        const auto rset = db::preparedStmt("SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
+        const auto rset = db::preparedStmt("SELECT ib.itemid, ib.aH, ib.flags, ie.level FROM item_basic ib LEFT OUTER JOIN item_equipment ie ON ib.itemid = ie.itemid WHERE flags & 4 > 0");
 
         uint16 itemid = 0;
         uint16 aH     = 0;
         uint16 flags  = 0;
+        uint16 level  = 0;
         if (rset && rset->rowsCount())
         {
             while (rset->next())
@@ -110,8 +111,12 @@ namespace daily
                 itemid = rset->get<uint16>("itemid");
                 aH     = rset->get<uint16>("aH");
                 flags  = rset->get<uint16>("flags");
-
-                specialDialItems.emplace_back(itemid);
+                level  = rset->getOrDefault<uint16>("level", 0);
+                if (level >= 0 && level <= 75)
+                {
+                    specialDialItems.emplace_back(itemid);
+                }
+                
                 switch (aH)
                 {
                     /* Dial 1 (Materials) */
