@@ -11,7 +11,7 @@
 #include "map/utils/battleutils.h"
 #include "map/utils/charutils.h"
 #include "map/packets/char_update.h"
-#include "map/packets/char_stats.h"
+#include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
 #include <packets/char_status.h>
 
@@ -57,7 +57,7 @@ class IvaliceFuncModule : public CPPModule
             PChar->addMP(PChar->GetMaxMP());
 
             PChar->pushPacket<CCharStatusPacket>(PChar);
-            PChar->pushPacket<CCharStatsPacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
             PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
 
             return 0;
