@@ -46,6 +46,7 @@
 #include "ipc_client.h"
 #include "item_container.h"
 #include "items.h"
+#include "job_points.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
 #include "mob_modifier.h"
@@ -99,15 +100,9 @@
 
 #include "packets/action.h"
 #include "packets/auction_house.h"
-#include "packets/char_job_extra.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
-#include "packets/conquest_map.h"
 #include "packets/entity_update.h"
-#include "packets/menu_jobpoints.h"
-#include "packets/menu_merit.h"
-#include "packets/monipulator1.h"
-#include "packets/monipulator2.h"
 #include "packets/objective_utility.h"
 #include "packets/quest_mission_log.h"
 #include "packets/s2c/0x009_message.h"
@@ -137,9 +132,13 @@
 #include "packets/s2c/0x05b_wpos.h"
 #include "packets/s2c/0x05c_pendingnum.h"
 #include "packets/s2c/0x05d_pendingstr.h"
+#include "packets/s2c/0x05e_conquest.h"
 #include "packets/s2c/0x05f_music.h"
 #include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
+#include "packets/s2c/0x063_miscdata_job_points.h"
+#include "packets/s2c/0x063_miscdata_merits.h"
+#include "packets/s2c/0x063_miscdata_monstrosity.h"
 #include "packets/s2c/0x077_entity_vis.h"
 #include "packets/s2c/0x086_guild_open.h"
 #include "packets/s2c/0x0aa_magic_data.h"
@@ -6639,9 +6638,9 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
         PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
-        PChar->pushPacket<CMenuMeritPacket>(PChar);
-        PChar->pushPacket<CMonipulatorPacket1>(PChar);
-        PChar->pushPacket<CMonipulatorPacket2>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
         PChar->pushPacket<CCharSyncPacket>(PChar);
     }
     else if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
@@ -6918,9 +6917,9 @@ void CLuaBaseEntity::setLevel(uint8 level)
         PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
-        PChar->pushPacket<CMenuMeritPacket>(PChar);
-        PChar->pushPacket<CMonipulatorPacket1>(PChar);
-        PChar->pushPacket<CMonipulatorPacket2>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
         PChar->pushPacket<CCharSyncPacket>(PChar);
     }
 }
@@ -6975,9 +6974,9 @@ void CLuaBaseEntity::setsLevel(uint8 slevel)
     PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
     PChar->pushPacket<CCharStatusPacket>(PChar);
-    PChar->pushPacket<CMenuMeritPacket>(PChar);
-    PChar->pushPacket<CMonipulatorPacket1>(PChar);
-    PChar->pushPacket<CMonipulatorPacket2>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
     PChar->pushPacket<CCharSyncPacket>(PChar);
 }
 
@@ -9066,9 +9065,9 @@ void CLuaBaseEntity::setMerits(uint8 numPoints)
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PMeritPoints->SetMeritPoints(numPoints);
-    PChar->pushPacket<CMenuMeritPacket>(PChar);
-    PChar->pushPacket<CMonipulatorPacket1>(PChar);
-    PChar->pushPacket<CMonipulatorPacket2>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
 
     charutils::SaveCharExp(PChar, PChar->GetMJob());
 }
@@ -9130,7 +9129,7 @@ void CLuaBaseEntity::setCapacityPoints(uint16 amount)
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PJobPoints->SetCapacityPoints(amount);
-    PChar->pushPacket<CMenuJobPointsPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
 }
 
 /************************************************************************
@@ -9151,7 +9150,7 @@ void CLuaBaseEntity::setJobPoints(uint16 amount)
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PJobPoints->SetJobPoints(amount);
-    PChar->pushPacket<CMenuJobPointsPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
 }
 
 /************************************************************************
@@ -9171,7 +9170,7 @@ void CLuaBaseEntity::addJobPoints(uint8 jobID, uint16 amount)
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PJobPoints->AddJobPoints(jobID, amount);
-    PChar->pushPacket<CMenuJobPointsPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
 }
 
 /************************************************************************
@@ -9191,7 +9190,7 @@ void CLuaBaseEntity::delJobPoints(uint8 jobID, uint16 amount)
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PJobPoints->DelJobPoints(jobID, amount);
-    PChar->pushPacket<CMenuJobPointsPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
 }
 
 /************************************************************************
@@ -9242,7 +9241,7 @@ void CLuaBaseEntity::masterJob()
         }
     }
 
-    PChar->pushPacket<CMenuJobPointsPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
 }
 
 /************************************************************************
@@ -9492,7 +9491,7 @@ void CLuaBaseEntity::addCP(int32 cp)
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     charutils::AddPoints(PChar, charutils::GetConquestPointsName(PChar).c_str(), cp);
-    PChar->pushPacket<CConquestPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_CONQUEST>(PChar);
 }
 
 /************************************************************************
@@ -9513,7 +9512,7 @@ void CLuaBaseEntity::delCP(int32 cp)
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     charutils::AddPoints(PChar, charutils::GetConquestPointsName(PChar).c_str(), -cp);
-    PChar->pushPacket<CConquestPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_CONQUEST>(PChar);
 }
 
 /************************************************************************
@@ -10815,11 +10814,11 @@ void CLuaBaseEntity::delLearnedAbility(uint16 abilityID)
 /************************************************************************
  *  Function: addSpell()
  *  Purpose : Adds a specified spell to the player
- *  Example : player:addSpell(128)
- *  Notes   :
+ *  Example : player:addSpell(128, { silentLog = true, saveToDB = false })
+ *  Notes   : Optional config table accepts bools for: silentLog, saveToDB, sendUpdate.
  ************************************************************************/
 
-void CLuaBaseEntity::addSpell(uint16 spellID, sol::variadic_args va)
+void CLuaBaseEntity::addSpell(uint16 spellID, const sol::optional<sol::table>& paramTable)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -10827,26 +10826,43 @@ void CLuaBaseEntity::addSpell(uint16 spellID, sol::variadic_args va)
         return;
     }
 
+    const auto coalesceParam = [](const sol::optional<sol::table>& maybeParamTable, const std::string& key, bool defaultValue) -> bool
+    {
+        if (maybeParamTable.has_value())
+        {
+            const auto& paramTable = *maybeParamTable;
+            if (paramTable[key].valid())
+            {
+                return paramTable[key].get_or<bool>(defaultValue);
+            }
+        }
+        return defaultValue;
+    };
+
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    bool silentLog  = va[0].is<bool>() ? va[0].as<bool>() : false;
-    bool save       = va[1].is<bool>() ? va[1].as<bool>() : true;
-    bool sendUpdate = va[2].is<bool>() ? va[2].as<bool>() : true;
+    const bool silentLog  = coalesceParam(paramTable, "silentLog", /*defaultValue=*/false);
+    const bool saveToDB   = coalesceParam(paramTable, "saveToDB", /*defaultValue=*/true);
+    const bool sendUpdate = coalesceParam(paramTable, "sendUpdate", /*defaultValue=*/true);
 
+    // Add spell to player's active spell list
     if (charutils::addSpell(PChar, spellID))
     {
+        // Update player's client spell list
         if (sendUpdate)
         {
             PChar->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(PChar);
         }
 
+        // Send a chat update "Player learns a new spell!"
         if (!silentLog)
         {
             PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, static_cast<MSGBASIC_ID>(23));
         }
 
-        if (save)
+        if (saveToDB)
         {
+            // Add spell to player's permanent learned spell list
             charutils::SaveSpell(PChar, spellID);
         }
     }
@@ -10902,11 +10918,12 @@ uint32 CLuaBaseEntity::canLearnSpell(uint16 spellID)
 
 /************************************************************************
  *  Function: delSpell()
- *  Purpose : Deletes a learned spell from a player
- *  Example : player:delSpell(528)
+ *  Purpose : Deletes a spell from a player's spell list
+ *  Example : player:delSpell(528, { sendUpdate = false })
+ *  Notes   : Optional config table accepts bools for: saveToDB, sendUpdate.
  ************************************************************************/
 
-void CLuaBaseEntity::delSpell(uint16 spellID)
+void CLuaBaseEntity::delSpell(uint16 spellID, const sol::optional<sol::table>& paramTable)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -10914,12 +10931,38 @@ void CLuaBaseEntity::delSpell(uint16 spellID)
         return;
     }
 
+    const auto coalesceParam = [](const sol::optional<sol::table>& maybeParamTable, const std::string& key, bool defaultValue) -> bool
+    {
+        if (maybeParamTable.has_value())
+        {
+            const auto& paramTable = *maybeParamTable;
+            if (paramTable[key].valid())
+            {
+                return paramTable[key].get_or<bool>(defaultValue);
+            }
+        }
+        return defaultValue;
+    };
+
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
+    const bool saveToDB   = coalesceParam(paramTable, "saveToDB", /*defaultValue=*/true);
+    const bool sendUpdate = coalesceParam(paramTable, "sendUpdate", /*defaultValue=*/true);
+
+    // Remove spell from player's active spell list
     if (charutils::delSpell(PChar, spellID))
     {
-        charutils::DeleteSpell(PChar, spellID);
-        PChar->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(PChar);
+        // Update player's client spell list
+        if (sendUpdate)
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(PChar);
+        }
+
+        // Remove spell from player's permanent learned spell list
+        if (saveToDB)
+        {
+            charutils::DeleteSpell(PChar, spellID);
+        }
     }
 }
 
@@ -12741,9 +12784,9 @@ void CLuaBaseEntity::recalculateStats()
         PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
-        PChar->pushPacket<CMenuMeritPacket>(PChar);
-        PChar->pushPacket<CMonipulatorPacket1>(PChar);
-        PChar->pushPacket<CMonipulatorPacket2>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
         PChar->pushPacket<CCharSyncPacket>(PChar);
     }
 }
@@ -16432,8 +16475,7 @@ void CLuaBaseEntity::setAutomatonFrame(uint8 frameItemID)
     }
 
     puppetutils::setFrame(PChar, frameItemID - 0x2000);
-    PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-    PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
+    charutils::SendExtendedJobPackets(PChar);
     puppetutils::SaveAutomaton(PChar);
 }
 
@@ -16474,8 +16516,7 @@ void CLuaBaseEntity::setAutomatonHead(uint8 headItemID)
     }
 
     puppetutils::setHead(PChar, headItemID - 0x2000);
-    PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-    PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
+    charutils::SendExtendedJobPackets(PChar);
     puppetutils::SaveAutomaton(PChar);
 }
 
@@ -16561,7 +16602,7 @@ void CLuaBaseEntity::removeAllManeuvers()
  *  Example : pet:getAttachment(1)
  ************************************************************************/
 
-auto CLuaBaseEntity::getAttachment(uint8 slotId) -> CItem*
+auto CLuaBaseEntity::getAttachment(const uint8 slotId) const -> CItem*
 {
     auto* PAutomaton = dynamic_cast<CAutomatonEntity*>(m_PBaseEntity);
 
@@ -16586,7 +16627,7 @@ auto CLuaBaseEntity::getAttachment(uint8 slotId) -> CItem*
  *  Example : player:setAttachment(8465, 0)
  ************************************************************************/
 
-void CLuaBaseEntity::setAttachment(uint8 attachmentItemID, uint8 slotID)
+void CLuaBaseEntity::setAttachment(const uint8 attachmentItemID, const uint8 slotID) const
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -16597,8 +16638,7 @@ void CLuaBaseEntity::setAttachment(uint8 attachmentItemID, uint8 slotID)
     }
 
     puppetutils::setAttachment(PChar, slotID, attachmentItemID - 0x2100);
-    PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-    PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
+    charutils::SendExtendedJobPackets(PChar);
     puppetutils::SaveAutomaton(PChar);
 }
 
