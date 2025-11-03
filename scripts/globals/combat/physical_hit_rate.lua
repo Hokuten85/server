@@ -112,7 +112,7 @@ xi.combat.physicalHitRate.getPhysicalHitRate = function(attacker, target, bonus,
 
     -- Applying hitrate caps
     -- TODO: per weapon caps
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
+    hitrate = utils.clamp(hitrate, 0.2, 0.99)
 
     return hitrate
 end
