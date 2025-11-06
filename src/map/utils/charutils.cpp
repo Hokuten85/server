@@ -6445,28 +6445,31 @@ namespace charutils
         if (earth_time::vanadiel_timestamp() < tstamp)
         {
             const auto curZone = PChar->loc.zone;
-            switch (accessType)
+            if (curZone != nullptr)
             {
-                case 1: // All areas
-                    // Allowed if in a zone with a Nomad Moogle or in your own Mog House
-                    return curZone->CanUseMisc(MISC_MOGMENU) || PChar->m_moghouseID == PChar->id;
-                case 0: // Al Zahbi only
-                default:
-                    const auto zoneId = curZone->GetID();
+                switch (accessType)
+                {
+                    case 1: // All areas
+                        // Allowed if in a zone with a Nomad Moogle or in your own Mog House
+                        return curZone->CanUseMisc(MISC_MOGMENU) || PChar->m_moghouseID == PChar->id;
+                    case 0: // Al Zahbi only
+                    default:
+                        const auto zoneId = curZone->GetID();
 
-                    // Either in your own MH in Al Zahbi or Whitegate
-                    if (PChar->m_moghouseID == PChar->id &&
-                        (zoneId == ZONE_AL_ZAHBI || zoneId == ZONE_AHT_URHGAN_WHITEGATE))
-                    {
-                        return true;
-                    }
+                        // Either in your own MH in Al Zahbi or Whitegate
+                        if (PChar->m_moghouseID == PChar->id &&
+                            (zoneId == ZONE_AL_ZAHBI || zoneId == ZONE_AHT_URHGAN_WHITEGATE))
+                        {
+                            return true;
+                        }
 
-                    // Or in Nashmau where a Nomad Moogle is present.
-                    if (zoneId == ZONE_NASHMAU)
-                    {
-                        return true;
-                    }
-            };
+                        // Or in Nashmau where a Nomad Moogle is present.
+                        if (zoneId == ZONE_NASHMAU)
+                        {
+                            return true;
+                        }
+                };
+            }
         }
 
         return false;
