@@ -65,7 +65,8 @@
 
 namespace
 {
-    // clang-format off
+
+// clang-format off
     std::map<uint8, uint16> geodeMap = {
         { ELEMENT_FIRE,    FLAME_GEODE   },
         { ELEMENT_ICE,     SNOW_GEODE    },
@@ -87,11 +88,11 @@ namespace
         { ELEMENT_LIGHT,   CARBITE   },
         { ELEMENT_DARK,    FENRITE   }
     };
-    // clang-format on
+// clang-format on
 
     constexpr int             RECAST_SEAL           = 1;
     constexpr int             RECAST_GEODE          = 2;
-    constexpr timer::duration SPECIAL_DROP_COOLDOWN = 1min; // 5 minutes between special drops
+    constexpr timer::duration SPECIAL_DROP_COOLDOWN = 1min; // 1 minutes between special drops
 } // namespace
 
 CMobEntity::CMobEntity()

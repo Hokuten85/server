@@ -27,14 +27,15 @@
 
 namespace daily
 {
-    std::vector<uint16> materialsDialItems;
-    std::vector<uint16> foodDialItems;
-    std::vector<uint16> medicineDialItems;
-    std::vector<uint16> sundries1DialItems;
-    std::vector<uint16> sundries2DialItems;
-    std::vector<uint16> specialDialItems;
 
-    // clang-format off
+std::vector<uint16> materialsDialItems;
+std::vector<uint16> foodDialItems;
+std::vector<uint16> medicineDialItems;
+std::vector<uint16> sundries1DialItems;
+std::vector<uint16> sundries2DialItems;
+std::vector<uint16> specialDialItems;
+
+// clang-format off
     std::vector<uint16> gobbieJunk =
     {
         2542, // Goblin Mess Tin
@@ -46,55 +47,55 @@ namespace daily
         4495, // Goblin Chocolate
         4539  // Goblin Pie
     };
-    // clang-format on
+// clang-format on
 
-    uint16 SelectItem(CCharEntity* player, uint8 dial)
+uint16 SelectItem(CCharEntity* player, uint8 dial)
+{
+    std::vector<uint16>* dialItems = &gobbieJunk;
+    switch (dial)
     {
-        std::vector<uint16>* dialItems = &gobbieJunk;
-        switch (dial)
+        case 1:
         {
-            case 1:
-            {
-                dialItems = &materialsDialItems;
-                break;
-            }
-            case 2:
-            {
-                dialItems = &foodDialItems;
-                break;
-            }
-            case 3:
-            {
-                dialItems = &medicineDialItems;
-                break;
-            }
-            case 4:
-            {
-                dialItems = &sundries1DialItems;
-                break;
-            }
-            case 5:
-            {
-                dialItems = &sundries2DialItems;
-                break;
-            }
-            case 6:
-            {
-                dialItems = &specialDialItems;
-                break;
-            }
+            dialItems = &materialsDialItems;
+            break;
         }
-        uint16 selection = xirand::GetRandomElement(dialItems);
-
-        // Check if Rare item is already owned and substitute with Goblin trash item.
-        if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
+        case 2:
         {
-            dialItems = &gobbieJunk;
-            selection = xirand::GetRandomElement(dialItems);
+            dialItems = &foodDialItems;
+            break;
         }
-
-        return selection;
+        case 3:
+        {
+            dialItems = &medicineDialItems;
+            break;
+        }
+        case 4:
+        {
+            dialItems = &sundries1DialItems;
+            break;
+        }
+        case 5:
+        {
+            dialItems = &sundries2DialItems;
+            break;
+        }
+        case 6:
+        {
+            dialItems = &specialDialItems;
+            break;
+        }
     }
+    uint16 selection = xirand::GetRandomElement(dialItems);
+
+    // Check if Rare item is already owned and substitute with Goblin trash item.
+    if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
+    {
+        dialItems = &gobbieJunk;
+        selection = xirand::GetRandomElement(dialItems);
+    }
+
+    return selection;
+}
 
     void LoadDailyItems()
     {

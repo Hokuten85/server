@@ -61,49 +61,50 @@ When a status effect is gained twice on a player. It can do one or more of the f
 
 namespace effects
 {
-    // Default effect of statuses are overwrite if equal or higher
-    struct EffectParams_t
+
+// Default effect of statuses are overwrite if equal or higher
+struct EffectParams_t
+{
+    uint32      Flag;
+    std::string Name;
+    // type will erase all other effects that match
+    // example: en- spells, spikes
+    uint16 Type;
+    // Negative means the new effect can only land if the negative id is weaker
+    // example: haste, slow
+    EFFECT NegativeId;
+    // only overwrite its self if the new effect is equal or higher / higher than current
+    // example: protect, blind
+    EFFECTOVERWRITE Overwrite;
+    // If this status effect is on the user, it will not take effect
+    // example: lullaby will not take effect with sleep I
+    EFFECT BlockId;
+    // Will always remove this effect when landing
+    EFFECT RemoveId;
+    // status effect element, used in resistances
+    uint8 Element;
+
+    // minimum duration. IE: stun cannot last less than 1 second
+    timer::duration MinDuration;
+
+    // Order in which the status effect should be displayed for the player
+    uint16 SortKey;
+
+    EffectParams_t()
+    : Flag(0)
+    , Type(0)
+    , NegativeId((EFFECT)0)
+    , Overwrite(EFFECTOVERWRITE::EQUAL_HIGHER)
+    , BlockId((EFFECT)0)
+    , RemoveId((EFFECT)0)
+    , Element(0)
+    , MinDuration(0s)
+    , SortKey(0)
     {
-        uint32      Flag;
-        std::string Name;
-        // type will erase all other effects that match
-        // example: en- spells, spikes
-        uint16 Type;
-        // Negative means the new effect can only land if the negative id is weaker
-        // example: haste, slow
-        EFFECT NegativeId;
-        // only overwrite its self if the new effect is equal or higher / higher than current
-        // example: protect, blind
-        EFFECTOVERWRITE Overwrite;
-        // If this status effect is on the user, it will not take effect
-        // example: lullaby will not take effect with sleep I
-        EFFECT BlockId;
-        // Will always remove this effect when landing
-        EFFECT RemoveId;
-        // status effect element, used in resistances
-        uint8 Element;
+    }
+};
 
-        // minimum duration. IE: stun cannot last less than 1 second
-        timer::duration MinDuration;
-
-        // Order in which the status effect should be displayed for the player
-        uint16 SortKey;
-
-        EffectParams_t()
-        : Flag(0)
-        , Type(0)
-        , NegativeId((EFFECT)0)
-        , Overwrite(EFFECTOVERWRITE::EQUAL_HIGHER)
-        , BlockId((EFFECT)0)
-        , RemoveId((EFFECT)0)
-        , Element(0)
-        , MinDuration(0s)
-        , SortKey(0)
-        {
-        }
-    };
-
-    std::array<EffectParams_t, MAX_EFFECTID> EffectsParams;
+std::array<EffectParams_t, MAX_EFFECTID> EffectsParams;
 
     std::map<EFFECT, LuckyRoll_t> LuckyRolls = {
         { EFFECT::EFFECT_CORSAIRS_ROLL,    LuckyRoll_t{ 5, 9 } },
@@ -137,40 +138,40 @@ namespace effects
             EffectsParams[i].Flag = 0;
         }
 
-        const auto rset = db::preparedStmt("SELECT id, name, flags, type, "
-                                           "negative_id, overwrite, block_id, remove_id, "
-                                           "element, min_duration, sort_key "
-                                           "FROM status_effects "
-                                           "WHERE id < ?",
-                                           MAX_EFFECTID);
-        FOR_DB_MULTIPLE_RESULTS(rset)
-        {
-            const auto EffectID = rset->get<uint16>("id");
-
-            EffectsParams[EffectID].Name       = rset->get<std::string>("name");
-            EffectsParams[EffectID].Flag       = rset->get<uint32>("flags");
-            EffectsParams[EffectID].Type       = rset->get<uint16>("type");
-            EffectsParams[EffectID].NegativeId = rset->get<EFFECT>("negative_id");
-            EffectsParams[EffectID].Overwrite  = rset->get<EFFECTOVERWRITE>("overwrite");
-            EffectsParams[EffectID].BlockId    = rset->get<EFFECT>("block_id");
-            EffectsParams[EffectID].RemoveId   = rset->get<EFFECT>("remove_id");
-
-            EffectsParams[EffectID].Element     = rset->get<uint16>("element");
-            EffectsParams[EffectID].MinDuration = std::chrono::seconds(rset->get<uint32>("min_duration"));
-
-            const auto sortKey              = rset->get<uint16>("sort_key");
-            EffectsParams[EffectID].SortKey = sortKey == 0 ? 10000 : sortKey; // default to high number to such that effects without a sort key aren't first
-
-            auto filename = fmt::format("./scripts/effects/{}.lua", EffectsParams[EffectID].Name);
-            luautils::CacheLuaObjectFromFile(filename);
-        }
-    }
-
-    // hacky way to get element from status effect
-    uint16 GetEffectElement(uint16 effect)
+    const auto rset = db::preparedStmt("SELECT id, name, flags, type, "
+                                       "negative_id, overwrite, block_id, remove_id, "
+                                       "element, min_duration, sort_key "
+                                       "FROM status_effects "
+                                       "WHERE id < ?",
+                                       MAX_EFFECTID);
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        return EffectsParams[effect].Element;
+        const auto EffectID = rset->get<uint16>("id");
+
+        EffectsParams[EffectID].Name       = rset->get<std::string>("name");
+        EffectsParams[EffectID].Flag       = rset->get<uint32>("flags");
+        EffectsParams[EffectID].Type       = rset->get<uint16>("type");
+        EffectsParams[EffectID].NegativeId = rset->get<EFFECT>("negative_id");
+        EffectsParams[EffectID].Overwrite  = rset->get<EFFECTOVERWRITE>("overwrite");
+        EffectsParams[EffectID].BlockId    = rset->get<EFFECT>("block_id");
+        EffectsParams[EffectID].RemoveId   = rset->get<EFFECT>("remove_id");
+
+        EffectsParams[EffectID].Element     = rset->get<uint16>("element");
+        EffectsParams[EffectID].MinDuration = std::chrono::seconds(rset->get<uint32>("min_duration"));
+
+        const auto sortKey              = rset->get<uint16>("sort_key");
+        EffectsParams[EffectID].SortKey = sortKey == 0 ? 10000 : sortKey; // default to high number to such that effects without a sort key aren't first
+
+        auto filename = fmt::format("./scripts/effects/{}.lua", EffectsParams[EffectID].Name);
+        luautils::CacheLuaObjectFromFile(filename);
     }
+}
+
+// hacky way to get element from status effect
+uint16 GetEffectElement(uint16 effect)
+{
+    return EffectsParams[effect].Element;
+}
 
     std::string GetEffectName(uint16 effect)
     {
@@ -1418,9 +1419,19 @@ CStatusEffect* CStatusEffectContainer::StealStatusEffect(EFFECTFLAG flag, Effect
         CStatusEffect* oldEffect = dispelableList.at(rndIdx);
 
         // make a copy
-        CStatusEffect* EffectCopy = new CStatusEffect(oldEffect->GetStatusID(), oldEffect->GetIcon(), oldEffect->GetPower(), oldEffect->GetTickTime(),
-                                                      oldEffect->GetDuration(), oldEffect->GetSubID(), oldEffect->GetSubPower(), oldEffect->GetTier(),
-                                                      oldEffect->GetEffectFlags(), oldEffect->GetSourceType(), oldEffect->GetSourceTypeParam(), oldEffect->GetOriginID());
+        CStatusEffect* EffectCopy = new CStatusEffect(
+            oldEffect->GetStatusID(),
+            oldEffect->GetIcon(),
+            oldEffect->GetPower(),
+            oldEffect->GetTickTime(),
+            oldEffect->GetDuration(),
+            oldEffect->GetSubID(),
+            oldEffect->GetSubPower(),
+            oldEffect->GetTier(),
+            oldEffect->GetEffectFlags(),
+            oldEffect->GetSourceType(),
+            oldEffect->GetSourceTypeParam(),
+            oldEffect->GetOriginID());
 
         RemoveStatusEffect(oldEffect, notice);
 
@@ -1846,9 +1857,20 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
 
             db::preparedStmt("INSERT INTO char_effects (charid, effectid, icon, power, tick, duration, subid, subpower, tier, flags, timestamp, sourcetype, sourcetypeparam, originid) "
                              "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                             m_POwner->id, PStatusEffect->GetStatusID(), PStatusEffect->GetIcon(), PStatusEffect->GetPower(), tick, duration,
-                             PStatusEffect->GetSubID(), PStatusEffect->GetSubPower(), PStatusEffect->GetTier(), PStatusEffect->GetEffectFlags(),
-                             timestamp, PStatusEffect->GetSourceType(), PStatusEffect->GetSourceTypeParam(), PStatusEffect->GetOriginID());
+                             m_POwner->id,
+                             PStatusEffect->GetStatusID(),
+                             PStatusEffect->GetIcon(),
+                             PStatusEffect->GetPower(),
+                             tick,
+                             duration,
+                             PStatusEffect->GetSubID(),
+                             PStatusEffect->GetSubPower(),
+                             PStatusEffect->GetTier(),
+                             PStatusEffect->GetEffectFlags(),
+                             timestamp,
+                             PStatusEffect->GetSourceType(),
+                             PStatusEffect->GetSourceTypeParam(),
+                             PStatusEffect->GetOriginID());
         }
     }
     DeleteStatusEffects();
@@ -2196,7 +2218,7 @@ void CStatusEffectContainer::TickRegen(timer::time_point tick)
                         }
                     }
 
-                    perpetuation -= charutils::AvatarPerpetuationReduction(PChar);
+                    perpetuation -= charutils::AvatarPerpetuationReduction(PChar, perpetuation);
 
                     if (perpetuation < 1)
                     {

@@ -31,7 +31,9 @@ class CTrustEntity;
 
 namespace gambits
 {
-    class CGambitsContainer;
+
+class CGambitsContainer;
+
 }
 
 enum class ACTION_TYPE : uint16
