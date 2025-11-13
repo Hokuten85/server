@@ -1700,12 +1700,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             return;
         }
 
-        if (battleutils::IsParalyzed(this))
-        {
-            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
-            return;
-        }
-
         // get any available recast reduction
         // TODO: this is DIFFERENT than gear reduction mod which is a static reduction for the entire ability!
         auto recastReduction = 0s;
@@ -1777,6 +1771,19 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             action.recast = 0s;
         }
 
+        // Check paralysis and consume recast for non-SP abilities
+        if (battleutils::IsParalyzed(this))
+        {
+            // SP abilities (recastId == 0) don't consume recast when paralyzed
+            if (PAbility->getRecastId() != 0)
+            {
+                charutils::ApplyAbilityRecast(this, PAbility, charge, baseChargeTime, action.recast);
+            }
+
+            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
+            return;
+        }
+
         // remove invisible if aggressive
         if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT && PAbility->getID() != ABILITY_DEPLOY && PAbility->getID() != ABILITY_GAUGE)
         {
@@ -1784,7 +1791,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             {
                 if (PAbility->getID() == ABILITY_ASSAULT)
                 {
-                    StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_INVISIBLE);
+                    charutils::RemoveInvisible(this);
                 }
                 // generic aggressive action
                 else
@@ -1796,7 +1803,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             else if (PAbility->getID() != ABILITY_TRICK_ATTACK)
             {
                 // remove invisible only
-                StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_INVISIBLE);
+                charutils::RemoveInvisible(this);
                 StatusEffectContainer->DelStatusEffect(EFFECT_ILLUSION);
             }
         }
@@ -1934,7 +1941,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
                 if (value < 0)
                 {
-                    actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
+                    actionTarget.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionTarget.messageID));
                     actionTarget.param     = -actionTarget.param;
                 }
 
@@ -1977,7 +1984,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             if (value < 0)
             {
-                actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
+                actionTarget.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionTarget.messageID));
                 actionTarget.param     = -value;
             }
 
@@ -1999,22 +2006,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         // Cleanup "consumed" abilities after action like Contradance
         StatusEffectContainer->DelStatusEffect(PAbility->getPostActionEffectCleanup());
 
-        if (charge)
-        {
-            PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast, baseChargeTime, charge->maxCharges);
-        }
-        else
-        {
-            PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
-        }
-
-        uint16 recastID = PAbility->getRecastId();
-        if (settings::get<bool>("map.BLOOD_PACT_SHARED_TIMER") && (recastID == 173 || recastID == 174))
-        {
-            PRecastContainer->Add(RECAST_ABILITY, (recastID == 173 ? 174 : 173), action.recast);
-        }
-
-        pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(this);
+        charutils::ApplyAbilityRecast(this, PAbility, charge, baseChargeTime, action.recast);
 
         // TODO: refactor
         //  if (this->getMijinGakure())
@@ -2362,7 +2354,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         {
             // Camouflage up, and retained, but all other effects must be dropped
             StatusEffectContainer->DelStatusEffect(EFFECT_SNEAK);
-            StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
             StatusEffectContainer->DelStatusEffect(EFFECT_DEODORIZE);
             StatusEffectContainer->DelStatusEffect(EFFECT_ILLUSION);
         }
