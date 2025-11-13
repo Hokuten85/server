@@ -40,7 +40,9 @@ CREATE TABLE `item_description` (
 -- ORDER BY:  `itemid`
 
 LOCK TABLES `item_description` WRITE;
-/*!40000 ALTER TABLE `item_basic` DISABLE KEYS */;
+/*!40000 ALTER TABLE `item_description` DISABLE KEYS */;
+
+
 /*!40000 ALTER TABLE `item_description` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
