@@ -26,6 +26,8 @@ CREATE TABLE `item_description` (
   `resource_id` int NOT NULL,
   `icon_bytes` blob NOT NULL,
   `no_trade_pc` bit NOT NULL,
+  `valid_target_object` bit NOT NULL,
+  `jug_size` int NOT NULL,
   `unknown1` int NOT NULL,
   `unknown2` int NOT NULL,
   `unknown3` int NOT NULL,
