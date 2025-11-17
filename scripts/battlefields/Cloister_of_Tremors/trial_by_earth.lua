@@ -7,6 +7,7 @@ local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_TREMORS,
     battlefieldId    = xi.battlefield.id.TRIAL_BY_EARTH,
     canLoseExp       = false,
+	allowTrusts      = true,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
     index            = 0,
