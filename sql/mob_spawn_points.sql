@@ -45326,8 +45326,8 @@ INSERT INTO `mob_spawn_points` VALUES (17289650,0,'Antican_Hoplomachus','Antican
 INSERT INTO `mob_spawn_points` VALUES (17289651,0,'Antican_Hoplomachus','Antican Hoplomachus',17,-765.857,-8.678,-672.943,111);
 INSERT INTO `mob_spawn_points` VALUES (17289652,0,'Goblin_Digger','Goblin Digger',31,-406.759,0.180,-540.065,5);
 INSERT INTO `mob_spawn_points` VALUES (17289653,0,'Sabotender_Enamorado','Sabotender Enamorado',32,-262.568,-8.248,51.540,0);
-INSERT INTO `mob_spawn_points` VALUES (17289654,0,'Eastern_Sphinx','Eastern Sphinx',33,-326.219,0.392,-109.227,55);
-INSERT INTO `mob_spawn_points` VALUES (17289655,0,'Western_Sphinx','Western Sphinx',34,-324.728,0.102,-113.180,175);
+INSERT INTO `mob_spawn_points` VALUES (17289654,0,'Eastern_Sphinx','Eastern Sphinx',33,-327.799,-2.859,-114.501,55);
+INSERT INTO `mob_spawn_points` VALUES (17289655,0,'Western_Sphinx','Western Sphinx',34,-329.357,-4.004,-110.601,175);
 INSERT INTO `mob_spawn_points` VALUES (17289656,0,'Maharaja','Maharaja',35,-652.300,0.200,-341.500,141);
 INSERT INTO `mob_spawn_points` VALUES (17289657,0,'Monarca_de_Altepa','Monarca de Altepa',36,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17289658,0,'Sabotender_Campeador','Sabotender Campeador',39,551.088,-0.068,257.063,73);
@@ -50009,12 +50009,12 @@ INSERT INTO `mob_spawn_points` VALUES (17346603,0,'Archer_Pugil','Archer Pugil',
 INSERT INTO `mob_spawn_points` VALUES (17346604,0,'Archer_Pugil','Archer Pugil',13,88.928,-146.026,297.804,40);
 
 -- Carapace Combatants
-INSERT INTO `mob_spawn_points` VALUES (17346606,0,'Pilwiz','Pilwiz',14,-400.000,94.000,-63.000,45);
-INSERT INTO `mob_spawn_points` VALUES (17346607,0,'Bisan','Bisan',15,-393.000,94.000,-63.000,45);
-INSERT INTO `mob_spawn_points` VALUES (17346609,0,'Pilwiz','Pilwiz',14,-160.065,-26.009,116.970,45);
-INSERT INTO `mob_spawn_points` VALUES (17346610,0,'Bisan','Bisan',15,-153.065,-26.009,116.970,45);
-INSERT INTO `mob_spawn_points` VALUES (17346612,0,'Pilwiz','Pilwiz',14,79.928,-146.026,296.804,45);
-INSERT INTO `mob_spawn_points` VALUES (17346613,0,'Bisan','Bisan',15,86.928,-146.026,296.804,45);
+INSERT INTO `mob_spawn_points` VALUES (17346606,0,'Pilwiz','Pilwiz',14,-399.723,94.409,-65.810,46);
+INSERT INTO `mob_spawn_points` VALUES (17346607,0,'Bisan','Bisan',15,-392.683,94.409,-62.733,46);
+INSERT INTO `mob_spawn_points` VALUES (17346609,0,'Pilwiz','Pilwiz',14,-160.065,-26.009,116.970,46);
+INSERT INTO `mob_spawn_points` VALUES (17346610,0,'Bisan','Bisan',15,-153.025,-26.009,120.047,46);
+INSERT INTO `mob_spawn_points` VALUES (17346612,0,'Pilwiz','Pilwiz',14,79.928,-146.026,296.804,46);
+INSERT INTO `mob_spawn_points` VALUES (17346613,0,'Bisan','Bisan',15,86.968,-146.026,299.881,46);
 
 -- Dropping Like Flies
 INSERT INTO `mob_spawn_points` VALUES (17346615,0,'Huntfly','Huntfly',16,-398.269,94.613,-59.508,46);
