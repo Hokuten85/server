@@ -22,7 +22,13 @@ mission.reward =
 {
     gil = 20000,
     rank = 6,
-    item = randomColoredDrop,
+    item = 
+	{
+		randomColoredDrop,
+		function()
+			return not player:hasItem(xi.item.VANACLOCK) and xi.item.VANACLOCK or 0
+		end
+	},
 }
 
 local handleAcceptMission = function(player, csid, option, npc)
