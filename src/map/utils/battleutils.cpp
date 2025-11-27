@@ -162,7 +162,7 @@ void LoadSkillTable()
 void LoadWeaponSkillsList()
 {
     const auto rset = db::preparedStmt("SELECT weaponskillid, name, jobs, type, skilllevel, element, animation, "
-                                       "animationTime, `range`, aoe, primary_sc, secondary_sc, tertiary_sc, main_only, unlock_id "
+                                       "animationTime, `range`, aoe, radius, primary_sc, secondary_sc, tertiary_sc, main_only, unlock_id "
                                        "FROM weapon_skills "
                                        "WHERE weaponskillid < ? "
                                        "ORDER BY type, skilllevel ASC",
@@ -188,6 +188,7 @@ void LoadWeaponSkillsList()
         PWeaponSkill->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("animationTime")));
         PWeaponSkill->setRange(rset->get<uint8>("range"));
         PWeaponSkill->setAoe(rset->get<uint8>("aoe"));
+        PWeaponSkill->setRadius(rset->get<uint8>("radius"));
         PWeaponSkill->setPrimarySkillchain(rset->get<uint8>("primary_sc"));
         PWeaponSkill->setSecondarySkillchain(rset->get<uint8>("secondary_sc"));
         PWeaponSkill->setTertiarySkillchain(rset->get<uint8>("tertiary_sc"));
@@ -223,7 +224,7 @@ void LoadMobSkillsList()
         PMobSkill->setValidTargets(rset->get<uint16>("mob_valid_targets"));
         PMobSkill->setFlag(rset->get<uint8>("mob_skill_flag"));
         PMobSkill->setParam(rset->get<int16>("mob_skill_param"));
-        PMobSkill->setKnockback(rset->get<uint8>("knockback"));
+        PMobSkill->setKnockback(rset->get<Knockback>("knockback"));
         PMobSkill->setPrimarySkillchain(rset->get<uint8>("primary_sc"));
         PMobSkill->setSecondarySkillchain(rset->get<uint8>("secondary_sc"));
         PMobSkill->setTertiarySkillchain(rset->get<uint8>("tertiary_sc"));
@@ -1611,7 +1612,7 @@ uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool 
 
         if (PItem != nullptr && PItem->isType(ITEM_WEAPON))
         {
-            acc = PChar->RACC(PItem->getSkillType());
+            acc = PChar->RACC();
         }
 
         // Check For Ambush Merit - Ranged
@@ -1622,15 +1623,11 @@ uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool 
     }
     else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
     {
-        acc = PAttacker->RACC(SKILL_AUTOMATON_RANGED);
+        acc = PAttacker->RACC();
     }
     else if (PAttacker->objtype == TYPE_TRUST)
     {
-        auto archery_acc      = PAttacker->RACC(SKILL_ARCHERY);
-        auto marksmanship_acc = PAttacker->RACC(SKILL_MARKSMANSHIP);
-        auto throwing_acc     = PAttacker->RACC(SKILL_THROWING);
-
-        acc = std::max({ archery_acc, marksmanship_acc, throwing_acc });
+        acc = PAttacker->RACC();
     }
     // Check for Yonin evasion bonus while in front of target
     if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_YONIN) && infront(PDefender->loc.p, PAttacker->loc.p, 64))
@@ -5896,7 +5893,7 @@ int32 GetRangedAttackBonuses(CBattleEntity* battleEntity)
 
     int32 bonus = 0;
 
-    // Reduction from velocity shot mod
+    // bonus from velocity shot mod
     if (battleEntity->StatusEffectContainer->HasStatusEffect(EFFECT_VELOCITY_SHOT))
     {
         bonus += battleEntity->getMod(Mod::VELOCITY_RATT_BONUS);
