@@ -353,7 +353,7 @@ auto CMobController::MobSkill(int listId) -> bool
 
         auto skillList{ battleutils::GetMobSkillList(listId) };
 
-        if (auto overrideSkill = luautils::OnMobWeaponSkillPrepare(PMob, PTarget); overrideSkill > 0)
+        if (auto overrideSkill = luautils::OnMobMobskillChoose(PMob, PTarget); overrideSkill > 0)
         {
             skillList = { overrideSkill };
         }
@@ -465,7 +465,7 @@ auto CMobController::TrySpecialSkill() -> bool
 auto CMobController::TryCastSpell() -> bool
 {
     TracyZoneScoped;
-    if (!CanCastSpells())
+    if (!CanCastSpells(IgnoreRecastsAndCosts::No))
     {
         return false;
     }
@@ -497,7 +497,7 @@ auto CMobController::TryCastSpell() -> bool
 
     // Try to get an override spell from the script (if available)
     auto PSpellTarget            = PTarget ? PTarget : PMob;
-    auto possibleOverriddenSpell = luautils::OnMobMagicPrepare(PMob, PSpellTarget, chosenSpellId);
+    auto possibleOverriddenSpell = luautils::OnMobSpellChoose(PMob, PSpellTarget, chosenSpellId);
     if (possibleOverriddenSpell.has_value())
     {
         chosenSpellId = possibleOverriddenSpell;
@@ -544,7 +544,7 @@ auto CMobController::TryCastSpell() -> bool
     return false;
 }
 
-auto CMobController::CanCastSpells() -> bool
+auto CMobController::CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool
 {
     TracyZoneScoped;
     if (!PMob->SpellContainer->HasSpells())
@@ -567,7 +567,17 @@ auto CMobController::CanCastSpells() -> bool
         }
     }
 
-    return IsMagicCastingEnabled();
+    if (!IsMagicCastingEnabled())
+    {
+        return false;
+    }
+
+    if (!ignoreRecastsAndCosts && !PMob->SpellContainer->IsAnySpellAvailable())
+    {
+        return false;
+    }
+
+    return true;
 }
 
 void CMobController::CastSpell(SpellID spellid)
@@ -832,16 +842,13 @@ void CMobController::Move()
                                 {
                                     auto angle = worldAngle(PMob->loc.p, PTarget->loc.p) + 64;
 
-                                    // clang-format off
-                                position_t new_pos
-                                {
-                                    PMob->loc.p.x - (cosf(rotationToRadian(angle)) * 1.5f),
-                                    PTarget->loc.p.y,
-                                    PMob->loc.p.z + (sinf(rotationToRadian(angle)) * 1.5f),
-                                    0,
-                                    0
-                                };
-                                    // clang-format on
+                                    position_t new_pos{
+                                        PMob->loc.p.x - (cosf(rotationToRadian(angle)) * 1.5f),
+                                        PTarget->loc.p.y,
+                                        PMob->loc.p.z + (sinf(rotationToRadian(angle)) * 1.5f),
+                                        0,
+                                        0,
+                                    };
 
                                     if (PMob->PAI->PathFind->ValidPosition(new_pos))
                                     {
@@ -1078,7 +1085,7 @@ void CMobController::DoRoamTick(timer::time_point tick)
                 }
                 else if (
                     (!PMob->PBattlefield || PMob->PBattlefield->GetStatus() != BATTLEFIELD_STATUS_OPEN) &&
-                    PMob->GetMJob() == JOB_SMN && CanCastSpells() &&
+                    PMob->GetMJob() == JOB_SMN && CanCastSpells(IgnoreRecastsAndCosts::No) &&
                     PMob->SpellContainer->HasBuffSpells() && m_Tick >= m_nextMagicTime)
                 {
                     // summon pet
@@ -1086,7 +1093,7 @@ void CMobController::DoRoamTick(timer::time_point tick)
                     // - Once battlefield is locked, behavior is back to normal with no rng added to pet summoning
                     TryCastSpell();
                 }
-                else if (CanCastSpells() && xirand::GetRandomNumber(10) < 3 && PMob->SpellContainer->HasBuffSpells())
+                else if (CanCastSpells(IgnoreRecastsAndCosts::No) && xirand::GetRandomNumber(10) < 3 && PMob->SpellContainer->HasBuffSpells())
                 {
                     // cast buff
                     TryCastSpell();
@@ -1476,7 +1483,7 @@ auto CMobController::CanMoveForward(const float currentDistance) -> bool
         (PMob->GetMaxMP() == 0 || PMob->GetMPP() >= standbackThreshold))
     {
         // Excluding Nins, mobs should not standback if can't cast magic
-        return PMob->GetMJob() != JOB_NIN && PMob->SpellContainer->HasSpells() && !CanCastSpells();
+        return PMob->GetMJob() != JOB_NIN && PMob->SpellContainer->HasSpells() && !CanCastSpells(IgnoreRecastsAndCosts::Yes);
     }
 
     if (PTarget && !PMob->CanSeeTarget(PTarget))

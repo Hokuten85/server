@@ -2441,11 +2441,6 @@ function CBaseEntity:disableLevelSync()
 end
 
 ---@nodiscard
----@return boolean
-function CBaseEntity:isLevelSync()
-end
-
----@nodiscard
 ---@return integer
 function CBaseEntity:checkSoloPartyAlliance()
 end
@@ -3992,8 +3987,9 @@ end
 ---@param PLuaBaseEntity CBaseEntity
 ---@param offset integer
 ---@param degrees integer
+---@param position table
 ---@return nil
-function CBaseEntity:drawIn(PLuaBaseEntity, offset, degrees)
+function CBaseEntity:drawIn(PLuaBaseEntity, offset, degrees, position)
 end
 
 ---@return nil
