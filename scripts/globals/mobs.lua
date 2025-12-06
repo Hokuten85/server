@@ -141,7 +141,7 @@ xi.mob.phOnDespawn = function(ph, phNmId, chance, cooldown, params)
     end
 
     if xi.settings.main.NM_LOTTERY_COOLDOWN then
-        cooldown = xi.settings.main.NM_LOTTERY_COOLDOWN >= 0 and (cooldown * xi.settings.main.NM_LOTTERY_COOLDOWN) or cooldown
+        cooldown = xi.settings.main.NM_LOTTERY_COOLDOWN >= 0 and xi.settings.main.NM_LOTTERY_COOLDOWN or cooldown
     end
 
     local pop = nm:getLocalVar('pop')
