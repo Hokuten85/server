@@ -115,8 +115,8 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
     { 4, 40, 7 },  // MCATEGORY_WAR_2       catNumber 31
     { 4, 40, 7 },  // MCATEGORY_MNK_2       catNumber 32
     { 6, 60, 7 },  // MCATEGORY_WHM_2       catNumber 33
-    { 12, 120, 7 }, // MCATEGORY_BLM_2       catNumber 34
-    { 12, 120, 7 }, // MCATEGORY_RDM_2       catNumber 35
+    { 12, 60, 7 }, // MCATEGORY_BLM_2       catNumber 34
+    { 12, 60, 7 }, // MCATEGORY_RDM_2       catNumber 35
     { 4, 40, 7 },  // MCATEGORY_THF_2       catNumber 36
     { 4, 40, 7 },  // MCATEGORY_PLD_2       catNumber 37
     { 4, 40, 7 },  // MCATEGORY_DRK_2       catNumber 38
@@ -124,7 +124,7 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
     { 6, 60, 7 },  // MCATEGORY_BRD_2       catNumber 40
     { 4, 40, 7 },  // MCATEGORY_RNG_2       catNumber 41
     { 4, 40, 7 },  // MCATEGORY_SAM_2       catNumber 42
-    { 12, 120, 7 }, // MCATEGORY_NIN_2       catNumber 43
+    { 12, 60, 7 }, // MCATEGORY_NIN_2       catNumber 43
     { 4, 40, 7 },  // MCATEGORY_DRG_2       catNumber 44
     { 6, 60, 7 },  // MCATEGORY_SMN_2       catNumber 45
     { 4, 40, 7 },  // MCATEGORY_BLU_2       catNumber 46
