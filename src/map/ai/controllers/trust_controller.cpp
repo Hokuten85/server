@@ -154,7 +154,7 @@ void CTrustController::DoCombatTick(timer::time_point tick)
                 {
                     auto spelldistance = ((PSpell->getValidTarget() == TARGET_SELF && PSpell->getAOE() == SPELLAOE_RADIAL && PSpell->getRange() == 0) ||
                                           (PSpell->getValidTarget() && TARGET_PLAYER_PARTY_PIANISSIMO && PSpell->getAOE() == SPELLAOE_PIANISSIMO && !POwner->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO)))
-                                             ? spell::GetSpellRadius(PSpell, POwner)
+                                             ? PSpell->getRadius()
                                              : PSpell->getRange();
 
                     if (distance(POwner->loc.p, PTarget->loc.p) > spelldistance)
@@ -527,7 +527,7 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
     auto PSpellFamily = PSpell->getSpellFamily();
     bool canCast      = true;
     auto castdistance = (PSpell->getValidTarget() == TARGET_SELF && PSpell->getAOE() == SPELLAOE_RADIAL && PSpell->getRange() == 0)
-                            ? spell::GetSpellRadius(PSpell, POwner)
+                            ? PSpell->getRadius()
                             : PSpell->getRange();
 
     if (distance(POwner->loc.p, PTarget->loc.p) > castdistance) // check casting distance
