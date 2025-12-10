@@ -168,7 +168,28 @@ UPDATE item_mods SET value = 50 WHERE itemid = 15585 AND modid = 897; -- Asn. Cu
 UPDATE item_mods SET value = 5 WHERE itemid = 15137 AND modid = 302; -- Asn. Culottes
 UPDATE item_mods SET value = 5 WHERE itemid = 15670 AND modid = 302; -- Asn. Culottes +1
 
-
+INSERT INTO item_mods VALUES (12515,10,5); -- Gallant Coronet
+INSERT INTO item_mods VALUES (15231,10,6); -- Gallant Coronet +1
+UPDATE item_mods SET value = 4 WHERE itemid = 12515 AND modid = 27; -- Gallant Coronet
+UPDATE item_mods SET value = 5 WHERE itemid = 15231 AND modid = 27; -- Gallant Coronet +1
+INSERT INTO item_mods VALUES (12644,13,10); -- Gallant Surcoat
+INSERT INTO item_mods VALUES (14479,13,10); -- Gallant Surcoat +1
+INSERT INTO item_mods VALUES (12644,23,15); -- Gallant Surcoat
+INSERT INTO item_mods VALUES (14479,23,15); -- Gallant Surcoat +1
+UPDATE item_mods SET value = 4 WHERE itemid = 12644 AND modid = 27; -- Gallant Surcoat
+UPDATE item_mods SET value = 5 WHERE itemid = 14479 AND modid = 27; -- Gallant Surcoat +1
+UPDATE item_mods SET value = 15 WHERE itemid = 12644 AND modid = 111; -- Gallant Surcoat
+UPDATE item_mods SET value = 18 WHERE itemid = 14479 AND modid = 111; -- Gallant Surcoat +1
+INSERT INTO item_mods VALUES (13967,10,3); -- Gallant Gauntlets
+UPDATE item_mods SET value = 4 WHERE itemid = 13967 AND modid = 27; -- Gallant Gauntlets
+UPDATE item_mods SET value = 6 WHERE itemid = 14896 AND modid = 10; -- Gallant Gauntlets +1
+UPDATE item_mods SET value = 5 WHERE itemid = 14896 AND modid = 27; -- Gallant Gauntlets +1
+UPDATE item_mods SET value = 4 WHERE itemid = 14220 AND modid = 27; -- Gallant Breeches
+UPDATE item_mods SET value = 5 WHERE itemid = 15567 AND modid = 27; -- Gallant Breeches +1
+UPDATE item_mods SET value = 15 WHERE itemid = 14220 AND modid = 113; -- Gallant Breeches
+UPDATE item_mods SET value = 15 WHERE itemid = 15567 AND modid = 113; -- Gallant Breeches +1
+INSERT INTO item_mods VALUES (14095,10,5); -- Gallant Leggings
+INSERT INTO item_mods VALUES (15358,10,5); -- Gallant Leggings +1
 
 
 UPDATE item_mods SET value = 3 WHERE itemId IN (12162, 12198) AND modid = 421; -- Shikkoku Togi, Shikkoku Kote
