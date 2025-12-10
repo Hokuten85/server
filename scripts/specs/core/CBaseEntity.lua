@@ -735,7 +735,7 @@ end
 
 ---@nodiscard
 ---@return boolean
-function CBaseEntity:isInMogHouse()
+function CBaseEntity:inMogHouse()
 end
 
 ---@param triggerAreaId integer
@@ -3216,12 +3216,6 @@ end
 ---@nodiscard
 ---@return integer
 function CBaseEntity:getIlvlParry()
-end
-
----@nodiscard
----@param spellId integer
----@return boolean
-function CBaseEntity:isSpellAoE(spellId)
 end
 
 ---@nodiscard
