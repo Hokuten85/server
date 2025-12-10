@@ -146,7 +146,7 @@ UPDATE item_mods SET value = 2 WHERE itemid = 12514 AND modid = 298; -- Rogue's 
 UPDATE item_mods SET value = 8 WHERE itemid = 15230 AND modid = 9; -- Rogue's Bonnet +1
 INSERT INTO item_mods VALUES (12643,9,5); -- Rogue's Vest
 INSERT INTO item_mods VALUES (14478,421,10); -- Rogue's Vest +1
-INSERT INTO item_mods VALUES (12643,9,6); -- Rogue's Vest
+UPDATE item_mods SET value = 6 WHERE itemid = 12643 AND modid = 9; -- Rogue's Vest
 INSERT INTO item_mods VALUES (14478,421,10); -- Rogue's Vest +1
 INSERT INTO item_mods VALUES (13966,11,5); -- Rogue's Armlets
 UPDATE item_mods SET value = 5 WHERE itemid = 13966 and modid = 9; -- Rogue's Armlets
