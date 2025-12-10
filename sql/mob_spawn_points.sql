@@ -58595,7 +58595,6 @@ INSERT INTO `mob_spawn_points` VALUES (17453072,0,'Zeid_2','Zeid',4,-1104.787,-6
 INSERT INTO `mob_spawn_points` VALUES (17453073,0,'Shadow_of_Rage','Shadow of Rage',5,-638.787,-479.000,-478.976,0);
 INSERT INTO `mob_spawn_points` VALUES (17453074,0,'Shadow_of_Rage','Shadow of Rage',5,-638.787,-479.000,-478.976,0);
 
--- TODO: Verify exact positions for battlefield instances 2 and 3
 -- Kindred Spirits (BS60)
 INSERT INTO `mob_spawn_points` VALUES (17453075,0,'Grand_Marquis_Chomiel','Grand Marquis Chomiel',6,-464.527,-167.58,-241.576,0);
 INSERT INTO `mob_spawn_points` VALUES (17453076,0,'Duke_Amduscias','Duke Amduscias',7,-464.527,-167.5,-244.576,0);
@@ -70141,32 +70140,32 @@ INSERT INTO `mob_spawn_points` VALUES (17621134,0,'Wind_Golem','Wind Golem',26,3
 INSERT INTO `mob_spawn_points` VALUES (17621135,0,'Earth_Golem','Earth Golem',27,398.028,199.000,-404.677,195);
 
 -- Demolition Squad (BS60)
-INSERT INTO `mob_spawn_points` VALUES (17621137,0,'Nephiyl_Rampartbreacher','Nephiyl Rampartbreacher',28,-390.000,-201.000,405.000,178);
-INSERT INTO `mob_spawn_points` VALUES (17621138,0,'Nephiyl_Keepcollapser','Nephiyl Keepcollapser',29,-410.000,-201.000,405.000,210);
-INSERT INTO `mob_spawn_points` VALUES (17621139,0,'Nephiyl_Moatfiller','Nephiyl Moatfiller',30,-410.000,-201.000,393.000,200);
-INSERT INTO `mob_spawn_points` VALUES (17621140,0,'Nephiyl_Pinnacletosser','Nephiyl Pinnacletosser',31,-390.000,-201.000,393.000,178);
-INSERT INTO `mob_spawn_points` VALUES (17621142,0,'Nephiyl_Rampartbreacher','Nephiyl Rampartbreacher',28,10.073,-1.000,5.099,178);
-INSERT INTO `mob_spawn_points` VALUES (17621143,0,'Nephiyl_Keepcollapser','Nephiyl Keepcollapser',29,-9.927,-1.000,5.099,210);
-INSERT INTO `mob_spawn_points` VALUES (17621144,0,'Nephiyl_Moatfiller','Nephiyl Moatfiller',30,-9.927,-1.000,-6.901,200);
-INSERT INTO `mob_spawn_points` VALUES (17621145,0,'Nephiyl_Pinnacletosser','Nephiyl Pinnacletosser',31,10.073,-1.000,-6.901,178);
-INSERT INTO `mob_spawn_points` VALUES (17621147,0,'Nephiyl_Rampartbreacher','Nephiyl Rampartbreacher',28,410.028,199.000,-394.677,178);
-INSERT INTO `mob_spawn_points` VALUES (17621148,0,'Nephiyl_Keepcollapser','Nephiyl Keepcollapser',29,390.028,199.000,-394.677,210);
-INSERT INTO `mob_spawn_points` VALUES (17621149,0,'Nephiyl_Moatfiller','Nephiyl Moatfiller',30,390.028,199.000,-406.677,200);
-INSERT INTO `mob_spawn_points` VALUES (17621150,0,'Nephiyl_Pinnacletosser','Nephiyl Pinnacletosser',31,410.028,199.000,-406.677,178);
+INSERT INTO `mob_spawn_points` VALUES (17621137,0,'Nephiyl_Rampartbreacher','Nephiyl Rampartbreacher',28,-405.001,-202.125,400.001,192);
+INSERT INTO `mob_spawn_points` VALUES (17621138,0,'Nephiyl_Keepcollapser','Nephiyl Keepcollapser',29,-395.001,-202.125,400.001,192);
+INSERT INTO `mob_spawn_points` VALUES (17621139,0,'Nephiyl_Moatfiller','Nephiyl Moatfiller',30,-400.001,-202.125,400.001,192);
+INSERT INTO `mob_spawn_points` VALUES (17621140,0,'Nephiyl_Pinnacletosser','Nephiyl Pinnacletosser',31,-400.001,-202.125,395.001,192);
+INSERT INTO `mob_spawn_points` VALUES (17621142,0,'Nephiyl_Rampartbreacher','Nephiyl Rampartbreacher',28,-3.940,-1.625,-0.900,192);
+INSERT INTO `mob_spawn_points` VALUES (17621143,0,'Nephiyl_Keepcollapser','Nephiyl Keepcollapser',29, 6.060,-1.625,-0.900,192);
+INSERT INTO `mob_spawn_points` VALUES (17621144,0,'Nephiyl_Moatfiller','Nephiyl Moatfiller',30, 1.060,-1.625,-0.900,192);
+INSERT INTO `mob_spawn_points` VALUES (17621145,0,'Nephiyl_Pinnacletosser','Nephiyl Pinnacletosser',31, 1.060,-1.625,-5.900,192);
+INSERT INTO `mob_spawn_points` VALUES (17621147,0,'Nephiyl_Rampartbreacher','Nephiyl Rampartbreacher',28,395.000,199.000,-400.677,192);
+INSERT INTO `mob_spawn_points` VALUES (17621148,0,'Nephiyl_Keepcollapser','Nephiyl Keepcollapser',29,405.000,199.000,-400.677,192);
+INSERT INTO `mob_spawn_points` VALUES (17621149,0,'Nephiyl_Moatfiller','Nephiyl Moatfiller',30,400.000,199.000,-400.677,192);
+INSERT INTO `mob_spawn_points` VALUES (17621150,0,'Nephiyl_Pinnacletosser','Nephiyl Pinnacletosser',31,400.000,199.000,-405.677,192);
 
 -- Brothers D'Aurphe (BS60)
-INSERT INTO `mob_spawn_points` VALUES (17621152,0,'Vaicoliaux_B_DAurphe','Vaicoliaux B D\'Aurphe',32,-393.000,-201.000,399.000,185);
-INSERT INTO `mob_spawn_points` VALUES (17621153,0,'Maldaramet_B_DAurphe','Maldaramet B D\'Aurphe',33,-397.000,-201.000,395.000,185);
-INSERT INTO `mob_spawn_points` VALUES (17621154,0,'Disfaurit_B_DAurphe','Disfaurit B D\'Aurphe',34,-404.000,-201.000,399.000,195);
-INSERT INTO `mob_spawn_points` VALUES (17621155,0,'Jeumouque_B_DAurphe','Jeumouque B D\'Aurphe',35,-402.000,-201.000,395.000,195);
-INSERT INTO `mob_spawn_points` VALUES (17621157,0,'Vaicoliaux_B_DAurphe','Vaicoliaux B D\'Aurphe',32,7.073,-1.000,-0.901,185);
-INSERT INTO `mob_spawn_points` VALUES (17621158,0,'Maldaramet_B_DAurphe','Maldaramet B D\'Aurphe',33,3.073,-1.000,-4.901,185);
-INSERT INTO `mob_spawn_points` VALUES (17621159,0,'Disfaurit_B_DAurphe','Disfaurit B D\'Aurphe',34,-3.927,-1.000,-0.901,195);
-INSERT INTO `mob_spawn_points` VALUES (17621160,0,'Jeumouque_B_DAurphe','Jeumouque B D\'Aurphe',35,-1.927,-1.000,-4.901,195);
-INSERT INTO `mob_spawn_points` VALUES (17621162,0,'Vaicoliaux_B_DAurphe','Vaicoliaux B D\'Aurphe',32,407.028,199.000,-400.677,185);
-INSERT INTO `mob_spawn_points` VALUES (17621163,0,'Maldaramet_B_DAurphe','Maldaramet B D\'Aurphe',33,403.028,199.000,-404.677,185);
-INSERT INTO `mob_spawn_points` VALUES (17621164,0,'Disfaurit_B_DAurphe','Disfaurit B D\'Aurphe',34,396.028,199.000,-400.677,195);
-INSERT INTO `mob_spawn_points` VALUES (17621165,0,'Jeumouque_B_DAurphe','Jeumouque B D\'Aurphe',35,398.028,199.000,-404.677,195);
+INSERT INTO `mob_spawn_points` VALUES (17621152,0,'Vaicoliaux_B_DAurphe','Vaicoliaux B D\'Aurphe',32,-401.366,-202.107,400.448,203);
+INSERT INTO `mob_spawn_points` VALUES (17621153,0,'Maldaramet_B_DAurphe','Maldaramet B D\'Aurphe',33,-404.071,-202.125,400.831,211);
+INSERT INTO `mob_spawn_points` VALUES (17621154,0,'Disfaurit_B_DAurphe','Disfaurit B D\'Aurphe',34,-398.439,-202.076,401.298,193);
+INSERT INTO `mob_spawn_points` VALUES (17621155,0,'Jeumouque_B_DAurphe','Jeumouque B D\'Aurphe',35,-395.501,-202.125,400.001,192);
+INSERT INTO `mob_spawn_points` VALUES (17621157,0,'Vaicoliaux_B_DAurphe','Vaicoliaux B D\'Aurphe',32,-1.413,-2.107,0.571,203);
+INSERT INTO `mob_spawn_points` VALUES (17621158,0,'Maldaramet_B_DAurphe','Maldaramet B D\'Aurphe',33,-4.118,-2.125,0.954,211);
+INSERT INTO `mob_spawn_points` VALUES (17621159,0,'Disfaurit_B_DAurphe','Disfaurit B D\'Aurphe',34,1.514,-2.076,1.421,193);
+INSERT INTO `mob_spawn_points` VALUES (17621160,0,'Jeumouque_B_DAurphe','Jeumouque B D\'Aurphe',35,4.452,-2.125,0.124,192);
+INSERT INTO `mob_spawn_points` VALUES (17621162,0,'Vaicoliaux_B_DAurphe','Vaicoliaux B D\'Aurphe',32,398.635,197.893,-399.715,203);
+INSERT INTO `mob_spawn_points` VALUES (17621163,0,'Maldaramet_B_DAurphe','Maldaramet B D\'Aurphe',33,395.930,197.875,-399.332,211);
+INSERT INTO `mob_spawn_points` VALUES (17621164,0,'Disfaurit_B_DAurphe','Disfaurit B D\'Aurphe',34,401.562,197.924,-398.865,193);
+INSERT INTO `mob_spawn_points` VALUES (17621165,0,'Jeumouque_B_DAurphe','Jeumouque B D\'Aurphe',35,404.500,197.875,-400.162,192);
 
 -- An Awful Autopsy (BS50)
 INSERT INTO `mob_spawn_points` VALUES (17621167,0,'Chahnameeds_Stomach','Chahnameed\'s Stomach',36,-393.000,-201.000,399.000,185);

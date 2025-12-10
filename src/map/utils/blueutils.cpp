@@ -158,24 +158,24 @@ void TryLearningSpells(CCharEntity* PChar, CMobEntity* PMob)
             // get player skill level with bonus from gear
             auto playerSkillLvl = PBlueMage->GetSkill(SKILL_BLUE_MAGIC);
 
-                // make sure the difference between spell skill and player is at most 31 points
-                if (playerSkillLvl >= skillLvlForSpell - 31)
+            // make sure the difference between spell skill and player is at most 31 points
+            if (playerSkillLvl >= skillLvlForSpell - 31)
+            {
+                auto chanceToLearn = 67 + PBlueMage->getMod(Mod::BLUE_LEARN_CHANCE);
+                if (xirand::GetRandomNumber(100) < chanceToLearn)
                 {
-                    auto chanceToLearn = 67 + PBlueMage->getMod(Mod::BLUE_LEARN_CHANCE);
-                    if (xirand::GetRandomNumber(100) < chanceToLearn)
+                    if (charutils::addSpell(PBlueMage, static_cast<uint16>(PSpell->getID())))
                     {
-                        if (charutils::addSpell(PBlueMage, static_cast<uint16>(PSpell->getID())))
-                        {
-                            PBlueMage->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MSGBASIC_LEARNS_SPELL);
-                            charutils::SaveSpell(PBlueMage, static_cast<uint16>(PSpell->getID()));
-                            PBlueMage->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(PBlueMage);
-                        }
+                        PBlueMage->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MsgBasic::LEARNS_SPELL);
+                        charutils::SaveSpell(PBlueMage, static_cast<uint16>(PSpell->getID()));
+                        PBlueMage->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(PBlueMage);
                     }
-                    break; // only one attempt at learning a spell, regardless of learn or not.
                 }
+                break; // only one attempt at learning a spell, regardless of learn or not.
             }
         }
     }
+}
 
 bool HasEnoughSetPoints(CCharEntity* PChar, CBlueSpell* PSpellToAdd, uint8 slotToPut)
 {
