@@ -231,7 +231,7 @@ xi.job_utils.paladin.useShieldBash = function(player, target, ability)
     damage = utils.stoneskin(target, damage)
 
     target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
-    target:updateEnmityFromDamage(player, damage)
+    target:updateEnmityFromDamage(player, damage * (1 + player:getMod(xi.mod.SHIELD_BASH) / 10))
     ability:setMsg(xi.msg.basic.JA_DAMAGE)
 
     return damage
