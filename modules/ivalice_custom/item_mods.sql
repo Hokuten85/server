@@ -310,6 +310,22 @@ REPLACE INTO item_mods VALUES (15590,138,1); -- Scout's Braccae +1
 REPLACE INTO item_mods VALUES (15142,105,10); -- Scout's Socks
 REPLACE INTO item_mods VALUES (15675,105,15); -- Scout's Socks +1
 
+REPLACE INTO item_mods VALUES (12520,117,10); -- Evoker's Horn
+REPLACE INTO item_mods VALUES (15239,117,10); -- Evoker's Horn +1
+REPLACE INTO item_mods VALUES (12650,357,3); -- Evoker's Doublet
+REPLACE INTO item_mods VALUES (14487,357,5); -- Evoker's Doublet +1
+REPLACE INTO item_mods VALUES (13975,1078,1); -- Evoker's Bracers
+REPLACE INTO item_mods VALUES (14904,1078,2); -- Evoker's Bracers +1
+
+REPLACE INTO `item_mods` VALUES (15086,357,4); -- BP_DELAY: 4 Summoner's Horn
+REPLACE INTO `item_mods` VALUES (15086,372,4); -- WEATHER_REDUCTION: 4 Summoner's Horn
+REPLACE INTO `item_mods` VALUES (15259,357,4); -- BP_DELAY: 4 Smn. Horn +1
+REPLACE INTO `item_mods` VALUES (15259,372,4); -- WEATHER_REDUCTION: 4 Smn. Horn +1
+REPLACE INTO `item_mods` VALUES (15101,357,4); -- BP_DELAY: 3 Summoner's Dblt
+REPLACE INTO `item_mods` VALUES (14514,357,5); -- BP_DELAY: 4 Smn. Doublet +1
+REPLACE INTO `item_mods` VALUES (15131,140,10); -- Summoner's Spats
+REPLACE INTO `item_mods` VALUES (15594,140,10); -- Smn. Spats +1
+
 REPLACE INTO item_mods VALUES (14226,68,10); -- Ninja Hakama
 REPLACE INTO item_mods VALUES (15573,68,10); -- Ninja Hakama +1
 REPLACE INTO item_mods VALUES (14101,169,18); -- Ninja Kyahan
