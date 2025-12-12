@@ -326,6 +326,45 @@ REPLACE INTO `item_mods` VALUES (14514,357,5); -- BP_DELAY: 4 Smn. Doublet +1
 REPLACE INTO `item_mods` VALUES (15131,140,10); -- Summoner's Spats
 REPLACE INTO `item_mods` VALUES (15594,140,10); -- Smn. Spats +1
 
+REPLACE INTO `item_mods` VALUES (13868,94,5); -- Myochin Kabuto
+REPLACE INTO `item_mods` VALUES (15236,94,6); -- Myn. Kabuto +1
+REPLACE INTO `item_mods` VALUES (13781,25,15); -- Myochin Domaru
+REPLACE INTO `item_mods` VALUES (13781,73,10); -- Myochin Domaru
+REPLACE INTO `item_mods` VALUES (14484,23,15); -- Myn. Domaru +1
+REPLACE INTO `item_mods` VALUES (14484,25,15); -- Myn. Domaru +1
+REPLACE INTO `item_mods` VALUES (14484,73,10); -- Myn. Domaru +1
+REPLACE INTO `item_mods` VALUES (14225,8,10); -- Myochin Haidate
+REPLACE INTO `item_mods` VALUES (15572,8,10); -- Myn. Haidate +1
+REPLACE INTO `item_mods` VALUES (15572,73,8); -- Myn. Haidate +1
+REPLACE INTO `item_mods` VALUES (14100,384,5); -- Myochin Sune-Ate
+REPLACE INTO `item_mods` VALUES (14100,306,5); -- Myochin Sune-Ate
+REPLACE INTO `item_mods` VALUES (15363,384,5); -- Myn. Sune-Ate +1
+REPLACE INTO `item_mods` VALUES (15363,306,5); -- Myn. Sune-Ate +1
+
+DELETE FROM item_mods WHERE itemid = 15083 and modid = 27; -- Saotome Kabuto
+REPLACE INTO `item_mods` VALUES (15083,368,5); -- Saotome Kabuto
+DELETE FROM item_mods WHERE itemid = 15256 and modid = 27; -- Saotome Kabuto +1
+REPLACE INTO `item_mods` VALUES (15256,368,5); -- Saotome Kabuto +1
+DELETE FROM item_mods WHERE itemid = 15083 and modid = 27; -- Saotome Domaru
+REPLACE INTO `item_mods` VALUES (15083,89,15); -- Saotome Domaru
+REPLACE INTO `item_mods` VALUES (15083,73,10); -- Saotome Domaru
+DELETE FROM item_mods WHERE itemid = 15256 and modid = 27; -- Saotome Domaru +1
+REPLACE INTO `item_mods` VALUES (15256,89,15); -- Saotome Domaru +1
+REPLACE INTO `item_mods` VALUES (15256,73,10); -- Saotome Domaru +1
+DELETE FROM item_mods WHERE itemid = 15113 and modid = 27; -- Saotome kote
+REPLACE INTO `item_mods` VALUES (15113,94,5); -- Saotome kote
+DELETE FROM item_mods WHERE itemid = 14920 and modid = 27; -- Saotome kote +1
+REPLACE INTO `item_mods` VALUES (14920,94,5); -- Saotome kote +1
+REPLACE INTO `item_mods` VALUES (15128,508,30); -- Saotome Haidate
+REPLACE INTO `item_mods` VALUES (15591,508,30); -- Saotome Haidate +1
+DELETE FROM item_mods WHERE itemid = 15143 and modid = 9; -- Saotome Sune-Ate
+REPLACE INTO `item_mods` VALUES (15143,8,5); -- Saotome Sune-Ate
+REPLACE INTO `item_mods` VALUES (15143,345,500); -- Saotome Sune-Ate
+DELETE FROM item_mods WHERE itemid = 15676 and modid = 9; -- Saotome Sune-Ate +1
+REPLACE INTO `item_mods` VALUES (15676,8,6); -- Saotome Sune-Ate +1
+REPLACE INTO `item_mods` VALUES (15676,345,500); -- Saotome Sune-Ate +1
+
+
 REPLACE INTO item_mods VALUES (14226,68,10); -- Ninja Hakama
 REPLACE INTO item_mods VALUES (15573,68,10); -- Ninja Hakama +1
 REPLACE INTO item_mods VALUES (14101,169,18); -- Ninja Kyahan
