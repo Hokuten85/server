@@ -1455,9 +1455,9 @@ void SendRecordsOfEminenceLog(CCharEntity* PChar)
 
 void SendKeyItems(CCharEntity* PChar)
 {
-    for (uint8 table = 0; table < MAX_KEYS_TABLE; table++)
+    for (uint8 table = 0; table < PChar->keys.tables.size(); table++)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(PChar, static_cast<KEYS_TABLE>(table));
+        PChar->pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(PChar, table);
     }
 }
 
@@ -4139,9 +4139,9 @@ auto hasKeyItem(const CCharEntity* PChar, const KeyItem keyItemId) -> bool
     const auto keyItemTable = static_cast<uint16_t>(keyItemId) / 512;
     const auto keyItemIndex = static_cast<uint16_t>(keyItemId) % 512;
 
-    if (keyItemTable >= MAX_KEYS_TABLE)
+    if (keyItemTable >= PChar->keys.tables.size())
     {
-        ShowWarning("Attempt to check for keyItem out of range (%d)!", static_cast<uint16_t>(keyItemId));
+        ShowErrorFmt("charutils::hasKeyItem() - Index {} exceeds key items table capacity.", keyItemTable);
         return false;
     }
 
@@ -4153,9 +4153,9 @@ auto seenKeyItem(CCharEntity* PChar, KeyItem keyItemId) -> bool
     const auto keyItemTable = static_cast<uint16_t>(keyItemId) / 512;
     const auto keyItemIndex = static_cast<uint16_t>(keyItemId) % 512;
 
-    if (keyItemTable >= MAX_KEYS_TABLE)
+    if (keyItemTable >= PChar->keys.tables.size())
     {
-        ShowWarning("Attempt to see for keyItem out of range (%d)!", static_cast<uint16_t>(keyItemId));
+        ShowErrorFmt("charutils::seenKeyItem() - Index {} exceeds key items table capacity.", keyItemTable);
         return false;
     }
 
@@ -4167,9 +4167,9 @@ void markSeenKeyItem(CCharEntity* PChar, KeyItem keyItemId)
     const auto keyItemTable = static_cast<uint16_t>(keyItemId) / 512;
     const auto keyItemIndex = static_cast<uint16_t>(keyItemId) % 512;
 
-    if (keyItemTable >= MAX_KEYS_TABLE)
+    if (keyItemTable >= PChar->keys.tables.size())
     {
-        ShowWarning("Attempt to mark keyItem in table out of range (%d)!", static_cast<uint16_t>(keyItemId));
+        ShowErrorFmt("charutils::markSeenKeyItem() - Index {} exceeds key items table capacity.", keyItemTable);
         return;
     }
 
@@ -4181,9 +4181,9 @@ void unseenKeyItem(CCharEntity* PChar, KeyItem keyItemId)
     const auto keyItemTable = static_cast<uint16_t>(keyItemId) / 512;
     const auto keyItemIndex = static_cast<uint16_t>(keyItemId) % 512;
 
-    if (keyItemTable >= MAX_KEYS_TABLE)
+    if (keyItemTable >= PChar->keys.tables.size())
     {
-        ShowWarning("Attempt to unsee for keyItem out of range (%d)!", static_cast<uint16_t>(keyItemId));
+        ShowErrorFmt("charutils::unseenKeyItem() - Index {} exceeds key items table capacity.", keyItemTable);
         return;
     }
 
@@ -4195,9 +4195,9 @@ void addKeyItem(CCharEntity* PChar, KeyItem keyItemId)
     const auto keyItemTable = static_cast<uint16_t>(keyItemId) / 512;
     const auto keyItemIndex = static_cast<uint16_t>(keyItemId) % 512;
 
-    if (keyItemTable >= MAX_KEYS_TABLE)
+    if (keyItemTable >= PChar->keys.tables.size())
     {
-        ShowWarning("Attempt to add for keyItem out of range (%d)!", static_cast<uint16_t>(keyItemId));
+        ShowErrorFmt("charutils::addKeyItem() - Index {} exceeds key items table capacity.", keyItemTable);
         return;
     }
 
@@ -4209,9 +4209,9 @@ void delKeyItem(CCharEntity* PChar, KeyItem keyItemId)
     const auto keyItemTable = static_cast<uint16_t>(keyItemId) / 512;
     const auto keyItemIndex = static_cast<uint16_t>(keyItemId) % 512;
 
-    if (keyItemTable >= MAX_KEYS_TABLE)
+    if (keyItemTable >= PChar->keys.tables.size())
     {
-        ShowWarning("Attempt to delete keyItem out of range (%d)!", static_cast<uint16_t>(keyItemId));
+        ShowErrorFmt("charutils::delKeyItem() - Index {} exceeds key items table capacity.", keyItemTable);
         return;
     }
 
