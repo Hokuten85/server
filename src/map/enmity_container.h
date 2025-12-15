@@ -28,6 +28,8 @@
 class CBattleEntity;
 class CMobEntity;
 class CCharEntity;
+class CSpell;
+class CAbility;
 
 struct EnmityObject_t
 {
