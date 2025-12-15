@@ -53,6 +53,8 @@ public:
     void          Clear(uint32 EntityID = 0);   // Removes Entries from list
     void          LogoutReset(uint32 EntityID); // Sets entry to inactive
     void          AddBaseEnmity(CBattleEntity* PEntity);
+    void          UpdateEnmity(CBattleEntity* PEntity, CSpell* PSpell, int32 CE, int32 VE);
+    void          UpdateEnmity(CBattleEntity* PEntity, CAbility* PAbility);
     void          UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, bool withMaster = false, bool tameable = false, bool directAction = true);
     void          UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Damage);
     void          UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level, int32 CureAmount, int32 fixedCE = 0, int32 fixedVE = 0);
@@ -73,6 +75,7 @@ private:
     EnmityList_t m_EnmityList;
     bool         m_tameable{ true };
     CMobEntity*  m_EnmityHolder; // usually a monster
+    float        m_Multiplier{ 1.0 };
 };
 
 #endif

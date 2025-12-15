@@ -43,4 +43,11 @@ UPDATE spell_list SET jobs = 0x0000000000000000000000000000004B000000000000 WHER
 
 UPDATE spell_list SET element = 1 WHERE spellid = 61; -- barblizzard is fire element
 
+UPDATE spell_list SET CE = 600, VE = 1800 WHERE spellid = 112; -- flash
+UPDATE spell_list SET mpCost = 10 WHERE spellid = 28; -- Banish
+UPDATE spell_list SET mpCost = 20 WHERE spellid = 29; -- Banish II
+UPDATE spell_list SET mpCost = 30 WHERE spellid = 38; -- Banishga
+UPDATE spell_list SET mpCost = 25 WHERE spellid = 21; -- Holy
+UPDATE spell_list SET mpCost = 50 WHERE spellid = 22; -- Holy II
+
 UPDATE spell_list SET content_tag = NULL;

@@ -128,7 +128,7 @@ void CEnmityContainer::AddBaseEnmity(CBattleEntity* PChar)
 float CEnmityContainer::CalculateEnmityBonus(CBattleEntity* PEntity)
 {
     TracyZoneScoped;
-    int enmityBonus = PEntity->getMod(Mod::ENMITY);
+    int enmityBonus = PEntity->getMod(Mod::ENMITY) * m_Multiplier;
 
     if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
@@ -150,6 +150,31 @@ float CEnmityContainer::CalculateEnmityBonus(CBattleEntity* PEntity)
  *  Add entity to hate list                                              *
  *                                                                       *
  ************************************************************************/
+void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, CSpell* PSpell, int32 CE, int32 VE)
+{
+    if (PSpell->getSkillType() == SKILLTYPE::SKILL_DIVINE_MAGIC)
+    {
+        if (PEntity->GetMJob() == JOB_PLD)
+        {
+            m_Multiplier = 2.0f;
+        }
+        else if (PEntity->GetMJob() == JOB_WHM)
+        {
+            m_Multiplier = 0.5f;
+        }
+    }
+
+    return UpdateEnmity(PEntity, CE, VE);
+}
+
+void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, CAbility* PAbility)
+{
+    if (PEntity->GetMJob() == JOB_PLD && PAbility->getID() == ABILITY::ABILITY_PROVOKE) {
+        m_Multiplier = 2.0f;
+    }
+
+    return UpdateEnmity(PEntity, PAbility->getCE(), PAbility->getVE(), false, PAbility->getID() == ABILITY::ABILITY_CHARM);
+}
 
 void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, bool withMaster, bool tameable, bool directAction)
 {
