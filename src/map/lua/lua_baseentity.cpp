@@ -17307,7 +17307,7 @@ void CLuaBaseEntity::setRespawnTime(uint32 seconds)
 
     auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
 
-    PMob->m_RespawnTime = std::chrono::seconds(std::min(300u, seconds));
+    PMob->m_RespawnTime = std::chrono::seconds(std::min(300u, seconds));  
     if (PMob->PAI->IsCurrentState<CRespawnState>())
     {
         PMob->PAI->GetCurrentState()->ResetEntryTime();

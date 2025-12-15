@@ -122,7 +122,7 @@ xi.pets.wyvern.onMobSpawn = function(mob)
     local master = mob:getMaster()
 
     if master:getMod(xi.mod.WYVERN_SUBJOB_TRAITS) > 0 then
-        mob:addWyvernJobTraits(master:getSubJob(), master:getSubLvl())
+        mob:addWyvernJobTraits(master:getSubJob(), master:getMainLvl())
     end
 
     local wyvernType = wyvernTypes[master:getSubJob()]
