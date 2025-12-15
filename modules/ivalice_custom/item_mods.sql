@@ -416,7 +416,6 @@ REPLACE INTO item_mods VALUES (15130,10,5); -- Wyrm Brais
 REPLACE INTO item_mods VALUES (15130,363,20); -- Wyrm Brais
 REPLACE INTO item_mods VALUES (15593,10,8); -- Wyrm Brais +1
 REPLACE INTO item_mods VALUES (15593,363,20); -- Wyrm Brais +1
-
 REPLACE INTO item_mods VALUES (15145,10,5); -- Wyrm Greaves
 REPLACE INTO item_mods VALUES (15145,936,50); -- Wyrm Greaves
 REPLACE INTO item_mods VALUES (15145,361,100); -- Wyrm Greaves
@@ -424,7 +423,41 @@ REPLACE INTO item_mods VALUES (15678,10,8); -- Wyrm Greaves +1
 REPLACE INTO item_mods VALUES (15678,936,50); -- Wyrm Greaves +1
 REPLACE INTO item_mods VALUES (15678,361,100); -- Wyrm Greaves +1
 
+REPLACE INTO item_mods VALUES (15265,82,5); -- Magus Keffiyeh
+REPLACE INTO item_mods VALUES (11464,82,10); -- Magus Keffiyeh +1
+REPLACE INTO item_mods VALUES (14521,1147,-10); -- Magus Jubbah
+REPLACE INTO item_mods VALUES (11291,1147,-10); -- Magus Jubbah +1
+REPLACE INTO item_mods VALUES (14928,945,20); -- Magus Bazubands
+REPLACE INTO item_mods VALUES (15024,945,25); -- Magus Bazubands +1
+REPLACE INTO item_mods VALUES (14928,8,3); -- Magus Shalwar
+REPLACE INTO item_mods VALUES (14928,82,5); -- Magus Shalwar
+REPLACE INTO item_mods VALUES (14928,384,500); -- Magus Shalwar
+REPLACE INTO item_mods VALUES (15024,8,5); -- Magus Shalwar +1
+REPLACE INTO item_mods VALUES (15024,82,5); -- Magus Shalwar +1
+REPLACE INTO item_mods VALUES (15024,384,500); -- Magus Shalwar +1
+REPLACE INTO item_mods VALUES (15684,369,1); -- Magus Charuqs
+REPLACE INTO item_mods VALUES (11381,369,1); -- Magus Charuqs +1
 
+REPLACE INTO item_mods VALUES (11465,122,15); -- Mirage Keffiyeh
+REPLACE INTO item_mods VALUES (11465,1075,50); -- Mirage Keffiyeh
+REPLACE INTO item_mods VALUES (11466,122,15); -- Mirage Keffiyeh +1
+REPLACE INTO item_mods VALUES (11466,1075,50); -- Mirage Keffiyeh +1
+REPLACE INTO item_mods VALUES (11292,25,15); -- Mirage Jubbah
+REPLACE INTO item_mods VALUES (11292,259,5); -- Mirage Jubbah
+REPLACE INTO item_mods VALUES (11293,25,20); -- Mirage Jubbah +1
+REPLACE INTO item_mods VALUES (11293,259,5); -- Mirage Jubbah +1
+REPLACE INTO item_mods VALUES (15025,8,5); -- Mirage Bazubands
+REPLACE INTO item_mods VALUES (15025,82,10); -- Mirage Bazubands
+REPLACE INTO item_mods VALUES (15026,8,6); -- Mirage Bazubands +1
+REPLACE INTO item_mods VALUES (15026,82,10); -- Mirage Bazubands +1
+REPLACE INTO item_mods VALUES (16346,25,15); -- Mirage Shalwar
+REPLACE INTO item_mods VALUES (16346,30,15); -- Mirage Shalwar
+REPLACE INTO item_mods VALUES (16347,25,20); -- Mirage Shalwar +1
+REPLACE INTO item_mods VALUES (16347,30,20); -- Mirage Shalwar +1
+REPLACE INTO item_mods VALUES (11382,384,400); -- Mirage Charuqs
+REPLACE INTO item_mods VALUES (11382,370,4); -- Mirage Charuqs
+REPLACE INTO item_mods VALUES (11383,384,400); -- Mirage Charuqs +1
+REPLACE INTO item_mods VALUES (11383,370,4); -- Mirage Charuqs +1
 
 
 UPDATE item_mods SET value = 3 WHERE itemId IN (12162, 12198) AND modid = 421; -- Shikkoku Togi, Shikkoku Kote
