@@ -11,3 +11,8 @@ REPLACE INTO `item_mods_pet` VALUES (14923,25,20,1); -- Avatar - ACC: 20
 
 REPLACE INTO `item_mods_pet` VALUES (15146,23,15,1);   -- Avatar - ATT: 15
 REPLACE INTO `item_mods_pet` VALUES (15679,23,20,1);  -- Avatar - ATT: 20
+
+REPLACE INTO `item_mods_pet` VALUES (13974,25,15,2);  -- Drachen Fng. Gnt. 
+REPLACE INTO `item_mods_pet` VALUES (15238,25,15,2);  -- Drachen Fng. Gnt. +1
+REPLACE INTO `item_mods_pet` VALUES (12649,370,5,2);  -- Drachen Mail 
+REPLACE INTO `item_mods_pet` VALUES (14486,370,5,2);  -- Drachen Mail +1

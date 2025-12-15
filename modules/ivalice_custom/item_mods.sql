@@ -385,6 +385,48 @@ UPDATE item_mods SET value = 10 WHERE itemid = 15592 AND modId = 259; -- Koga Ha
 REPLACE INTO item_mods VALUES (15144,9,7); -- Koga Kyahan
 REPLACE INTO item_mods VALUES (15677,9,7); -- Koga Kyahan +1
 
+REPLACE INTO item_mods VALUES (12519,402,30); -- Drachen Armet
+REPLACE INTO item_mods VALUES (15238,402,30); -- Drachen Armet +1
+REPLACE INTO item_mods VALUES (12649,8,5); -- Drachen Mail
+REPLACE INTO item_mods VALUES (12649,10,5); -- Drachen Mail
+REPLACE INTO item_mods VALUES (12649,87,15); -- Drachen Mail
+REPLACE INTO item_mods VALUES (14486,8,10); -- Drachen Mail +1
+REPLACE INTO item_mods VALUES (14486,10,10); -- Drachen Mail +1
+REPLACE INTO item_mods VALUES (14486,87,15); -- Drachen Mail +1
+REPLACE INTO item_mods VALUES (12519,8,5); -- Drachen Fng. Gnt.
+REPLACE INTO item_mods VALUES (12519,9,5); -- Drachen Fng. Gnt.
+REPLACE INTO item_mods VALUES (15238,8,8); -- Drachen Fng. Gnt. +1
+REPLACE INTO item_mods VALUES (15238,9,8); -- Drachen Fng. Gnt. +1
+REPLACE INTO item_mods VALUES (14227,10,5); -- Drachen Brais
+REPLACE INTO item_mods VALUES (14227,888,5); -- Drachen Brais
+REPLACE INTO item_mods VALUES (15574,10,8); -- Drachen Brais +1
+REPLACE INTO item_mods VALUES (15574,888,5); -- Drachen Brais +1
+REPLACE INTO item_mods VALUES (14102,10,5); -- Drachen Greaves
+REPLACE INTO item_mods VALUES (14102,362,15); -- Drachen Greaves
+REPLACE INTO item_mods VALUES (15365,10,8); -- Drachen Greaves +1
+REPLACE INTO item_mods VALUES (15365,362,15); -- Drachen Greaves +1
+
+REPLACE INTO item_mods VALUES (15085,402,45); -- Wyrm Armet
+REPLACE INTO item_mods VALUES (15085,986,50); -- Wyrm Armet
+REPLACE INTO item_mods VALUES (15258,402,45); -- Wyrm Armet +1
+REPLACE INTO item_mods VALUES (15258,986,50); -- Wyrm Armet +1
+REPLACE INTO item_mods VALUES (15115,1043,5); -- Wyrm Fng.Gnt.
+REPLACE INTO item_mods VALUES (14922,1043,5); -- Wyrm Fng.Gnt. +1
+REPLACE INTO item_mods VALUES (15130,10,5); -- Wyrm Brais
+REPLACE INTO item_mods VALUES (15130,363,20); -- Wyrm Brais
+REPLACE INTO item_mods VALUES (15593,10,8); -- Wyrm Brais +1
+REPLACE INTO item_mods VALUES (15593,363,20); -- Wyrm Brais +1
+
+REPLACE INTO item_mods VALUES (15145,10,5); -- Wyrm Greaves
+REPLACE INTO item_mods VALUES (15145,936,50); -- Wyrm Greaves
+REPLACE INTO item_mods VALUES (15145,361,100); -- Wyrm Greaves
+REPLACE INTO item_mods VALUES (15678,10,8); -- Wyrm Greaves +1
+REPLACE INTO item_mods VALUES (15678,936,50); -- Wyrm Greaves +1
+REPLACE INTO item_mods VALUES (15678,361,100); -- Wyrm Greaves +1
+
+
+
+
 UPDATE item_mods SET value = 3 WHERE itemId IN (12162, 12198) AND modid = 421; -- Shikkoku Togi, Shikkoku Kote
 
 UPDATE item_mods SET value = 5 WHERE itemid = 14488 AND modid = 302; -- homam_corazza Triple Attack +5
