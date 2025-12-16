@@ -530,7 +530,7 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
                             ? PSpell->getRadius()
                             : PSpell->getRange();
 
-    if (distance(POwner->loc.p, PTarget->loc.p) > castdistance) // check casting distance
+    if (PTarget != nullptr && distance(POwner->loc.p, PTarget->loc.p) > castdistance) // check casting distance
     {
         if (static_cast<CTrustEntity*>(POwner)->getMobMod(MOBMOD_TRUST_DISTANCE) != TRUST_MOVEMENT_TYPE::MELEE) // melee characters don't move to cast
         {
