@@ -10,6 +10,7 @@ WHERE ib.name LIKE '%coffer_key%'
 AND md.itemRate < 100;
 
 SET @UNCOMMON = 100; -- Uncommon, 10%
+SET @COMMON = 150;   -- Common, 15%
 SET @VCOMMON = 240; -- Uncommon, 10%
 
 UPDATE mob_droplist SET itemRate = 50 WHERE itemId = 17662; -- Company Sword
@@ -31,3 +32,5 @@ INSERT INTO `mob_droplist` VALUES (2362,0,0,1000,1407,@VCOMMON);       -- Seal O
 INSERT INTO `mob_droplist` VALUES (394,0,0,1000,1406,@VCOMMON);      -- Seal Of Byakko (24.0%)
 
 UPDATE mob_droplist SET dropType = 0, groupId = 0 WHERE itemId IN (13415,13566); -- Pixie Earring, Defending Ring
+
+UPDATE mob_droplist SET itemRate = @COMMON WHERE itemId IN (3340,3342,3344); -- Sweet Tea, Savory Shank, Red Pondweed
