@@ -25,13 +25,23 @@ UPDATE item_mods SET value = 5 WHERE itemId IN (15117, 15580) AND modid = 288; -
 DELETE FROM item_mods WHERE itemId = 15132 AND modId = 27; -- Warrior's Calligae
 DELETE FROM item_mods WHERE itemId = 15665 AND modId = 27; -- Warrior's Calligae +1
 
-UPDATE item_mods SET value = 15 WHERE itemid = 12639 AND modId = 25; -- Temple Cyclas
-UPDATE item_mods SET value = 15 WHERE itemid = 14474 AND modId = 25; -- Temple Cyclas +1
+REPLACE INTO item_mods VALUES (12512,165,5); -- Temple Crown
+REPLACE INTO item_mods VALUES (12512,289,5); -- Temple Crown
+REPLACE INTO item_mods VALUES (15226,165,5); -- Temple Crown +1
+REPLACE INTO item_mods VALUES (15226,289,5); -- Temple Crown +1
+REPLACE INTO item_mods VALUES (12639,80,15); -- Temple Cyclas
+REPLACE INTO item_mods VALUES (14474,80,15); -- Temple Cyclas +1
+DELETE FROM item_mods WHERE itemid = 12639 AND modid = 25; -- Temple Cyclas
+DELETE FROM item_mods WHERE itemid = 14474 AND modid = 25; -- Temple Cyclas +1
 UPDATE item_mods SET value = 100 WHERE itemid = 13962 AND modId = 97; -- Temple Gloves
 UPDATE item_mods SET value = 100 WHERE itemid = 14891 AND modId = 97; -- Temple Gloves +1
 UPDATE item_mods SET value = 10 WHERE itemid = 14215 AND modId = 291; -- Temple Hose
 UPDATE item_mods SET value = 13 WHERE itemid = 15562 AND modId = 291; -- Temple Hose +1
+REPLACE INTO item_mods VALUES (14090,173,20); -- Temple Gaiters
+REPLACE INTO item_mods VALUES (15353,173,20); -- Temple Gaiters +1
 
+REPLACE INTO item_mods VALUES (15073,8,8); -- Melee Crown
+REPLACE INTO item_mods VALUES (15246,8,10); -- Melee Crown +1
 UPDATE item_mods SET value = 5 WHERE itemid = 15088 AND modId = 370; -- Melee Cyclas
 UPDATE item_mods SET value = 5 WHERE itemid = 14501 AND modId = 370; -- Melee Cyclas +1
 UPDATE item_mods SET value = 40 WHERE itemid = 15103 AND modId = 1026; -- Melee Gloves
@@ -459,6 +469,46 @@ REPLACE INTO item_mods VALUES (11382,370,4); -- Mirage Charuqs
 REPLACE INTO item_mods VALUES (11383,384,400); -- Mirage Charuqs +1
 REPLACE INTO item_mods VALUES (11383,370,4); -- Mirage Charuqs +1
 
+REPLACE INTO item_mods VALUES (15266,411,20); -- Corsair's Tricorne
+REPLACE INTO item_mods VALUES (11467,411,20); -- Corsair's Tricorne +1
+REPLACE INTO item_mods VALUES (14522,9,4); -- Corsair's Frac
+REPLACE INTO item_mods VALUES (14522,11,4); -- Corsair's Frac
+REPLACE INTO item_mods VALUES (14522,24,10); -- Corsair's Frac
+REPLACE INTO item_mods VALUES (14522,26,10); -- Corsair's Frac
+REPLACE INTO item_mods VALUES (11294,9,7); -- Corsair's Frac +1
+REPLACE INTO item_mods VALUES (11294,11,7); -- Corsair's Frac +1
+REPLACE INTO item_mods VALUES (11294,24,15); -- Corsair's Frac +1
+REPLACE INTO item_mods VALUES (11294,26,15); -- Corsair's Frac +1
+DELETE FROM item_mods WHERE itemid = 14929 AND modid = 9; -- Corsair's Gants
+REPLACE INTO item_mods VALUES (14929,11,12); -- Corsair's Gants
+REPLACE INTO item_mods VALUES (14929,13,12); -- Corsair's Gants
+DELETE FROM item_mods WHERE itemid = 15027 AND modid = 9; -- Corsair's Gants +1
+REPLACE INTO item_mods VALUES (15027,11,15); -- Corsair's Gants +1
+REPLACE INTO item_mods VALUES (15027,13,15); -- Corsair's Gants +1
+REPLACE INTO item_mods VALUES (15601,359,5); -- Corsair's Culottes
+REPLACE INTO item_mods VALUES (16348,359,5); -- Corsair's Culottes +1
+DELETE FROM item_mods WHERE itemid = 15685 AND modid = 26; -- Corsair's Bottes
+REPLACE INTO item_mods VALUES (15685,105,10); -- Corsair's Bottes
+DELETE FROM item_mods WHERE itemid = 11384 AND modid = 25; -- Corsair's Bottes +1
+DELETE FROM item_mods WHERE itemid = 11384 AND modid = 26; -- Corsair's Bottes +1
+REPLACE INTO item_mods VALUES (11384,105,10); -- Corsair's Bottes +1
+
+REPLACE INTO item_mods VALUES (11468,542,100); -- Comm. Tricorne
+REPLACE INTO item_mods VALUES (11469,542,100); -- Comm. Tricorne +1
+REPLACE INTO item_mods VALUES (11295,220,50); -- Comm. Frac
+REPLACE INTO item_mods VALUES (11295,8,7); -- Comm. Frac
+REPLACE INTO item_mods VALUES (11296,220,50); -- Comm. Frac +1
+REPLACE INTO item_mods VALUES (11296,8,10); -- Comm. Frac +1
+REPLACE INTO item_mods VALUES (15028,365,10); -- Comm. Gants
+REPLACE INTO item_mods VALUES (15029,365,10); -- Comm. Gants +1
+REPLACE INTO item_mods VALUES (16349,8,5); -- Comm. Trews
+REPLACE INTO item_mods VALUES (16349,11,5); -- Comm. Trews
+REPLACE INTO item_mods VALUES (16349,13,5); -- Comm. Trews
+REPLACE INTO item_mods VALUES (16350,8,6); -- Comm. Trews +1
+REPLACE INTO item_mods VALUES (16350,11,6); -- Comm. Trews +1
+REPLACE INTO item_mods VALUES (16350,13,6); -- Comm. Trews +1
+REPLACE INTO item_mods VALUES (11385,191,100); -- Comm. Bottes
+REPLACE INTO item_mods VALUES (11386,191,100); -- Comm. Bottes +1
 
 UPDATE item_mods SET value = 3 WHERE itemId IN (12162, 12198) AND modid = 421; -- Shikkoku Togi, Shikkoku Kote
 
