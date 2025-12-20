@@ -16,3 +16,21 @@ REPLACE INTO `item_mods_pet` VALUES (13974,25,15,2);  -- Drachen Fng. Gnt.
 REPLACE INTO `item_mods_pet` VALUES (15238,25,15,2);  -- Drachen Fng. Gnt. +1
 REPLACE INTO `item_mods_pet` VALUES (12649,370,5,2);  -- Drachen Mail 
 REPLACE INTO `item_mods_pet` VALUES (14486,370,5,2);  -- Drachen Mail +1
+
+REPLACE INTO `item_mods_pet` VALUES (15602,168,20,3);  -- Pup. Churidars 
+REPLACE INTO `item_mods_pet` VALUES (15602,374,20,3);  -- Pup. Churidars 
+REPLACE INTO `item_mods_pet` VALUES (16351,168,20,3);  -- Pup. Churidars +1
+REPLACE INTO `item_mods_pet` VALUES (16351,374,20,3);  -- Pup. Churidars +1
+
+REPLACE INTO `item_mods_pet` VALUES (11471,384,500,3);  -- Pantin Taj 
+REPLACE INTO `item_mods_pet` VALUES (11472,384,500,3);  -- Pantin Taj +1
+REPLACE INTO `item_mods_pet` VALUES (11298,25,15,3);  -- Pantin Tobe 
+REPLACE INTO `item_mods_pet` VALUES (11298,289,15,3);  -- Pantin Tobe 
+REPLACE INTO `item_mods_pet` VALUES (11299,25,17,3);  -- Pantin Tobe +1
+REPLACE INTO `item_mods_pet` VALUES (11299,289,17,3);  -- Pantin Tobe +1
+REPLACE INTO `item_mods_pet` VALUES (15031,384,500,3);  -- Pantin Dastanas 
+REPLACE INTO `item_mods_pet` VALUES (15032,384,500,3);  -- Pantin Dastanas +1
+REPLACE INTO `item_mods_pet` VALUES (16352,30,10,3);  -- Pantin Churidars 
+REPLACE INTO `item_mods_pet` VALUES (16353,30,12,3);  -- Pantin Churidars +1
+REPLACE INTO `item_mods_pet` VALUES (11388,28,10,3);  -- Pantin Babouches 
+REPLACE INTO `item_mods_pet` VALUES (11389,28,10,3);  -- Pantin Babouches +1

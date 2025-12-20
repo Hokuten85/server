@@ -510,6 +510,30 @@ REPLACE INTO item_mods VALUES (16350,13,6); -- Comm. Trews +1
 REPLACE INTO item_mods VALUES (11385,191,100); -- Comm. Bottes
 REPLACE INTO item_mods VALUES (11386,191,100); -- Comm. Bottes +1
 
+REPLACE INTO item_mods VALUES (15267,384,500); -- Puppetry Taj
+REPLACE INTO item_mods VALUES (11470,384,500); -- Puppetry Taj +1
+DELETE FROM item_mods WHERE itemid = 14523 AND modid = 25; -- Puppetry Tobe
+REPLACE INTO item_mods VALUES (14523,80,10); -- Puppetry Tobe
+DELETE FROM item_mods WHERE itemid = 11297 AND modid = 23; -- Puppetry Tobe +1
+DELETE FROM item_mods WHERE itemid = 11297 AND modid = 25; -- Puppetry Tobe +1
+REPLACE INTO item_mods VALUES (11297,80,10); -- Puppetry Tobe +1
+REPLACE INTO item_mods VALUES (14930,504,5); -- Pup. Dastanas
+REPLACE INTO item_mods VALUES (15030,504,5); -- Pup. Dastanas +1
+REPLACE INTO item_mods VALUES (15686,165,5); -- Pup. Babouches
+REPLACE INTO item_mods VALUES (11387,165,5); -- Pup. Babouches +1
+
+REPLACE INTO item_mods VALUES (11298,25,15); -- Pantin Tobe
+REPLACE INTO item_mods VALUES (11298,289,15); -- Pantin Tobe
+REPLACE INTO item_mods VALUES (11299,25,17); -- Pantin Tobe +1
+REPLACE INTO item_mods VALUES (11299,289,15); -- Pantin Tobe +1
+REPLACE INTO item_mods VALUES (15031,384,500); -- Pantin Dastanas
+REPLACE INTO item_mods VALUES (15032,384,500); -- Pantin Dastanas +1
+REPLACE INTO item_mods VALUES (16352,25,10); -- Pantin Churidars
+REPLACE INTO item_mods VALUES (16353,25,12); -- Pantin Churidars +1
+
+REPLACE INTO item_mods VALUES (11388,23,10); -- Pantin Babouches
+REPLACE INTO item_mods VALUES (11389,23,10); -- Pantin Babouches +1
+
 UPDATE item_mods SET value = 3 WHERE itemId IN (12162, 12198) AND modid = 421; -- Shikkoku Togi, Shikkoku Kote
 
 UPDATE item_mods SET value = 5 WHERE itemid = 14488 AND modid = 302; -- homam_corazza Triple Attack +5
