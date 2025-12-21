@@ -24,6 +24,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.dex_wsc = 0.8
         params.multiHitfTP = true -- https://www.bg-wiki.com/ffxi/Chant_du_Cygne
     end
+	
+	params.ftpMod = { 2.25, 2.25, 2.25 }
 
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.EMPYREAN)

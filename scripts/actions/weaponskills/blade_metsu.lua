@@ -27,6 +27,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.ftpMod  = { 5, 5, 5 }
         params.dex_wsc = 0.8
     end
+	
+	params.ftpMod  = { 4, 4, 4 }
+        params.dex_wsc = 0.7
 
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.RELIC)

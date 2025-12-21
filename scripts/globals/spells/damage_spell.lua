@@ -212,16 +212,16 @@ local pTable =
 -- Divine spells: https://nw6yx36onohv5j6wmzoba3nllq-ac4c6men2g7xr2a-wiki-ffo-jp.translate.goog/html/1963.html
 --                                       1          2     3        4   5      6  7
 -- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I, M0 },
-    [xi.magic.spell.BANISH        ] = { xi.mod.MND,  100,   14,    1,   85,  25, 0 },
-    [xi.magic.spell.BANISH_II     ] = { xi.mod.MND,  100,   85,    1,  200, 113, 0 },
-    [xi.magic.spell.BANISH_III    ] = { xi.mod.MND,    0,  198,  1.5,  350, 250, 0 },
+    [xi.magic.spell.BANISH        ] = { xi.mod.MND,  100,   14,    1,   85,  25, 4,    3,    2,    1,    0,    0,    0 },
+    [xi.magic.spell.BANISH_II     ] = { xi.mod.MND,  100,   85,    1,  200, 113, 4,    3,    2,    1,    0,    0,    0 },
+    [xi.magic.spell.BANISH_III    ] = { xi.mod.MND,    0,  198,  1.5,  350, 250, 4,    3,    2,    1,    0,    0,    0 },
     [xi.magic.spell.BANISH_IV     ] = { xi.mod.MND,    0,  420,  1.5,  600, 400, 0 }, -- Enemy only. Stats unknown/unchecked.
-    [xi.magic.spell.BANISHGA      ] = { xi.mod.MND,  100,   50,    1,  200,  46, 0 },
-    [xi.magic.spell.BANISHGA_II   ] = { xi.mod.MND,    0,  180,    1,  400, 133, 0 },
+    [xi.magic.spell.BANISHGA      ] = { xi.mod.MND,  100,   50,    1,  200,  46, 4,    3,    2,    1,    0,    0,    0 },
+    [xi.magic.spell.BANISHGA_II   ] = { xi.mod.MND,    0,  180,    1,  400, 133, 4,    3,    2,    1,    0,    0,    0 },
     [xi.magic.spell.BANISHGA_III  ] = { xi.mod.MND,    0,  480,  1.5,  700, 450, 0 }, -- Enemy only. Stats unknown.
     [xi.magic.spell.BANISHGA_IV   ] = { xi.mod.MND,    0,  600,  1.5,  800, 600, 0 }, -- Enemy only. Stats unknown.
-    [xi.magic.spell.HOLY          ] = { xi.mod.MND,  100,  125,    1,  300, 150, 0 },
-    [xi.magic.spell.HOLY_II       ] = { xi.mod.MND,    0,  250,    2,  400, 300, 0 },
+    [xi.magic.spell.HOLY          ] = { xi.mod.MND,  100,  125,    1,  350, 150, 4,    3,    2,    1,    0,    0,    0 },
+    [xi.magic.spell.HOLY_II       ] = { xi.mod.MND,    0,  250,    2,  500, 300, 4,    3,    2,    1,    0,    0,    0 },
 
 -- Dark spells.
 --                                       1          2     3     4      5      6    7    8    9     10    11    12    13

@@ -25,6 +25,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.multiHitfTP = true -- https://www.bg-wiki.com/ffxi/Dragon_Kick
         params.ftpMod = { 1.7, 3.0, 5.0 }
     end
+	
+	params.ftpMod = { 1.85, 2.75, 4.25 }
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     return tpHits, extraHits, criticalHit, damage

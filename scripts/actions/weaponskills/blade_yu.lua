@@ -27,6 +27,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.dex_wsc = 0.4
         params.int_wsc = 0.4
     end
+	
+	params.ftpMod  = { 2.75, 2.75, 2.75 }
+	params.dex_wsc = 0.35
+    params.int_wsc = 0.35
 
     local damage, tpHits, extraHits = xi.weaponskills.doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
