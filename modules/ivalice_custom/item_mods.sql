@@ -3,27 +3,45 @@ update item_mods set value = 50 where modid = 501 and itemid IN (18148,18150); -
 
 DELETE FROM item_mods WHERE itemId = 12511 AND modId = 27; -- Fighter's Mask
 DELETE FROM item_mods WHERE itemId = 15225 AND modId = 27; -- Fighter's Mask +1
+REPLACE INTO item_mods VALUES (12511,384,500); -- Fighter's Mask
+REPLACE INTO item_mods VALUES (15225,384,500); -- Fighter's Mask +1
 DELETE FROM item_mods WHERE itemId = 12638 AND modId = 27; -- Fighter's Lorica
 DELETE FROM item_mods WHERE itemId = 14473 AND modId = 27; -- Fighter's Lorica +1
+REPLACE INTO item_mods VALUES (12638,84,15); -- Fighter's Lorica
+REPLACE INTO item_mods VALUES (14473,84,15); -- Fighter's Lorica +1
 DELETE FROM item_mods WHERE itemId = 13961 AND modId = 27; -- Fighter's Mufflers
 DELETE FROM item_mods WHERE itemId = 14890 AND modId = 27; -- Fighter's Mufflers +1
+REPLACE INTO item_mods VALUES (13961,8,10); -- Fighter's Mufflers
+REPLACE INTO item_mods VALUES (14890,8,12); -- Fighter's Mufflers +1
 DELETE FROM item_mods WHERE itemId = 14214 AND modId = 27; -- Fighter's Cuisses
 DELETE FROM item_mods WHERE itemId = 15561 AND modId = 27; -- Fighter's Cuisses +1
+REPLACE INTO item_mods VALUES (14214,954,60); -- Fighter's Cuisses
+REPLACE INTO item_mods VALUES (15561,954,60); -- Fighter's Cuisses +1
 DELETE FROM item_mods WHERE itemId = 14089 AND modId = 27; -- Fighter's Calligae
 DELETE FROM item_mods WHERE itemId = 15352 AND modId = 27; -- Fighter's Calligae +1
 UPDATE item_mods SET value = 5 WHERE itemId IN (14089, 15352) AND modid = 288; -- Fighter's Calligae and Ftr. Calligae +1 
 
-DELETE FROM item_mods WHERE itemId = 15072 AND modId = 27; -- Warrior's Mask
-DELETE FROM item_mods WHERE itemId = 15245 AND modId = 27; -- Warrior's Mask +1
+DELETE FROM item_mods WHERE itemId = 15072 AND modId IN (9,27); -- Warrior's Mask
+DELETE FROM item_mods WHERE itemId = 15245 AND modId IN (9,27); -- Warrior's Mask +1
+REPLACE INTO item_mods VALUES (15072,8,5); -- Warrior's Mask
+REPLACE INTO item_mods VALUES (15245,8,6); -- Warrior's Mask +1
+REPLACE INTO item_mods VALUES (15072,841,5); -- Warrior's Mask
+REPLACE INTO item_mods VALUES (15245,841,6); -- Warrior's Mask +1
 DELETE FROM item_mods WHERE itemId = 15087 AND modId = 27; -- Warrior's Lorica
 DELETE FROM item_mods WHERE itemId = 14500 AND modId = 27; -- Warrior's Lorica +1
+REPLACE INTO item_mods VALUES (15087,85,15); -- Warrior's Lorica
+REPLACE INTO item_mods VALUES (14500,85,15); -- Warrior's Lorica +1
 DELETE FROM item_mods WHERE itemId = 15102 AND modId = 27; -- Warrior's Mufflers
 DELETE FROM item_mods WHERE itemId = 14909 AND modId = 27; -- Warrior's Mufflers +1
+REPLACE INTO item_mods VALUES (15102,10,10); -- Warrior's Mufflers
+REPLACE INTO item_mods VALUES (14909,10,10); -- Warrior's Mufflers +1
 DELETE FROM item_mods WHERE itemId = 15117 AND modId = 27; -- Warrior's Cuisses
 DELETE FROM item_mods WHERE itemId = 15580 AND modId = 27; -- Warrior's Cuisses +1
 UPDATE item_mods SET value = 5 WHERE itemId IN (15117, 15580) AND modid = 288; -- Warrior's Cuisses and Warrior Cuisses +1 
 DELETE FROM item_mods WHERE itemId = 15132 AND modId = 27; -- Warrior's Calligae
 DELETE FROM item_mods WHERE itemId = 15665 AND modId = 27; -- Warrior's Calligae +1
+REPLACE INTO item_mods VALUES (15132,948,5); -- Warrior's Calligae
+REPLACE INTO item_mods VALUES (15665,948,5); -- Warrior's Calligae +1
 
 REPLACE INTO item_mods VALUES (12512,165,5); -- Temple Crown
 REPLACE INTO item_mods VALUES (12512,289,5); -- Temple Crown
@@ -63,8 +81,12 @@ REPLACE INTO item_mods VALUES (12640,13,5); -- Healer's Bliaut
 REPLACE INTO item_mods VALUES (14475,13,7); -- Healer's Bliaut +1
 REPLACE INTO item_mods VALUES (12640,12,5); -- Healer's Bliaut
 REPLACE INTO item_mods VALUES (14475,12,7); -- Healer's Bliaut +1
+REPLACE INTO item_mods VALUES (13963,374,10); -- Healer's Mitts.
+REPLACE INTO item_mods VALUES (14892,374,10); -- Healer's Mitts. +1
 REPLACE INTO item_mods VALUES (14216,13,10); -- Healer's Pantaln.
 REPLACE INTO item_mods VALUES (15563,13,12); -- Healer's Pantaln. +1
+REPLACE INTO item_mods VALUES (14091,838,10); -- Healer's Duckbills.
+REPLACE INTO item_mods VALUES (15354,838,10); -- Healer's Duckbills. +1
 
 UPDATE item_mods SET value = 10 WHERE itemid = 15074 AND modId = 244; -- Cleric's Cap
 UPDATE item_mods SET value = 12 WHERE itemid = 15247 AND modId = 244; -- Cleric's Cap +1
@@ -73,6 +95,12 @@ UPDATE item_mods SET value = 15 WHERE itemid = 15089 AND modId = 838; -- Cleric'
 UPDATE item_mods SET value = 15 WHERE itemid = 14502 AND modId = 838; -- Cleric's Cap +1
 REPLACE INTO item_mods VALUES (15104,13,7); -- Cleric's Mitts.
 REPLACE INTO item_mods VALUES (14911,13,10); -- Cleric's Mitts +1
+REPLACE INTO item_mods VALUES (15089,369,2); -- Cleric's Bliaut.
+REPLACE INTO item_mods VALUES (14502,369,2); -- Cleric's Bliaut +1
+REPLACE INTO item_mods VALUES (15119,567,30); -- Cleric's Pantaln.
+REPLACE INTO item_mods VALUES (15119,860,3); -- Cleric's Pantaln.
+REPLACE INTO item_mods VALUES (15582,567,32); -- Cleric's Pantaln +1
+REPLACE INTO item_mods VALUES (15582,860,3); -- Cleric's Pantaln +1
 UPDATE item_mods SET value = 15 WHERE itemid = 15134 AND modId = 113; -- Cleric's Duckbills
 UPDATE item_mods SET value = 15 WHERE itemid = 15667 AND modId = 113; -- Cleric's Duckbills +1
 
@@ -83,9 +111,16 @@ REPLACE INTO item_mods VALUES (14476,12,5); -- Wizard's Coat +1
 UPDATE item_mods SET value = 15 WHERE itemid = 12641 AND modId = 114; -- Wizard's Coat
 UPDATE item_mods SET value = 17 WHERE itemid = 14476 AND modId = 114; -- Wizard's Coat +1
 REPLACE INTO item_mods VALUES (13964,12,5); -- Wizard's Gloves
-UPDATE item_mods SET value = 8 WHERE itemid = 14893 AND modId = 12; -- Wizard's Coat +1
+UPDATE item_mods SET value = 8 WHERE itemid = 14893 AND modId = 12; -- Wizard's Gloves +1
 REPLACE INTO item_mods VALUES (14217,315,10); -- Wizard's Tonban
 REPLACE INTO item_mods VALUES (15564,315,10); -- Wizard's Tonban +1
+DELETE FROM item_mods WHERE itemid = 14092 AND modid = 11; -- Wizard's Sabots
+REPLACE INTO item_mods VALUES (14092,12,3); -- Wizard's Sabots
+REPLACE INTO item_mods VALUES (14092,562,10); -- Wizard's Sabots
+DELETE FROM item_mods WHERE itemid = 15355 AND modid = 11; -- Wizard's Sabots +1
+REPLACE INTO item_mods VALUES (15355,12,5); -- Wizard's Sabots +1
+REPLACE INTO item_mods VALUES (15355,13,5); -- Wizard's Sabots +1
+REPLACE INTO item_mods VALUES (15355,562,15); -- Wizard's Sabots +1
 
 UPDATE item_mods SET value = 15 WHERE itemid = 15075 AND modId IN (114,115); -- Sorcerer's Petas.
 UPDATE item_mods SET value = 15 WHERE itemid = 15248 AND modId IN (114,115); -- Sorcerer's Petas. +1
@@ -109,10 +144,14 @@ REPLACE INTO item_mods VALUES (12642,12,5); -- Warlock's Tabard
 REPLACE INTO item_mods VALUES (14477,12,5); -- Warlock's Tabard +1
 REPLACE INTO item_mods VALUES (12642,13,5); -- Warlock's Tabard
 REPLACE INTO item_mods VALUES (14477,13,5); -- Warlock's Tabard +1
+REPLACE INTO item_mods VALUES (13965,432,10); -- Warlock's Gloves
+REPLACE INTO item_mods VALUES (14894,432,10); -- Warlock's Gloves +1
 UPDATE item_mods SET value = 15 WHERE itemid = 14218 AND modId IN (112); -- Warlock's Tights
 UPDATE item_mods SET value = 15 WHERE itemid = 15565 AND modId IN (112); -- Warlock's Tights +1
 REPLACE INTO item_mods VALUES (14218,890,10); -- Warlock's Tights
 REPLACE INTO item_mods VALUES (15565,890,10); -- Warlock's Tights +1
+REPLACE INTO item_mods VALUES (14093,1151,10); -- Warlock's Boots
+REPLACE INTO item_mods VALUES (15356,1151,10); -- Warlock's Boots +1
 
 REPLACE INTO item_mods VALUES (15076,12,5); -- Duelist's Chapeau
 REPLACE INTO item_mods VALUES (15249,12,5); -- Duelist's Chapeau +1
@@ -121,10 +160,12 @@ UPDATE item_mods SET value = 8 WHERE itemid = 15249 AND modid = 13; -- Duelist's
 UPDATE item_mods SET value = 2 WHERE itemid = 15249 AND modid = 369; -- Duelist's Chapeau +1
 UPDATE item_mods SET value = 15 WHERE itemid = 15091 AND modid = 112; -- Duelist's Tabard
 UPDATE item_mods SET value = 17 WHERE itemid = 14504 AND modid = 112; -- Duelist's Tabard +1
+REPLACE INTO item_mods VALUES (15106,890,10); -- Duelist's Gloves
+REPLACE INTO item_mods VALUES (14913,890,10); -- Duelist's Gloves +1
 REPLACE INTO item_mods VALUES (15121,28,5); -- Duelist's Tights
 REPLACE INTO item_mods VALUES (15584,28,5); -- Duelist's Tights +1
-UPDATE item_mods SET value = 15 WHERE itemid = 15121 AND modid = 115; -- Duelist's Tabard
-UPDATE item_mods SET value = 17 WHERE itemid = 15584 AND modid = 115; -- Duelist's Tabard +1
+UPDATE item_mods SET value = 15 WHERE itemid = 15121 AND modid = 115; -- Duelist's Tights
+UPDATE item_mods SET value = 17 WHERE itemid = 15584 AND modid = 115; -- Duelist's Tights +1
 REPLACE INTO item_mods VALUES (15136,12,4); -- Duelist's Tights
 REPLACE INTO item_mods VALUES (15669,12,5); -- Duelist's Tights +1
 UPDATE item_mods SET value = 5 WHERE itemid = 15136 AND modid = 28; -- Duelist's Boots
@@ -155,8 +196,8 @@ UPDATE item_mods SET value = 20 WHERE itemid = 14505 AND modid = 165; -- Assassi
 UPDATE item_mods SET value = 2 WHERE itemid = 14914 AND modid = 303; -- Assassin's Armlets +1
 UPDATE item_mods SET value = 50 WHERE itemid = 15122 AND modid = 897; -- Asn. Culottes
 UPDATE item_mods SET value = 50 WHERE itemid = 15585 AND modid = 897; -- Asn. Culottes +1
-UPDATE item_mods SET value = 5 WHERE itemid = 15137 AND modid = 302; -- Asn. Culottes
-UPDATE item_mods SET value = 5 WHERE itemid = 15670 AND modid = 302; -- Asn. Culottes +1
+UPDATE item_mods SET value = 5 WHERE itemid = 15137 AND modid = 302; -- Asn. poulaines
+UPDATE item_mods SET value = 5 WHERE itemid = 15670 AND modid = 302; -- Asn. poulaines +1
 
 REPLACE INTO item_mods VALUES (12515,10,5); -- Gallant Coronet
 REPLACE INTO item_mods VALUES (15231,10,6); -- Gallant Coronet +1
@@ -530,9 +571,78 @@ REPLACE INTO item_mods VALUES (15031,384,500); -- Pantin Dastanas
 REPLACE INTO item_mods VALUES (15032,384,500); -- Pantin Dastanas +1
 REPLACE INTO item_mods VALUES (16352,25,10); -- Pantin Churidars
 REPLACE INTO item_mods VALUES (16353,25,12); -- Pantin Churidars +1
-
 REPLACE INTO item_mods VALUES (11388,23,10); -- Pantin Babouches
 REPLACE INTO item_mods VALUES (11389,23,10); -- Pantin Babouches +1
+
+REPLACE INTO item_mods VALUES (16138,490,60); -- Dancer's Tiara
+REPLACE INTO item_mods VALUES (11475,490,60); -- Dancer's Tiara +1
+REPLACE INTO item_mods VALUES (14578,491,20); -- Dancer's Casaque
+REPLACE INTO item_mods VALUES (11302,491,20); -- Dancer's Casaque +1
+REPLACE INTO item_mods VALUES (15003,403,50); -- Dancer's Bangles
+REPLACE INTO item_mods VALUES (15035,403,50); -- Dancer's Bangles +1
+REPLACE INTO item_mods VALUES (15659,259,10); -- Dancer's Tights
+REPLACE INTO item_mods VALUES (16357,259,10); -- Dancer's Tights +1
+REPLACE INTO item_mods VALUES (15746,492,50); -- Dancer's Toe Shoes
+REPLACE INTO item_mods VALUES (11393,492,50); -- Dancer's Toe Shoes +1
+
+REPLACE INTO item_mods VALUES (11478,8,5); -- Etoile Tiara
+REPLACE INTO item_mods VALUES (11478,9,5); -- Etoile Tiara
+REPLACE INTO item_mods VALUES (11478,491,10); -- Etoile Tiara
+REPLACE INTO item_mods VALUES (11479,8,6); -- Etoile Tiara +1
+REPLACE INTO item_mods VALUES (11479,9,6); -- Etoile Tiara +1
+REPLACE INTO item_mods VALUES (11479,491,10); -- Etoile Tiara +1
+REPLACE INTO item_mods VALUES (11305,259,10); -- Etoile Casaque
+REPLACE INTO item_mods VALUES (11306,259,10); -- Etoile Casaque +1
+REPLACE INTO item_mods VALUES (15038,415,20); -- Etoile Bangles
+REPLACE INTO item_mods VALUES (15039,415,20); -- Etoile Bangles +1
+REPLACE INTO item_mods VALUES (16360,8,6); -- Etoile Tights
+REPLACE INTO item_mods VALUES (16360,14,6); -- Etoile Tights
+REPLACE INTO item_mods VALUES (16360,384,500); -- Etoile Tights
+REPLACE INTO item_mods VALUES (16360,492,50); -- Etoile Tights
+REPLACE INTO item_mods VALUES (16361,8,6); -- Etoile Tights +1
+REPLACE INTO item_mods VALUES (16361,14,6); -- Etoile Tights +1
+REPLACE INTO item_mods VALUES (16361,384,500); -- Etoile Tights +1
+REPLACE INTO item_mods VALUES (16361,492,50); -- Etoile Tights +1
+REPLACE INTO item_mods VALUES (11396,9,8); -- Etoile Toe Shoes
+REPLACE INTO item_mods VALUES (11396,9,8); -- Etoile Toe Shoes
+REPLACE INTO item_mods VALUES (11397,25,8); -- Etoile Toe Shoes +1
+REPLACE INTO item_mods VALUES (11397,25,10); -- Etoile Toe Shoes +1
+
+REPLACE INTO item_mods VALUES (16140,12,5); -- Scholar's Gown
+REPLACE INTO item_mods VALUES (16140,13,5); -- Scholar's Gown
+REPLACE INTO item_mods VALUES (16140,401,2); -- Scholar's Gown
+REPLACE INTO item_mods VALUES (11477,12,7); -- Sch. Gown +1
+REPLACE INTO item_mods VALUES (11477,13,7); -- Sch. Gown +1
+REPLACE INTO item_mods VALUES (11477,401,2); -- Sch. Gown +1
+REPLACE INTO item_mods VALUES (14580,337,25); -- Scholar's M.board
+REPLACE INTO item_mods VALUES (11304,337,25); -- Sch. M.board +1
+REPLACE INTO item_mods VALUES (15004,478,20); -- Scholar's Bracers
+REPLACE INTO item_mods VALUES (15037,478,20); -- Sch. Bracers +1
+REPLACE INTO item_mods VALUES (15004,336,25); -- Scholar's Bracers
+REPLACE INTO item_mods VALUES (15004,374,10); -- Scholar's Bracers
+REPLACE INTO item_mods VALUES (15037,336,25); -- Sch. Bracers +1
+REPLACE INTO item_mods VALUES (15037,374,10); -- Sch. Bracers +1
+REPLACE INTO item_mods VALUES (15748,489,-15); -- Scholar's Loafers
+REPLACE INTO item_mods VALUES (11395,489,-15); -- Sch. Loafers +1
+
+REPLACE INTO item_mods VALUES (11480,489,-15); -- Argute M.board
+REPLACE INTO item_mods VALUES (11481,489,-15); -- Argute M.board +1
+REPLACE INTO item_mods VALUES (11480,113,15); -- Argute Gown
+REPLACE INTO item_mods VALUES (11480,401,2); -- Argute Gown
+REPLACE INTO item_mods VALUES (11481,113,15); -- Argute Gown +1
+REPLACE INTO item_mods VALUES (11481,401,2); -- Argute Gown +1
+REPLACE INTO item_mods VALUES (15040,12,5); -- Argute Bracers
+REPLACE INTO item_mods VALUES (15040,13,5); -- Argute Bracers
+REPLACE INTO item_mods VALUES (15040,114,15); -- Argute Bracers
+REPLACE INTO item_mods VALUES (15041,12,7); -- Argute Bracers +1
+REPLACE INTO item_mods VALUES (15041,13,7); -- Argute Bracers +1
+REPLACE INTO item_mods VALUES (15041,114,15); -- Argute Bracers +1
+REPLACE INTO item_mods VALUES (16362,116,15); -- Argute Pants
+REPLACE INTO item_mods VALUES (16362,315,10); -- Argute Pants
+REPLACE INTO item_mods VALUES (16363,116,15); -- Argute Pants +1
+REPLACE INTO item_mods VALUES (16363,315,10); -- Argute Pants +1
+REPLACE INTO item_mods VALUES (11398,112,15); -- Argute Loafers
+REPLACE INTO item_mods VALUES (11399,112,17); -- Argute Loafers +1
 
 UPDATE item_mods SET value = 3 WHERE itemId IN (12162, 12198) AND modid = 421; -- Shikkoku Togi, Shikkoku Kote
 
