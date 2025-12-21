@@ -457,7 +457,7 @@ bool CTrustController::Ability(uint16 targid, uint16 abilityid)
 {
     TracyZoneScoped;
 
-    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, abilityid, 0s) ||
+    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, static_cast<Recast>(abilityid), 0s) ||
         POwner->StatusEffectContainer->HasStatusEffect({ EFFECT_AMNESIA, EFFECT_IMPAIRMENT }) ||
         !trustutils::hasAbility(static_cast<CTrustEntity*>(POwner), abilityid))
     {
@@ -507,7 +507,7 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
 
     FaceTarget(targid);
 
-    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellid)))
+    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellid)))
     {
         return false;
     }

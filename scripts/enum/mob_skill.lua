@@ -440,6 +440,8 @@ xi.mobSkill =
     EMPTY_THRASH                  = 1275,
     PROMYVION_BRUME_2             = 1276,
 
+    GERJIS_GRIP                   = 1322,
+
     HOOF_VOLLEY                   = 1330,
 
     COUNTERSTANCE                 = 1331, -- The Waughroon Kid
@@ -447,10 +449,10 @@ xi.mobSkill =
     CONTAGION_TRANSFER            = 1333,
     CONTAMINATION                 = 1334,
     TOXIC_PICK                    = 1335,
-
     FRENZIED_RAGE_1               = 1336,
     CHARM_2                       = 1337,
 
+    CROSSTHRASH_1                 = 1340,
     KNIFE_EDGE_CIRCLE             = 1341,
     TRAIN_FALL                    = 1342,
 
@@ -486,6 +488,8 @@ xi.mobSkill =
     RICEBALL_TENZEN               = 1399,
     RANGED_ATTACK_TENZEN_2        = 1400, -- Tenzen Bow Low
     SOUL_ACCRETION                = 1401,
+
+    DEADALUS_WING_COP_PRISHE      = 1487, -- Dwing COP 8-4 Dawn
 
     HOWLING_MOON_3                = 1520, -- Unknown usage.
 
@@ -534,6 +538,8 @@ xi.mobSkill =
     DEATHGNASH                    = 1977, -- Unique entry.
 
     BOREAS_MANTLE                 = 1980, -- Unique entry.
+
+    REWARD                        = 2005,
 
     NOCTURNAL_SERVITUDE           = 2112,
     HELLSNAP                      = 2113,
