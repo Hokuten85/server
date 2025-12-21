@@ -634,7 +634,7 @@ void CGambitsContainer::Tick(timer::time_point tick)
                             }
                             // if roll is 10 and we have snake eye available, then use it
                             else if (roll == 10 &&
-                                     !static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, ABILITY::ABILITY_SNAKE_EYE, 0s) &&
+                                     !static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, static_cast<Recast>(ABILITY::ABILITY_SNAKE_EYE), 0s) &&
                                      trustutils::hasAbility(static_cast<CTrustEntity*>(POwner), ABILITY::ABILITY_SNAKE_EYE))
                             {
                                 controller->Ability(target->targid, ABILITY::ABILITY_SNAKE_EYE);
@@ -647,7 +647,7 @@ void CGambitsContainer::Tick(timer::time_point tick)
                             }
                             // if we got here, then we are over 6, no 11 or lucky roll, and we've landed on unlucky. If we have snake eye to get off unlucky, then use it.
                             else if (roll == effects::GetLuckyRollInfo(prevRoll->GetStatusID()).unlucky &&
-                                     !static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, ABILITY::ABILITY_SNAKE_EYE, 0s) &&
+                                     !static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, static_cast<Recast>(ABILITY::ABILITY_SNAKE_EYE), 0s) &&
                                      trustutils::hasAbility(static_cast<CTrustEntity*>(POwner), ABILITY::ABILITY_SNAKE_EYE))
                             {
                                 controller->Ability(target->targid, ABILITY::ABILITY_SNAKE_EYE);
@@ -1118,7 +1118,7 @@ bool CGambitsContainer::PartyHasTank()
     bool CGambitsContainer::EnqueueJA(const uint16 abilityId, const uint16 targid)
     {
         auto* controller = static_cast<CTrustController*>(POwner->PAI->GetController());
-        if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, abilityId, 0s) ||
+        if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, static_cast<Recast>(abilityId), 0s) ||
             POwner->StatusEffectContainer->HasStatusEffect({ EFFECT_AMNESIA, EFFECT_IMPAIRMENT }) ||
             !trustutils::hasAbility(static_cast<CTrustEntity*>(POwner), abilityId))
         {
