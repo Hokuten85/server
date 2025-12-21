@@ -1,13 +1,14 @@
 -----------------------------------
--- Area: Horlais Peak
---  Mob: Cottontail
--- BCNM: Tails of Woe
+-- Area: Balgas Dais
+-- Mob: Domovoi
+-- BCNM: Steamed Sprouts
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobSpawn = function(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.CHARMABLE, 1)
+    mob:setMobMod(xi.mobMod.SUPERLINK, 1)
 end
 
 return entity
