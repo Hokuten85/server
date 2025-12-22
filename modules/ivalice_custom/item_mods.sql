@@ -172,32 +172,63 @@ UPDATE item_mods SET value = 5 WHERE itemid = 15136 AND modid = 28; -- Duelist's
 UPDATE item_mods SET value = 6 WHERE itemid = 15669 AND modid = 28; -- Duelist's Boots +1
 
 REPLACE INTO item_mods VALUES (12514,9,5); -- Rogue's Bonnet
+REPLACE INTO item_mods VALUES (12514,298,2); -- Rogue's Bonnet
+REPLACE INTO item_mods VALUES (15230,9,8); -- Rogue's Bonnet
 REPLACE INTO item_mods VALUES (15230,298,2); -- Rogue's Bonnet +1
-UPDATE item_mods SET value = 2 WHERE itemid = 12514 AND modid = 298; -- Rogue's Bonnet
-UPDATE item_mods SET value = 8 WHERE itemid = 15230 AND modid = 9; -- Rogue's Bonnet +1
+REPLACE INTO item_mods VALUES (12643,8,5); -- Rogue's Vest
 REPLACE INTO item_mods VALUES (12643,9,5); -- Rogue's Vest
+REPLACE INTO item_mods VALUES (12643,421,10); -- Rogue's Vest
+REPLACE INTO item_mods VALUES (14478,8,8); -- Rogue's Vest
+REPLACE INTO item_mods VALUES (14478,9,8); -- Rogue's Vest
 REPLACE INTO item_mods VALUES (14478,421,10); -- Rogue's Vest +1
-UPDATE item_mods SET value = 6 WHERE itemid = 12643 AND modid = 9; -- Rogue's Vest
-REPLACE INTO item_mods VALUES (14478,421,10); -- Rogue's Vest +1
+REPLACE INTO item_mods VALUES (13966,9,5); -- Rogue's Armlets
 REPLACE INTO item_mods VALUES (13966,11,5); -- Rogue's Armlets
-UPDATE item_mods SET value = 5 WHERE itemid = 13966 and modid = 9; -- Rogue's Armlets
 REPLACE INTO item_mods VALUES (13966,520,10); -- Rogue's Armlets
 REPLACE INTO item_mods VALUES (14895,11,5); -- Rogue's Armlets +1
 UPDATE item_mods SET value = 5 WHERE itemid = 14895 and modid = 9; -- Rogue's Armlets +1
+REPLACE INTO item_mods VALUES (14219,9,4); -- Rogue's Culottes
 UPDATE item_mods SET value = 8 WHERE itemid = 14219 AND modid = 11; -- Rogue's Culottes
 UPDATE item_mods SET value = 8 WHERE itemid = 15566 AND modid IN (9,11); -- Rogue's Culottes +1
 UPDATE item_mods SET value = 60 WHERE itemid = 14094 AND modid = 93; -- Rogue's Poulaines
+REPLACE INTO item_mods VALUES (14094,9,4); -- Rogue's Poulaines
+REPLACE INTO item_mods VALUES (14094,384,300); -- Rogue's Poulaines
 UPDATE item_mods SET value = 60 WHERE itemid = 15357 AND modid = 93; -- Rogue's Poulaines +1
+REPLACE INTO item_mods VALUES (15357,9,4); -- Rogue's Poulaines +1
+REPLACE INTO item_mods VALUES (15357,384,300); -- Rogue's Poulaines +1
 
-UPDATE item_mods SET value = 50 WHERE itemid = 15077 AND modid = 835; -- Assassin's Bonnet
-UPDATE item_mods SET value = 50 WHERE itemid = 15250 AND modid = 835; -- Assassin's Bonnet +1
-UPDATE item_mods SET value = 20 WHERE itemid = 15092 AND modid = 165; -- Assassin's Vest
-UPDATE item_mods SET value = 20 WHERE itemid = 14505 AND modid = 165; -- Assassin's Vest +1
-UPDATE item_mods SET value = 2 WHERE itemid = 14914 AND modid = 303; -- Assassin's Armlets +1
-UPDATE item_mods SET value = 50 WHERE itemid = 15122 AND modid = 897; -- Asn. Culottes
-UPDATE item_mods SET value = 50 WHERE itemid = 15585 AND modid = 897; -- Asn. Culottes +1
-UPDATE item_mods SET value = 5 WHERE itemid = 15137 AND modid = 302; -- Asn. poulaines
-UPDATE item_mods SET value = 5 WHERE itemid = 15670 AND modid = 302; -- Asn. poulaines +1
+DELETE FROM item_mods WHERE itemid = 15077 AND modid = 27; -- Assassin's Bonnet
+REPLACE INTO item_mods VALUES (15077,9,6); -- Assassin's Bonnet
+REPLACE INTO item_mods VALUES (15077,302,3); -- Assassin's Bonnet
+REPLACE INTO item_mods VALUES (15077,384,300); -- Assassin's Bonnet
+REPLACE INTO item_mods VALUES (15077,835,50); -- Assassin's Bonnet
+DELETE FROM item_mods WHERE itemid = 15250 AND modid = 27; -- Assassin's Bonnet +1
+REPLACE INTO item_mods VALUES (15250,9,6); -- Assassin's Bonnet +1
+REPLACE INTO item_mods VALUES (15250,302,4); -- Assassin's Bonnet +1
+REPLACE INTO item_mods VALUES (15250,384,400); -- Assassin's Bonnet +1
+REPLACE INTO item_mods VALUES (15250,835,50); -- Assassin's Bonnet +1
+DELETE FROM item_mods WHERE itemid = 15092 AND modid = 27; -- Assassin's Vest
+REPLACE INTO item_mods VALUES (15092,81,15); -- Assassin's Vest
+REPLACE INTO item_mods VALUES (15092,165,20); -- Assassin's Vest
+DELETE FROM item_mods WHERE itemid = 14505 AND modid = 27; -- Assassin's Vest +1
+REPLACE INTO item_mods VALUES (14505,81,15); -- Assassin's Vest +1
+REPLACE INTO item_mods VALUES (14505,165,20); -- Assassin's Vest +1
+
+DELETE FROM item_mods WHERE itemid = 14914 AND modid = 27; -- Assassin's Armlets
+REPLACE INTO item_mods VALUES (14914,259,10); -- Assassin's Armlets
+REPLACE INTO item_mods VALUES (14914,303,2); -- Assassin's Armlets
+DELETE FROM item_mods WHERE itemid = 14914 AND modid = 27; -- Assassin's Armlets +1
+REPLACE INTO item_mods VALUES (14914,259,10); -- Assassin's Armlets +1
+REPLACE INTO item_mods VALUES (14914,303,2); -- Assassin's Armlets +1
+DELETE FROM item_mods WHERE itemid = 15122 AND modid = 27; -- Assassin's Culottes
+REPLACE INTO item_mods VALUES (15122,165,5); -- Assassin's Culottes
+REPLACE INTO item_mods VALUES (15122,384,300); -- Assassin's Culottes
+REPLACE INTO item_mods VALUES (15122,897,50); -- Assassin's Culottes
+DELETE FROM item_mods WHERE itemid = 15585 AND modid = 27; -- Assassin's Culottes +1
+REPLACE INTO item_mods VALUES (15585,165,6); -- Assassin's Culottes +1
+REPLACE INTO item_mods VALUES (15585,384,400); -- Assassin's Culottes +1
+REPLACE INTO item_mods VALUES (15585,897,50); -- Assassin's Culottes +1
+REPLACE INTO item_mods VALUES (15137,302,5); -- Assassin's poulaines
+REPLACE INTO item_mods VALUES (15670,302,5); -- Assassin's poulaines +1
 
 REPLACE INTO item_mods VALUES (12515,10,5); -- Gallant Coronet
 REPLACE INTO item_mods VALUES (15231,10,6); -- Gallant Coronet +1
@@ -205,16 +236,18 @@ UPDATE item_mods SET value = 4 WHERE itemid = 12515 AND modid = 27; -- Gallant C
 UPDATE item_mods SET value = 5 WHERE itemid = 15231 AND modid = 27; -- Gallant Coronet +1
 REPLACE INTO item_mods VALUES (12644,13,10); -- Gallant Surcoat
 REPLACE INTO item_mods VALUES (14479,13,10); -- Gallant Surcoat +1
-REPLACE INTO item_mods VALUES (12644,23,15); -- Gallant Surcoat
-REPLACE INTO item_mods VALUES (14479,23,15); -- Gallant Surcoat +1
 UPDATE item_mods SET value = 4 WHERE itemid = 12644 AND modid = 27; -- Gallant Surcoat
 UPDATE item_mods SET value = 5 WHERE itemid = 14479 AND modid = 27; -- Gallant Surcoat +1
 UPDATE item_mods SET value = 15 WHERE itemid = 12644 AND modid = 111; -- Gallant Surcoat
 UPDATE item_mods SET value = 18 WHERE itemid = 14479 AND modid = 111; -- Gallant Surcoat +1
+REPLACE INTO item_mods VALUES (13967,1,20); -- Gallant Gauntlets
 REPLACE INTO item_mods VALUES (13967,10,3); -- Gallant Gauntlets
-UPDATE item_mods SET value = 4 WHERE itemid = 13967 AND modid = 27; -- Gallant Gauntlets
-UPDATE item_mods SET value = 6 WHERE itemid = 14896 AND modid = 10; -- Gallant Gauntlets +1
-UPDATE item_mods SET value = 5 WHERE itemid = 14896 AND modid = 27; -- Gallant Gauntlets +1
+REPLACE INTO item_mods VALUES (13967,27,4); -- Gallant Gauntlets
+REPLACE INTO item_mods VALUES (13967,109,10); -- Gallant Gauntlets
+REPLACE INTO item_mods VALUES (14896,1,26); -- Gallant Gauntlets +1
+REPLACE INTO item_mods VALUES (14896,10,6); -- Gallant Gauntlets +1
+REPLACE INTO item_mods VALUES (14896,27,5); -- Gallant Gauntlets +1
+REPLACE INTO item_mods VALUES (14896,109,15); -- Gallant Gauntlets +1
 UPDATE item_mods SET value = 4 WHERE itemid = 14220 AND modid = 27; -- Gallant Breeches
 UPDATE item_mods SET value = 5 WHERE itemid = 15567 AND modid = 27; -- Gallant Breeches +1
 UPDATE item_mods SET value = 15 WHERE itemid = 14220 AND modid = 113; -- Gallant Breeches
@@ -230,13 +263,13 @@ REPLACE INTO item_mods VALUES (15251,92,45); -- Valor Coronet +1
 REPLACE INTO item_mods VALUES (15251,112,15); -- Valor Coronet +1
 REPLACE INTO item_mods VALUES (15093,13,10); -- Valor Surcoat
 REPLACE INTO item_mods VALUES (14506,13,10); -- Valor Surcoat +1
-REPLACE INTO item_mods VALUES (15093,23,15); -- Valor Surcoat
-REPLACE INTO item_mods VALUES (14506,23,15); -- Valor Surcoat +1
+REPLACE INTO item_mods VALUES (15093,82,15); -- Valor Surcoat
+REPLACE INTO item_mods VALUES (14506,82,15); -- Valor Surcoat +1
 REPLACE INTO item_mods VALUES (15093,27,5); -- Valor Surcoat
 REPLACE INTO item_mods VALUES (14506,27,6); -- Valor Surcoat +1
-REPLACE INTO item_mods VALUES (15108,27,5); -- Valor Gauntlets
+REPLACE INTO item_mods VALUES (15108,27,6); -- Valor Gauntlets
 REPLACE INTO item_mods VALUES (15108,385,15); -- Valor Gauntlets
-REPLACE INTO item_mods VALUES (14915,27,5); -- Valor Gauntlets +1
+REPLACE INTO item_mods VALUES (14915,27,6); -- Valor Gauntlets +1
 REPLACE INTO item_mods VALUES (14915,385,15); -- Valor Gauntlets +1
 REPLACE INTO item_mods VALUES (15123,8,10); -- Valor Breeches
 REPLACE INTO item_mods VALUES (15123,27,6); -- Valor Breeches

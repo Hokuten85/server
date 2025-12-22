@@ -480,6 +480,11 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
 {
     bool enmityApplied = false;
 
+    if (m_PEntity == nullptr || m_PSpell == nullptr)
+    {
+        return;
+    }
+
     if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_TRANQUILITY) && m_PSpell->getSpellGroup() == SPELLGROUP_WHITE)
     {
         m_PEntity->addModifier(Mod::ENMITY, -m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_TRANQUILITY)->GetPower());
