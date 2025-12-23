@@ -2171,8 +2171,8 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, bool update)
             }
             PChar->m_dualWield = false;
         }
-        PChar->delEquipModifiers(&((CItemEquipment*)PItem)->modList, ((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
         PChar->PLatentEffectContainer->DelLatentEffects(((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
+        PChar->delEquipModifiers(&((CItemEquipment*)PItem)->modList, ((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
         PChar->delPetModifiers(&((CItemEquipment*)PItem)->petModList);
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Normal); // ???
