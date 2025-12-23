@@ -581,7 +581,7 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
     {
         damage = PAttacker->getMod(Mod::ENSPELL_DMG);
 
-        if (damage > 1)
+        /*if (damage > 1)
         {
             PAttacker->delModifier(Mod::ENSPELL_DMG, 1);
         }
@@ -595,7 +595,7 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
             {
                 PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_ENLIGHT);
             }
-        }
+        }*/
 
         damage += bonus;
     }
