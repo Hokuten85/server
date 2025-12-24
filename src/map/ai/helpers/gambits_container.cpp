@@ -844,6 +844,11 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
                 predicateResults.push_back((triggerTarget->health.maxhp - triggerTarget->health.hp) >= (int16)predicate.condition_arg);
                 continue;
             }
+            case G_CONDITION::IN_RANGE:
+            {
+                predicateResults.push_back(distance(POwner->loc.p, triggerTarget->loc.p) >= (int16)predicate.condition_arg);
+                continue;
+            }
             default:
             {
                 predicateResults.push_back(false);

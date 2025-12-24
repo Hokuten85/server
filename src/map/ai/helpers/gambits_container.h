@@ -86,6 +86,7 @@ enum class G_CONDITION : uint16
     NOT_PT_HAS_TANK    = 22,
     IS_ECOSYSTEM       = 23,
     HP_MISSING         = 24,
+    IN_RANGE           = 40,
 };
 
 enum class G_REACTION : uint16
