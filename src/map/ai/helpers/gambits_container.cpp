@@ -912,6 +912,11 @@ bool CGambitsContainer::TryTrustSkill()
                 return result;
                 break;
             }
+            case G_TP_TRIGGER::OPENER_AYAME:
+            {
+                return POwner->PMaster->health.tp >= 1000;
+                break;
+            }
             case G_TP_TRIGGER::CLOSER: // Hold TP indefinitely to close a SC.
             {
                 auto* PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);

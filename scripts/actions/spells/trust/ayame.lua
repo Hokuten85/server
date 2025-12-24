@@ -24,7 +24,7 @@ spellObject.onMobSpawn = function(mob)
 
     mob:addGambit(ai.t.SELF, { ai.c.TP_LT, 1000 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.MEDITATE })
 
-    mob:setTrustTPSkillSettings(ai.tp.OPENER, ai.s.SPECIAL_AYAME)
+    mob:setTrustTPSkillSettings(ai.tp.OPENER_AYAME, ai.s.SPECIAL_AYAME)
 end
 
 spellObject.onMobDespawn = function(mob)

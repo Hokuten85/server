@@ -126,4 +126,5 @@ ai.tp =
     OPENER          = 2,
     CLOSER          = 3,    -- Will Hold TP Indefinitely to close a SC
     CLOSER_UNTIL_TP = 4,    -- Will Hold TP to close a SC until a certain threshold
+	OPENER_AYAME    = 10,
 }
