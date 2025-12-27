@@ -51800,9 +51800,9 @@ INSERT INTO `mob_spawn_points` VALUES (17367238,0,'The_Waughroon_Kid','The Waugh
 INSERT INTO `mob_spawn_points` VALUES (17367240,0,'The_Waughroon_Kid','The Waughroon Kid',34,222.5,-60.000,137.946,128);
 
 -- Up in Arms
-INSERT INTO `mob_spawn_points` VALUES (17367242,0,'Fee','Fe\'e',35,-175.000,60.000,-142.000,124);
-INSERT INTO `mob_spawn_points` VALUES (17367244,0,'Fee','Fe\'e',35,25.274,0.000,17.964,124);
-INSERT INTO `mob_spawn_points` VALUES (17367246,0,'Fee','Fe\'e',35,225.224,-60.000,137.946,124);
+INSERT INTO `mob_spawn_points` VALUES (17367242,0,'Fee','Fe\'e',35,-177.354,59.696,-142,128);
+INSERT INTO `mob_spawn_points` VALUES (17367244,0,'Fee','Fe\'e',35,22.5,0.000,17.964,128);
+INSERT INTO `mob_spawn_points` VALUES (17367246,0,'Fee','Fe\'e',35,222.5,-60.000,137.946,128);
 
 -- Copycat
 INSERT INTO `mob_spawn_points` VALUES (17367248,0,'Osschaart','Osschaart',36,-177.358,60.188,-141.977,124);
@@ -70117,13 +70117,12 @@ INSERT INTO `mob_spawn_points` VALUES (17621110,0,'Generic_Doll','Generic Doll',
 INSERT INTO `mob_spawn_points` VALUES (17621111,0,'Generic_Doll','Generic Doll',21,398.028,199.000,-404.677,195);
 
 -- Undying Promise (BS40)
-INSERT INTO `mob_spawn_points` VALUES (17621113,0,'Ghul-I-Beaban','Ghul-I-Beaban',22,-399.000,-201.000,399.000,190);
-INSERT INTO `mob_spawn_points` VALUES (17621114,0,'Ghul-I-Beaban','Ghul-I-Beaban',23,-399.000,-201.000,399.000,190);
-INSERT INTO `mob_spawn_points` VALUES (17621116,0,'Ghul-I-Beaban','Ghul-I-Beaban',22,1.073,-1.000,-0.901,190);
-INSERT INTO `mob_spawn_points` VALUES (17621117,0,'Ghul-I-Beaban','Ghul-I-Beaban',23,1.073,-1.000,-0.901,190);
-INSERT INTO `mob_spawn_points` VALUES (17621119,0,'Ghul-I-Beaban','Ghul-I-Beaban',22,401.028,199.000,-400.677,190);
-INSERT INTO `mob_spawn_points` VALUES (17621120,0,'Ghul-I-Beaban','Ghul-I-Beaban',23,401.028,199.000,-400.677,190);
-
+INSERT INTO `mob_spawn_points` VALUES (17621113,0,'Ghul-I-Beaban_DRK','Ghul-I-Beaban',22,-400.001,-202.125,400.001,192);
+INSERT INTO `mob_spawn_points` VALUES (17621114,0,'Ghul-I-Beaban_BLM','Ghul-I-Beaban',23,-400.001,-202.125,400.001,192);
+INSERT INTO `mob_spawn_points` VALUES (17621116,0,'Ghul-I-Beaban_DRK','Ghul-I-Beaban',22,1.06,-1.625,-0.9,192);
+INSERT INTO `mob_spawn_points` VALUES (17621117,0,'Ghul-I-Beaban_BLM','Ghul-I-Beaban',23,1.06,-1.625,-0.9,192);
+INSERT INTO `mob_spawn_points` VALUES (17621119,0,'Ghul-I-Beaban_DRK','Ghul-I-Beaban',22,400,199.000,-400.677,192);
+INSERT INTO `mob_spawn_points` VALUES (17621120,0,'Ghul-I-Beaban_BLM','Ghul-I-Beaban',23,400,199.000,-400.677,192);
 -- Idol Thoughts (BS50)
 INSERT INTO `mob_spawn_points` VALUES (17621122,0,'Fire_Golem','Fire Golem',24,-393.000,-201.000,399.000,185);
 INSERT INTO `mob_spawn_points` VALUES (17621123,0,'Water_Golem','Water Golem',25,-397.000,-201.000,395.000,185);
