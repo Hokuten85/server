@@ -2799,9 +2799,39 @@ void CCharEntity::UpdateMoghancement()
 
 void CCharEntity::SetMoghancement(uint16 moghancementID)
 {
+    std::unordered_set<MOGHANCEMENT_TYPE> installedMogHancements;
+    for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+    {
+        CItemContainer* PContainer = getStorage(containerID);
+        for (int slotID = 1; slotID <= PContainer->GetSize(); ++slotID)
+        {
+            CItem* PItem = PContainer->GetItem(slotID);
+            if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
+            {
+                CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
+                if (PFurniture->isInstalled()) {
+                    installedMogHancements.insert((MOGHANCEMENT_TYPE)PFurniture->getMoghancement());
+                }
+            }
+        }
+    }
+
     // Remove the previous Moghancement first
-    changeMoghancement(m_moghancementID, false);
-    changeMoghancement(moghancementID, true);
+    if (m_moghancementID != 0)
+    {
+        for (auto mogHancement : installedMogHancements)
+        {
+            changeMoghancement(mogHancement, false);
+        }
+    }
+
+    for (auto mogHancement : installedMogHancements)
+    {
+        changeMoghancement(mogHancement, true);
+    }
+
+    /*changeMoghancement(m_moghancementID, false);
+    changeMoghancement(moghancementID, true);*/
     m_moghancementID = moghancementID;
 }
 

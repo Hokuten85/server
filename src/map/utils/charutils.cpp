@@ -490,7 +490,7 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
         PChar->SetPlayTime(std::chrono::seconds(rset->get<uint32>("playtime")));
         PChar->profile.campaign_allegiance = rset->get<uint8>("campaign_allegiance");
         PChar->setStyleLocked(rset->get<uint32>("isstylelocked") == 1);
-        PChar->SetMoghancement(rset->get<uint16>("moghancement"));
+        //PChar->SetMoghancement(rset->get<uint16>("moghancement"));
         PChar->lastOnline      = earth_time::time_point(std::chrono::seconds(rset->get<uint32>("lastonline")));
         PChar->search.language = rset->get<uint8>("languages");
 
@@ -938,6 +938,7 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
     monstrosity::TryPopulateMonstrosityData(PChar);
 
     charutils::LoadInventory(PChar);
+    PChar->SetMoghancement(0);
 
     CalculateStats(PChar);
     jobpointutils::RefreshGiftMods(PChar);
