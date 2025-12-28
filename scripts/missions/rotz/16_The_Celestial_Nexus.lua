@@ -16,9 +16,7 @@ mission.reward =
     item = 
 	{
 		randomColoredDrop,
-		function()
-			return not player:hasItem(xi.item.MURREY_GRISAILLE) and xi.item.MURREY_GRISAILLE or 0
-		end
+		xi.item.MURREY_GRISAILLE
 	},
 }
 

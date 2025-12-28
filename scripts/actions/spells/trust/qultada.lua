@@ -17,12 +17,8 @@ spellObject.onMobSpawn = function(mob)
 	
 	mob:addGambit(ai.t.SELF, { ai.c.STATUS, xi.effect.DOUBLE_UP_CHANCE} , { ai.r.JA, ai.s.BEST_DOUBLE_UP, xi.ja.DOUBLE_UP })
 
-    mob:addGambit(ai.t.PARTY,
-					{ {ai.c.NOT_STATUS, xi.effect.HUNTERS_ROLL}, {ai.c.IN_RANGE, GetAbility(xi.ja.HUNTERS_ROLL):getRadius()} },
-					{ ai.r.JA, ai.s.SPECIFIC, xi.ja.HUNTERS_ROLL })
-    mob:addGambit(ai.t.PARTY,
-					{ {ai.c.NOT_STATUS, xi.effect.CHAOS_ROLL}, {ai.c.IN_RANGE, GetAbility(xi.ja.CHAOS_ROLL):getRadius()} },
-					{ ai.r.JA, ai.s.SPECIFIC, xi.ja.CHAOS_ROLL })
+    mob:addGambit(ai.t.PARTY, {ai.c.NOT_STATUS, xi.effect.HUNTERS_ROLL}, { ai.r.JA, ai.s.SPECIFIC, xi.ja.HUNTERS_ROLL })
+    mob:addGambit(ai.t.PARTY, {ai.c.NOT_STATUS, xi.effect.CHAOS_ROLL}  , { ai.r.JA, ai.s.SPECIFIC, xi.ja.CHAOS_ROLL })
 	
 	mob:addGambit(ai.t.SELF, { ai.c.STATUS, xi.effect.BUST }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.FOLD })
 

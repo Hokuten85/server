@@ -22,9 +22,7 @@ mission.reward =
     item = 
 	{
 		randomColoredDrop,
-		function()
-			return not player:hasItem(xi.item.VANACLOCK) and xi.item.VANACLOCK or 0
-		end
+		xi.item.VANACLOCK
 	},
 }
 
