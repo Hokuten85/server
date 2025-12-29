@@ -15,3 +15,8 @@ REPLACE INTO `item_latents` VALUES (11367,25,30,49,5928);  -- def+40 Hinesama Ri
 REPLACE INTO `item_latents` VALUES (11367,25,30,49,5929);  -- def+40 Ojo Rice Ball
 REPLACE INTO `item_latents` VALUES (11367,25,30,49,4405);  -- def+50 Rice Ball
 REPLACE INTO `item_latents` VALUES (11367,25,30,49,4604);  -- def+50 Rogue Rice Ball
+
+REPLACE INTO item_latents
+SELECT itemid, modid, value, 62, latentParam
+FROM item_latents
+WHERE latentid = 8; -- Latents based on Subjob now work for main job

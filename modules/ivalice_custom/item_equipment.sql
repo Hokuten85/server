@@ -127,3 +127,5 @@ UPDATE item_equipment SET jobs = jobs | 65536 | 8192 | 64 | 32 WHERE itemid = 12
 UPDATE item_equipment SET jobs = jobs | 65536 | 8192 | 64 | 32 WHERE itemid = 12434; -- suzakus_sune-ate add THF, PLD, DRG, COR
 
 UPDATE item_equipment SET jobs = jobs | 65536 | 8192 | 64 | 32 WHERE itemid = 12562; -- Kirin's Osode add THF, PLD, DRG, COR
+
+UPDATE item_equipment SET jobs = jobs | 64 | 1 WHERE itemid = 15223; -- Ace's Helm add WAR, PLD

@@ -686,3 +686,6 @@ REPLACE into item_mods values (16542, 432, 1), (16542, 499, 3), (16542, 500, 15)
 REPLACE into item_mods values (17637, 432, 1), (17637, 499, 3), (17637, 500, 20), (17637, 501, 30), (17637, 950, 3); -- Wing Sword +1
 REPLACE into item_mods values (17738, 432, 1), (17738, 499, 7), (17738, 500, 30), (17738, 501, 30), (17738, 950, 7); -- Hauteclaire
 REPLACE into item_mods values (17659, 432, 1), (17659, 499, 6), (17659, 500, 30), (17659, 501, 30), (17659, 950, 6); -- Seiryu's Sword
+
+DELETE FROM item_mods WHERE itemid = 15223 AND modid = 68;
+REPLACE INTO item_mods VALUES (15223, 384, 500);
