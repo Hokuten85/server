@@ -41,6 +41,8 @@ UPDATE item_basic SET name = 'toolbag_furu' WHERE name = 'toolbag_(furu)';
 
 UPDATE item_basic SET aH = 46 WHERE itemid = 8740; -- pizza_cutter
 
+UPDATE item_basic SET flags = flags & (~0x8000) WHERE itemid BETWEEN 4258 AND 4265; -- red_drop - black_drop
+
 -- Remove EX
 -- update item_basic set flags = flags ^ 0x4000
 -- where itemid in (4064,4065,4066,4067,4068,4069,4070,4071,4072,4073); -- chapters 1-10

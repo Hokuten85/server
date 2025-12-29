@@ -313,7 +313,10 @@ function npcUtil.giveItem(player, items, params)
                 return false
             end
 
-            table.insert(givenItems, { itemId, quantity })
+			if not (bit.band(GetItemByID(itemId):getFlag(), xi.itemFlag.RARE) ~= 0 and player:hasItem(itemId))
+			then
+				table.insert(givenItems, { itemId, quantity })
+			end
         end
     end
 
