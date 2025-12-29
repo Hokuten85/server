@@ -108,10 +108,10 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
     bool withPet = PETS_CAN_AOE_BUFF || (m_findFlags & FINDFLAGS_PET) || (m_PMasterTarget->objtype != m_PBattleEntity->objtype);
 
     // Pets/trusts don't buff other pets with self-centered AoEs
-    if (radiusType == AOE_RADIUS::ATTACKER && m_PBattleEntity->PMaster != nullptr)
+    /*if (radiusType == AOE_RADIUS::ATTACKER && m_PBattleEntity->PMaster != nullptr)
     {
         withPet = false;
-    }
+    }*/
 
     // add original target first except for self-centered moves
     if (radiusType != AOE_RADIUS::ATTACKER || m_conal)
