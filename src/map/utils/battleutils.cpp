@@ -2053,16 +2053,16 @@ int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHY
         }
 
         int16 baseTp = 0;
-
+        int32 delay  = 0;
         if ((slot == SLOT_RANGED || slot == SLOT_AMMO) && PAttacker->objtype == TYPE_PC)
         {
-            int32 delay = PAttacker->GetRangedWeaponDelay(true);
+            delay = PAttacker->GetRangedWeaponDelay(true);
 
             baseTp = CalculateBaseTP(delay * 120 / 1000);
         }
         else
         {
-            int32 delay      = PAttacker->GetWeaponDelay(true);
+            delay      = PAttacker->GetWeaponDelay(true);
             auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
 
             if (sub_weapon && sub_weapon->getDmgType() > DAMAGE_TYPE::NONE && sub_weapon->getDmgType() < DAMAGE_TYPE::HTH &&
@@ -2130,7 +2130,7 @@ int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHY
             else
             {
                 PDefender->addTP((uint16)(tpMultiplier *
-                                          ((baseTp + 30) * sBlowMult *
+                                          ((baseTp + (30 * (delay/1000.0f))) * sBlowMult *
                                            (1.0f + 0.01f * (float)PDefender->getMod(Mod::STORETP))))); // subtle blow also reduces the "+30" on mob tp gain
             }
         }
