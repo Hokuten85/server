@@ -19,6 +19,9 @@ spellObject.onMobSpawn = function(mob)
     local finalElixir = mob:getMaster():getCharVar('finalElixir') -- CVar used to store Elixir donation info.
     local potAoe = mob:getMaster():getCharVar('monbAoe') -- CVar used to store gil donation info.
 
+    potAoe = 1
+    finalElixir = 2
+
     if potAoe == 0 and finalElixir == 0 then
         xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
     elseif potAoe == 0 and finalElixir == 1 then
@@ -63,13 +66,13 @@ spellObject.onMobSpawn = function(mob)
                                 { ai.c.STATUS, xi.effect.BANE },
                                 { ai.c.STATUS, xi.effect.DOOM })
                                     }, { ai.r.MS, ai.s.SPECIFIC, 4242 }, healingMoveCooldown)   -- AoE Holy Water
+			mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.PETRIFICATION }, { ai.r.MS, ai.s.SPECIFIC, 4244 }, healingMoveCooldown) -- AoE Mix: Gold Needle
             mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.BLINDNESS }, { ai.r.MS, ai.s.SPECIFIC, 4240 }, healingMoveCooldown) -- AoE Mix: Eye Drops
             mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.POISON }, { ai.r.MS, ai.s.SPECIFIC, 4238 }, healingMoveCooldown) -- AoE Mix: Antidote
             mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.SILENCE }, { ai.r.MS, ai.s.SPECIFIC, 4241 }, healingMoveCooldown) -- AoE Echo Drops
             mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.PARALYSIS }, { ai.r.MS, ai.s.SPECIFIC, 4239 }, healingMoveCooldown) -- AoE Mix: Para-B-Gone
             mob:addGambit(ai.t.PARTY, { ai.c.STATUS_FLAG, xi.effectFlag.ERASABLE }, { ai.r.MS, ai.s.SPECIFIC, 4245 }, healingMoveCooldown) -- AoE Mix: Panacea-1
             mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.PLAGUE }, { ai.r.MS, ai.s.SPECIFIC, 4243 }, healingMoveCooldown) -- AoE Mix: Vaccine
-            mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.PETRIFICATION }, { ai.r.MS, ai.s.SPECIFIC, 4244 }, healingMoveCooldown) -- AoE Mix: Gold Needle
     -- Mix I Single Target --
         elseif potAoe == 0 then
             mob:addGambit(ai.t.PARTY, { ai.l.OR(
@@ -78,13 +81,13 @@ spellObject.onMobSpawn = function(mob)
                                 { ai.c.STATUS, xi.effect.BANE },
                                 { ai.c.STATUS, xi.effect.DOOM })
                                     }, { ai.r.MS, ai.s.SPECIFIC, 4242 }, healingMoveCooldown)   -- Holy Water
+			mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.PETRIFICATION }, { ai.r.MS, ai.s.SPECIFIC, 4252 }, healingMoveCooldown) -- Mix: Gold Needle
             mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.BLINDNESS }, { ai.r.MS, ai.s.SPECIFIC, 4248 }, healingMoveCooldown) -- Mix: Eye Drops
             mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.POISON }, { ai.r.MS, ai.s.SPECIFIC, 4246 }, healingMoveCooldown) -- Mix: Antidote
             mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.SILENCE }, { ai.r.MS, ai.s.SPECIFIC, 4249 }, healingMoveCooldown) -- Echo Drops
             mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.PARALYSIS }, { ai.r.MS, ai.s.SPECIFIC, 4247 }, healingMoveCooldown) -- Mix: Para-B-Gone
             mob:addGambit(ai.t.PARTY, { ai.c.STATUS_FLAG, xi.effectFlag.ERASABLE }, { ai.r.MS, ai.s.SPECIFIC, 4253 }, healingMoveCooldown) -- Mix: Panacea-1
             mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.PLAGUE, ai.r.MS }, { ai.s.SPECIFIC, 4251 }, healingMoveCooldown) -- Vaccine
-            mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.PETRIFICATION }, { ai.r.MS, ai.s.SPECIFIC, 4252 }, healingMoveCooldown) -- Mix: Gold Needle
         end
 
         --mob:addGambit(ai.t.PARTY, {ai.c.NOT_STATUS, xi.effect.NEGATE_SLEEP}, {ai.r.MS, ai.s.SPECIFIC, 4256}, healingMoveCooldown) -- Insomniant. Disabled because animation when used is completely wrong.

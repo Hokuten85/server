@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2025 LandSandBoat Dev Teams
@@ -33,6 +33,6 @@ GP_SERV_COMMAND_COMMAND_DATA::GP_SERV_COMMAND_COMMAND_DATA(const CCharEntity* PC
     std::memcpy(packet.CommandDataTbl.WeaponSkills, PChar->m_WeaponSkills, sizeof(PChar->m_WeaponSkills));
     std::memcpy(packet.CommandDataTbl.JobAbilities, PChar->m_Abilities, sizeof(PChar->m_Abilities));
     std::memcpy(packet.CommandDataTbl.PetAbilities, PChar->m_PetCommands, sizeof(PChar->m_PetCommands));
-    // Note: Packet Traits is 32 bytes. CCharEntity is 18.
+    // Note: Packet Traits is 32 bytes. CCharEntity is 19.
     std::memcpy(packet.CommandDataTbl.Traits, PChar->m_TraitList, sizeof(PChar->m_TraitList));
 }
