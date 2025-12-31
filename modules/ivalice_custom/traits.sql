@@ -9,7 +9,7 @@ REPLACE INTO traits VALUES ('150','critrate bonus','6','60','4','165','8',null,0
 REPLACE INTO traits VALUES ('150','critrate bonus','6','75','5','165','10',null,0); -- THF
 
 -- PLD Adjust the enmit cap
-REPLACE INTO traits VALUES ('151','enmity cap','7','25','1','3000','500',null,0); -- PLD
+REPLACE INTO traits VALUES ('151','enmity cap','7','50','1','3000','1000',null,0); -- PLD
 -- REPLACE INTO traits VALUES ('151','enmity cap','7','50','2','3000','100',null,0);
 -- REPLACE INTO traits VALUES ('151','enmity cap','7','75','3','3000','200',null,0);
 -- REPLACE INTO traits VALUES ('151','enmity cap','7','99','4','3000','300',null,0);
@@ -73,7 +73,7 @@ REPLACE INTO traits VALUES ('150','crit dmg bonus','13','40','3','421','6',null,
 REPLACE INTO traits VALUES ('150','crit dmg bonus','13','60','4','421','8',null,0); -- NIN
 REPLACE INTO traits VALUES ('150','crit dmg bonus','13','75','5','421','10',null,0); -- NIN
 
-REPLACE INTO traits VALUES ('151','enmity cap','13','25','1','3000','500',null,0); -- NIN
+REPLACE INTO traits VALUES ('151','enmity cap','13','50','1','3000','1000',null,0); -- NIN
 
 -- GIVE NIN TACTICAL PARRY
 UPDATE traits SET level = 25 WHERE traitid = 100 and job = 13 and rank = 1;
