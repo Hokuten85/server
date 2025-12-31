@@ -1,5 +1,5 @@
 UPDATE mob_droplist SET itemRate = 50 WHERE itemId = 1025 AND itemRate < 50; -- palborough_chest_key
-UPDATE mob_droplist SET itemRate = 50 WHERE itemId = 13514 AND itemRate < 50; -- archers_ring
+UPDATE mob_droplist SET itemRate = 50 WHERE itemId IN (13514,15551) AND itemRate < 50; -- archers_ring, shikaree-ring
 
 -- Coffer Keys 10% minimum
 UPDATE mob_droplist md
