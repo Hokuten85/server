@@ -689,3 +689,5 @@ REPLACE into item_mods values (17659, 432, 1), (17659, 499, 6), (17659, 500, 30)
 
 DELETE FROM item_mods WHERE itemid = 15223 AND modid = 68;
 REPLACE INTO item_mods VALUES (15223, 384, 500);
+
+DELETE FROM item_mods where modid = 75 AND itemid IN (12445,12573,12701,12879,12957,13938,14188,14307,14391,14825);
