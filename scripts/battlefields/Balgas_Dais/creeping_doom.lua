@@ -10,6 +10,7 @@ local content = Battlefield:new({
     battlefieldId    = xi.battlefield.id.CREEPING_DOOM,
     maxPlayers       = 3,
     levelCap         = 30,
+	allowTrusts      = true,
     timeLimit        = utils.minutes(15),
     index            = 8,
     entryNpc         = 'BC_Entrance',

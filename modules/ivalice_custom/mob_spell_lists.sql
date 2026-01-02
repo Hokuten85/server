@@ -36,3 +36,20 @@ REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,111,66,255); -- reg
 
 REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,23,3,255);   -- dia (1~255)
 REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,24,36,255);  -- dia_ii (31~255)
+
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_AAEV',406,97,61,255);   -- reprisal
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_AAEV',406,310,75,255);   -- enlight
+
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Curilla',314,97,61,255);    -- reprisal
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Curilla',314,310,75,255);   -- enlight
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Curilla',314,21,55,255);    -- holy
+
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Trion',317,97,61,255);    -- reprisal
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Trion',317,310,75,255);   -- enlight
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Trion',317,21,55,255);    -- holy
+
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Valaineral',322,97,61,255);    -- reprisal
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Valaineral',322,310,75,255);   -- enlight
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Valaineral',322,21,55,255);    -- holy
+
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Rahal',363,97,61,255);    -- reprisal

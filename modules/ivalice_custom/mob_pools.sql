@@ -3,3 +3,7 @@ UPDATE mob_pools SET links = 0 WHERE poolid = 2580; -- make marsh murre in cadae
 UPDATE mob_pools SET links = 0 WHERE poolid = 6469; -- Colliery_Bat no link
 
 update mob_pools set mJob = 1, sJob = 1, links = 0 where poolid = 6074; -- Targe_Beetle
+
+UPDATE mob_pools SET sJob = 1 WHERE poolid = 5902; -- curilla
+
+UPDATE mob_pools SET skill_list_id = 1197 WHERE poolid = 5984; -- august
