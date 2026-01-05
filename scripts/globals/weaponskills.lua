@@ -358,6 +358,17 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     local dmg = mainBase
     hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcParams)
+	
+	-- Evaluate Zanshin on WS
+	if
+		hitdmg == 0
+		and attacker:isPC()
+		and (attacker:getMainJob() == xi.job.SAM or attacker:getSubJob() == xi.job.SAM)
+		and math.random() > calcParams.ZanshinRate
+	then
+		calcParams.hitRate = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc + 100 + 35, xi.attackAnimation.RIGHT_ATTACK)
+		hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcParams)
+	end
 
     if
         not isJump and
@@ -674,6 +685,7 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     calcParams.bonusTP                 = wsParams.bonusTP or 0
     calcParams.tpUsed                  = tp
     calcParams.attackType              = xi.attackType.PHYSICAL
+	calcParams.ZanshinRate			   = utils.clamp(attacker:getMod(xi.mod.ZANSHIN) + attacker:getMerit(xi.merit.ZANSHIN_ATTACK_RATE), 100) / 100.0
 
     local isJump = wsParams.isJump or false
     if isJump then

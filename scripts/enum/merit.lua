@@ -217,7 +217,7 @@ xi.merit =
     WARDING_CIRCLE_RECAST       = meritCategory.SAM_1 + 0x02,
     STORE_TP_EFFECT             = meritCategory.SAM_1 + 0x04,
     MEDITATE_RECAST             = meritCategory.SAM_1 + 0x06,
-    ZASHIN_ATTACK_RATE          = meritCategory.SAM_1 + 0x08,
+    ZANSHIN_ATTACK_RATE         = meritCategory.SAM_1 + 0x08,
 
     -- NIN 1
     SUBTLE_BLOW_EFFECT          = meritCategory.NIN_1 + 0x00,

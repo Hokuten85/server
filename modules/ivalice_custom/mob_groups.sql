@@ -24,6 +24,14 @@ WHERE zs.zonetype = 5
 AND NOT (mp.mobType & 0x02)
 AND mg.minLevel > 85;
 
+-- Mobs over lvl 85, reduce to 84 - 87
+update mob_groups mg
+inner join mob_pools mp
+	on mg.poolid = mp.poolid
+set HP = 0, MP = 0, minLevel = 84, maxLevel = 87
+where minLevel > 85
+and not (mp.mobType & (0x02 | 0x04 | 0x08 | 0x10| 0x20))
+
 -- NMs respawn timer to 300 seconds
 UPDATE mob_groups mg
 INNER JOIN mob_pools mp
