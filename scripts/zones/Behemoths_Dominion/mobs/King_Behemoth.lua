@@ -146,6 +146,7 @@ entity.onMobDespawn = function(mob)
     -- Respawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 	DisallowRespawn(ID.mob.BEHEMOTH, false)
+	GetMobByID(ID.mob.BEHEMOTH):setRespawnTime(500)
 end
 
 return entity

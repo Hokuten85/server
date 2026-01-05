@@ -157,6 +157,7 @@ entity.onMobDespawn = function(mob)
     -- Respawn the ???
     GetNPCByID(ID.npc.ADAMANTOISE_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 	DisallowRespawn(ID.mob.ADAMANTOISE, false)
+	GetMobByID(ID.mob.ADAMANTOISE):setRespawnTime(500)
 end
 
 return entity
