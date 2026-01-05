@@ -736,7 +736,8 @@ void CMobController::DoCombatTick(timer::time_point tick)
             return;
         }
 
-        if (m_Tick >= m_LastMobSkillTime && (1 + xirand::GetRandomNumber(10000)) <= PMob->TPUseChance() && MobSkill())
+        // Add minimum cooldown on mob tp usage
+        if (m_Tick >= m_LastMobSkillTime + std::chrono::milliseconds(3000) && (1 + xirand::GetRandomNumber(10000)) <= PMob->TPUseChance() && MobSkill())
         {
             return;
         }
