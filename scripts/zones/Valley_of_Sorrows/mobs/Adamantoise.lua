@@ -78,6 +78,7 @@ entity.onMobSpawn = function(mob)
 
     -- Despawn the ???
     GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)
+	DisallowRespawn(ID.mob.ASPIDOCHELONE, true)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -87,6 +88,7 @@ end
 entity.onMobDespawn = function(mob)
     -- Respawn the ???
     GetNPCByID(ID.npc.ADAMANTOISE_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
+	DisallowRespawn(ID.mob.ASPIDOCHELONE, false)
 end
 
 return entity

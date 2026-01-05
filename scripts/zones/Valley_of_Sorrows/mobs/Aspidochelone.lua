@@ -106,6 +106,8 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ATT, 395)
     mob:setMod(xi.mod.EVA, 310)
     mob:setAnimationSub(0)
+	
+	DisallowRespawn(ID.mob.ADAMANTOISE, true)
 end
 
 entity.onMobFight = function(mob, target)
@@ -154,6 +156,7 @@ end
 entity.onMobDespawn = function(mob)
     -- Respawn the ???
     GetNPCByID(ID.npc.ADAMANTOISE_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
+	DisallowRespawn(ID.mob.ADAMANTOISE, false)
 end
 
 return entity

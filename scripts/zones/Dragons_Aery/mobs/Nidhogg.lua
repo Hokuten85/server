@@ -75,6 +75,7 @@ entity.onMobSpawn = function(mob)
 
     -- Despawn the ???
     GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
+	DisallowRespawn(ID.mob.FAFNIR, true)
 end
 
 entity.onMobFight = function(mob, target)
@@ -118,6 +119,7 @@ end
 entity.onMobDespawn = function(mob)
     -- Respawn the ???
     GetNPCByID(ID.npc.FAFNIR_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
+	DisallowRespawn(ID.mob.FAFNIR, false)
 end
 
 return entity
