@@ -19421,6 +19421,29 @@ void CLuaBaseEntity::clearPacketMods()
     }
 }
 
+/************************************************************************
+ *  Function: refreshLevelSync()
+ *  Purpose : Refreshes...wait for it...Level Sync
+ *  Example : target:refreshLevelSync()
+ *  Notes   : 
+ ************************************************************************/
+
+void CLuaBaseEntity::refreshLevelSync()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (PChar->PParty)
+    {
+        PChar->PParty->RefreshSync();
+    }
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -20319,6 +20342,8 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("addPacketMod", CLuaBaseEntity::addPacketMod);
     SOL_REGISTER("clearPacketMods", CLuaBaseEntity::clearPacketMods);
+
+    SOL_REGISTER("refreshLevelSync", CLuaBaseEntity::refreshLevelSync);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

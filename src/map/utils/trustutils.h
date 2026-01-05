@@ -36,4 +36,6 @@ namespace trustutils
     void  BuildingTrustAbilityTable(CTrustEntity* PTrust);
     int32 hasAbility(CTrustEntity* PTrust, uint16 AbilityID);
     int32 addAbility(CTrustEntity* PTrust, uint16 AbilityID);
+
+    void RefreshTrust(CTrustEntity* PTrust);
 }; // namespace trustutils

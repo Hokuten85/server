@@ -812,3 +812,72 @@ int32 trustutils::addAbility(CTrustEntity* PTrust, uint16 AbilityID)
 {
     return addBit(AbilityID, PTrust->m_Abilities, sizeof(PTrust->m_Abilities));
 }
+
+void trustutils::RefreshTrust(CTrustEntity* PTrust)
+{
+    const auto itr = g_PTrustData.find(PTrust->m_TrustID);
+    if (itr == g_PTrustData.end())
+    {
+        ShowError(fmt::format("Could not look up trust data for id: {}", PTrust->m_TrustID));
+        return;
+    }
+
+    auto* trustData = itr->second.get();
+
+    auto* PMaster = PTrust->PMaster;
+
+    // assume level matches master
+    PTrust->SetMLevel(PMaster->GetMLevel());
+    PTrust->SetSLevel(PMaster->GetMLevel());
+
+    PTrust->StatusEffectContainer->KillAllStatusEffect();
+    PTrust->restoreModifiers(); // I Think this should clear all of the mods because nothing has been saved
+
+    PTrust->TraitList.clear();
+
+    PTrust->PAI->ClearActionQueue();
+    PTrust->PAI->ClearStateStack();
+    PTrust->PAI->ClearTimerQueue();
+    PTrust->PAI->Reset();
+    auto* controller = dynamic_cast<CTrustController*>(PTrust->PAI->GetController());
+
+    controller->m_GambitsContainer->RemoveAllGambits();
+    controller->m_GambitsContainer->tp_skills.clear();
+
+    LoadTrustStatsAndSkills(PTrust);
+    trustutils::BuildingTrustAbilityTable(PTrust);
+
+    // Use Mob formulas to work out base "weapon" damage, but scale down to reasonable values.
+    const float  mobStyleDamage = static_cast<float>(mobutils::GetWeaponDamage(PTrust, SLOT_MAIN));
+    const float  baseDamage = mobStyleDamage * 0.5f;
+    const float  damageMultiplier = static_cast<float>(trustData->cmbDmgMult) / 100.0f;
+    const float  adjustedDamage = baseDamage * damageMultiplier;
+    const uint16 finalDamage = static_cast<uint16>(std::max(adjustedDamage, 1.0f));
+
+    // Trust do not really have weapons, but they are modelled internally as
+    // if they do.
+    if (auto* mainWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))
+    {
+        mainWeapon->setDamage(finalDamage);
+    }
+
+    if (auto* subWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_SUB]))
+    {
+        subWeapon->setDamage(finalDamage);
+    }
+
+    if (auto* rangedWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))
+    {
+        rangedWeapon->setDamage(finalDamage);
+    }
+
+    if (auto* ammoWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))
+    {
+        ammoWeapon->setDamage(finalDamage);
+    }
+
+    if (auto* spellList = mobSpellList::GetMobSpellList(trustData->spellList); spellList != nullptr)
+    {
+        mobutils::SetSpellList(PTrust, trustData->spellList);
+    }
+}

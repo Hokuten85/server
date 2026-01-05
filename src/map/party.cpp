@@ -47,6 +47,7 @@
 #include "packets/s2c/0x0b4_config.h"
 #include "packets/s2c/0x0c8_group_tbl.h"
 #include "packets/s2c/0x0dd_group_list.h"
+#include <utils/trustutils.h>
 
 // should have brace-or-equal initializers when MSVC supports it
 struct CParty::partyInfo_t
@@ -1308,17 +1309,7 @@ void CParty::RefreshSync()
         }
 
         CCharEntity* member = (CCharEntity*)i;
-
-        uint8 NewMLevel = 0;
-
-        if (syncLevel < member->jobs.job[member->GetMJob()])
-        {
-            NewMLevel = syncLevel;
-        }
-        else
-        {
-            NewMLevel = member->jobs.job[member->GetMJob()];
-        }
+        uint8 NewMLevel = std::min(syncLevel, member->jobs.job[member->GetMJob()]);
 
         if (member->GetMLevel() != NewMLevel)
         {
@@ -1339,6 +1330,14 @@ void CParty::RefreshSync()
             member->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(member);
         }
         member->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(member, member, 0, syncLevel, MsgStd::LevelSyncActivated);
+
+        if (!member->PTrusts.empty())
+        {
+            for (auto PTrust : member->PTrusts)
+            {
+                trustutils::RefreshTrust(PTrust);
+            }
+        }
     }
     m_PSyncTarget = sync;
 }
