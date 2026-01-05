@@ -28,9 +28,9 @@ AND mg.minLevel > 85;
 update mob_groups mg
 inner join mob_pools mp
 	on mg.poolid = mp.poolid
-set HP = 0, MP = 0, minLevel = 84, maxLevel = 87
+set mg.HP = 0, mg.MP = 0, mg.minLevel = 84, mg.maxLevel = 87
 where minLevel > 85
-and not (mp.mobType & (0x02 | 0x04 | 0x08 | 0x10| 0x20))
+and not (mp.mobType & (0x02 | 0x04 | 0x08 | 0x10| 0x20));
 
 -- NMs respawn timer to 300 seconds
 UPDATE mob_groups mg
