@@ -1334,16 +1334,16 @@ void CParty::RefreshSync()
             charutils::BuildingCharWeaponSkills(member);
             charutils::CheckValidEquipment(member);
             member->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(member);
-        }
-        member->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(member, member, 0, syncLevel, MsgStd::LevelSyncActivated);
 
-        if (!member->PTrusts.empty())
-        {
-            for (auto PTrust : member->PTrusts)
+            if (!member->PTrusts.empty())
             {
-                trustutils::RefreshTrust(PTrust);
+                for (auto PTrust : member->PTrusts)
+                {
+                    trustutils::RefreshTrust(PTrust);
+                }
             }
         }
+        member->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(member, member, 0, syncLevel, MsgStd::LevelSyncActivated);
     }
     m_PSyncTarget = sync;
 }

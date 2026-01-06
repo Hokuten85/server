@@ -116,6 +116,7 @@
 #include "packets/s2c/0x110_unity.h"
 #include "packets/s2c/0x111_roe_activelog.h"
 #include "packets/s2c/0x112_roe_log.h"
+#include "trustutils.h"
 
 /************************************************************************
  *                                                                       *
@@ -5434,6 +5435,14 @@ void DelExperiencePoints(CCharEntity* PChar, float retainPercent, uint16 forcedX
                 PChar->PParty->ReloadParty();
             }
 
+            if (!PChar->PTrusts.empty())
+            {
+                for (auto PTrust : PChar->PTrusts)
+                {
+                    trustutils::RefreshTrust(PTrust);
+                }
+            }
+
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, PChar->jobs.job[PChar->GetMJob()], 0, 11));
             luautils::OnPlayerLevelDown(PChar);
             PChar->updatemask |= UPDATE_HP;
@@ -5627,6 +5636,14 @@ void AddExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMo
                     PChar->PParty->RefreshSync();
                 }
                 PChar->PParty->ReloadParty();
+            }
+
+            if (!PChar->PTrusts.empty())
+            {
+                for (auto PTrust : PChar->PTrusts)
+                {
+                    trustutils::RefreshTrust(PTrust);
+                }
             }
 
             PChar->UpdateHealth();
