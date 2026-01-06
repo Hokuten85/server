@@ -840,8 +840,6 @@ void trustutils::RefreshTrust(CTrustEntity* PTrust)
     PTrust->PAI->ClearTimerQueue();
     PTrust->PAI->Reset();
     auto* controller = dynamic_cast<CTrustController*>(PTrust->PAI->GetController());
-
-    controller->m_GambitsContainer->RemoveAllGambits();
     controller->m_GambitsContainer->tp_skills.clear();
 
     LoadTrustStatsAndSkills(PTrust);
