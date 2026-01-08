@@ -1,0 +1,1 @@
+DELETE FROM mob_skill_lists WHERE skill_list_id = 72 AND mob_skill_id = 1700; -- No snatch morsel
