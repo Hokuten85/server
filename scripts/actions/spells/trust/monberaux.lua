@@ -55,8 +55,8 @@ spellObject.onMobSpawn = function(mob)
         end
 
     -- Top Priority Heals --
-        mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 40 }, { ai.r.MS, ai.s.SPECIFIC, 4237 }, healingMoveCooldown) -- Mix: Max Potion (700 HP)
-        mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 55 }, { ai.r.MS, ai.s.SPECIFIC, 4236 }, healingMoveCooldown) -- Max Potion (500 HP)
+        mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 50 }, { ai.r.MS, ai.s.SPECIFIC, 4237 }, healingMoveCooldown) -- Mix: Max Potion (700 HP)
+        mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 65 }, { ai.r.MS, ai.s.SPECIFIC, 4236 }, healingMoveCooldown) -- Max Potion (500 HP)
 
     -- Mix I AoE --
         if potAoe == 1 then
@@ -100,7 +100,7 @@ spellObject.onMobSpawn = function(mob)
     -- Mix III--
         mob:addGambit(ai.t.CASTER, { ai.c.MPP_LT, 50 }, { ai.r.MS, ai.s.SPECIFIC, 4254 }, mpMoveCooldown) -- Mix: Dry Ether Concoction
     -- Less Priority Heals --
-        mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 65 }, { ai.r.MS, ai.s.SPECIFIC, 4235 }, healingMoveCooldown) -- Hyper Potion (250 HP)
+        mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 75 }, { ai.r.MS, ai.s.SPECIFIC, 4235 }, healingMoveCooldown) -- Hyper Potion (250 HP)
         --mob:addGambit(ai.t.PARTY, {ai.c.HPP_LT, 75}, {ai.r.MS, ai.s.SPECIFIC, 4234}, healingMoveCooldown) -- X-Potion (150 HP) -- Disabled to prevent super spam
         --mob:addGambit(ai.t.PARTY, {ai.c.HPP_LT, 85}, {ai.r.MS, ai.s.SPECIFIC, 4232}, healingMoveCooldown) -- Potion (50 HP) -- Disabled to prevent super spam
 

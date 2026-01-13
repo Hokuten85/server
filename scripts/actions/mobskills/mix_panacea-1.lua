@@ -41,6 +41,7 @@ local statii =
     xi.effect.INHIBIT_TP,
     xi.effect.MAGIC_ACC_DOWN,
     xi.effect.MAGIC_ATK_DOWN,
+	xi.effect.ACCURACY_DOWN
 }
 
 -- TODO: verify messaging
