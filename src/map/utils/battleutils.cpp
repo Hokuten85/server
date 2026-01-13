@@ -2415,7 +2415,7 @@ void TakeSpellDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, CSpell*
         auto tpGainFunc = lua["xi"]["combat"]["tp"]["calculateTPGainOnMagicalDamage"];
         if (tpGainFunc.valid())
         {
-            PDefender->addTP(tpGainFunc(damage, PAttacker, PDefender));
+            PDefender->addTP(tpGainFunc(PAttacker, PDefender, damage));
         }
     }
 }

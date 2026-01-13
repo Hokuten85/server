@@ -289,7 +289,7 @@ void CalculateStats(CCharEntity* PChar)
     }
 
     uint16 MeritBonus   = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_HP, PChar);
-    PChar->health.maxhp = (int16)(settings::get<float>("map.PLAYER_HP_MULTIPLIER") * (raceStat + jobStat + bonusStat + sJobStat) + MeritBonus);
+    PChar->health.maxhp = (int16)(raceStat + jobStat + bonusStat + sJobStat + MeritBonus);
 
     // The beginning of the MP
 
@@ -332,7 +332,7 @@ void CalculateStats(CCharEntity* PChar)
     }
 
     MeritBonus          = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MP, PChar);
-    PChar->health.maxmp = (int16)(settings::get<float>("map.PLAYER_MP_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus); // MP calculation result
+    PChar->health.maxmp = (int16)(raceStat + jobStat + sJobStat + MeritBonus); // MP calculation result
 
     // Start calculating Stats
 
@@ -383,7 +383,7 @@ void CalculateStats(CCharEntity* PChar)
         MeritBonus = PChar->PMeritPoints->GetMeritValue(statMerit[StatIndex - 2], PChar);
 
         // Value output
-        ref<uint16>(&PChar->stats, counter) = (uint16)(settings::get<float>("map.PLAYER_STAT_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus);
+        ref<uint16>(&PChar->stats, counter) = (uint16)(raceStat + jobStat + sJobStat + MeritBonus);
         counter += 2;
     }
 }

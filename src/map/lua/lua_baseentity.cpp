@@ -14165,6 +14165,11 @@ int16 CLuaBaseEntity::getMod(uint16 modID)
         return 0;
     }
 
+    if (modID == 0)
+    {
+        return 0;
+    }
+
     return static_cast<CBattleEntity*>(m_PBaseEntity)->getMod(static_cast<Mod>(modID));
 }
 
@@ -14183,6 +14188,11 @@ void CLuaBaseEntity::setMod(uint16 modID, int16 value)
         return;
     }
 
+    if (modID == 0)
+    {
+        return;
+    }
+
     static_cast<CBattleEntity*>(m_PBaseEntity)->setModifier(static_cast<Mod>(modID), value);
 }
 
@@ -14198,6 +14208,11 @@ void CLuaBaseEntity::delMod(uint16 modID, int16 value)
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return;
+    }
+
+    if (modID == 0)
+    {
         return;
     }
 
