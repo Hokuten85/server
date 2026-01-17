@@ -54,6 +54,7 @@ public:
     float         CalculateEnmityBonus(CBattleEntity* PEntity);
     void          Clear(uint32 EntityID = 0);   // Removes Entries from list
     void          LogoutReset(uint32 EntityID); // Sets entry to inactive
+    void          SetActive(uint32 EntityID, bool active);
     void          AddBaseEnmity(CBattleEntity* PEntity);
     void          UpdateEnmity(CBattleEntity* PEntity, CSpell* PSpell, int32 CE, int32 VE);
     void          UpdateEnmity(CBattleEntity* PEntity, CAbility* PAbility);

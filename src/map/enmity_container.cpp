@@ -98,7 +98,14 @@ void CEnmityContainer::LogoutReset(uint32 EntityID)
     if (const auto& enmity_obj = m_EnmityList.find(EntityID); enmity_obj != m_EnmityList.end())
     {
         enmity_obj->second.PEnmityOwner = nullptr;
-        enmity_obj->second.active       = false;
+    }
+}
+
+void CEnmityContainer::SetActive(uint32 EntityID, bool active)
+{
+    if (const auto& enmity_obj = m_EnmityList.find(EntityID); enmity_obj != m_EnmityList.end())
+    {
+        enmity_obj->second.active = active;
     }
 }
 
@@ -231,9 +238,13 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
         int32 newVE = (int32)(enmity_obj->second.VE + (VE > 0 ? VE * bonus : VE));
 
         // Check for cap limit
-        enmity_obj->second.CE     = std::clamp(newCE, 0, EnmityMax);
-        enmity_obj->second.VE     = std::clamp(newVE, 0, EnmityMax);
-        enmity_obj->second.active = true;
+        enmity_obj->second.CE = std::clamp(newCE, 0, EnmityMax);
+        enmity_obj->second.VE = std::clamp(newVE, 0, EnmityMax);
+
+        if (CE >= 0 && VE >= 0)
+        {
+            enmity_obj->second.active = true;
+        }
     }
     else if (CE >= 0 && VE >= 0)
     {
@@ -284,7 +295,7 @@ bool CEnmityContainer::HasID(uint32 TargetID)
         m_EnmityList.end(),
         [TargetID](auto elem)
         {
-            return elem.first == TargetID && elem.second.active;
+            return elem.first == TargetID;
         });
 
     return maybeID != m_EnmityList.end();
@@ -489,14 +500,13 @@ CBattleEntity* CEnmityContainer::GetHighestEnmity()
     }
     uint32 HighestEnmity = 0;
     auto   highest       = m_EnmityList.end();
-    bool   active        = false;
 
     for (auto it = m_EnmityList.begin(); it != m_EnmityList.end(); ++it)
     {
         const EnmityObject_t& PEnmityObject = it->second;
         uint32                Enmity        = PEnmityObject.CE + PEnmityObject.VE;
 
-        if (Enmity >= HighestEnmity && ((PEnmityObject.active == active) || (PEnmityObject.active && !active)))
+        if (Enmity >= HighestEnmity && PEnmityObject.active)
         {
             auto* POwner = PEnmityObject.PEnmityOwner;
             if (!POwner || (POwner->allegiance != m_EnmityHolder->allegiance))
@@ -509,12 +519,13 @@ CBattleEntity* CEnmityContainer::GetHighestEnmity()
                 {
                     continue;
                 }
-                active        = PEnmityObject.active;
+
                 HighestEnmity = Enmity;
                 highest       = it;
             }
         }
     }
+
     CBattleEntity* PEntity = nullptr;
     if (highest != m_EnmityList.end())
     {
@@ -524,7 +535,9 @@ CBattleEntity* CEnmityContainer::GetHighestEnmity()
             PEntity = zoneutils::GetChar(highest->first);
         }
 
-        if (!PEntity || PEntity->getZone() != m_EnmityHolder->getZone() || PEntity->PInstance != m_EnmityHolder->PInstance)
+        // TODO: Kaeko's blog indicates talking to NPCs/being in a CS also will reset hate here?
+        // Is this still true?
+        if (!PEntity || PEntity->getZone() != m_EnmityHolder->getZone() || PEntity->PInstance != m_EnmityHolder->PInstance || PEntity->isDead())
         {
             m_EnmityList.erase(highest);
             PEntity = GetHighestEnmity();
