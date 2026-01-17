@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.THUNDER)
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, math.random(10, 20))
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 1)
 
     return damage
 end
