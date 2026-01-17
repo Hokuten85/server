@@ -2157,10 +2157,10 @@ int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHY
                 }
             }
 
-                // account for attacker's subtle blow which reduces the baseTP gain for the defender
-                float sBlow1    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW) + sBlowMerit), -50.0f, 60.0f);
-                float sBlow2    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW_II) + tandemBlowBonus), -50.0f, 50.0f);
-                float sBlowMult = ((100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 85.0f)) / 100.0f);
+            // account for attacker's subtle blow which reduces the baseTP gain for the defender
+            float sBlow1    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW) + sBlowMerit), -50.0f, 60.0f);
+            float sBlow2    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW_II) + tandemBlowBonus), -50.0f, 50.0f);
+            float sBlowMult = ((100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 85.0f)) / 100.0f);
 
             // mobs hit get basetp+30 whereas pcs hit get basetp/3
             if (PDefender->objtype == TYPE_PC || (PDefender->objtype == TYPE_PET && PDefender->PMaster && PDefender->PMaster->objtype == TYPE_PC))
@@ -2173,7 +2173,7 @@ int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHY
             else
             {
                 PDefender->addTP((uint16)(tpMultiplier *
-                                          ((baseTp + (30 * (delay/1000.0f))) * sBlowMult *
+                                          ((baseTp + (30 * (delay * 60 / 1000.0f) / 1000.0f)) * sBlowMult *
                                            (1.0f + 0.01f * (float)PDefender->getMod(Mod::STORETP))))); // subtle blow also reduces the "+30" on mob tp gain
             }
         }
