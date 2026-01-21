@@ -451,10 +451,27 @@ REPLACE INTO `item_mods` VALUES (15676,345,500); -- Saotome Sune-Ate +1
 
 REPLACE INTO item_mods VALUES (14226,68,10); -- Ninja Hakama
 REPLACE INTO item_mods VALUES (15573,68,10); -- Ninja Hakama +1
-REPLACE INTO item_mods VALUES (14101,169,18); -- Ninja Kyahan
-REPLACE INTO item_mods VALUES (15364,169,18); -- Ninja Kyahan +1
+REPLACE INTO item_mods VALUES (14101,76,18); -- Ninja Kyahan
+REPLACE INTO item_mods VALUES (15364,76,18); -- Ninja Kyahan +1
 UPDATE item_mods SET value = 10 WHERE itemid = 13782 AND modId = 259; -- Ninja Chainmail
 UPDATE item_mods SET value = 10 WHERE itemid = 14485 AND modId = 259; -- Ninja Chainmail +1
+
+DELETE FROM item_mods WHERE itemid = 13973 and modid = 9; -- Ninja Tekko
+REPLACE INTO item_mods VALUES (13973,11,4); -- Ninja Tekko
+REPLACE INTO item_mods VALUES (13973,106,10); -- Ninja Tekko
+DELETE FROM item_mods WHERE itemid = 14902 and modid = 9; -- Ninja Tekko +1
+REPLACE INTO item_mods VALUES (14902,11,6); -- Ninja Tekko +1
+REPLACE INTO item_mods VALUES (14902,106,10); -- Ninja Tekko +1
+
+DELETE FROM item_mods WHERE itemid = 13973 and modid = 118; -- Ninja Hatsuburi
+REPLACE INTO item_mods VALUES (13973,11,5); -- Ninja Hatsuburi
+REPLACE INTO item_mods VALUES (13973,911,5); -- Ninja Hatsuburi
+REPLACE INTO item_mods VALUES (13973,384,500); -- Ninja Hatsuburi
+DELETE FROM item_mods WHERE itemid = 13973 and modid = 118; -- Ninja Hatsuburi +1
+REPLACE INTO item_mods VALUES (13973,911,5); -- Ninja Hatsuburi +1
+REPLACE INTO item_mods VALUES (13973,384,500); -- Ninja Hatsuburi +1
+
+
 
 REPLACE INTO item_mods VALUES (15084,110,10); -- Koga Hatsuburi
 REPLACE INTO item_mods VALUES (15257,110,12); -- Kog. Hatsuburi +1
