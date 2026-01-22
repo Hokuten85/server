@@ -143,6 +143,8 @@ xi.mobSkill =
 
     MIND_WALL                     =  471, -- Mammet-800
 
+    GRAVE_REEL                    =  472,
+
     PETRIFACTIVE_BREATH           =  480,
 
     CHARGED_WHISKER               =  483,
@@ -160,6 +162,11 @@ xi.mobSkill =
     FRIGHTFUL_ROAR_1              =  501,
     MORTAL_RAY_1                  =  502,
     UNBLESSED_ARMOR               =  503,
+    GAS_SHELL_1                   =  504,
+    VENOM_SHELL_1                 =  505,
+    PALSYNYXIS_1                  =  506,
+    PAINFUL_WHIP_1                =  507,
+    SUCTORIAL_TENTACLE_1          =  508,
 
     SELF_DESTRUCT_BOMB            =  509,
 
@@ -173,7 +180,7 @@ xi.mobSkill =
     BLITZSTRAHL                   =  535,
     PANZERFAUST                   =  536,
     BERSERK_DOLL                  =  537,
-
+    PANZERSCHRECK                 =  538,
     TYPHOON                       =  539,
 
     TREMOROUS_TREAD               =  540, -- Mammet-800
@@ -594,6 +601,14 @@ xi.mobSkill =
     VAMPIRIC_ROOT                 = 1793,
 
     XENOGLOSSIA                   = 1823, -- Unique entry.
+
+    PYRIC_BLAST                   = 1828,
+    PYRIC_BULWARK                 = 1829,
+    POLAR_BLAST                   = 1830,
+    POLAR_BULWARK                 = 1831,
+    BAROFIELD                     = 1832,
+
+    NERVE_GAS                     = 1836,
 
     SANDBLAST_2                   = 1841,
     SANDPIT_2                     = 1842,
