@@ -7,3 +7,5 @@ update mob_pools set mJob = 1, sJob = 1, links = 0 where poolid = 6074; -- Targe
 UPDATE mob_pools SET sJob = 1 WHERE poolid = 5902; -- curilla
 
 UPDATE mob_pools SET skill_list_id = 1197 WHERE poolid = 5984; -- august
+
+UPDATE mob_pools SET spellList = 0 WHERE poolid = 5967 AND name = 'qultada';
