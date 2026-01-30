@@ -30,7 +30,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 	
 	params.str_wsc = 0.15 params.vit_wsc = 0.15
-	params.accVaries = { 1.0, 1.1, 1.2 }
+	params.accVaries = { 0, 30, 60 }
 	params.critVaries = { 0.20, 0.30, 0.45 }
 	params.multiHitfTP = true -- http://wiki.ffo.jp/html/2420.html
 
