@@ -3020,7 +3020,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         // Binding
                         luautils::OnCriticalHit(PTarget, this);
                     }
-                    else if (PTarget->objtype == TYPE_PC || PTarget->objtype == TYPE_TRUST)
+
+                    if (this->objtype == TYPE_PC || this->objtype == TYPE_TRUST)
                     {
                         this->addTP(50);
                     }
