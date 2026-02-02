@@ -117,14 +117,6 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
             killer:addTreasure(currency, mob, singleChance) -- base single slot
         end
     end)
-	
-	dynamisBeastmenMob:addListener('DEATH', 'DISALLOW_RESPAWN', function(mob, killer)
-        if killer then
-            if not mob:isNM() then
-                DisallowRespawn(mob:getID(), true)
-            end
-        end
-    end)
 end
 
 return g_mixins.dynamis_beastmen
