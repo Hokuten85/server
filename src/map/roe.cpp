@@ -408,15 +408,15 @@ auto SetEminenceRecordProgress(CCharEntity* PChar, const uint16 recordID, const 
 void UpdateUnityTrust(CCharEntity* PChar, const bool sendUpdate)
 {
     TracyZoneScoped;
-    int32  curPoints        = charutils::GetPoints(PChar, "prev_accolades") / 1000;
-    int32  prevPoints       = charutils::GetPoints(PChar, "current_accolades") / 1000;
+    //int32  curPoints        = charutils::GetPoints(PChar, "prev_accolades") / 1000;
+    //int32  prevPoints       = charutils::GetPoints(PChar, "current_accolades") / 1000;
     uint16 unityLeaderTrust = (PChar->profile.unity_leader > 0) ? ROE_TRUST_ID[PChar->profile.unity_leader - 1] : 0;
 
-        if (unityLeaderTrust > 0)
-        {
-            charutils::addSpell(PChar, unityLeaderTrust);
-            charutils::SaveSpell(PChar, unityLeaderTrust);
-        }
+    if (unityLeaderTrust > 0)
+    {
+        charutils::addSpell(PChar, unityLeaderTrust);
+        charutils::SaveSpell(PChar, unityLeaderTrust);
+    }
 
     if (sendUpdate)
     {
