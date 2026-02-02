@@ -5605,7 +5605,7 @@ void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level)
 
         for (auto&& PTrait : *traitList)
         {
-            if (PTrait->getID() >= 150 && PEntity->objtype == TYPE_MOB)
+            if (PEntity->objtype == TYPE_MOB && ((PTrait->getID() >= 48 && PTrait->getID() <= 63) || PTrait->getID() >= 150))
             {
                 continue;
             }
