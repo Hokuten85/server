@@ -22,6 +22,7 @@ WHERE mp.mobType & 0x02
 AND mg.spawntype = 0
 AND mg.respawntime > 600;
 
+-- Dynamis mobs respawn 30 minutes
 UPDATE mob_groups mg
 INNER JOIN mob_pools mp
 	ON mg.poolid = mp.poolid
@@ -29,5 +30,16 @@ INNER JOIN zone_settings zs
 	ON mg.zoneid = zs.zoneid
 SET mg.respawntime = 1800
 WHERE mg.spawntype = 0
+AND zs.zonetype = 128
+AND NOT (mp.mobType & 0x02);
+
+-- Dynamis avatar resistance profiles
+UPDATE mob_groups mg
+INNER JOIN mob_pools mp
+	ON mg.poolid = mp.poolid
+INNER JOIN zone_settings zs
+	ON mg.zoneid = zs.zoneid
+SET mp.resist_id = 32
+WHERE mp.resist_id = 34
 AND zs.zonetype = 128
 AND NOT (mp.mobType & 0x02);
