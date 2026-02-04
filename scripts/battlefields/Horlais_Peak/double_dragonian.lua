@@ -10,6 +10,7 @@ local content = Battlefield:new({
     zoneId           = xi.zone.HORLAIS_PEAK,
     battlefieldId    = xi.battlefield.id.DOUBLE_DRAGONIAN,
     maxPlayers       = 6,
+	allowTrusts      = true,
     timeLimit        = utils.minutes(30),
     index            = 15,
     entryNpc         = 'BC_Entrance',
@@ -26,6 +27,7 @@ content.loot =
     },
 
     {
+		quantity = 2,
         { itemId = xi.item.SUBDUER,                    weight =  2500 },
         { itemId = xi.item.DISSECTOR,                  weight =  2500 },
         { itemId = xi.item.DESTROYERS,                 weight =  2500 },
@@ -40,10 +42,11 @@ content.loot =
     },
 
     {
-        { itemId = xi.item.NONE,                       weight =  6000 },
-        { itemId = xi.item.SPEAR_STRAP,                weight =  1500 },
-        { itemId = xi.item.SWORD_STRAP,                weight =  1500 },
-        { itemId = xi.item.POLE_GRIP,                  weight =  1000 },
+		quantity = 2,
+        { itemId = xi.item.NONE,                       weight =  2500 },
+        { itemId = xi.item.SPEAR_STRAP,                weight =  2500 },
+        { itemId = xi.item.SWORD_STRAP,                weight =  2500 },
+        { itemId = xi.item.POLE_GRIP,                  weight =  2500 },
     },
 
     {
