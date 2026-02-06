@@ -10,6 +10,7 @@ local content = Battlefield:new({
     zoneId           = xi.zone.BALGAS_DAIS,
     battlefieldId    = xi.battlefield.id.MOA_CONSTRICTORS,
     maxPlayers       = 6,
+	allowTrusts      = true,
     timeLimit        = utils.minutes(30),
     index            = 17,
     entryNpc         = 'BC_Entrance',
@@ -31,6 +32,7 @@ content.loot =
     },
 
     {
+		quantity = 2,
         { itemId = xi.item.EXPUNGER,                   weight =  2500 },
         { itemId = xi.item.HEART_SNATCHER,             weight =  2500 },
         { itemId = xi.item.MORGENSTERN,                weight =  2500 },

@@ -10,6 +10,7 @@ local content = Battlefield:new({
     zoneId           = xi.zone.WAUGHROON_SHRINE,
     battlefieldId    = xi.battlefield.id.OPERATION_DESERT_SWARM,
     maxPlayers       = 6,
+	allowTrusts      = true,
     timeLimit        = utils.minutes(30),
     index            = 17,
     entryNpc         = 'BC_Entrance',
@@ -32,6 +33,7 @@ content.loot =
     },
 
     {
+		quantity = 2,
         { itemId = xi.item.EXPUNGER,                    weight =  2500 },
         { itemId = xi.item.HEART_SNATCHER,              weight =  2500 },
         { itemId = xi.item.RAMPAGER,                    weight =  2500 },
