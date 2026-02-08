@@ -39,7 +39,7 @@ INNER JOIN mob_pools mp
 	ON mg.poolid = mp.poolid
 INNER JOIN zone_settings zs
 	ON mg.zoneid = zs.zoneid
-SET mp.resist_id = 32
-WHERE mp.resist_id = 34
-AND zs.zonetype = 128
-AND NOT (mp.mobType & 0x02);
+SET mp.resist_id = 32, mp.immunity = mp.immunity & ~(0x800 | 0x1000 )
+WHERE zs.zonetype = 128
+AND NOT (mp.mobType & 0x02)
+and mg.name like '%avatar%';
