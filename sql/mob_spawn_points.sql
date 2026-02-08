@@ -71076,9 +71076,9 @@ INSERT INTO `mob_spawn_points` VALUES (17633282,0,'Titan_Prime_TBE','Titan Prime
 INSERT INTO `mob_spawn_points` VALUES (17633283,0,'Titan_Prime_TBE','Titan Prime',1,60,60,-376.962,-79.004,513.055,105);
 
 -- The Puppet Master
-INSERT INTO `mob_spawn_points` VALUES (17633284,0,'Galgalim','Galgalim',2,56,56,503.000,41.000,-367.000,105);
-INSERT INTO `mob_spawn_points` VALUES (17633285,0,'Galgalim','Galgalim',2,56,56,22.907,-19.005,33.085,105);
-INSERT INTO `mob_spawn_points` VALUES (17633286,0,'Galgalim','Galgalim',2,56,56,-376.962,-79.004,513.055,105);
+INSERT INTO `mob_spawn_points` VALUES (17633284,0,'Galgalim','Galgalim',2,45,45,503.000,41.000,-367.000,105);
+INSERT INTO `mob_spawn_points` VALUES (17633285,0,'Galgalim','Galgalim',2,45,45,22.907,-19.005,33.085,105);
+INSERT INTO `mob_spawn_points` VALUES (17633286,0,'Galgalim','Galgalim',2,45,45,-376.962,-79.004,513.055,105);
 
 -- Trial-size Trial by Earth
 INSERT INTO `mob_spawn_points` VALUES (17633287,0,'Titan_Prime_TSTBE','Titan Prime',3,20,20,503.000,41.000,-367.000,105);
