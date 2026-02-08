@@ -41,9 +41,10 @@ content.loot =
     },
 
     {
-        { itemId = xi.item.ANUBISS_KNIFE,               weight =  5000 },
-        { itemId = xi.item.CLAYMORE_GRIP,               weight =  1000 },
-        { itemId = xi.item.POLE_GRIP,                   weight =  1000 },
+		quantity = 2,
+        { itemId = xi.item.ANUBISS_KNIFE,               weight =  1000 },
+        { itemId = xi.item.CLAYMORE_GRIP,               weight =  3000 },
+        { itemId = xi.item.POLE_GRIP,                   weight =  3000 },
         { itemId = xi.item.SWORD_STRAP,                 weight =  2000 },
         { itemId = xi.item.ADAMAN_INGOT,                weight =   500 },
         { itemId = xi.item.ORICHALCUM_INGOT,            weight =   500 },
