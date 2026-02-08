@@ -140,7 +140,7 @@ xi.job_utils.samurai.useHasso = function(player, target, ability)
     if strboost > 0 then
         target:delStatusEffect(xi.effect.HASSO)
         target:delStatusEffect(xi.effect.SEIGAN)
-        target:addStatusEffect(xi.effect.HASSO, strboost, 0, 300)
+        target:addStatusEffect(xi.effect.HASSO, strboost, 0, 36000)
     end
 
     return xi.effect.HASSO
@@ -163,7 +163,7 @@ xi.job_utils.samurai.useSeigan = function(player, target, ability)
     if target:isWeaponTwoHanded() then
         target:delStatusEffect(xi.effect.HASSO)
         target:delStatusEffect(xi.effect.SEIGAN)
-        target:addStatusEffect(xi.effect.SEIGAN, 0, 0, 300)
+        target:addStatusEffect(xi.effect.SEIGAN, 0, 0, 36000)
     end
 
     return xi.effect.SEIGAN
