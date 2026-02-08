@@ -41,89 +41,101 @@ CREATE TABLE `guild_shops` (
 -- The above 30 item limit no longer exists..
 
 -- Chaupire (Northern San d'Oria) Woodworking Guild (S)
-INSERT INTO `guild_shops` VALUES (5132,3,295500,295500,20,0,3);
-INSERT INTO `guild_shops` VALUES (5132,22,282,691,20,0,20);
-INSERT INTO `guild_shops` VALUES (5132,23,829,2035,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,24,70200,408096,20,0,3);
-INSERT INTO `guild_shops` VALUES (5132,26,31500,31500,20,0,6);
-INSERT INTO `guild_shops` VALUES (5132,92,738,2322,20,0,10);
-INSERT INTO `guild_shops` VALUES (5132,97,5508,13512,20,0,12);
-INSERT INTO `guild_shops` VALUES (5132,102,291,713,25,0,25);
-INSERT INTO `guild_shops` VALUES (5132,688,15,28,255,0,100);            -- arrowwood_log
-INSERT INTO `guild_shops` VALUES (5132,689,27,59,255,0,100);            -- lauan_log
-INSERT INTO `guild_shops` VALUES (5132,690,1378,10938,255,48,100);      -- elm_log
-INSERT INTO `guild_shops` VALUES (5132,691,45,276,255,0,100);           -- maple_log
-INSERT INTO `guild_shops` VALUES (5132,693,640,3586,255,48,100);        -- walnut_log
-INSERT INTO `guild_shops` VALUES (5132,694,2119,2811,165,33,65);        -- chestnut_log
-INSERT INTO `guild_shops` VALUES (5132,695,120,132,255,48,100);         -- willow_log
-INSERT INTO `guild_shops` VALUES (5132,696,330,699,255,48,100);         -- yew_log
-INSERT INTO `guild_shops` VALUES (5132,697,528,930,255,48,100);         -- holly_log
-INSERT INTO `guild_shops` VALUES (5132,698,72,122,255,48,100);          -- ash_log
-INSERT INTO `guild_shops` VALUES (5132,699,4740,24016,165,33,65);       -- oak_log
-INSERT INTO `guild_shops` VALUES (5132,700,9075,19844,165,33,65);       -- mahogany_log
-INSERT INTO `guild_shops` VALUES (5132,701,6615,37044,165,33,65);       -- rosewood_log
-INSERT INTO `guild_shops` VALUES (5132,702,9600,23040,165,33,65);       -- ebony_log
-INSERT INTO `guild_shops` VALUES (5132,704,96,230,375,100,150);         -- bamboo_stick
-INSERT INTO `guild_shops` VALUES (5132,705,3,18,255,48,100);            -- arrowwood_lbr.
-INSERT INTO `guild_shops` VALUES (5132,706,27,151,255,48,100);          -- lauan_lumber
-INSERT INTO `guild_shops` VALUES (5132,707,1723,4136,255,48,100);       -- elm_lumber
-INSERT INTO `guild_shops` VALUES (5132,708,45,276,255,48,100);          -- maple_lumber
-INSERT INTO `guild_shops` VALUES (5132,710,2119,6104,165,33,65);        -- chestnut_lumber
-INSERT INTO `guild_shops` VALUES (5132,711,1015,3982,100,0,100);        -- walnut_lumber
-INSERT INTO `guild_shops` VALUES (5132,712,120,256,255,48,100);         -- willow_lumber
-INSERT INTO `guild_shops` VALUES (5132,713,330,836,255,48,100);         -- yew_lumber
-INSERT INTO `guild_shops` VALUES (5132,714,607,2559,255,48,100);        -- holly_lumber
-INSERT INTO `guild_shops` VALUES (5132,715,72,403,255,48,100);          -- ash_lumber
-INSERT INTO `guild_shops` VALUES (5132,716,4740,23257,165,33,65);       -- oak_lumber
-INSERT INTO `guild_shops` VALUES (5132,719,23552,25216,165,0,65);       -- ebony_lumber
-INSERT INTO `guild_shops` VALUES (5132,12289,88,232,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,12290,847,1173,20,0,10);
-INSERT INTO `guild_shops` VALUES (5132,12984,176,280,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,12985,1625,1625,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,12986,6885,17625,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,12987,38707,38707,20,0,3);
-INSERT INTO `guild_shops` VALUES (5132,16832,194,201,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,16833,809,4294,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,16834,6448,25376,20,0,10);
-INSERT INTO `guild_shops` VALUES (5132,16835,27165,34750,20,0,3);
-INSERT INTO `guild_shops` VALUES (5132,16845,31314,34445,20,0,3);
-INSERT INTO `guild_shops` VALUES (5132,17024,48,141,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,17025,1165,5707,20,0,10);
-INSERT INTO `guild_shops` VALUES (5132,17027,7525,21003,20,0,5);
-INSERT INTO `guild_shops` VALUES (5132,17030,14766,41876,20,0,3);
-INSERT INTO `guild_shops` VALUES (5132,17049,34,102,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,17050,247,703,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,17051,1049,3038,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,17052,3827,19420,20,0,10);
-INSERT INTO `guild_shops` VALUES (5132,17088,46,126,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,17089,424,977,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,17090,3371,7103,20,0,15);
-INSERT INTO `guild_shops` VALUES (5132,17095,281,1260,20,0,15);         -- ash_pole
-INSERT INTO `guild_shops` VALUES (5132,17096,3400,23349,20,0,15);       -- holly_pole
-INSERT INTO `guild_shops` VALUES (5132,17097,22617,35932,20,0,15);      -- elm_pole
-INSERT INTO `guild_shops` VALUES (5132,17098,29390,72633,20,0,3);       -- oak_pole
-INSERT INTO `guild_shops` VALUES (5132,17152,41,202,20,0,15);           -- shortbow
-INSERT INTO `guild_shops` VALUES (5132,17153,1039,1055,20,0,15);        -- self_bow
-INSERT INTO `guild_shops` VALUES (5132,17154,15602,38649,20,0,10);      -- wrapped_bow
-INSERT INTO `guild_shops` VALUES (5132,17155,5625,16875,20,0,5);        -- composite_bow
-INSERT INTO `guild_shops` VALUES (5132,17156,82971,82971,20,0,3);       -- kaman
-INSERT INTO `guild_shops` VALUES (5132,17160,870,969,20,0,15);          -- longbow
-INSERT INTO `guild_shops` VALUES (5132,17162,14614,42969,20,0,10);      -- great_bow
-INSERT INTO `guild_shops` VALUES (5132,17163,28944,82080,20,0,5);       -- battle_bow
-INSERT INTO `guild_shops` VALUES (5132,17164,57405,166219,20,0,3);      -- war_bow
-INSERT INTO `guild_shops` VALUES (5132,17216,187,354,20,0,15);          -- light_crossbow
-INSERT INTO `guild_shops` VALUES (5132,17218,10311,67100,20,0,10);      -- zamburak
-INSERT INTO `guild_shops` VALUES (5132,17280,1172,5250,20,0,15);        -- boomerang
-INSERT INTO `guild_shops` VALUES (5132,17318,6,13,8910,48,3564);        -- wooden_arrow
-INSERT INTO `guild_shops` VALUES (5132,17320,10,14,5940,0,2376);        -- iron_arrow
-INSERT INTO `guild_shops` VALUES (5132,17321,28,34,2970,0,1188);        -- silver_arrow
-INSERT INTO `guild_shops` VALUES (5132,17345,69,163,20,0,15);           -- flute
-INSERT INTO `guild_shops` VALUES (5132,17347,1028,5060,20,0,15);        -- piccolo
-INSERT INTO `guild_shops` VALUES (5132,17348,11256,32592,20,0,10);      -- traversiere
-INSERT INTO `guild_shops` VALUES (5132,17353,37,94,20,0,15);            -- maple_harp
-INSERT INTO `guild_shops` VALUES (5132,17354,4300,12200,20,0,10);       -- harp
-INSERT INTO `guild_shops` VALUES (5132,17355,13400,38800,20,0,5);       -- rose_harp
-INSERT INTO `guild_shops` VALUES (5132,17424,7717,20685,20,0,3);        -- spiked_club
+INSERT INTO `guild_shops` VALUES (5132,698,72,441,240,48,144);     -- ash_log
+INSERT INTO `guild_shops` VALUES (5132,695,120,736,240,48,144);    -- willow_log
+INSERT INTO `guild_shops` VALUES (5132,697,528,3243,180,48,108);   -- holly_log
+INSERT INTO `guild_shops` VALUES (5132,696,330,2024,180,48,108);   -- yew_log
+INSERT INTO `guild_shops` VALUES (5132,690,1378,10938,255,48,84);  -- elm_log
+INSERT INTO `guild_shops` VALUES (5132,693,640,3928,60,48,36);     -- walnut_log
+INSERT INTO `guild_shops` VALUES (5132,694,2119,12999,120,33,72);  -- chestnut_log
+INSERT INTO `guild_shops` VALUES (5132,699,4740,29072,60,33,36);   -- oak_log
+INSERT INTO `guild_shops` VALUES (5132,701,6615,40572,60,33,36);   -- rosewood_log
+INSERT INTO `guild_shops` VALUES (5132,700,9075,19844,60,33,36);   -- mahogany_log
+INSERT INTO `guild_shops` VALUES (5132,702,9600,45568,60,33,36);   -- ebony_log
+INSERT INTO `guild_shops` VALUES (5132,704,108,662,240,100,36);    -- bamboo_stick
+INSERT INTO `guild_shops` VALUES (5132,721,704,2465,240,0,0);      -- rattan_lumber
+INSERT INTO `guild_shops` VALUES (5132,705,3,18,240,48,36);        -- arrowwood_lumber
+INSERT INTO `guild_shops` VALUES (5132,706,27,165,240,48,36);      -- lauan_lumber
+INSERT INTO `guild_shops` VALUES (5132,708,45,276,240,48,36);      -- maple_lumber
+INSERT INTO `guild_shops` VALUES (5132,715,72,441,240,48,36);      -- ash_lumber
+INSERT INTO `guild_shops` VALUES (5132,712,120,736,240,48,36);     -- willow_lumber
+INSERT INTO `guild_shops` VALUES (5132,714,607,3726,180,48,27);    -- holly_lumber
+INSERT INTO `guild_shops` VALUES (5132,713,330,2024,180,48,27);    -- yew_lumber
+INSERT INTO `guild_shops` VALUES (5132,707,1723,10570,120,48,18);  -- elm_lumber
+INSERT INTO `guild_shops` VALUES (5132,710,2119,12999,120,33,18);  -- chestnut_lumber
+INSERT INTO `guild_shops` VALUES (5132,716,4740,26544,60,33,15);   -- oak_lumber
+INSERT INTO `guild_shops` VALUES (5132,711,1015,3982,60,0,0);      -- walnut_lumber
+-- INSERT INTO `guild_shops` VALUES (5132,718,41983,41983,60,0,0);    -- rosewood_lumber TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5132,717,41140,41140,60,0,0);    -- mahogany_lumber TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5132,719,23552,62464,60,0,0);    -- ebony_lumber
+-- INSERT INTO `guild_shops` VALUES (5132,720,41140,41140,60,0,0);    -- ancient_lumber TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5132,12984,176,280,24,0,0);      -- ash_clogs
+INSERT INTO `guild_shops` VALUES (5132,12985,1625,7605,24,0,0);    -- holly_clogs
+INSERT INTO `guild_shops` VALUES (5132,12986,6885,40024,24,0,0);   -- chestnut_sabots
+INSERT INTO `guild_shops` VALUES (5132,12987,38707,38707,24,0,0);  -- ebony_sabots
+INSERT INTO `guild_shops` VALUES (5132,12289,88,537,30,0,0);       -- lauaun_shield
+INSERT INTO `guild_shops` VALUES (5132,12290,847,1173,30,0,0);     -- maple_shield
+-- INSERT INTO `guild_shops` VALUES (5132,12291,847,1173,30,0,0);     -- elm_shield TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5132,12292,847,1173,30,0,0);     -- mahogany_shield TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5132,12293,847,1173,30,0,0);     -- oak_shield TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5132,2,847,1173,12,0,0);         -- simple_bed TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5132,22,282,1639,12,0,0);        -- workbench
+INSERT INTO `guild_shops` VALUES (5132,97,5508,13512,12,0,0);      -- book_holder
+INSERT INTO `guild_shops` VALUES (5132,102,291,713,12,0,0);        -- flower_stand
+-- INSERT INTO `guild_shops` VALUES (5132,21,847,1173,12,0,0);        -- desk TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5132,26,31500,137340,12,0,0);    -- tarutaru_desk
+INSERT INTO `guild_shops` VALUES (5132,23,829,2035,12,0,0);        -- maple_table
+INSERT INTO `guild_shops` VALUES (5132,92,738,3621,12,0,0);        -- tarutaru_stool
+INSERT INTO `guild_shops` VALUES (5132,24,70200,408096,12,0,0);    -- oak_table
+INSERT INTO `guild_shops` VALUES (5132,17348,11256,32592,60,0,0);  -- traversiere
+INSERT INTO `guild_shops` VALUES (5132,3,295500,295500,60,0,0);    -- oak_bed
+INSERT INTO `guild_shops` VALUES (5132,17345,69,163,60,0,0);       -- flute
+INSERT INTO `guild_shops` VALUES (5132,17347,1028,5368,60,0,0);    -- piccolo
+INSERT INTO `guild_shops` VALUES (5132,17353,37,94,60,0,0);        -- maple_harp
+INSERT INTO `guild_shops` VALUES (5132,17354,1675,12200,60,0,0);   -- harp
+INSERT INTO `guild_shops` VALUES (5132,17355,13400,79200,60,0,0);  -- rose_harp
+INSERT INTO `guild_shops` VALUES (5132,17024,48,351,60,0,0);       -- ash_club
+INSERT INTO `guild_shops` VALUES (5132,17025,1165,8282,60,0,0);    -- chestnut_club
+INSERT INTO `guild_shops` VALUES (5132,17027,7525,22127,60,0,0);   -- oak_cudgel
+INSERT INTO `guild_shops` VALUES (5132,17030,14766,81107,60,0,0);  -- great_club
+INSERT INTO `guild_shops` VALUES (5132,17049,34,102,60,0,0);       -- maple_wand
+INSERT INTO `guild_shops` VALUES (5132,17050,247,1406,60,0,0);     -- willow_wand
+INSERT INTO `guild_shops` VALUES (5132,17051,1049,3038,60,0,0);    -- yew_wand
+INSERT INTO `guild_shops` VALUES (5132,17052,3827,27189,60,0,0);   -- chestnut_wand
+INSERT INTO `guild_shops` VALUES (5132,17053,20944,41289,60,0,0);  -- rose_wand
+INSERT INTO `guild_shops` VALUES (5132,17152,41,214,60,0,0);       -- shortbow
+INSERT INTO `guild_shops` VALUES (5132,17153,1039,2615,60,0,0);    -- self_bow
+INSERT INTO `guild_shops` VALUES (5132,17155,5625,16875,60,0,0);   -- composite_bow
+INSERT INTO `guild_shops` VALUES (5132,17156,82971,82971,60,0,0);  -- kaman
+INSERT INTO `guild_shops` VALUES (5132,17160,870,969,60,0,0);      -- longbow
+INSERT INTO `guild_shops` VALUES (5132,17154,15602,38649,60,0,0);  -- wrapped_bow
+-- INSERT INTO `guild_shops` VALUES (5132,17161,15602,38649,60,0,0);  -- power_bow TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5132,17162,14614,42969,60,0,0);  -- great_bow
+INSERT INTO `guild_shops` VALUES (5132,17163,28944,82080,60,0,0);  -- battle_bow
+INSERT INTO `guild_shops` VALUES (5132,17164,57405,166219,60,0,0); -- war_bow
+INSERT INTO `guild_shops` VALUES (5132,17088,46,261,60,0,0);       -- ash_staff
+INSERT INTO `guild_shops` VALUES (5132,17089,424,1066,60,0,0);     -- holly_staff
+INSERT INTO `guild_shops` VALUES (5132,17090,3371,7103,60,0,0);    -- elm_staff
+INSERT INTO `guild_shops` VALUES (5132,17091,3371,7103,60,0,0);    -- oak_staff
+INSERT INTO `guild_shops` VALUES (5132,17095,281,1932,60,0,0);     -- ash_pole
+INSERT INTO `guild_shops` VALUES (5132,17096,3400,24161,60,0,0);   -- holly_pole
+INSERT INTO `guild_shops` VALUES (5132,17097,22617,35932,60,0,0);  -- elm_pole
+INSERT INTO `guild_shops` VALUES (5132,17098,29390,72633,60,0,0);  -- oak_pole
+INSERT INTO `guild_shops` VALUES (5132,17424,7717,49980,60,0,0);   -- spiked_club
+-- INSERT INTO `guild_shops` VALUES (5132,17523,7717,49980,60,0,0);   -- quarterstaff TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5132,16832,194,267,60,0,0);      -- harpoon
+INSERT INTO `guild_shops` VALUES (5132,16833,809,4294,60,0,0);     -- bronze_spear
+INSERT INTO `guild_shops` VALUES (5132,16834,6448,25376,60,0,0);   -- brass_spear
+INSERT INTO `guild_shops` VALUES (5132,16835,27165,34750,60,0,0);  -- spear
+-- INSERT INTO `guild_shops` VALUES (5132,16836,7717,49980,60,0,0);   -- halberd TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5132,16845,31314,34445,60,0,0);  -- lance
+INSERT INTO `guild_shops` VALUES (5132,17216,187,354,60,0,0);      -- light_crossbow
+-- INSERT INTO `guild_shops` VALUES (5132,17217,7717,49980,60,0,0);   -- crossbow TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5132,17218,10311,67100,60,0,0);  -- zamburak
+INSERT INTO `guild_shops` VALUES (5132,17280,1172,5250,60,0,0);    -- boomerang
+INSERT INTO `guild_shops` VALUES (5132,17318,6,18,240,48,50);      -- wooden_arrow
+INSERT INTO `guild_shops` VALUES (5132,17320,10,14,240,0,0);       -- iron_arrow
+INSERT INTO `guild_shops` VALUES (5132,17321,28,34,240,0,0);       -- silver_arrow
 
 -- Shih Tayuun (Bonecraft Guild) Windurst Woods (S)
 INSERT INTO `guild_shops` VALUES (514,881,3469,11306,240,0,0);     -- crab_shell
@@ -703,7 +715,7 @@ INSERT INTO `guild_shops` VALUES (5262,18236,21,21,240,60,180);     -- wind_fan
 
 -- Visala (Goldsmith Guild) Bastok Markets (S)
 INSERT INTO `guild_shops` VALUES (5272,736,315,1260,240,48,180);    -- chunk_of_silver_ore
-INSERT INTO `guild_shops` VALUES (5272,644,1500,9200,120,33,12);    -- chunk_of_mythril_ore
+INSERT INTO `guild_shops` VALUES (5272,644,1500,9800,120,33,12);    -- chunk_of_mythril_ore
 -- INSERT INTO `guild_shops` VALUES (5272,737,1500,9200,120,0,0);      -- chunk_of_gold_ore TODO: missing min_price and max_price
 INSERT INTO `guild_shops` VALUES (5272,738,6000,58032,120,0,0);     -- chunk_of_platinum_ore TODO: verify min_price and max_price
 -- INSERT INTO `guild_shops` VALUES (5272,648,6000,58032,120,0,0);     -- copper_ingot TODO: missing min_price and max_price
@@ -829,7 +841,7 @@ INSERT INTO `guild_shops` VALUES (5272,1588,20400,20400,240,3,180); -- slab_of_t
 
 -- Yabby Tanmikey (Goldsmith Guild) Mhaura (S)
 INSERT INTO `guild_shops` VALUES (528,736,315,1260,200,48,100);  -- chunk_of_silver_ore
-INSERT INTO `guild_shops` VALUES (528,644,1500,9200,200,0,0);    -- chunk_of_mythril_ore
+INSERT INTO `guild_shops` VALUES (528,644,1500,9800,200,0,0);    -- chunk_of_mythril_ore
 -- INSERT INTO `guild_shops` VALUES (528,737,1500,9200,200,0,0);    -- chunk_of_gold_ore TODO: missing min_price and max_price
 INSERT INTO `guild_shops` VALUES (528,738,6000,58032,200,0,0);   -- chunk_of_platinum_ore TODO: verify min_price and max_price
 -- INSERT INTO `guild_shops` VALUES (528,648,6000,58032,200,0,0);   -- copper_ingot TODO: missing min_price and max_price
@@ -927,198 +939,293 @@ INSERT INTO `guild_shops` VALUES (529,13469,937,2087,60,0,0);     -- leather_rin
 INSERT INTO `guild_shops` VALUES (529,12294,13500,14000,60,0,0);  -- leather_shield
 
 -- Kopopo (Windurst Waters) Cooking Guild (S)
-INSERT INTO `guild_shops` VALUES (530,610,45,144,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,611,30,60,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,612,45,114,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,614,60,152,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,615,45,119,255,0,100);
-INSERT INTO `guild_shops` VALUES (530,616,60,368,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,618,21,42,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,620,45,276,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,621,21,40,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,622,36,94,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,625,66,221,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,627,40,80,255,0,100);
-INSERT INTO `guild_shops` VALUES (530,628,195,494,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,629,36,144,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,636,30,57,255,0,100);
-INSERT INTO `guild_shops` VALUES (530,1111,450,2832,255,0,100);
-INSERT INTO `guild_shops` VALUES (530,1554,431,754,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,1555,1061,1854,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,1590,536,992,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,1840,1500,2800,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,2110,457,530,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,2111,525,530,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,2112,530,540,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,4156,3872,3936,55,0,22);
-INSERT INTO `guild_shops` VALUES (530,4356,154,992,165,0,65);
-INSERT INTO `guild_shops` VALUES (530,4358,61,64,255,0,100);
-INSERT INTO `guild_shops` VALUES (530,4359,180,475,255,0,100);
-INSERT INTO `guild_shops` VALUES (530,4360,114,160,255,0,100);
-INSERT INTO `guild_shops` VALUES (530,4362,117,120,255,0,100);
-INSERT INTO `guild_shops` VALUES (530,4363,33,183,255,48,100);
-INSERT INTO `guild_shops` VALUES (530,4364,102,427,255,0,100);       -- black_bread
-INSERT INTO `guild_shops` VALUES (530,4365,192,600,255,0,100);       -- rolanberry
-INSERT INTO `guild_shops` VALUES (530,4366,18,100,255,48,100);       -- la_theine_cbg.
-INSERT INTO `guild_shops` VALUES (530,4367,36,124,255,48,100);       -- batagreens
-INSERT INTO `guild_shops` VALUES (530,4370,163,590,255,0,100);       -- honey
-INSERT INTO `guild_shops` VALUES (530,4371,252,743,55,11,22);        -- grilled_hare
-INSERT INTO `guild_shops` VALUES (530,4372,83,230,255,48,100);       -- g._sheep_meat
-INSERT INTO `guild_shops` VALUES (530,4376,90,288,255,48,100);       -- meat_jerky
-INSERT INTO `guild_shops` VALUES (530,4378,45,268,255,48,100);       -- selbina_milk
-INSERT INTO `guild_shops` VALUES (530,4380,437,1091,165,33,65);      -- smoked_salmon
-INSERT INTO `guild_shops` VALUES (530,4381,1382,3600,165,33,65);     -- meat_mithkabob
-INSERT INTO `guild_shops` VALUES (530,4382,58,64,165,0,65);          -- frost_turnip
-INSERT INTO `guild_shops` VALUES (530,4383,3906,5760,165,0,65);      -- gold_lobster
-INSERT INTO `guild_shops` VALUES (530,4387,709,1934,255,0,100);      -- wild_onion
-INSERT INTO `guild_shops` VALUES (530,4389,43,153,255,0,100);        -- san_dor._carrot
-INSERT INTO `guild_shops` VALUES (530,4390,51,198,255,48,100);       -- mithran_tomato
-INSERT INTO `guild_shops` VALUES (530,4392,45,149,255,48,100);       -- saruta_orange
-INSERT INTO `guild_shops` VALUES (530,4394,9,55,255,0,100);          -- ginger_cookie
-INSERT INTO `guild_shops` VALUES (530,4398,2149,3256,165,33,65);     -- fish_mithkabob
-INSERT INTO `guild_shops` VALUES (530,4399,2592,2700,165,33,65);     -- bluetail
-INSERT INTO `guild_shops` VALUES (530,4406,734,1988,165,33,65);      -- baked_apple
-INSERT INTO `guild_shops` VALUES (530,4408,105,250,165,33,65);       -- tortilla
-INSERT INTO `guild_shops` VALUES (530,4409,132,211,165,33,65);       -- hard-boiled_egg
-INSERT INTO `guild_shops` VALUES (530,4410,626,1962,165,33,65);      -- roast_mushroom
-INSERT INTO `guild_shops` VALUES (530,4412,412,1118,165,33,65);      -- thundermelon
-INSERT INTO `guild_shops` VALUES (530,4413,240,1420,165,33,65);      -- apple_pie
-INSERT INTO `guild_shops` VALUES (530,4415,93,565,165,0,65);         -- roasted_corn
-INSERT INTO `guild_shops` VALUES (530,4416,2716,6944,165,0,65);      -- pea_soup
-INSERT INTO `guild_shops` VALUES (530,4417,2475,15972,165,0,65);     -- egg_soup
-INSERT INTO `guild_shops` VALUES (530,4419,12390,14000,165,0,65);    -- mushroom_soup
-INSERT INTO `guild_shops` VALUES (530,4420,13124,13230,165,0,65);    -- tomato_soup
-INSERT INTO `guild_shops` VALUES (530,4422,150,328,55,11,22);        -- orange_juice
-INSERT INTO `guild_shops` VALUES (530,4423,225,720,55,11,22);        -- apple_juice
-INSERT INTO `guild_shops` VALUES (530,4424,825,4488,55,11,22);       -- melon_juice
-INSERT INTO `guild_shops` VALUES (530,4425,240,1113,55,11,22);       -- tomato_juice
-INSERT INTO `guild_shops` VALUES (530,4431,72,376,255,48,100);       -- san_dor._grape
-INSERT INTO `guild_shops` VALUES (530,4432,87,192,255,0,100);        -- kazham_pineapl.
-INSERT INTO `guild_shops` VALUES (530,4435,3520,3968,165,0,65);      -- cockatrice_meat
-INSERT INTO `guild_shops` VALUES (530,4436,240,1113,165,0,65);       -- baked_popoto
-INSERT INTO `guild_shops` VALUES (530,4437,240,1113,55,11,22);       -- roast_mutton
-INSERT INTO `guild_shops` VALUES (530,4438,2750,7084,55,11,22);      -- dhalmel_steak
-INSERT INTO `guild_shops` VALUES (530,4441,753,3720,55,11,22);       -- grape_juice
-INSERT INTO `guild_shops` VALUES (530,4442,300,1504,55,11,22);       -- pineapple_juice
-INSERT INTO `guild_shops` VALUES (530,4444,18,45,165,33,65);         -- rarab_tail
-INSERT INTO `guild_shops` VALUES (530,4445,41,88,165,33,65);         -- yagudo_cherry
-INSERT INTO `guild_shops` VALUES (530,4455,968,984,165,33,65);       -- pebble_soup
-INSERT INTO `guild_shops` VALUES (530,4456,2452,10620,165,33,65);    -- boiled_crab
-INSERT INTO `guild_shops` VALUES (530,4457,4800,13920,165,0,65);     -- eel_kabob
-INSERT INTO `guild_shops` VALUES (530,4468,60,208,165,33,65);        -- pamamas
-INSERT INTO `guild_shops` VALUES (530,4482,1408,1984,255,0,100);     -- nosteau_herring
-INSERT INTO `guild_shops` VALUES (530,4490,955,2284,165,0,65);       -- pickled_herring
-INSERT INTO `guild_shops` VALUES (530,4491,150,696,165,33,65);       -- watermelon
-INSERT INTO `guild_shops` VALUES (530,4492,1182,2845,55,11,22);      -- puls
-INSERT INTO `guild_shops` VALUES (530,4499,75,320,165,0,65);         -- iron_bread
-INSERT INTO `guild_shops` VALUES (530,4537,967,2600,165,33,65);      -- roast_carp
-INSERT INTO `guild_shops` VALUES (530,4538,1628,4232,165,33,65);     -- roast_pipira
-INSERT INTO `guild_shops` VALUES (530,4556,10644,10644,55,11,22);    -- icecap_rolanberry
-INSERT INTO `guild_shops` VALUES (530,4560,2861,2861,55,11,22);      -- vegetable_soup
-INSERT INTO `guild_shops` VALUES (530,4563,6113,15360,15,0,6);       -- pamama_tart
-INSERT INTO `guild_shops` VALUES (530,4570,47,245,255,48,100);       -- bird_egg
-INSERT INTO `guild_shops` VALUES (530,4571,75,460,255,48,100);       -- beaugreens
-INSERT INTO `guild_shops` VALUES (530,4572,1360,7260,55,11,22);      -- beaugr._saute
+-- INSERT INTO `guild_shops` VALUES (530,631,200,200,240,0,0);        -- bag_of_horo_flour TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (530,611,30,60,240,48,144);       -- bag_of_rye_flour
+INSERT INTO `guild_shops` VALUES (530,610,45,144,240,48,144);      -- bag_of_san_dorian_flour
+INSERT INTO `guild_shops` VALUES (530,612,45,114,240,48,144);      -- bunch_of_kazham_peppers
+INSERT INTO `guild_shops` VALUES (530,614,60,152,240,48,144);      -- bulb_of_mhaura_garlic
+INSERT INTO `guild_shops` VALUES (530,4378,45,268,240,48,144);     -- selbina_milk
+INSERT INTO `guild_shops` VALUES (530,615,45,119,120,0,0);         -- stick_of_selbina_butter
+INSERT INTO `guild_shops` VALUES (530,616,60,368,240,48,18);       -- piece_of_pie_dough
+INSERT INTO `guild_shops` VALUES (530,618,21,42,240,48,144);       -- pod_of_blue_peas
+INSERT INTO `guild_shops` VALUES (530,619,36,42,240,48,144);       -- popoto
+INSERT INTO `guild_shops` VALUES (530,620,45,276,240,48,144);      -- box_of_tarutaru_rice
+INSERT INTO `guild_shops` VALUES (530,621,21,40,240,48,144);       -- pot_of_crying_mustard
+INSERT INTO `guild_shops` VALUES (530,622,36,94,240,48,144);       -- pinch_of_dried_marjoram
+INSERT INTO `guild_shops` VALUES (530,625,66,221,240,48,10);       -- bottle_of_apple_vinegar
+INSERT INTO `guild_shops` VALUES (530,627,40,80,240,0,0);          -- pot_of_maple_sugar
+INSERT INTO `guild_shops` VALUES (530,1111,450,2832,240,0,0);      -- block_of_gelatin
+INSERT INTO `guild_shops` VALUES (530,628,195,494,240,48,108);     -- stick_of_cinnamon
+INSERT INTO `guild_shops` VALUES (530,629,36,144,240,48,144);      -- ear_of_millioncorn
+INSERT INTO `guild_shops` VALUES (530,4358,61,64,240,0,0);         -- slice_of_hare_meat
+INSERT INTO `guild_shops` VALUES (530,4372,83,230,240,0,0);        -- slice_of_giant_sheep_meat
+INSERT INTO `guild_shops` VALUES (530,4359,180,475,240,0,0);       -- slice_of_dhalmel_meat
+INSERT INTO `guild_shops` VALUES (530,4354,257,488,240,0,0);       -- shining_trout
+INSERT INTO `guild_shops` VALUES (530,4360,114,160,240,0,0);       -- bastore_sardine
+INSERT INTO `guild_shops` VALUES (530,4570,47,245,240,48,44);      -- bird_egg
+INSERT INTO `guild_shops` VALUES (530,4363,33,183,240,48,48);      -- faerie_apple
+INSERT INTO `guild_shops` VALUES (530,4365,192,600,240,0,0);       -- rolanberry
+INSERT INTO `guild_shops` VALUES (530,4366,18,100,240,48,84);      -- la_theine_cabbage
+INSERT INTO `guild_shops` VALUES (530,4571,75,460,240,48,84);      -- clump_of_beaugreens
+INSERT INTO `guild_shops` VALUES (530,4367,36,124,240,48,4);       -- clump_of_batagreens
+INSERT INTO `guild_shops` VALUES (530,4370,163,590,240,0,0);       -- pot_of_honey
+INSERT INTO `guild_shops` VALUES (530,4380,437,1091,240,33,4);     -- smoked_salmon
+INSERT INTO `guild_shops` VALUES (530,4382,58,64,240,0,0);         -- frost_turnip
+INSERT INTO `guild_shops` VALUES (530,4383,3906,5760,240,0,0);     -- gold_lobster
+INSERT INTO `guild_shops` VALUES (530,4387,709,1934,240,0,0);      -- wild_onion
+INSERT INTO `guild_shops` VALUES (530,4389,43,153,240,0,64);       -- san_dorian_carrot
+INSERT INTO `guild_shops` VALUES (530,4390,51,198,240,48,64);      -- mithran_tomato
+INSERT INTO `guild_shops` VALUES (530,4399,2592,2700,240,0,0);     -- bluetail
+INSERT INTO `guild_shops` VALUES (530,4401,91,191,240,0,0);        -- moat carp
+INSERT INTO `guild_shops` VALUES (530,4412,412,1118,240,33,16);    -- thundermelon
+INSERT INTO `guild_shops` VALUES (530,4432,87,192,240,0,16);       -- kazham_pineaple
+INSERT INTO `guild_shops` VALUES (530,4435,3520,3968,240,0,0);     -- slice_of_cockatrice_meat
+INSERT INTO `guild_shops` VALUES (530,4444,18,45,240,0,0);         -- rarab_tail
+INSERT INTO `guild_shops` VALUES (530,4445,41,88,240,0,0);         -- yagudo_cherry
+INSERT INTO `guild_shops` VALUES (530,4468,60,208,240,33,16);      -- bunch_of_pamamas
+INSERT INTO `guild_shops` VALUES (530,4472,30,65,240,0,0);         -- crayfish
+INSERT INTO `guild_shops` VALUES (530,4482,1408,1984,240,0,0);     -- nosteau_herring
+INSERT INTO `guild_shops` VALUES (530,4483,195,1248,240,0,0);      -- tiger_cod
+INSERT INTO `guild_shops` VALUES (530,4491,150,696,240,33,16);     -- watermelon
+INSERT INTO `guild_shops` VALUES (530,4356,154,992,240,0,4);       -- loaf_of_white_bread
+INSERT INTO `guild_shops` VALUES (530,4364,102,427,240,0,8);       -- loaf_of_black_bread
+INSERT INTO `guild_shops` VALUES (530,4499,75,320,241,0,0);        -- loaf_of_iron_bread
+INSERT INTO `guild_shops` VALUES (530,4391,18,274,240,0,0);        -- bretzel
+-- INSERT INTO `guild_shops` VALUES (530,4510,9,55,255,0,0);          -- acorn_cookie TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (530,4397,9,55,255,0,0);          -- cinna_cookie TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (530,4394,9,55,255,0,0);          -- ginger_cookie
+INSERT INTO `guild_shops` VALUES (530,4413,240,1420,240,0,0);      -- apple_pie
+INSERT INTO `guild_shops` VALUES (530,4563,6113,15360,240,0,0);    -- pamama_tart
+INSERT INTO `guild_shops` VALUES (530,4556,10644,10644,240,0,0);   -- serving_of_icecap_rolanberry
+INSERT INTO `guild_shops` VALUES (530,4371,252,743,240,0,0);       -- slice_of_grilled_hare
+INSERT INTO `guild_shops` VALUES (530,4437,240,1113,240,0,0);      -- slice_of_roast_mutton
+INSERT INTO `guild_shops` VALUES (530,4438,2750,7084,240,0,0);     -- slice_of_dhalmel_steak
+INSERT INTO `guild_shops` VALUES (530,4376,90,288,240,0,0);        -- strip_of_meat_jerky
+INSERT INTO `guild_shops` VALUES (530,4537,967,2600,240,0,0);      -- roast_carp
+-- INSERT INTO `guild_shops` VALUES (530,4404,918,2600,240,0,0);      -- roast_trout TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (530,4538,1628,4232,240,0,0);     -- roast_pipira
+-- INSERT INTO `guild_shops` VALUES (530,4459,918,8568,240,0,0);      -- nebimonite_bake TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (530,4457,4800,13920,240,0,0);    -- eel_kabob
+INSERT INTO `guild_shops` VALUES (530,4408,105,250,240,0,0);       -- tortilla
+INSERT INTO `guild_shops` VALUES (530,4456,2452,10620,240,0,0);    -- boiled_crab
+INSERT INTO `guild_shops` VALUES (530,4409,132,211,240,0,0);       -- hard-boiled_egg
+INSERT INTO `guild_shops` VALUES (530,4410,626,1962,240,0,0);      -- roast_mushroom
+INSERT INTO `guild_shops` VALUES (530,4381,1382,3600,240,0,0);     -- meat_mithkabob
+INSERT INTO `guild_shops` VALUES (530,4398,2149,3256,240,0,0);     -- fish_mithkabob
+INSERT INTO `guild_shops` VALUES (530,4422,150,328,240,0,0);       -- bottle_of_orange_juice
+INSERT INTO `guild_shops` VALUES (530,4423,225,720,240,0,1);       -- bottle_of_apple_juice
+INSERT INTO `guild_shops` VALUES (530,4424,825,4488,240,0,0);      -- bottle_of_melon_juice
+INSERT INTO `guild_shops` VALUES (530,4441,753,3720,240,0,0);      -- bottle_of_grape_juice
+INSERT INTO `guild_shops` VALUES (530,4442,300,1504,240,0,0);      -- bottle_of_pineapple_juice
+INSERT INTO `guild_shops` VALUES (530,4425,240,1113,240,0,0);      -- bottle_of_tomato_juice
+INSERT INTO `guild_shops` VALUES (530,4156,3872,3936,240,0,0);     -- bottle_of_mulsum
+INSERT INTO `guild_shops` VALUES (530,4406,734,1988,240,0,0);      -- baked_apple
+INSERT INTO `guild_shops` VALUES (530,4415,93,565,240,0,0);        -- ear_of_roasted_corn
+INSERT INTO `guild_shops` VALUES (530,4436,240,1113,240,0,0);      -- baked_popoto
+INSERT INTO `guild_shops` VALUES (530,4490,955,2284,240,0,0);      -- pickled_herring
+INSERT INTO `guild_shops` VALUES (530,4572,1360,7260,240,0,0);     -- serving_of_beaugreen_saute
+INSERT INTO `guild_shops` VALUES (530,4492,1182,2845,240,0,0);     -- bowl_of_puls
+-- INSERT INTO `guild_shops` VALUES (530,4489,1950,2845,240,0,0);     -- bowl_of_vegetable_gruel TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (530,4555,3701,3701,240,0,0);     -- windurst_salad TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (530,4455,968,984,240,0,0);       -- bowl_of_pebble_soup
+INSERT INTO `guild_shops` VALUES (530,4416,2716,6944,240,0,0);     -- bowl_of_pea_soup
+INSERT INTO `guild_shops` VALUES (530,4560,2861,2861,240,0,0);     -- bowl_of_vegetable_soup
+INSERT INTO `guild_shops` VALUES (530,4419,12390,14000,240,0,0);   -- bowl_of_mushroom_soup
+INSERT INTO `guild_shops` VALUES (530,4420,13124,13230,240,0,0);   -- bowl_of_tomato_soup
+INSERT INTO `guild_shops` VALUES (530,4417,2475,15972,240,0,0);    -- bowl_of_egg_soup
+INSERT INTO `guild_shops` VALUES (530,4355,1946,5515,240,0,0);     -- salmon_sub_sandwich
+INSERT INTO `guild_shops` VALUES (530,1554,431,754,120,48,40);     -- onz_of_turmeric
+INSERT INTO `guild_shops` VALUES (530,1555,1061,1854,120,48,40);   -- onz_of_coriander
+INSERT INTO `guild_shops` VALUES (530,1590,536,992,60,48,19);      -- sprig_of_holy_basil
+INSERT INTO `guild_shops` VALUES (530,1475,411,4985,240,0,0);      -- onz_of_curry_powder
+INSERT INTO `guild_shops` VALUES (530,1840,1500,2800,240,48,84);   -- bag_of_semolina
+INSERT INTO `guild_shops` VALUES (530,2110,457,530,200,48,150);    -- jar_of_fish_stock
+INSERT INTO `guild_shops` VALUES (530,2111,525,530,200,48,150);    -- saucer_of_soy_stock
+INSERT INTO `guild_shops` VALUES (530,2112,530,540,200,48,155);    -- stick_of_vanilla
+INSERT INTO `guild_shops` VALUES (530,5684,1900,11661,240,12,144); -- wedge_of_chalaimbille
 
 -- Doggomehr (Northern San d'Oria) Smithing Guild (S)
-INSERT INTO `guild_shops` VALUES (531,640,9,36,255,48,100);
-INSERT INTO `guild_shops` VALUES (531,641,30,66,255,48,100);
-INSERT INTO `guild_shops` VALUES (531,643,675,981,165,33,65);
-INSERT INTO `guild_shops` VALUES (531,649,115,349,165,33,65);
-INSERT INTO `guild_shops` VALUES (531,651,2700,10800,165,33,65);
-INSERT INTO `guild_shops` VALUES (531,652,25620,25620,80,16,32);
-INSERT INTO `guild_shops` VALUES (531,660,69,294,165,33,65);
-INSERT INTO `guild_shops` VALUES (531,662,4050,9898,165,33,65);
-INSERT INTO `guild_shops` VALUES (531,666,14868,39984,165,0,65);
-INSERT INTO `guild_shops` VALUES (531,672,81,254,165,0,65);
-INSERT INTO `guild_shops` VALUES (531,676,13720,13720,80,0,32);
-INSERT INTO `guild_shops` VALUES (531,680,11781,11781,80,0,32);
-INSERT INTO `guild_shops` VALUES (531,1155,2400,2400,165,33,65);
-INSERT INTO `guild_shops` VALUES (531,2143,320,320,255,48,100);
-INSERT INTO `guild_shops` VALUES (531,2144,75,75,255,48,100);
-INSERT INTO `guild_shops` VALUES (531,12424,7695,26676,20,0,15);
-INSERT INTO `guild_shops` VALUES (531,12432,2711,2856,20,10,20);
-INSERT INTO `guild_shops` VALUES (531,12688,1666,5664,20,7,15);
-INSERT INTO `guild_shops` VALUES (531,12944,1519,5294,20,0,15);
-INSERT INTO `guild_shops` VALUES (531,13783,81084,162345,20,0,10);
-INSERT INTO `guild_shops` VALUES (531,13871,27216,47355,20,0,10);
-INSERT INTO `guild_shops` VALUES (531,13873,61107,70963,20,3,5);
-INSERT INTO `guild_shops` VALUES (531,14001,42476,88529,20,0,10);
-INSERT INTO `guild_shops` VALUES (531,14003,79745,84198,20,0,5);
-INSERT INTO `guild_shops` VALUES (531,14245,52785,166096,20,0,5);
-INSERT INTO `guild_shops` VALUES (531,16412,56544,56544,20,0,10);
-INSERT INTO `guild_shops` VALUES (531,16448,240,761,20,0,20);
-INSERT INTO `guild_shops` VALUES (531,16532,36503,36503,20,0,10);
-INSERT INTO `guild_shops` VALUES (531,16535,509,1056,20,0,20);
-INSERT INTO `guild_shops` VALUES (531,16537,25800,32680,20,0,10);    -- mythril_sword
-INSERT INTO `guild_shops` VALUES (531,16565,1395,8853,20,0,15);      -- spatha
-INSERT INTO `guild_shops` VALUES (531,16589,10444,67958,20,0,10);    -- two-hand._sword
-INSERT INTO `guild_shops` VALUES (531,16650,18270,36987,20,5,10);    -- war_pick
-INSERT INTO `guild_shops` VALUES (531,16651,66555,168606,20,2,5);    -- mythril_pick
-INSERT INTO `guild_shops` VALUES (531,16768,643,677,20,0,20);        -- bronze_zaghnal
-INSERT INTO `guild_shops` VALUES (531,16770,16803,24703,20,0,15);    -- zaghnal
-INSERT INTO `guild_shops` VALUES (531,17034,313,917,20,0,15);        -- bronze_mace
+INSERT INTO `guild_shops` VALUES (531,641,30,66,240,48,180);       -- chunk_of_tin_ore
+INSERT INTO `guild_shops` VALUES (531,643,675,3825,240,33,144);    -- chunk_of_iron_ore
+INSERT INTO `guild_shops` VALUES (531,644,1500,9800,240,0,0);      -- chunk_of_mythril_ore
+INSERT INTO `guild_shops` VALUES (531,1155,2400,2400,240,0,0);     -- handful_of_iron_sand
+INSERT INTO `guild_shops` VALUES (531,649,115,349,240,33,36);      -- bronze_ingot
+INSERT INTO `guild_shops` VALUES (531,651,2700,13680,240,33,36);   -- iron_ingot
+INSERT INTO `guild_shops` VALUES (531,652,3517,25620,60,0,0);      -- steel_ingot
+INSERT INTO `guild_shops` VALUES (531,653,19900,36400,60,0,0);     -- mythril_ingot
+INSERT INTO `guild_shops` VALUES (531,657,4690,21000,60,0,0);      -- lump_of_tama_hagane
+INSERT INTO `guild_shops` VALUES (531,660,61,423,240,33,36);       -- bronze_sheet
+INSERT INTO `guild_shops` VALUES (531,662,4050,20520,240,33,36);   -- iron_sheet
+INSERT INTO `guild_shops` VALUES (531,666,14868,39984,60,0,0);     -- steel_sheet
+INSERT INTO `guild_shops` VALUES (531,663,20240,45600,60,0,0);     -- mythril_sheet
+-- INSERT INTO `guild_shops` VALUES (531,664,20240,45600,60,0,0);     -- darksteel_sheet TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,672,81,254,60,0,0);          -- handful_of_bronze_scales
+INSERT INTO `guild_shops` VALUES (531,674,4945,30744,60,0,0);      -- handful_of_iron_scales
+INSERT INTO `guild_shops` VALUES (531,676,7350,13720,60,0,0);      -- handful_of_steel_scales
+INSERT INTO `guild_shops` VALUES (531,680,11781,12411,60,0,0);     -- iron_chain
+-- INSERT INTO `guild_shops` VALUES (531,682,20240,45600,60,0,0);     -- darksteel_chain TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,16411,11746,21322,60,0,0);   -- claws
+INSERT INTO `guild_shops` VALUES (531,16412,56544,56544,60,0,0);   -- mythril_claws
+-- INSERT INTO `guild_shops` VALUES (531,16413,20240,45600,60,0,0);   -- darksteel_claws TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,16399,20240,45600,60,0,0);   -- katars TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,16448,240,761,60,0,0);       -- bronze_dagger
+-- INSERT INTO `guild_shops` VALUES (531,16450,20240,45600,60,0,0);   -- dagger TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,16451,20240,45600,60,0,0);   -- mythril_dagger TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,16455,20240,45600,60,0,0);   -- baselard TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,16460,20240,45600,60,0,0);   -- kris TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,16530,1323,8853,60,0,0);     -- xiphos TODO: verify min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,16532,36503,36503,60,0,0);   -- gladius
+INSERT INTO `guild_shops` VALUES (531,16535,509,1056,60,0,0);      -- bronze_sword
+-- INSERT INTO `guild_shops` VALUES (531,16536,20240,45600,60,0,0);   -- iron_sword TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,16537,25800,32680,60,0,0);   -- mythril_sword
+-- INSERT INTO `guild_shops` VALUES (531,16538,20240,45600,60,0,0);   -- darksteel_sword TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,16545,20240,45600,60,0,0);   -- broadsword TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,16565,1395,8853,60,0,0);     -- spatha
+-- INSERT INTO `guild_shops` VALUES (531,16566,20240,45600,60,0,0);   -- longsword TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,16567,20240,45600,60,0,0);   -- knights_sword TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,16576,20240,45600,60,0,0);   -- hunting_sword TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,16524,20240,45600,60,0,0);   -- fleuret TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,16583,20240,45600,60,0,0);   -- claymore TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,16584,20240,45600,60,0,0);   -- mythril_claymore TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,16585,20240,45600,60,0,0);   -- darksteel_claymore TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,16589,10444,67958,60,0,0);   -- two_handed_sword
+-- INSERT INTO `guild_shops` VALUES (531,16590,20240,45600,60,0,0);   -- greatsword TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,17059,20240,45600,60,0,0);   -- bronze_rod TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,17060,20240,45600,60,0,0);   -- rod TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,17061,20240,45600,60,0,0);   -- mythril_rod TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,16650,18270,36987,60,0,0);   -- war_pick
+INSERT INTO `guild_shops` VALUES (531,16651,66555,168606,60,0,0);  -- mythril_pick
+INSERT INTO `guild_shops` VALUES (531,17034,313,917,60,0,0);       -- bronze_mace
+-- INSERT INTO `guild_shops` VALUES (531,17035,20240,45600,60,0,0);   -- mace TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,17036,20240,45600,60,0,0);   -- mythril_mace TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,16768,643,677,60,0,0);       -- bronze_zaghnal
+INSERT INTO `guild_shops` VALUES (531,16770,16803,24703,60,0,0);   -- zaghnal
+-- INSERT INTO `guild_shops` VALUES (531,16774,20240,45600,60,0,0);   -- scythe TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,16775,20240,45600,60,0,0);   -- mythril_scythe TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,12432,2711,2856,60,0,0);     -- faceguard
+INSERT INTO `guild_shops` VALUES (531,12424,7695,26676,60,0,0);    -- iron_mask
+INSERT INTO `guild_shops` VALUES (531,13871,27216,47355,60,0,0);   -- iron_visor
+INSERT INTO `guild_shops` VALUES (531,13873,61107,70963,60,0,0);   -- steel_visor
+INSERT INTO `guild_shops` VALUES (531,12688,1666,5664,60,0,0);     -- scale_finger_gauntlets
+-- INSERT INTO `guild_shops` VALUES (531,12680,20240,45600,60,0,0);   -- chain_mittens TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,14001,42476,88529,60,0,0);   -- iron_finger_gauntlets
+INSERT INTO `guild_shops` VALUES (531,14003,79745,84198,60,0,0);   -- steel_finger_gauntlets
+INSERT INTO `guild_shops` VALUES (531,12944,1519,5294,60,0,0);     -- scale_greaves
+-- INSERT INTO `guild_shops` VALUES (531,12936,20240,45600,60,0,0);   -- greaves TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,14118,20240,45600,60,0,0);   -- iron_greaves TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,14120,20240,45600,60,0,0);   -- steel_greaves TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,12816,2810,8735,60,0,0);     -- scale_cuisses TODO: verify min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,12808,20240,45600,60,0,0);   -- chain_hose TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,14243,20240,45600,60,0,0);   -- iron_cuisses TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,14245,52785,166096,60,0,0);  -- steel_cuisses
+-- INSERT INTO `guild_shops` VALUES (531,12560,20240,45600,60,0,0);   -- scale_mail TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,12552,20240,45600,60,0,0);   -- chainmail TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (531,13783,81084,162345,60,0,0);  -- iron_scale_mail
+-- INSERT INTO `guild_shops` VALUES (531,13785,20240,45600,60,0,0);   -- steel_scale_mail TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (531,12306,20240,45600,60,0,0);   -- kite_shield TODO: missing min_price and max_price
 
 -- Kamilah (Mhaura) Smithing Guild (S)
-INSERT INTO `guild_shops` VALUES (532,640,9,20,255,48,100);
-INSERT INTO `guild_shops` VALUES (532,641,30,66,255,48,100);
-INSERT INTO `guild_shops` VALUES (532,643,675,1224,165,33,65);
-INSERT INTO `guild_shops` VALUES (532,652,3517,22890,80,16,32);
-INSERT INTO `guild_shops` VALUES (532,660,61,423,165,33,65);
-INSERT INTO `guild_shops` VALUES (532,672,72,209,165,0,65);
-INSERT INTO `guild_shops` VALUES (532,680,12400,12411,80,0,32);
-INSERT INTO `guild_shops` VALUES (532,12706,21945,21945,20,0,15);
+INSERT INTO `guild_shops` VALUES (532,641,30,66,240,48,110);       -- chunk_of_tin_ore
+INSERT INTO `guild_shops` VALUES (532,643,675,3825,240,33,110);    -- chunk_of_iron_ore
+INSERT INTO `guild_shops` VALUES (532,649,115,349,120,0,0);        -- bronze_ingot
+INSERT INTO `guild_shops` VALUES (532,651,2700,13680,120,0,0);     -- iron_ingot
+INSERT INTO `guild_shops` VALUES (532,652,3517,25620,120,16,90);   -- steel_ingot
+INSERT INTO `guild_shops` VALUES (532,660,61,423,120,33,36);       -- bronze_sheet
+INSERT INTO `guild_shops` VALUES (532,662,4050,20520,120,0,0);     -- iron_sheet
+INSERT INTO `guild_shops` VALUES (532,672,81,254,60,0,0);          -- handful_of_bronze_scales
+INSERT INTO `guild_shops` VALUES (532,674,4945,30744,60,0,0);      -- handful_of_iron_scales
+INSERT INTO `guild_shops` VALUES (532,680,11781,12411,60,0,0);     -- iron_chain
+-- INSERT INTO `guild_shops` VALUES (532,12552,20240,45600,60,0,0);   -- chainmail TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (532,12560,20240,45600,60,0,0);   -- scale_mail TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (532,12578,61086,81086,60,0,0);   -- padded_armor
+-- INSERT INTO `guild_shops` VALUES (532,12936,20240,45600,60,0,0);   -- greaves TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (532,12944,1519,5294,60,0,0);     -- scale_greaves
+INSERT INTO `guild_shops` VALUES (532,12962,27866,76830,60,0,0);   -- leggings
+-- INSERT INTO `guild_shops` VALUES (532,12680,20240,45600,60,0,0);   -- chain_mittens TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (532,12688,1666,5664,60,0,0);     -- scale_finger_gauntlets
+INSERT INTO `guild_shops` VALUES (532,12706,21945,21945,60,0,0);  -- iron_mittens
 
 -- Amulya (Metalworks) Smithing Guild (S)
-INSERT INTO `guild_shops` VALUES (5332,640,9,44,255,48,100);         -- copper_ore
-INSERT INTO `guild_shops` VALUES (5332,641,30,66,255,48,100);        -- tin_ore
-INSERT INTO `guild_shops` VALUES (5332,643,675,1656,165,33,65);      -- iron_ore
-INSERT INTO `guild_shops` VALUES (5332,644,2000,10000,165,33,65);    -- mythril_ore
-INSERT INTO `guild_shops` VALUES (5332,649,103,349,165,33,65);       -- bronze_ingot
-INSERT INTO `guild_shops` VALUES (5332,651,2700,4680,165,33,65);     -- iron_ingot
-INSERT INTO `guild_shops` VALUES (5332,660,69,294,165,33,65);        -- bronze_sheet
-INSERT INTO `guild_shops` VALUES (5332,662,4050,7020,165,33,65);     -- iron_sheet
-INSERT INTO `guild_shops` VALUES (5332,664,66690,66690,30,0,12);     -- darksteel_sheet
-INSERT INTO `guild_shops` VALUES (5332,672,81,106,165,0,65);         -- bronze_scales
-INSERT INTO `guild_shops` VALUES (5332,674,4945,12411,165,0,65);     -- iron_scales
-INSERT INTO `guild_shops` VALUES (5332,676,7350,11466,80,0,32);      -- steel_scales
-INSERT INTO `guild_shops` VALUES (5332,680,4725,11592,80,0,32);      -- iron_chain
-INSERT INTO `guild_shops` VALUES (5332,2143,75,75,255,48,100);       -- mandrel
-INSERT INTO `guild_shops` VALUES (5332,2144,75,75,255,48,100);       -- workshop_anvil
-INSERT INTO `guild_shops` VALUES (5332,12299,708,2835,20,0,15);      -- aspis
-INSERT INTO `guild_shops` VALUES (5332,12450,15300,15300,20,0,10);   -- padded_cap
-INSERT INTO `guild_shops` VALUES (5332,12544,36855,83538,20,0,5);    -- breastplate
-INSERT INTO `guild_shops` VALUES (5332,12578,61086,81086,20,0,10);   -- padded_armor
-INSERT INTO `guild_shops` VALUES (5332,12672,19440,23328,20,0,15);   -- gauntlets
-INSERT INTO `guild_shops` VALUES (5332,12704,191,394,20,0,20);       -- bronze_mittens
-INSERT INTO `guild_shops` VALUES (5332,12706,12960,12960,20,0,15);   -- iron_mittens
-INSERT INTO `guild_shops` VALUES (5332,12800,34020,69552,20,0,10);   -- cuisses
-INSERT INTO `guild_shops` VALUES (5332,12832,409,818,20,0,20);       -- bronze_subligar
-INSERT INTO `guild_shops` VALUES (5332,12836,19008,38565,20,0,10);   -- iron_subligar
-INSERT INTO `guild_shops` VALUES (5332,12928,34927,45144,20,0,5);    -- plate_leggings
-INSERT INTO `guild_shops` VALUES (5332,12962,27866,76830,20,0,5);    -- leggings
-INSERT INTO `guild_shops` VALUES (5332,13080,13770,14412,20,0,10);   -- gorget
-INSERT INTO `guild_shops` VALUES (5332,16406,10713,17020,20,0,10);   -- baghnakhs
-INSERT INTO `guild_shops` VALUES (5332,16465,229,754,20,0,20);       -- bronze_knife
-INSERT INTO `guild_shops` VALUES (5332,16467,22422,22422,20,0,10);
-INSERT INTO `guild_shops` VALUES (5332,16552,8914,8914,20,0,15);
-INSERT INTO `guild_shops` VALUES (5332,16558,10200,81600,20,0,10);
-INSERT INTO `guild_shops` VALUES (5332,16640,622,2898,20,0,20);
-INSERT INTO `guild_shops` VALUES (5332,16657,95040,314160,20,0,3);
-INSERT INTO `guild_shops` VALUES (5332,16704,1323,3565,20,0,10);
-INSERT INTO `guild_shops` VALUES (5332,16706,30912,90783,20,0,10);
-INSERT INTO `guild_shops` VALUES (5332,17045,11970,29366,20,0,10);
-INSERT INTO `guild_shops` VALUES (5332,17298,598,620,2970,0,1188);
-INSERT INTO `guild_shops` VALUES (5332,17336,4,11,2970,0,1188);
+INSERT INTO `guild_shops` VALUES (5332,641,30,66,240,48,180);       -- chunk_of_tin_ore
+INSERT INTO `guild_shops` VALUES (5332,643,675,3825,240,33,180);    -- chunk_of_iron_ore
+INSERT INTO `guild_shops` VALUES (5332,644,1500,9800,240,0,0);      -- chunk_of_mythril_ore
+-- INSERT INTO `guild_shops` VALUES (5332,645,28272,28272,240,0,0);    -- chunk_of_darksteel_ore TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,649,115,349,240,33,36);      -- bronze_ingot
+INSERT INTO `guild_shops` VALUES (5332,651,2700,13680,240,33,36);   -- iron_ingot
+INSERT INTO `guild_shops` VALUES (5332,652,3517,25620,60,0,0);      -- steel_ingot
+INSERT INTO `guild_shops` VALUES (5332,653,19900,36400,60,0,0);     -- mythril_ingot
+-- INSERT INTO `guild_shops` VALUES (5332,654,19900,36400,60,0,0);     -- darksteel_ingot TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,660,61,423,240,33,36);       -- bronze_sheet
+INSERT INTO `guild_shops` VALUES (5332,662,4050,20520,240,33,36);   -- iron_sheet
+INSERT INTO `guild_shops` VALUES (5332,666,14868,39984,240,0,0);    -- steel_sheet
+INSERT INTO `guild_shops` VALUES (5332,663,20240,45600,240,0,0);    -- mythril_sheet
+INSERT INTO `guild_shops` VALUES (5332,664,66690,66690,240,0,0);    -- darksteel_sheet TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,672,81,254,60,0,0);          -- handful_of_bronze_scales
+INSERT INTO `guild_shops` VALUES (5332,674,4945,30744,60,0,0);      -- handful_of_iron_scales
+INSERT INTO `guild_shops` VALUES (5332,676,7350,13720,60,0,0);      -- handful_of_steel_scales
+INSERT INTO `guild_shops` VALUES (5332,680,11781,12411,60,0,0);     -- iron_chain
+-- INSERT INTO `guild_shops` VALUES (5332,682,20240,45600,60,0,0);     -- darksteel_chain TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,16390,439,1161,60,0,0);      -- bronze_knuckles
+-- INSERT INTO `guild_shops` VALUES (5332,16392,439,1161,60,0,0);      -- metal_knuckles TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5332,16393,439,1161,60,0,0);      -- mythril_knuckles TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5332,16394,439,1161,60,0,0);      -- darksteel_knuckles TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,16406,10713,17020,60,0,0);   -- baghnakhs
+INSERT INTO `guild_shops` VALUES (5332,16419,34320,76416,60,0,0);   -- patas
+INSERT INTO `guild_shops` VALUES (5332,16465,229,754,60,0,0);       -- bronze_knife
+-- INSERT INTO `guild_shops` VALUES (5332,16466,439,1161,60,0,0);      -- knife TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,16467,22422,22422,60,0,0);   -- mythril_knife
+-- INSERT INTO `guild_shops` VALUES (5332,16468,439,1161,60,0,0);      -- darksteel_knife TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5332,16473,439,1161,60,0,0);      -- kukri TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5332,16475,439,1161,60,0,0);      -- mythril_kukri TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,16552,8914,8914,60,0,0);     -- scimitar
+-- INSERT INTO `guild_shops` VALUES (5332,16553,439,1161,60,0,0);      -- tulwar TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,16558,51000,81600,60,0,0);   -- falchion
+-- INSERT INTO `guild_shops` VALUES (5332,16559,439,1161,60,0,0);      -- darksteel_falchion TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5332,16512,439,1161,60,0,0);      -- bilbo TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5332,16513,62834,62834,60,0,0);   -- tuck TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5332,16517,62834,62834,60,0,0);   -- degen TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5332,16519,62834,62834,60,0,0);   -- schlaeger TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,16640,290,2898,60,0,0);      -- bronze_axe
+-- INSERT INTO `guild_shops` VALUES (5332,16643,62834,62834,60,0,0);   -- battleaxe TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5332,16644,62834,62834,60,0,0);   -- mythril_axe TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,16657,95040,314160,60,0,0);  -- tabar
+INSERT INTO `guild_shops` VALUES (5332,16704,1323,3565,60,0,0);     -- butterfly_axe
+-- INSERT INTO `guild_shops` VALUES (5332,16705,62834,62834,60,0,0);   -- greataxe TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,16706,30912,90783,60,0,0);   -- heavy_axe
+-- INSERT INTO `guild_shops` VALUES (5332,17042,290,2898,60,0,0);      -- bronze_hammer TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (5332,17044,290,2898,60,0,0);      -- war_hammer TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,17045,11970,29366,60,0,0);   -- maul
+-- INSERT INTO `guild_shops` VALUES (5332,17248,62834,62834,60,0,0);   -- arquebus TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,12960,222,573,60,0,0);       -- bronze_leggings
+INSERT INTO `guild_shops` VALUES (5332,12962,27866,76830,60,0,0);   -- leggings
+INSERT INTO `guild_shops` VALUES (5332,12928,34927,45144,60,0,0);   -- plate_leggings
+-- INSERT INTO `guild_shops` VALUES (5332,12448,290,705,60,0,0);       -- bronze_cap TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,12450,15300,15300,60,0,0);   -- padded_cap
+INSERT INTO `guild_shops` VALUES (5332,12832,409,818,60,0,0);       -- bronze_subligar
+INSERT INTO `guild_shops` VALUES (5332,12836,19008,38565,60,0,0);   -- iron_subligar
+INSERT INTO `guild_shops` VALUES (5332,12800,34020,69552,60,0,0);   -- cuisses
+INSERT INTO `guild_shops` VALUES (5332,12704,191,394,60,0,0);       -- bronze_mittens
+INSERT INTO `guild_shops` VALUES (5332,12706,12960,12960,60,0,0);   -- iron_mittens
+INSERT INTO `guild_shops` VALUES (5332,12672,19440,23328,60,0,0);   -- gauntlets
+-- INSERT INTO `guild_shops` VALUES (5332,12576,290,1249,60,0,0);      -- bronze_harness TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,12578,61086,81086,60,0,0);   -- padded_armor
+INSERT INTO `guild_shops` VALUES (5332,12544,36855,83538,60,0,0);   -- breastplate
+INSERT INTO `guild_shops` VALUES (5332,13080,13770,14412,60,0,0);   -- gorget
+INSERT INTO `guild_shops` VALUES (5332,12299,708,2835,60,0,0);      -- aspis
+INSERT INTO `guild_shops` VALUES (5332,11872,59731,62834,60,0,0);   -- targe
+-- INSERT INTO `guild_shops` VALUES (5332,12323,62834,62834,60,0,0);   -- scutum TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (5332,17336,4,11,240,0,0);         -- crossbow_bolt
+INSERT INTO `guild_shops` VALUES (5332,17337,4,11,240,0,0);         -- mythril_bolt
+INSERT INTO `guild_shops` VALUES (5332,17298,38,38,240,0,0);      -- tathlum TODO: missing min_price and max_price
 
 -- Beugungel (Carpenter's Landing) Woodworking Guild
-INSERT INTO `guild_shops` VALUES (534,688,12,30,255,48,100);
-INSERT INTO `guild_shops` VALUES (534,693,640,1622,255,48,100);
-INSERT INTO `guild_shops` VALUES (534,695,120,184,255,48,100);
-INSERT INTO `guild_shops` VALUES (534,696,330,686,255,48,100);
-INSERT INTO `guild_shops` VALUES (534,698,93,182,255,48,100);
-INSERT INTO `guild_shops` VALUES (534,1021,312,500,255,48,100);
-INSERT INTO `guild_shops` VALUES (534,1657,75,255,255,48,100);
+INSERT INTO `guild_shops` VALUES (534,1657,75,255,240,48,180);  -- bundling_twine
+INSERT INTO `guild_shops` VALUES (534,1021,312,500,200,48,180); -- hatchet
+INSERT INTO `guild_shops` VALUES (534,688,15,30,200,48,180);    -- arrowwood_log
+INSERT INTO `guild_shops` VALUES (534,698,72,441,200,48,180);   -- ash_log
+INSERT INTO `guild_shops` VALUES (534,696,330,2024,200,48,150); -- yew_log
+INSERT INTO `guild_shops` VALUES (534,695,120,736,200,48,150);  -- willow_log
+INSERT INTO `guild_shops` VALUES (534,693,640,3928,240,48,180); -- walnut_log
 
 -- Akamafula (Lower Jeuno) Tenshodo Merchent
 INSERT INTO `guild_shops` VALUES (60417,16896,517,592,20,10,20);
@@ -1413,53 +1520,197 @@ INSERT INTO `guild_shops` VALUES (60426,17405,540,540,20,6,12);
 INSERT INTO `guild_shops` VALUES (60426,17407,303,303,20,6,12);
 
 -- Ndego (Smithing Guild) Al Zahbi
-INSERT INTO `guild_shops` VALUES (60427,640,9,36,255,48,100);
-INSERT INTO `guild_shops` VALUES (60427,641,30,43,255,48,100);
-INSERT INTO `guild_shops` VALUES (60427,643,675,2700,165,33,65);
-INSERT INTO `guild_shops` VALUES (60427,649,288,349,165,33,65);
-INSERT INTO `guild_shops` VALUES (60427,651,2700,3060,165,33,65);
-INSERT INTO `guild_shops` VALUES (60427,660,69,294,165,33,65);
-INSERT INTO `guild_shops` VALUES (60427,662,4050,9898,165,33,65);
-INSERT INTO `guild_shops` VALUES (60427,2143,320,320,255,48,100);
-INSERT INTO `guild_shops` VALUES (60427,2144,75,75,255,48,100);
+INSERT INTO `guild_shops` VALUES (60427,640,9,36,240,48,180);        -- chunk_of_copper_ore
+INSERT INTO `guild_shops` VALUES (60427,641,30,66,240,48,180);       -- chunk_of_tin_ore
+INSERT INTO `guild_shops` VALUES (60427,643,675,3825,240,33,180);    -- chunk_of_iron_ore
+INSERT INTO `guild_shops` VALUES (60427,644,1500,9800,240,0,0);      -- chunk_of_mythril_ore
+INSERT INTO `guild_shops` VALUES (60427,1155,2400,2400,240,0,0);     -- handful_of_iron_sand
+INSERT INTO `guild_shops` VALUES (60427,649,115,349,240,33,36);      -- bronze_ingot
+INSERT INTO `guild_shops` VALUES (60427,651,2700,13680,240,33,36);   -- iron_ingot
+INSERT INTO `guild_shops` VALUES (60427,652,3517,25620,60,0,0);      -- steel_ingot
+INSERT INTO `guild_shops` VALUES (60427,653,19900,36400,60,0,0);     -- mythril_ingot
+INSERT INTO `guild_shops` VALUES (60427,657,4690,21000,60,0,0);      -- lump_of_tama_hagane
+INSERT INTO `guild_shops` VALUES (60427,660,61,423,240,33,36);       -- bronze_sheet
+INSERT INTO `guild_shops` VALUES (60427,662,4050,20520,240,33,36);   -- iron_sheet
+INSERT INTO `guild_shops` VALUES (60427,666,14868,39984,60,0,0);     -- steel_sheet
+INSERT INTO `guild_shops` VALUES (60427,663,20240,45600,60,0,0);     -- mythril_sheet
+-- INSERT INTO `guild_shops` VALUES (60427,664,20240,45600,60,0,0);     -- darksteel_sheet TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,672,81,254,60,0,0);          -- handful_of_bronze_scales
+INSERT INTO `guild_shops` VALUES (60427,674,4945,30744,60,0,0);      -- handful_of_iron_scales
+INSERT INTO `guild_shops` VALUES (60427,676,7350,13720,60,0,0);      -- handful_of_steel_scales
+INSERT INTO `guild_shops` VALUES (60427,680,11781,12411,60,0,0);     -- iron_chain
+-- INSERT INTO `guild_shops` VALUES (60427,682,20240,45600,60,0,0);     -- darksteel_chain TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,16411,11746,21322,60,0,0);   -- claws
+INSERT INTO `guild_shops` VALUES (60427,16412,56544,56544,60,0,0);   -- mythril_claws
+-- INSERT INTO `guild_shops` VALUES (60427,16413,20240,45600,60,0,0);   -- darksteel_claws TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,16399,20240,45600,60,0,0);   -- katars TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,16448,240,761,60,0,0);       -- bronze_dagger
+-- INSERT INTO `guild_shops` VALUES (60427,16450,20240,45600,60,0,0);   -- dagger TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,16451,20240,45600,60,0,0);   -- mythril_dagger TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,16455,20240,45600,60,0,0);   -- baselard TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,16460,20240,45600,60,0,0);   -- kris TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,16530,1323,8853,60,0,0);     -- xiphos TODO: verify min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,16532,36503,36503,60,0,0);   -- gladius
+INSERT INTO `guild_shops` VALUES (60427,16535,509,1056,60,0,0);      -- bronze_sword
+-- INSERT INTO `guild_shops` VALUES (60427,16536,20240,45600,60,0,0);   -- iron_sword TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,16537,25800,32680,60,0,0);   -- mythril_sword
+-- INSERT INTO `guild_shops` VALUES (60427,16538,20240,45600,60,0,0);   -- darksteel_sword TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,16545,20240,45600,60,0,0);   -- broadsword TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,16565,1395,8853,60,0,0);     -- spatha
+-- INSERT INTO `guild_shops` VALUES (60427,16566,20240,45600,60,0,0);   -- longsword TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,16567,20240,45600,60,0,0);   -- knights_sword TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,16576,20240,45600,60,0,0);   -- hunting_sword TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,16524,20240,45600,60,0,0);   -- fleuret TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,16583,20240,45600,60,0,0);   -- claymore TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,16584,20240,45600,60,0,0);   -- mythril_claymore TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,16585,20240,45600,60,0,0);   -- darksteel_claymore TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,16589,10444,67958,60,0,0);   -- two_handed_sword
+-- INSERT INTO `guild_shops` VALUES (60427,16590,20240,45600,60,0,0);   -- greatsword TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,17059,20240,45600,60,0,0);   -- bronze_rod TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,17060,20240,45600,60,0,0);   -- rod TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,17061,20240,45600,60,0,0);   -- mythril_rod TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,16650,18270,36987,60,0,0);   -- war_pick
+INSERT INTO `guild_shops` VALUES (60427,16651,66555,168606,60,0,0);  -- mythril_pick
+INSERT INTO `guild_shops` VALUES (60427,17034,313,917,60,0,0);       -- bronze_mace
+-- INSERT INTO `guild_shops` VALUES (60427,17035,20240,45600,60,0,0);   -- mace TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,17036,20240,45600,60,0,0);   -- mythril_mace TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,16768,643,677,60,0,0);       -- bronze_zaghnal
+INSERT INTO `guild_shops` VALUES (60427,16770,16803,24703,60,0,0);   -- zaghnal
+-- INSERT INTO `guild_shops` VALUES (60427,16774,20240,45600,60,0,0);   -- scythe TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,16775,20240,45600,60,0,0);   -- mythril_scythe TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,12432,2711,2856,60,0,0);     -- faceguard
+INSERT INTO `guild_shops` VALUES (60427,12424,7695,26676,60,0,0);    -- iron_mask
+INSERT INTO `guild_shops` VALUES (60427,13871,27216,47355,60,0,0);   -- iron_visor
+INSERT INTO `guild_shops` VALUES (60427,13873,61107,70963,60,0,0);   -- steel_visor
+INSERT INTO `guild_shops` VALUES (60427,12688,1666,5664,60,0,0);     -- scale_finger_gauntlets
+-- INSERT INTO `guild_shops` VALUES (60427,12680,20240,45600,60,0,0);   -- chain_mittens TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,14001,42476,88529,60,0,0);   -- iron_finger_gauntlets
+INSERT INTO `guild_shops` VALUES (60427,14003,79745,84198,60,0,0);   -- steel_finger_gauntlets
+INSERT INTO `guild_shops` VALUES (60427,12944,1519,5294,60,0,0);     -- scale_greaves
+-- INSERT INTO `guild_shops` VALUES (60427,12936,20240,45600,60,0,0);   -- greaves TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,14118,20240,45600,60,0,0);   -- iron_greaves TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,14120,20240,45600,60,0,0);   -- steel_greaves TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,12816,2810,8735,60,0,0);     -- scale_cuisses TODO: verify min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,12808,20240,45600,60,0,0);   -- chain_hose TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,14243,20240,45600,60,0,0);   -- iron_cuisses TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,14245,52785,166096,60,0,0);  -- steel_cuisses
+-- INSERT INTO `guild_shops` VALUES (60427,12560,20240,45600,60,0,0);   -- scale_mail TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,12552,20240,45600,60,0,0);   -- chainmail TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,13783,81084,162345,60,0,0);  -- iron_scale_mail
+-- INSERT INTO `guild_shops` VALUES (60427,13785,20240,45600,60,0,0);   -- steel_scale_mail TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60427,12306,20240,45600,60,0,0);   -- kite_shield TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60427,2143,320,320,240,48,180);    -- mandrel
+INSERT INTO `guild_shops` VALUES (60427,2144,75,75,240,48,180);      -- workshop_anvil
 
 -- Dehbi Moshal (Woodworking Guild) Al Zahbi
-INSERT INTO `guild_shops` VALUES (60428,23,829,2035,20,0,15);
-INSERT INTO `guild_shops` VALUES (60428,688,15,30,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,689,27,59,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,690,1401,10295,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,691,45,192,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,693,640,2459,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,694,2119,4182,165,33,65);
-INSERT INTO `guild_shops` VALUES (60428,695,120,184,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,696,330,686,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,697,528,930,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,698,72,86,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,699,4740,29072,165,33,65);
-INSERT INTO `guild_shops` VALUES (60428,700,9075,10103,165,33,65);
-INSERT INTO `guild_shops` VALUES (60428,701,6615,18345,165,33,65);
-INSERT INTO `guild_shops` VALUES (60428,702,9600,45568,165,33,65);
-INSERT INTO `guild_shops` VALUES (60428,704,108,248,375,100,150);
-INSERT INTO `guild_shops` VALUES (60428,705,7,18,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,706,27,97,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,707,1723,1838,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,708,45,276,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,710,2119,2543,165,33,65);
-INSERT INTO `guild_shops` VALUES (60428,712,120,256,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,713,330,426,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,714,607,2559,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,715,72,215,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,716,4740,26544,165,33,65);
-INSERT INTO `guild_shops` VALUES (60428,721,704,2465,255,48,100);
-INSERT INTO `guild_shops` VALUES (60428,17318,6,13,8910,0,3564);
-INSERT INTO `guild_shops` VALUES (60428,17320,21,26,5940,0,2376);
-INSERT INTO `guild_shops` VALUES (60428,17321,48,60,2970,0,1188);
+INSERT INTO `guild_shops` VALUES (60428,688,15,30,240,48,180);      -- arrowwood_log
+INSERT INTO `guild_shops` VALUES (60428,689,27,59,240,48,144);      -- lauan_log
+INSERT INTO `guild_shops` VALUES (60428,691,45,192,240,48,144);     -- maple_log
+INSERT INTO `guild_shops` VALUES (60428,698,72,441,240,48,144);     -- ash_log
+INSERT INTO `guild_shops` VALUES (60428,695,120,736,240,48,144);    -- willow_log
+INSERT INTO `guild_shops` VALUES (60428,697,528,3243,180,48,108);   -- holly_log
+INSERT INTO `guild_shops` VALUES (60428,696,330,2024,180,48,108);   -- yew_log
+INSERT INTO `guild_shops` VALUES (60428,690,1378,10938,255,48,84);  -- elm_log
+INSERT INTO `guild_shops` VALUES (60428,693,640,3928,60,48,36);     -- walnut_log
+INSERT INTO `guild_shops` VALUES (60428,694,2119,12999,120,33,72);  -- chestnut_log
+INSERT INTO `guild_shops` VALUES (60428,699,4740,29072,60,33,36);   -- oak_log
+INSERT INTO `guild_shops` VALUES (60428,701,6615,40572,60,33,36);   -- rosewood_log
+INSERT INTO `guild_shops` VALUES (60428,700,9075,19844,60,33,36);   -- mahogany_log
+INSERT INTO `guild_shops` VALUES (60428,702,9600,45568,60,33,36);   -- ebony_log
+-- INSERT INTO `guild_shops` VALUES (60428,727,704,2465,240,0,0);      -- dogwood_log TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60428,729,9600,45568,240,0,0);    -- bloodwood_log TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60428,704,108,662,240,100,36);    -- bamboo_stick
+INSERT INTO `guild_shops` VALUES (60428,721,704,2465,240,0,0);      -- rattan_lumber
+INSERT INTO `guild_shops` VALUES (60428,705,3,18,240,48,36);        -- arrowwood_lumber
+INSERT INTO `guild_shops` VALUES (60428,706,27,165,240,48,36);      -- lauan_lumber
+INSERT INTO `guild_shops` VALUES (60428,708,45,276,240,48,36);      -- maple_lumber
+INSERT INTO `guild_shops` VALUES (60428,715,72,441,240,48,36);      -- ash_lumber
+INSERT INTO `guild_shops` VALUES (60428,712,120,736,240,48,36);     -- willow_lumber
+INSERT INTO `guild_shops` VALUES (60428,714,607,3726,180,48,27);    -- holly_lumber
+INSERT INTO `guild_shops` VALUES (60428,713,330,2024,180,48,27);    -- yew_lumber
+INSERT INTO `guild_shops` VALUES (60428,707,1723,10570,120,48,18);  -- elm_lumber
+INSERT INTO `guild_shops` VALUES (60428,710,2119,12999,120,33,18);  -- chestnut_lumber
+INSERT INTO `guild_shops` VALUES (60428,716,4740,26544,60,33,15);   -- oak_lumber
+INSERT INTO `guild_shops` VALUES (60428,711,1015,3982,60,0,0);      -- walnut_lumber
+-- INSERT INTO `guild_shops` VALUES (60428,718,41983,41983,60,0,0);    -- rosewood_lumber TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60428,717,41140,41140,60,0,0);    -- mahogany_lumber TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60428,719,23552,62464,60,0,0);    -- ebony_lumber
+-- INSERT INTO `guild_shops` VALUES (60428,720,41140,41140,60,0,0);    -- ancient_lumber TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60428,728,41140,41140,60,0,0);    -- dogwood_lumber TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60428,730,41140,41140,60,0,0);    -- bloodwood_lumber TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60428,12984,176,280,24,0,0);      -- ash_clogs
+INSERT INTO `guild_shops` VALUES (60428,12985,1625,7605,24,0,0);    -- holly_clogs
+INSERT INTO `guild_shops` VALUES (60428,12986,6885,40024,24,0,0);   -- chestnut_sabots
+INSERT INTO `guild_shops` VALUES (60428,12987,38707,38707,24,0,0);  -- ebony_sabots
+INSERT INTO `guild_shops` VALUES (60428,12289,88,537,30,0,0);       -- lauaun_shield
+INSERT INTO `guild_shops` VALUES (60428,12290,847,1173,30,0,0);     -- maple_shield
+-- INSERT INTO `guild_shops` VALUES (60428,12291,847,1173,30,0,0);     -- elm_shield TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60428,12292,847,1173,30,0,0);     -- mahogany_shield TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60428,12293,847,1173,30,0,0);     -- oak_shield TODO: missing min_price and max_price
+-- INSERT INTO `guild_shops` VALUES (60428,2,847,1173,12,0,0);         -- simple_bed TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60428,22,282,1639,12,0,0);        -- workbench
+INSERT INTO `guild_shops` VALUES (60428,97,5508,13512,12,0,0);      -- book_holder
+INSERT INTO `guild_shops` VALUES (60428,102,291,713,12,0,0);        -- flower_stand
+-- INSERT INTO `guild_shops` VALUES (60428,21,847,1173,12,0,0);        -- desk TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60428,26,31500,137340,12,0,0);    -- tarutaru_desk
+INSERT INTO `guild_shops` VALUES (60428,23,829,2035,12,0,0);        -- maple_table
+INSERT INTO `guild_shops` VALUES (60428,92,738,3621,12,0,0);        -- tarutaru_stool
+INSERT INTO `guild_shops` VALUES (60428,24,70200,408096,12,0,0);    -- oak_table
+INSERT INTO `guild_shops` VALUES (60428,17348,11256,32592,60,0,0);  -- traversiere
+INSERT INTO `guild_shops` VALUES (60428,3,295500,295500,60,0,0);    -- oak_bed
+INSERT INTO `guild_shops` VALUES (60428,17345,69,163,60,0,0);       -- flute
+INSERT INTO `guild_shops` VALUES (60428,17347,1028,5368,60,0,0);    -- piccolo
+INSERT INTO `guild_shops` VALUES (60428,17353,37,94,60,0,0);        -- maple_harp
+INSERT INTO `guild_shops` VALUES (60428,17354,1675,12200,60,0,0);   -- harp
+INSERT INTO `guild_shops` VALUES (60428,17355,13400,79200,60,0,0);  -- rose_harp
+INSERT INTO `guild_shops` VALUES (60428,17024,48,351,60,0,0);       -- ash_club
+INSERT INTO `guild_shops` VALUES (60428,17025,1165,8282,60,0,0);    -- chestnut_club
+INSERT INTO `guild_shops` VALUES (60428,17027,7525,22127,60,0,0);   -- oak_cudgel
+INSERT INTO `guild_shops` VALUES (60428,17030,14766,81107,60,0,0);  -- great_club
+INSERT INTO `guild_shops` VALUES (60428,17049,34,102,60,0,0);       -- maple_wand
+INSERT INTO `guild_shops` VALUES (60428,17050,247,1406,60,0,0);     -- willow_wand
+INSERT INTO `guild_shops` VALUES (60428,17051,1049,3038,60,0,0);    -- yew_wand
+INSERT INTO `guild_shops` VALUES (60428,17052,3827,27189,60,0,0);   -- chestnut_wand
+INSERT INTO `guild_shops` VALUES (60428,17053,20944,41289,60,0,0);  -- rose_wand
+INSERT INTO `guild_shops` VALUES (60428,17152,41,214,60,0,0);       -- shortbow
+INSERT INTO `guild_shops` VALUES (60428,17153,1039,2615,60,0,0);    -- self_bow
+INSERT INTO `guild_shops` VALUES (60428,17155,5625,16875,60,0,0);   -- composite_bow
+INSERT INTO `guild_shops` VALUES (60428,17156,82971,82971,60,0,0);  -- kaman
+INSERT INTO `guild_shops` VALUES (60428,17160,870,969,60,0,0);      -- longbow
+INSERT INTO `guild_shops` VALUES (60428,17154,15602,38649,60,0,0);  -- wrapped_bow
+-- INSERT INTO `guild_shops` VALUES (60428,17161,15602,38649,60,0,0);  -- power_bow TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60428,17162,14614,42969,60,0,0);  -- great_bow
+INSERT INTO `guild_shops` VALUES (60428,17163,28944,82080,60,0,0);  -- battle_bow
+INSERT INTO `guild_shops` VALUES (60428,17164,57405,166219,60,0,0); -- war_bow
+INSERT INTO `guild_shops` VALUES (60428,17088,46,261,60,0,0);       -- ash_staff
+INSERT INTO `guild_shops` VALUES (60428,17089,424,1066,60,0,0);     -- holly_staff
+INSERT INTO `guild_shops` VALUES (60428,17090,3371,7103,60,0,0);    -- elm_staff
+INSERT INTO `guild_shops` VALUES (60428,17091,3371,7103,60,0,0);    -- oak_staff
+INSERT INTO `guild_shops` VALUES (60428,17095,281,1932,60,0,0);     -- ash_pole
+INSERT INTO `guild_shops` VALUES (60428,17096,3400,24161,60,0,0);   -- holly_pole
+INSERT INTO `guild_shops` VALUES (60428,17097,22617,35932,60,0,0);  -- elm_pole
+INSERT INTO `guild_shops` VALUES (60428,17098,29390,72633,60,0,0);  -- oak_pole
+INSERT INTO `guild_shops` VALUES (60428,17424,7717,49980,60,0,0);   -- spiked_club
+-- INSERT INTO `guild_shops` VALUES (60428,17523,7717,49980,60,0,0);   -- quarterstaff TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60428,16832,194,267,60,0,0);      -- harpoon
+INSERT INTO `guild_shops` VALUES (60428,16833,809,4294,60,0,0);     -- bronze_spear
+INSERT INTO `guild_shops` VALUES (60428,16834,6448,25376,60,0,0);   -- brass_spear
+INSERT INTO `guild_shops` VALUES (60428,16835,27165,34750,60,0,0);  -- spear
+-- INSERT INTO `guild_shops` VALUES (60428,16836,7717,49980,60,0,0);   -- halberd TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60428,16845,31314,34445,60,0,0);  -- lance
+INSERT INTO `guild_shops` VALUES (60428,17216,187,354,60,0,0);      -- light_crossbow
+-- INSERT INTO `guild_shops` VALUES (60428,17217,7717,49980,60,0,0);   -- crossbow TODO: missing min_price and max_price
+INSERT INTO `guild_shops` VALUES (60428,17218,10311,67100,60,0,0);  -- zamburak
+INSERT INTO `guild_shops` VALUES (60428,17280,1172,5250,60,0,0);    -- boomerang
+INSERT INTO `guild_shops` VALUES (60428,17318,6,18,240,48,50);      -- wooden_arrow
+INSERT INTO `guild_shops` VALUES (60428,17320,10,14,240,0,0);       -- iron_arrow
+INSERT INTO `guild_shops` VALUES (60428,17321,28,34,240,0,0);       -- silver_arrow
 
 -- Bornahn (Goldsmithing Guild) Al Zahbi
 INSERT INTO `guild_shops` VALUES (60429,640,9,36,240,48,180);      -- chunk_of_copper_ore
 INSERT INTO `guild_shops` VALUES (60429,642,93,620,120,0,0);       -- chunk_of_zinc_ore
 INSERT INTO `guild_shops` VALUES (60429,736,315,1260,240,48,180);  -- chunk_of_silver_ore
-INSERT INTO `guild_shops` VALUES (60429,644,1500,9200,120,33,12);  -- chunk_of_mythril_ore
+INSERT INTO `guild_shops` VALUES (60429,644,1500,9800,120,33,12);  -- chunk_of_mythril_ore
 -- INSERT INTO `guild_shops` VALUES (60429,737,1500,9200,120,0,0);    -- chunk_of_gold_ore TODO: missing min_price and max_price
 INSERT INTO `guild_shops` VALUES (60429,738,6000,58032,120,0,0);   -- chunk_of_platinum_ore TODO: verify min_price and max_price
 -- INSERT INTO `guild_shops` VALUES (60429,648,6000,58032,120,0,0);   -- copper_ingot TODO: missing min_price and max_price
