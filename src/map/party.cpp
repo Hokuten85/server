@@ -631,7 +631,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
     {
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PEntity);
 
-        if (!PEntity)
+        if (!PChar)
         {
             ShowWarning("Non-Player passed into function (%s).", PEntity->getName());
             return;
