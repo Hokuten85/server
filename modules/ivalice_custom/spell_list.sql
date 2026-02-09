@@ -51,4 +51,6 @@ UPDATE spell_list SET mpCost = 30 WHERE spellid = 38; -- Banishga
 UPDATE spell_list SET mpCost = 25 WHERE spellid = 21; -- Holy
 UPDATE spell_list SET mpCost = 50 WHERE spellid = 22; -- Holy II
 
+UPDATE spell_list SET castTime = castTime / 2 WHERE family BETWEEN 54 AND 59;
+
 UPDATE spell_list SET content_tag = NULL;
