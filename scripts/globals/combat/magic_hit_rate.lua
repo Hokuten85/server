@@ -471,7 +471,9 @@ local function calculateTargetMagicEvasion(actor, target, params)
     end
 
     -- Apply resistance rank multiplier.
-    magicEva = math.floor(magicEva * resistRankMultiplier[params.resistanceRank])
+	if params.resistanceRank < 0 then
+		magicEva = math.floor(magicEva * resistRankMultiplier[params.resistanceRank])
+	end
 
     return magicEva
 end
