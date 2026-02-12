@@ -524,13 +524,11 @@ local function calculateResistanceFactor(actor, target, params)
     -- Calculate first 3 resist tiers.
     -- Notes: https://wiki-ffo-jp.translate.goog/html/795.html?_x_tr_sl=ja&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc
     local resistTier = 0
-    if math.random() > params.magicHitRate then
-        resistTier = resistTier + 1
-
-        for i = 2, maxResistTier do
-            if math.random() > params.magicHitRate then
-                resistTier = resistTier + 1
-            end
+    for i = 1, maxResistTier do
+        if math.random() > params.magicHitRate then
+            resistTier = resistTier + 1
+        else
+            break
         end
     end
 
