@@ -156,7 +156,7 @@ local pTable =
     [xi.magic.spell.REGEN_V      ] = { 5, xi.effect.REGEN,         99,   40,  300, true,  false, 0 },
 
     -- Reprisal
-    [xi.magic.spell.REPRISAL     ] = { 1, xi.effect.REPRISAL,       1,   33,   60, true,  false, 0 },
+    [xi.magic.spell.REPRISAL     ] = { 1, xi.effect.REPRISAL,       1,   33,  300, true,  false, 0 },
 
     -- Shell / Shellra
     [xi.magic.spell.SHELL        ] = { 1, xi.effect.SHELL,         18, 1055, 1800, false, false, 0 },
