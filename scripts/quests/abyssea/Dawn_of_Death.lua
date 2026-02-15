@@ -3,15 +3,15 @@
 -----------------------------------
 -- !addquest 8 162
 -- Joachim : !pos -52.844 0 -9.978 246
--- This quest is flagged on completion of The Truth Beckons.
--- Complete when any 3 of the 9 zone sub-quests are completed and player talks to Joachim. Flags First Contact upon completion.
+-- Flagged on completion of The Truth Beckons.
+-- Complete when any 3 of the 9 zone quests are completed and player talks to Joachim. Flags First Contact upon completion.
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH)
 
 quest.reward = {}
 
-local subQuests =
+local zoneQuests =
 {
     xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS,
     xi.quest.id.abyssea.TO_PASTE_A_PEISTE,
@@ -24,9 +24,9 @@ local subQuests =
     xi.quest.id.abyssea.AN_ULCEROUS_URAGNITE,
 }
 
-local function countCompletedSubQuests(player)
+local function countCompletedZoneQuests(player)
     local count = 0
-    for _, questId in ipairs(subQuests) do
+    for _, questId in ipairs(zoneQuests) do
         if player:hasCompletedQuest(xi.questLog.ABYSSEA, questId) then
             count = count + 1
         end
@@ -39,7 +39,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_ACCEPTED and countCompletedSubQuests(player) >= 3
+            return status == xi.questStatus.QUEST_ACCEPTED and countCompletedZoneQuests(player) >= 3
         end,
 
         [xi.zone.PORT_JEUNO] =
