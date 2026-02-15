@@ -325,7 +325,7 @@ std::optional<SpellID> CMobSpellContainer::GetBestEntrustedSpell(CBattleEntity* 
             choice = SpellID::Indi_Refresh;
             break;
         case JOB_NIN:
-            choice = SpellID::Indi_Regen;
+            choice = SpellID::Indi_Haste;
             break;
         case JOB_GEO:
             break;

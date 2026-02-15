@@ -32,6 +32,7 @@ UPDATE spell_list SET jobs = 0x000000004B0000000000000000000000000000000000 WHER
 UPDATE spell_list SET validTargets = 3, spell_range = 204  WHERE spellid IN (249,250,251); -- blaze, ice, shock spikes
 
 UPDATE spell_list SET jobs = 0x00000000000000000000000000000000000000004B00 WHERE spellid IN (829,831,833,835,837,839); -- fira_ii,blizzara_ii,aera_ii,stonera_ii,thundara_ii,watera_ii
+UPDATE spell_list SET jobs = 0x00000000000000000000000000000000000000004B00 WHERE skill = 44 AND CAST(CONV(SUBSTR(HEX(jobs),41,2),16,10) AS INT) > 75; -- Reduce level of geo spells 76+ to 75
 
 UPDATE spell_list SET jobs = 0x00000000000000000000000019000000000000000000 WHERE name IN ('gekka_ichi','yain_ichi');
 UPDATE spell_list SET jobs = 0x00000000000000000000000046000000000000000000 WHERE name IN ('yurin_ichi');

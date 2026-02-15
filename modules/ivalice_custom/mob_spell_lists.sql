@@ -28,6 +28,11 @@ REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,132,57,255); -- she
 REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,133,68,255); -- shellra_iv (68~255)
 REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,134,75,255); -- shellra_v (75~255)
 
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,809,75,255); -- geo-fury
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,813,75,255); -- geo-precision
+REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,816,75,255); -- get-attunement
+
+
 
 REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,96,55,255);  -- auspice (55~255)
 REPLACE INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,108,21,255); -- regen (21~255)
