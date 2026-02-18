@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2023 LandSandBoat Dev Teams
@@ -43,7 +43,7 @@ public:
 
     static void seed()
     {
-        ShowInfo("Seeding Mersenne Twister 64 bit RNG");
+        // ShowInfo("Seeding Mersenne Twister 64 bit RNG");
 
         uint64_t seed;
         sysrandom(&seed, sizeof(seed));
