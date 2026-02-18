@@ -291,6 +291,7 @@ private:
     SpawnSlot*                     spawnSlot = nullptr;
 
     std::array<uint16, 7> coloredDrops = { 4258, 4259, 4260, 4261, 4262, 4263, 4264 };
+    xirand m_mobRand;
 };
 
 #endif

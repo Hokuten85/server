@@ -168,6 +168,7 @@ CMobEntity::CMobEntity()
     m_Weapons[SLOT_AMMO]   = new CItemWeapon(0);
 
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CMobController>(this), std::make_unique<CTargetFind>(this));
+    m_mobRand.seed();
 }
 
 CMobEntity::~CMobEntity()
@@ -279,7 +280,7 @@ uint32 CMobEntity::GetRandomGil()
             ShowWarning("CMobEntity::GetRandomGil Max value is set too low, defaulting");
         }
 
-        return xirand::GetRandomNumber(min, max);
+        return m_mobRand.GetRandomNumber(min, max);
     }
 
     float gil = (float)pow(GetMLevel(), 1.05f);
@@ -302,7 +303,7 @@ uint32 CMobEntity::GetRandomGil()
     }
 
     // randomize it
-    gil += xirand::GetRandomNumber(highGil);
+    gil += m_mobRand.GetRandomNumber(highGil);
 
     if (min && gil < min)
     {
@@ -341,7 +342,7 @@ bool CMobEntity::CanStealGil()
 
 void CMobEntity::ResetGilPurse()
 {
-    uint32 purse = GetRandomGil() / ((xirand::GetRandomNumber(4, 7)));
+    uint32 purse = GetRandomGil() / ((m_mobRand.GetRandomNumber(4, 7)));
     if (purse == 0)
     {
         purse = GetRandomGil();
@@ -672,7 +673,7 @@ void CMobEntity::Spawn()
 
     // The underlying function in GetRandomNumber doesn't accept uint8 as <T> so use uint32
     // https://stackoverflow.com/questions/31460733/why-arent-stduniform-int-distributionuint8-t-and-stduniform-int-distri
-    uint8 level = static_cast<uint8>(xirand::GetRandomNumber<uint32>(m_minLevel, m_maxLevel + 1));
+    uint8 level = static_cast<uint8>(m_mobRand.GetRandomNumber<uint32>(m_minLevel, m_maxLevel + 1));
 
     TraitList.clear(); // Clear traits just in case from random levels. Traits are recalculated in mobutils::CalculateMobStat().
                        // Note: Traits are NOT stored on DB load as of writing, so mobs won't gradually get stronger on respawn from restoreModifiers()
@@ -980,12 +981,12 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             }
 
             // Determine if this group should drop an item.
-            if (groupDropRate > 0 && (1 + xirand::GetRandomNumber(10000)) <= groupDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
+            if (groupDropRate > 0 && (1 + m_mobRand.GetRandomNumber(10000)) <= groupDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
             {
                 // Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
                 // Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
                 uint16 previousRateValue = 0;
-                uint16 itemRoll          = xirand::GetRandomNumber(total);
+                uint16 itemRoll          = m_mobRand.GetRandomNumber(total);
                 for (const DropItem_t& item : group.Items)
                 {
                     if (itemRoll < previousRateValue + item.DropRate)
@@ -1001,7 +1002,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
         if (this->GetMLevel() >= 85 && this->m_Type & MOBTYPE::MOBTYPE_NOTORIOUS) 
         {
-            uint16 itemId = coloredDrops[xirand::GetRandomNumber(coloredDrops.size())];
+            uint16 itemId = coloredDrops[m_mobRand.GetRandomNumber(coloredDrops.size())];
             loot.drops.Items.emplace_back(DROP_TYPE::DROP_NORMAL, itemId, 50);
             loot.drops.Items.emplace_back(DROP_TYPE::DROP_NORMAL, 1312, 150); // Angel Skin
         }
@@ -1016,7 +1017,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 itemDropRate = thDropRateFunction(m_THLvl, itemDropRate);
             }
 
-            if (itemDropRate > 0 && (1 + xirand::GetRandomNumber(10000)) <= itemDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
+            if (itemDropRate > 0 && (1 + m_mobRand.GetRandomNumber(10000)) <= itemDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
             {
                 AddItemToPool(item.ItemID);
             }
@@ -1032,20 +1033,20 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     {
         // Check for seal drops
         // Only one type of seal can drop per mob
-        if (xirand::GetRandomNumber(100) < 99 && CanAddSpecial(LootRecastID::Seal))
+        if (m_mobRand.GetRandomNumber(100) < 99 && CanAddSpecial(LootRecastID::Seal))
         {
             const auto seals = GetEligibleSeals();
-            AddItemToPool(seals[xirand::GetRandomNumber(seals.size())]);
+            AddItemToPool(seals[m_mobRand.GetRandomNumber(seals.size())]);
             AddSpecialRecast(LootRecastID::Seal);
         }
 
         // Check for geode/avatarites drops
         // Only one type of geode can drop per mob
-        if (xirand::GetRandomNumber(100) < 20 && CanAddSpecial(LootRecastID::Geode))
+        if (m_mobRand.GetRandomNumber(100) < 20 && CanAddSpecial(LootRecastID::Geode))
         {
             if (const auto geodes = GetEligibleGeodes(); !geodes.empty())
             {
-                AddItemToPool(geodes[xirand::GetRandomNumber(geodes.size())]);
+                AddItemToPool(geodes[m_mobRand.GetRandomNumber(geodes.size())]);
                 AddSpecialRecast(LootRecastID::Geode);
             }
         }
@@ -1136,7 +1137,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         for (uint8 i = 0; i < crystalRolls; i++)
         {
             // TODO: implement nation aketon crystal bonus (per member?)
-            if (xirand::GetRandomNumber(100) < 20)
+            if (m_mobRand.GetRandomNumber(100) < 20)
             {
                 AddItemToPool(4095 + m_Element);
             }
