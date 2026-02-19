@@ -544,6 +544,8 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* map_sessio
                 PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
             }
         }
+
+        charutils::BuildingCharWeaponSkills(PChar, true);
         PChar->retriggerLatents = false; // reset as we have retriggered the latents somewhere
     }
 

@@ -109,7 +109,7 @@ void  TrySkillUP(CCharEntity* PChar, SKILLTYPE SkillID, uint8 lvl, bool forceSki
 bool  isArtsBonusActive(CCharEntity* PChar, SKILLTYPE SkillID);
 int16 ArtsBonusSkill(CCharEntity* PChar, SKILLTYPE SkillID);
 void  BuildingCharSkillsTable(CCharEntity* PChar);
-void  BuildingCharWeaponSkills(CCharEntity* PChar);
+void  BuildingCharWeaponSkills(CCharEntity* PChar, bool sendUpdatePacket = false);
 void  BuildingCharAbilityTable(CCharEntity* PChar);
 void  BuildingCharTraitsTable(CCharEntity* PChar);
 void  BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 PetID);

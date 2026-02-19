@@ -3242,7 +3242,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
             CheckUnarmedWeapon(PChar);
         }
 
-        BuildingCharWeaponSkills(PChar);
+        charutils::BuildingCharWeaponSkills(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
     }
 
@@ -3374,7 +3374,7 @@ void CheckEquipLogic(CCharEntity* PChar, SCRIPTTYPE ScriptType, uint32 param)
  *                                                                       *
  ************************************************************************/
 
-void BuildingCharWeaponSkills(CCharEntity* PChar)
+void BuildingCharWeaponSkills(CCharEntity* PChar, bool sendUpdatePacket)
 {
     std::memset(&PChar->m_WeaponSkills, 0, sizeof(PChar->m_WeaponSkills));
 
@@ -3422,6 +3422,11 @@ void BuildingCharWeaponSkills(CCharEntity* PChar)
                 addWeaponSkill(PChar, PSkill->getID());
             }
         }
+    }
+
+    if (sendUpdatePacket)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
     }
 }
 

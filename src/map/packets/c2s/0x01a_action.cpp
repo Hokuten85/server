@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2025 LandSandBoat Dev Teams
@@ -175,6 +175,8 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
             }
         }
+
+        charutils::BuildingCharWeaponSkills(PChar, true);
         PChar->retriggerLatents = false; // reset as we have retriggered the latents somewhere
     }
 
