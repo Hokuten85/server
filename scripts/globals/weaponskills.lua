@@ -1096,6 +1096,6 @@ xi.weaponskills.handleWeaponskillEffect = function(actor, target, effectId, acti
         not xi.data.statusEffect.isTargetResistant(actor, target, effectId) and
         not xi.data.statusEffect.isEffectNullified(target, effectId, 0)
     then
-        target:addStatusEffect(effectId, power, 0, duration)
+        target:addStatusEffect(effectId, { power = power, duration = duration, origin = actor })
     end
 end

@@ -14,11 +14,11 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target, user, item)
-    target:addStatusEffect(xi.effect.STR_BOOST, 5, 0, 900)
-    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 3600)
-	
-	if target:getCharMod(xi.mod.STR) < 20 then
+itemObject.onItemUse = function(target, user)
+    target:addStatusEffect(xi.effect.STR_BOOST, { power = 5, duration = 900, origin = user })
+    target:addStatusEffect(xi.effect.MEDICINE, { duration = 3600, origin = user })
+
+    if target:getCharMod(xi.mod.STR) < 20 then
 		target:addCharMod(xi.mod.STR,1)
 		if target:getCharMod(xi.mod.STR) == 20 then
 			target:PrintToPlayer("You have reached the max enhancement for this stat. Additional usage of Red Drops is allowed")
