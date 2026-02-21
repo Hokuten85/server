@@ -175,19 +175,20 @@ local regenRefreshFormulas =
     ['mana_tank']           = { { 0,  1,  2,  3 }, { 0,   0.2,   0.4,   0.6 } },
     ['mana_tank_ii']        = { { 0,  2,  3,  4 }, { 0,   0.4,   0.6,   0.8 } },
     ['mana_tank_iii']       = { { 0,  3,  4,  5 }, { 0,   0.6,   0.8,   1.0 } },
+    ['mana_tank_iii']       = { { 0,  3,  4,  5 }, { 0,   0.6,   0.8,   1.0 } },
     ['mana_tank_iv']        = { { 0,  4,  5,  6 }, { 0,   0.8,   1.0,   1.2 } },
 }
 
 local function getRegenModValue(pet, attachmentName, numManeuvers)
     local petMaxHP = pet:getMaxHP()
 
-    return regenRefreshFormulas[attachmentName][1][math.min(numManeuvers + 1, 3)] + petMaxHP * (regenRefreshFormulas[attachmentName][2][numManeuvers + 1] / 100)
+    return regenRefreshFormulas[attachmentName][1][math.min(numManeuvers + 1, 4)] + petMaxHP * (regenRefreshFormulas[attachmentName][2][math.min(numManeuvers + 1, 4)] / 100)
 end
 
 local function getRefreshModValue(pet, attachmentName, numManeuvers)
     local petMaxMP = pet:getMaxMP()
 
-    return regenRefreshFormulas[attachmentName][1][math.min(numManeuvers + 1, 3)] + petMaxMP * (regenRefreshFormulas[attachmentName][2][numManeuvers + 1] / 100)
+    return regenRefreshFormulas[attachmentName][1][math.min(numManeuvers + 1, 4)] + petMaxMP * (regenRefreshFormulas[attachmentName][2][math.min(numManeuvers + 1, 4)] / 100)
 end
 
 local function isOpticFiber(attachmentName)
@@ -209,7 +210,7 @@ local function calculatePerformanceBoost(pet)
         local attachmentName = attachmentObj:getName()
 
         if isOpticFiber(attachmentName) then
-            performanceBoost = performanceBoost + attachmentModifiers[attachmentName][1][2][numLightManeuvers + 1]
+            performanceBoost = performanceBoost + attachmentModifiers[attachmentName][1][2][math.min(numLightManeuvers + 1, 4)]
         end
     end
 
