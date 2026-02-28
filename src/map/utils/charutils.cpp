@@ -1491,13 +1491,17 @@ void SendInventory(CCharEntity* PChar)
                 PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LocationID, slotID);
             }
         }
+
+        // Mark this container as synced and send ITEM_SAME with updated flags
+        PChar->inventorySyncState().markSynced(LocationID);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(LocationID, PChar);
     };
 
     // Send important items first
     // Note: it's possible that non-essential inventory items are sent in response to another packet
 
-    // TODO: What order are these sent in?
-    for (auto&& containerID : { LOC_INVENTORY, LOC_TEMPITEMS, LOC_WARDROBE, LOC_WARDROBE2, LOC_WARDROBE3, LOC_WARDROBE4, LOC_WARDROBE5, LOC_WARDROBE6, LOC_WARDROBE7, LOC_WARDROBE8, LOC_MOGSAFE, LOC_STORAGE, LOC_MOGLOCKER, LOC_MOGSATCHEL, LOC_MOGSACK, LOC_MOGCASE, LOC_MOGSAFE2 })
+    // Container order based on retail capture
+    for (auto&& containerID : { LOC_INVENTORY, LOC_MOGSAFE, LOC_MOGSAFE2, LOC_STORAGE, LOC_RECYCLEBIN, LOC_WARDROBE, LOC_WARDROBE2, LOC_WARDROBE3, LOC_WARDROBE4, LOC_WARDROBE5, LOC_WARDROBE6, LOC_WARDROBE7, LOC_WARDROBE8, LOC_TEMPITEMS, LOC_MOGLOCKER, LOC_MOGSATCHEL, LOC_MOGSACK, LOC_MOGCASE })
     {
         pushContainer(containerID);
     }
@@ -1532,7 +1536,7 @@ void SendInventory(CCharEntity* PChar)
         PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, 2);
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(); // "Finish" type
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }
 
 // Sends all 64 Unity ranking packets to the client (0x063 type 0x07)
@@ -1750,7 +1754,7 @@ uint8 AddItem(CCharEntity* PChar, uint8 LocationID, CItem* PItem, bool silence)
         }
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(LocationID), SlotID);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
     else
     {
@@ -1995,7 +1999,7 @@ void DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity,
     {
         ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->getName(), itemutils::GetItemPointer(ItemID)->getName(), ItemID, quantity);
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, ItemID, quantity, MsgStd::ThrowAway);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }
 
@@ -2078,7 +2082,7 @@ void DoTrade(CCharEntity* PChar, CCharEntity* PTarget)
  *                                                                       *
  ************************************************************************/
 
-void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, bool update)
+void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate)
 {
     if (PChar == nullptr)
     {
@@ -2180,9 +2184,6 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, bool update)
         PChar->delEquipModifiers(&((CItemEquipment*)PItem)->modList, ((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
         PChar->delPetModifiers(&((CItemEquipment*)PItem)->petModList);
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Normal); // ???
-        PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(0, static_cast<SLOTTYPE>(equipSlotID), LOC_INVENTORY);
-
         switch (equipSlotID)
         {
             case SLOT_HEAD:
@@ -2277,15 +2278,14 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, bool update)
 
         luautils::OnItemUnequip(PChar, PItem);
 
-        if (update)
+        PChar->inventorySyncState().queueEquipChange(LOC_INVENTORY, 0, static_cast<SLOTTYPE>(equipSlotID), PItem, Equipping::No);
+
+        if (recalculate)
         {
             charutils::BuildingCharSkillsTable(PChar);
             PChar->UpdateHealth();
-            PChar->m_EquipSwap = true;
+            PChar->updatemask |= UPDATE_HP;
             PChar->updatemask |= UPDATE_LOOK;
-
-            // Mark container dirty
-            PChar->dirtyInventoryContainers[static_cast<CONTAINER_ID>(PItem->getLocationID())] = true;
         }
     }
 }
@@ -2345,7 +2345,7 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
         }
     }
 
-    UnequipItem(PChar, equipSlotID, false);
+    UnequipItem(PChar, equipSlotID, Recalculate::No);
 
     // When equipping PItem - Remove all equip in slots which are also restricted by PItem
     // e.g. Equipping a Black Cloak should remove head equipment
@@ -2357,7 +2357,7 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
         {
             if (removeSlotID & (1 << i))
             {
-                UnequipItem(PChar, i, false);
+                UnequipItem(PChar, i, Recalculate::No);
                 if (i >= SLOT_HEAD && i <= SLOT_FEET)
                 {
                     switch (i)
@@ -2389,7 +2389,7 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
             CItemEquipment* armor = PChar->getEquip((SLOTTYPE)i);
             if (armor && armor->isType(ITEM_EQUIPMENT) && armor->getRemoveSlotId() & PItem->getEquipSlotId())
             {
-                UnequipItem(PChar, i, false);
+                UnequipItem(PChar, i, Recalculate::No);
             }
         }
 
@@ -2417,12 +2417,12 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
                                     CItemWeapon* PWeapon = static_cast<CItemWeapon*>(sub);
                                     if (PWeapon->getSkillType() != SKILL_NONE || static_cast<CItemWeapon*>(PItem)->getSkillType() == SKILL_HAND_TO_HAND)
                                     {
-                                        UnequipItem(PChar, SLOT_SUB, false);
+                                        UnequipItem(PChar, SLOT_SUB, Recalculate::No);
                                     }
                                 }
                                 else
                                 {
-                                    UnequipItem(PChar, SLOT_SUB, false);
+                                    UnequipItem(PChar, SLOT_SUB, Recalculate::No);
                                 }
                             }
                             if (static_cast<CItemWeapon*>(PItem)->getSkillType() == SKILL_HAND_TO_HAND)
@@ -2471,7 +2471,7 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
                         {
                             if (!PItem->isType(ITEM_WEAPON))
                             {
-                                UnequipItem(PChar, SLOT_MAIN, false);
+                                UnequipItem(PChar, SLOT_MAIN, Recalculate::No);
                             }
                             break;
                         }
@@ -2500,7 +2500,7 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
                         {
                             if (!PItem->isType(ITEM_WEAPON))
                             {
-                                UnequipItem(PChar, SLOT_MAIN, false);
+                                UnequipItem(PChar, SLOT_MAIN, Recalculate::No);
                             }
                             else if (static_cast<CItemWeapon*>(PItem)->getSkillType() != SKILL_NONE)
                             {
@@ -2525,7 +2525,7 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
                         if (static_cast<CItemWeapon*>(PItem)->getSkillType() != weapon->getSkillType() ||
                             (weapon->getSkillType() != SKILL_ARCHERY && static_cast<CItemWeapon*>(PItem)->getSubSkillType() != weapon->getSubSkillType()))
                         {
-                            UnequipItem(PChar, SLOT_AMMO, false);
+                            UnequipItem(PChar, SLOT_AMMO, Recalculate::No);
                         }
                     }
                     PChar->m_Weapons[SLOT_RANGED] = PItem;
@@ -2545,7 +2545,7 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
                         if (static_cast<CItemWeapon*>(PItem)->getSkillType() != weapon->getSkillType() ||
                             (weapon->getSkillType() != SKILL_ARCHERY && static_cast<CItemWeapon*>(PItem)->getSubSkillType() != weapon->getSubSkillType()))
                         {
-                            UnequipItem(PChar, SLOT_RANGED, false);
+                            UnequipItem(PChar, SLOT_RANGED, Recalculate::No);
                         }
                     }
                     if (PChar->equip[SLOT_RANGED] == 0)
@@ -2989,7 +2989,7 @@ void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uin
         }
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway);
     }
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }
 
 void EmptyRecycleBin(CCharEntity* PChar)
@@ -3132,8 +3132,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
         return;
     }
 
-    CItemEquipment* PItem    = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
-    CItem*          POldItem = PChar->getEquip(static_cast<SLOTTYPE>(equipSlotID));
+    CItemEquipment* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
 
     if (PItem && PItem == PChar->getEquip(static_cast<SLOTTYPE>(equipSlotID)))
     {
@@ -3178,8 +3177,6 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
         {
             RemoveSub(PChar);
         }
-
-        PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(slotID, static_cast<SLOTTYPE>(equipSlotID), static_cast<CONTAINER_ID>(containerID));
     }
     else
     {
@@ -3220,12 +3217,10 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
 
                 // Only call the lua onEquip if its a valid equip - e.g. has passed EquipArmor and other checks above
                 luautils::OnItemEquip(PChar, PItem);
-
-                PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(slotID, static_cast<SLOTTYPE>(equipSlotID), static_cast<CONTAINER_ID>(containerID));
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::NoDrop);
             }
         }
     }
+
     if (equipSlotID == SLOT_MAIN || equipSlotID == SLOT_RANGED || equipSlotID == SLOT_SUB)
     {
         if (!PItem || !PItem->isType(ITEM_EQUIPMENT) ||
@@ -3247,21 +3242,15 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
     }
 
     charutils::BuildingCharSkillsTable(PChar);
-
     PChar->UpdateHealth();
-    PChar->m_EquipSwap = true;
+
+    if (PItem != nullptr && PItem->isType(ITEM_EQUIPMENT))
+    {
+        PChar->inventorySyncState().queueEquipChange(static_cast<CONTAINER_ID>(containerID), slotID, static_cast<SLOTTYPE>(equipSlotID), PItem, Equipping::Yes);
+    }
+
+    PChar->updatemask |= UPDATE_HP;
     PChar->updatemask |= UPDATE_LOOK;
-
-    // PItem can be null if item id is 0 (unequip)
-    if (PItem)
-    {
-        PChar->dirtyInventoryContainers[static_cast<CONTAINER_ID>(PItem->getLocationID())] = true;
-    }
-
-    if (POldItem)
-    {
-        PChar->dirtyInventoryContainers[static_cast<CONTAINER_ID>(POldItem->getLocationID())] = true;
-    }
 }
 
 /************************************************************************
@@ -3310,8 +3299,6 @@ void CheckValidEquipment(CCharEntity* PChar)
     {
         CheckUnarmedWeapon(PChar);
     }
-
-    PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
 
     BuildingCharWeaponSkills(PChar);
     PChar->RequestPersist(CHAR_PERSIST::EQUIP);
@@ -6795,9 +6782,9 @@ auto CheckAbilityAddtype(CCharEntity* PChar, const CAbility* PAbility) -> bool
             return false;
         }
 
-        // Alexander and Odin grant no abilities (Assault, Release...) to the master.
+        // Alexander, Odin and Atomos grant no abilities (Assault, Release...) to the master.
         const auto* petEntity = static_cast<CPetEntity*>(PChar->PPet);
-        if (petEntity->m_PetID == PETID_ALEXANDER || petEntity->m_PetID == PETID_ODIN)
+        if (petEntity->m_PetID == PETID_ALEXANDER || petEntity->m_PetID == PETID_ODIN || petEntity->m_PetID == PETID_ATOMOS)
         {
             return false;
         }
