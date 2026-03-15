@@ -286,6 +286,11 @@ void CGambitsContainer::Tick(timer::time_point tick)
         // For each potential target, check if the predicates resolves
         for (auto& potentialTarget : potentialTargets)
         {
+            if (potentialTarget == NULL || potentialTarget == nullptr)
+            {
+                continue;
+            }
+
             // All predicate groups must resolve successfully for the target to be considered
             bool targetMatchAllPredicates = true;
             for (auto& predicateGroup : gambit.predicate_groups)
@@ -758,6 +763,11 @@ void CGambitsContainer::Tick(timer::time_point tick)
 bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, PredicateGroup_t& predicateGroup)
 {
     TracyZoneScoped;
+
+    if (triggerTarget == nullptr)
+    {
+        return false;
+    }
 
     auto*             controller = static_cast<CTrustController*>(POwner->PAI->GetController());
     std::vector<bool> predicateResults;
