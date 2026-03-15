@@ -95,6 +95,7 @@
 #include "entities/npcentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "enums/automaton.h"
 #include "enums/chat_message_area.h"
 #include "enums/item_lockflg.h"
 #include "items/item_furnishing.h"
@@ -570,7 +571,7 @@ void CLuaBaseEntity::messageSystem(MsgStd messageID, const sol::object& p0, cons
  *  Example : master:messageCombat(mob, offset + id, 0, 711)
  *  Notes   :
  ************************************************************************/
-void CLuaBaseEntity::messageCombat(const sol::object& speaker, int32 p0, int32 p1, int16 message)
+void CLuaBaseEntity::messageCombat(const sol::object& speaker, int32 p0, int32 p1, MsgBasic message) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -583,8 +584,8 @@ void CLuaBaseEntity::messageCombat(const sol::object& speaker, int32 p0, int32 p
     CBaseEntity* PSpeaker = nullptr;
     if (speaker != sol::lua_nil)
     {
-        CLuaBaseEntity* PLuaBaseEntity = speaker.as<CLuaBaseEntity*>();
-        PSpeaker                       = PLuaBaseEntity->m_PBaseEntity;
+        const auto* PLuaBaseEntity = speaker.as<CLuaBaseEntity*>();
+        PSpeaker                   = PLuaBaseEntity->m_PBaseEntity;
     }
     else
     {
@@ -7262,7 +7263,7 @@ uint8 CLuaBaseEntity::levelRestriction(const sol::object& level)
                                 resetRecast(RECAST_ABILITY, 205);
                             }
 
-                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::AUTO_EXCEEDS_CAPACITY);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::AutoExceedsCapacity);
                             petutils::DespawnPet(PChar);
                             return PChar->m_LevelRestriction;
                         }
@@ -8513,8 +8514,8 @@ bool CLuaBaseEntity::setEminenceProgress(uint16 recordID, uint32 progress, const
 
     if (total && progressNotify)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, recordID, 0, MsgBasic::ROE_RECORD);
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, progress, total, MsgBasic::ROE_PROGRESS);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, recordID, 0, MsgBasic::ROERecord);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, progress, total, MsgBasic::ROEProgress);
     }
 
     return result;
@@ -10877,7 +10878,7 @@ void CLuaBaseEntity::addLearnedAbility(uint16 abilityID)
         charutils::addAbility(PChar, abilityID);
         charutils::SaveLearnedAbilities(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::LEARNS_NEW_ABILITY);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::LearnsNewAbility);
     }
 }
 
@@ -10999,7 +11000,7 @@ void CLuaBaseEntity::addSpell(uint16 spellID, const sol::optional<sol::table>& p
         // Send a chat update "Player learns a new spell!"
         if (!silentLog)
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::LEARNS_NEW_SPELL);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::LearnsNewSpell);
         }
 
         if (saveToDB)
@@ -11850,7 +11851,7 @@ bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, const sol::
     float        range  = minRange.is<float>() ? minRange.as<float>() : 100;
     bool         credit = false;
 
-    if (charutils::CheckMob(PMob->m_HiPCLvl, PMob->GetMLevel()) > EMobDifficulty::TooWeak && distance(PMob->loc.p, PChar->loc.p) < range && !PMob->GetCallForHelpFlag())
+    if (charutils::CheckMob(PMob->m_HiPCLvl, PMob) > EMobDifficulty::TooWeak && distance(PMob->loc.p, PChar->loc.p) < range && !PMob->GetCallForHelpFlag())
     {
         if (PChar->PParty && PChar->PParty->GetSyncTarget())
         {
@@ -11887,7 +11888,7 @@ uint8 CLuaBaseEntity::checkDifficulty(CLuaBaseEntity* PLuaBaseEntity)
 
     if (PChar && PMob)
     {
-        return (uint8)charutils::CheckMob((PChar->GetMLevel()), (PMob->GetMLevel()));
+        return static_cast<uint8>(charutils::CheckMob(PChar->GetMLevel(), PMob));
     }
 
     ShowError("Value is not valid");
@@ -15796,7 +15797,7 @@ uint32 CLuaBaseEntity::getTrustID()
  *  Example : mob:trustPartyMessage(message_id)
  ************************************************************************/
 
-void CLuaBaseEntity::trustPartyMessage(uint32 message_id)
+void CLuaBaseEntity::trustPartyMessage(uint32 message_id) const
 {
     if (m_PBaseEntity->objtype != TYPE_TRUST)
     {
@@ -15811,7 +15812,7 @@ void CLuaBaseEntity::trustPartyMessage(uint32 message_id)
         PMaster->ForParty([&](CBattleEntity* PMember)
         {
             auto* PCharMember = static_cast<CCharEntity*>(PMember);
-            PCharMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PTrust, PMember, message_id, 0, 711);
+            PCharMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PTrust, PMember, message_id, 0, MsgBasic::TrustPartyMessage);
         });
         // clang-format on
     }
@@ -16549,7 +16550,7 @@ void CLuaBaseEntity::delPetMod(uint16 modID, int16 amount)
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::hasAttachment(uint16 itemID)
+auto CLuaBaseEntity::hasAttachment(const uint16 itemID) const -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -16568,7 +16569,7 @@ bool CLuaBaseEntity::hasAttachment(uint16 itemID)
  *  Notes   :
  ************************************************************************/
 
-auto CLuaBaseEntity::getAutomatonName() -> std::string
+auto CLuaBaseEntity::getAutomatonName() const -> std::string
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -16592,30 +16593,40 @@ auto CLuaBaseEntity::getAutomatonName() -> std::string
 /************************************************************************
  *  Function: getAutomatonFrame()
  *  Purpose : Returns the integer value of frame being used for automation
- *  Example : local frame = pet:getAutomatonFrame()
+ *  Example : local frame = player:getAutomatonFrame()
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getAutomatonFrame()
+auto CLuaBaseEntity::getAutomatonFrame() const -> std::optional<AutomatonFrame>
 {
-    if (m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON)
+    if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        ShowWarning("CLuaBaseEntity::getAutomatonFrame() - No automaton passed to function, or master does not have an automaton.");
-        return 0;
+        auto frame = static_cast<CCharEntity*>(m_PBaseEntity)->getAutomatonFrame();
+        if (frame >= AutomatonFrame::Harlequin && frame <= AutomatonFrame::Stormwaker)
+        {
+            return frame;
+        }
+
+        return std::nullopt;
     }
 
-    auto* PAutomaton = static_cast<CAutomatonEntity*>(m_PBaseEntity);
-    return static_cast<uint8>(PAutomaton->getFrame());
+    if (m_PBaseEntity->objtype == TYPE_PET && static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() == PET_TYPE::AUTOMATON)
+    {
+        return static_cast<CAutomatonEntity*>(m_PBaseEntity)->getFrame();
+    }
+
+    ShowWarning("CLuaBaseEntity::getAutomatonFrame() - Entity is not a PC or an Automaton.");
+    return std::nullopt;
 }
 
 /************************************************************************
  *  Function: setAutomatonFrame(frameItemID)
  *  Purpose : Sets the provided frame on the automaton
- *  Example : player:setAutomatonFrame(xi.item.VALOREDGE_FRAME)
+ *  Example : player:setAutomatonFrame(xi.automaton.frame.VALOREDGE)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::setAutomatonFrame(uint8 frameItemID)
+void CLuaBaseEntity::setAutomatonFrame(const AutomatonFrame frame) const
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -16625,7 +16636,7 @@ void CLuaBaseEntity::setAutomatonFrame(uint8 frameItemID)
         return;
     }
 
-    puppetutils::setFrame(PChar, frameItemID - 0x2000);
+    puppetutils::setFrame(PChar, frame);
     charutils::SendExtendedJobPackets(PChar);
     puppetutils::SaveAutomaton(PChar);
 }
@@ -16633,30 +16644,40 @@ void CLuaBaseEntity::setAutomatonFrame(uint8 frameItemID)
 /************************************************************************
  *  Function: getAutomatonHead()
  *  Purpose : Returns the integer value of the (active?) automation head
- *  Example : local head = pet:getAutomatonHead()
- *  Notes   : Currently unscripted
- ************************************************************************/
-
-uint8 CLuaBaseEntity::getAutomatonHead()
-{
-    if (m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON)
-    {
-        ShowWarning("CLuaBaseEntity::getAutomatonFrame() - No automaton passed to function, or master does not have an automaton.");
-        return 0;
-    }
-
-    auto* PAutomaton = static_cast<CAutomatonEntity*>(m_PBaseEntity);
-    return static_cast<uint8>(PAutomaton->getHead());
-}
-
-/************************************************************************
- *  Function: setAutomatonHead(headItemID)
- *  Purpose : Sets the automaton head to the specified item
- *  Example : player:setAutomatonHead(xi.item.VALOREDGE_HEAD)
+ *  Example : local head = player:getAutomatonHead()
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::setAutomatonHead(uint8 headItemID)
+auto CLuaBaseEntity::getAutomatonHead() const -> std::optional<AutomatonHead>
+{
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        auto head = static_cast<CCharEntity*>(m_PBaseEntity)->getAutomatonHead();
+        if (head >= AutomatonHead::Harlequin && head <= AutomatonHead::Spiritreaver)
+        {
+            return head;
+        }
+
+        return std::nullopt;
+    }
+
+    if (m_PBaseEntity->objtype == TYPE_PET && static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() == PET_TYPE::AUTOMATON)
+    {
+        return static_cast<CAutomatonEntity*>(m_PBaseEntity)->getHead();
+    }
+
+    ShowWarning("CLuaBaseEntity::getAutomatonHead() - Entity is not a PC or an Automaton.");
+    return std::nullopt;
+}
+
+/************************************************************************
+ *  Function: setAutomatonHead(head)
+ *  Purpose : Sets the automaton head to the specified item
+ *  Example : player:setAutomatonHead(xi.automaton.head.VALOREDGE)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setAutomatonHead(const AutomatonHead head) const
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -16666,7 +16687,7 @@ void CLuaBaseEntity::setAutomatonHead(uint8 headItemID)
         return;
     }
 
-    puppetutils::setHead(PChar, headItemID - 0x2000);
+    puppetutils::setHead(PChar, head);
     charutils::SendExtendedJobPackets(PChar);
     puppetutils::SaveAutomaton(PChar);
 }
@@ -16678,7 +16699,7 @@ void CLuaBaseEntity::setAutomatonHead(uint8 headItemID)
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::unlockAttachment(uint16 itemID)
+auto CLuaBaseEntity::unlockAttachment(const uint16 itemID) const -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -16697,7 +16718,7 @@ bool CLuaBaseEntity::unlockAttachment(uint16 itemID)
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getActiveManeuverCount()
+uint8 CLuaBaseEntity::getActiveManeuverCount() const
 {
     auto* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PEntity)
@@ -16716,7 +16737,7 @@ uint8 CLuaBaseEntity::getActiveManeuverCount()
  *  Notes   : Often used if (target:getActiveManeuverCount() == 3)
  ************************************************************************/
 
-void CLuaBaseEntity::removeOldestManeuver()
+void CLuaBaseEntity::removeOldestManeuver() const
 {
     auto* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PEntity)
@@ -16735,7 +16756,7 @@ void CLuaBaseEntity::removeOldestManeuver()
  *  Notes   : Often used if (overload ~= 0)
  ************************************************************************/
 
-void CLuaBaseEntity::removeAllManeuvers()
+void CLuaBaseEntity::removeAllManeuvers() const
 {
     auto* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PEntity)
@@ -16799,7 +16820,7 @@ void CLuaBaseEntity::setAttachment(const uint8 attachmentItemID, const uint8 slo
  *  Example : pet:getAttachments()
  ************************************************************************/
 
-sol::table CLuaBaseEntity::getAttachments()
+auto CLuaBaseEntity::getAttachments() const -> sol::table
 {
     auto* PAutomaton = dynamic_cast<CAutomatonEntity*>(m_PBaseEntity);
 
@@ -16830,7 +16851,7 @@ sol::table CLuaBaseEntity::getAttachments()
  *  Notes   : Called when Optic Fiber has changed.
  ************************************************************************/
 
-void CLuaBaseEntity::updateAttachments()
+void CLuaBaseEntity::updateAttachments() const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -16850,7 +16871,7 @@ void CLuaBaseEntity::updateAttachments()
  *            after percentage is applied.
  ************************************************************************/
 
-void CLuaBaseEntity::reduceBurden(float percentReduction, const sol::object& intReductionObj)
+void CLuaBaseEntity::reduceBurden(const float percentReduction, const sol::object& intReductionObj) const
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -16884,7 +16905,7 @@ void CLuaBaseEntity::reduceBurden(float percentReduction, const sol::object& int
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::isExceedingElementalCapacity()
+auto CLuaBaseEntity::isExceedingElementalCapacity() const -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -18714,7 +18735,7 @@ void CLuaBaseEntity::restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 res
 
         ActionAnimation animationID  = ActionAnimation::None;
         int             messageParam = 0;
-        MsgBasic        messageID    = MsgBasic::NONE;
+        MsgBasic        messageID    = MsgBasic::None;
         int             addedHP      = 0;
         int             addedMP      = 0;
 
@@ -18727,12 +18748,12 @@ void CLuaBaseEntity::restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 res
             {
                 case 1:
                     messageParam = addedHP;
-                    messageID    = MsgBasic::TARGET_REGAINS_HP;
+                    messageID    = MsgBasic::TargetRegainsHP;
                     animationID  = ActionAnimation::RegainHP;
                     break;
                 case 2:
                     messageParam = addedMP;
-                    messageID    = MsgBasic::TARGET_REGAINS_MP;
+                    messageID    = MsgBasic::TargetRegainsMP;
                     animationID  = ActionAnimation::RegainMP;
                     break;
             }

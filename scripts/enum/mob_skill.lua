@@ -9,6 +9,17 @@ xi.mobSkill =
     SHARK_BITE                    =   24,
     EVISCERATION                  =   25,
 
+    FAST_BLADE_1                  =   32,
+
+    RED_LOTUS_BLADE_1             =   34,
+    FLAT_BLADE_1                  =   35,
+
+    SERAPH_BLADE_1                =   37,
+
+    SPIRITS_WITHIN_1              =   39,
+
+    SAVAGE_BLADE_1                =   42,
+
     HARD_SLASH_1                  =   48,
     POWER_SLASH_1                 =   49,
     FROSTBITE_1                   =   50,
@@ -194,11 +205,14 @@ xi.mobSkill =
 
     TREMOROUS_TREAD               =  540, -- Mammet-800
     GRAVITY_FIELD                 =  541,
+    EMPTY_SEED                    =  542,
 
     CAMISADO_1                    =  544,
-
+    SOMNOLENCE_1                  =  545,
     NOCTOSHIELD_1                 =  546,
     ULTIMATE_TERROR_1             =  547,
+
+    DREAM_SHROUD_1                =  556,
 
     NIGHTMARE_1                   =  558,
 
@@ -217,6 +231,7 @@ xi.mobSkill =
     CHOKE_BREATH_1                =  579,
     FANTOD_1                      =  580,
     BLOW                          =  581,
+    CACODEMONIA_1                 =  582,
 
     BLANK_GAZE                    =  586,
 
@@ -232,6 +247,10 @@ xi.mobSkill =
     COLD_WAVE_2                   =  600, -- Snoll Tzar
     HIEMAL_STORM                  =  601, -- Snoll Tzar
     HYPOTHERMAL_COMBUSTION_2      =  602, -- Snoll Tzar
+
+    NETHER_BLAST_1                =  610,
+
+    RUINOUS_OMEN_1                =  616,
 
     SWEEP                         =  620,
 
@@ -620,6 +639,8 @@ xi.mobSkill =
     DISSIPATION                   = 1524,
 
     CITADEL_BUSTER                = 1540,
+
+    CAMISADO_2                    = 1554,
 
     FOOT_KICK_2                   = 1567,
     DUST_CLOUD_2                  = 1568,

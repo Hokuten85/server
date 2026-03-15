@@ -199,6 +199,7 @@ CCharEntity::CCharEntity()
     m_hasArise           = false;
     m_LevelRestriction   = 0;
     m_lastBcnmTimePrompt = 0;
+    servmesLastOffset_   = std::nullopt;
     m_AHHistoryTimestamp = timer::time_point::min();
     m_DeathTimestamp     = timer::time_point::min();
 
@@ -652,31 +653,31 @@ auto CCharEntity::shouldPetPersistThroughZoning() const -> bool
            (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
 }
 
-void CCharEntity::setAutomatonFrame(AUTOFRAMETYPE frame)
+void CCharEntity::setAutomatonFrame(const AutomatonFrame frame)
 {
     automatonInfo.m_Equip.Frame = frame;
 }
 
-void CCharEntity::setAutomatonHead(AUTOHEADTYPE head)
+void CCharEntity::setAutomatonHead(const AutomatonHead head)
 {
     automatonInfo.m_Equip.Head = head;
 }
 
-void CCharEntity::setAutomatonAttachment(uint8 slotid, uint8 id)
+void CCharEntity::setAutomatonAttachment(const uint8 slotid, const uint8 id)
 {
     automatonInfo.m_Equip.Attachments[slotid] = id;
 }
 
-void CCharEntity::setAutomatonElementMax(uint8 element, uint8 max)
+void CCharEntity::setAutomatonElementMax(const uint8 element, const uint8 max)
 {
     automatonInfo.m_ElementMax[element] = max;
 }
-void CCharEntity::addAutomatonElementCapacity(uint8 element, int8 value)
+void CCharEntity::addAutomatonElementCapacity(const uint8 element, const int8 value)
 {
     automatonInfo.m_ElementEquip[element] += value;
 }
 
-void CCharEntity::setAutomatonElementalCapacityBonus(uint8 bonus)
+void CCharEntity::setAutomatonElementalCapacityBonus(const uint8 bonus)
 {
     if (bonus == automatonInfo.m_elementalCapacityBonus)
     {
@@ -692,22 +693,22 @@ void CCharEntity::setAutomatonElementalCapacityBonus(uint8 bonus)
     automatonInfo.m_elementalCapacityBonus = bonus;
 }
 
-AUTOFRAMETYPE CCharEntity::getAutomatonFrame() const
+auto CCharEntity::getAutomatonFrame() const -> AutomatonFrame
 {
-    return static_cast<AUTOFRAMETYPE>(automatonInfo.m_Equip.Frame);
+    return automatonInfo.m_Equip.Frame;
 }
 
-AUTOHEADTYPE CCharEntity::getAutomatonHead() const
+auto CCharEntity::getAutomatonHead() const -> AutomatonHead
 {
-    return static_cast<AUTOHEADTYPE>(automatonInfo.m_Equip.Head);
+    return automatonInfo.m_Equip.Head;
 }
 
-uint8 CCharEntity::getAutomatonAttachment(uint8 slotid)
+auto CCharEntity::getAutomatonAttachment(const uint8 slotid) const -> uint8
 {
     return automatonInfo.m_Equip.Attachments[slotid];
 }
 
-bool CCharEntity::hasAutomatonAttachment(uint8 attachment)
+auto CCharEntity::hasAutomatonAttachment(const uint8 attachment) const -> bool
 {
     for (auto&& attachmentid : automatonInfo.m_Equip.Attachments)
     {
@@ -719,12 +720,12 @@ bool CCharEntity::hasAutomatonAttachment(uint8 attachment)
     return false;
 }
 
-uint8 CCharEntity::getAutomatonElementMax(uint8 element)
+auto CCharEntity::getAutomatonElementMax(const uint8 element) const -> uint8
 {
     return automatonInfo.m_ElementMax[element];
 }
 
-uint8 CCharEntity::getAutomatonElementCapacity(uint8 element)
+auto CCharEntity::getAutomatonElementCapacity(const uint8 element) const -> uint8
 {
     return automatonInfo.m_ElementEquip[element];
 }
@@ -1320,25 +1321,25 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
 
     if (!IsMobOwner(PTarget))
     {
-        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::ALREADY_CLAIMED);
+        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::AlreadyClaimed);
 
         PAI->Disengage();
         return false;
     }
     else if (!this->StatusEffectContainer->HasStatusEffect({ EFFECT_CHARM, EFFECT_CHARM_II }) && dist > 30)
     {
-        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::LOSE_SIGHT);
+        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::LoseSight);
         PAI->Disengage();
         return false;
     }
     else if (!facing(this->loc.p, PTarget->loc.p, 64))
     {
-        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::UNABLE_TO_SEE_TARG);
+        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::UnableToSeeTarget);
         return false;
     }
     else if (dist > GetMeleeRange(PTarget))
     {
-        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::TARG_OUT_OF_RANGE);
+        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::TargetOutOfRange);
         return false;
     }
     return true;
@@ -1600,7 +1601,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
             }
             else
             {
-                actionResult.messageID  = primary ? MsgBasic::USES_SKILL_RECOVERS_MP : MsgBasic::TARGET_RECOVERS_MP;
+                actionResult.messageID  = primary ? MsgBasic::UsesSkillRecoversMP : MsgBasic::TargetRecoversMP;
                 actionResult.resolution = ActionResolution::Hit;
                 damage                  = std::max(damage, 0);
                 actionResult.param      = PTarget->addMP(damage);
@@ -1650,7 +1651,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                     // The following exceptions apply:
                     // - PC targeted weaponskills always give WSP
                     // - A handful of content: Besieged, DI
-                    if (charutils::CheckMob(this->GetMLevel(), PTarget->GetMLevel()) > EMobDifficulty::TooWeak)
+                    if (charutils::CheckMob(this->GetMLevel(), PTarget) > EMobDifficulty::TooWeak)
                     {
                         charutils::AddWeaponSkillPoints(this, damslot, wspoints);
                     }
@@ -1673,12 +1674,12 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
     auto* PAbility = state.GetAbility();
     if (this->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
     {
-        pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::WAIT_LONGER);
+        pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::WaitLonger);
         return;
     }
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA))
     {
-        pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::UNABLE_TO_USE_JA2);
+        pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::UnableToUseJobAbility2);
         return;
     }
 
@@ -1872,7 +1873,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             PAI->TargetFind->reset();
             PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, aoeRadius, findFlags, PAbility->getValidTarget());
 
-            auto prevMsg = MsgBasic::NONE;
+            auto prevMsg = MsgBasic::None;
             for (auto&& PTargetFound : PAI->TargetFind->m_targets)
             {
                 action_target_t& actionTarget = action.addTarget(PTargetFound->id);
@@ -1883,7 +1884,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
                 int32 value = luautils::OnUseAbility(this, PTargetFound, PAbility, &action);
 
-                if (prevMsg == MsgBasic::NONE) // get default message for the first target
+                if (prevMsg == MsgBasic::None) // get default message for the first target
                 {
                     actionResult.messageID = PAbility->getMessage();
                 }
@@ -1928,9 +1929,9 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
 
             // TODO: Some abilities legitimately have no message (e.g., Full Circle)
-            if (actionResult.messageID == MsgBasic::NONE)
+            if (actionResult.messageID == MsgBasic::None)
             {
-                actionResult.messageID = MsgBasic::USES_JA;
+                actionResult.messageID = MsgBasic::UsesJobAbility;
             }
 
             actionResult.param = value;
@@ -1986,7 +1987,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     action.actionid               = static_cast<uint32_t>(FourCC::RangedFinish);
     action_target_t& actionTarget = action.addTarget(PTarget->id);
     action_result_t& actionResult = actionTarget.addResult();
-    actionResult.messageID        = MsgBasic::RANGED_ATTACK_HIT;
+    actionResult.messageID        = MsgBasic::RangedAttackHit;
 
     CItemWeapon* PItem = (CItemWeapon*)this->getEquip(SLOT_RANGED);
     CItemWeapon* PAmmo = (CItemWeapon*)this->getEquip(SLOT_AMMO);
@@ -2061,7 +2062,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 if (isCritical)
                 {
                     wasCritical            = true;
-                    actionResult.messageID = MsgBasic::RANGED_ATTACK_CRIT;
+                    actionResult.messageID = MsgBasic::RangedAttackCrit;
                 }
 
                 // at least 1 hit occured
@@ -2088,7 +2089,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         {
             damage                  = 0;
             actionResult.resolution = ActionResolution::Miss;
-            actionResult.messageID  = MsgBasic::RANGED_ATTACK_MISS;
+            actionResult.messageID  = MsgBasic::RangedAttackMiss;
             hitCount                = i; // end barrage, shot missed
         }
 
@@ -2131,7 +2132,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     if (hitOccured)
     {
         // Critical Hits don't get distance messaging
-        if (actionResult.messageID != MsgBasic::RANGED_ATTACK_CRIT)
+        if (actionResult.messageID != MsgBasic::RangedAttackCrit)
         {
             auto rangedPenaltyFunction = lua["xi"]["combat"]["ranged"]["attackDistancePenalty"];
             auto distancePenaltyResult = rangedPenaltyFunction(this, PTarget);
@@ -2149,15 +2150,15 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
             if (distancePenalty == 0)
             {
-                actionResult.messageID = MsgBasic::RANGED_ATTACK_PUMMELS;
+                actionResult.messageID = MsgBasic::RangedAttackPummels;
             }
             else if (distancePenalty <= 15)
             {
-                actionResult.messageID = MsgBasic::RANGED_ATTACK_SQUARELY;
+                actionResult.messageID = MsgBasic::RangedAttackSquarely;
             }
             else
             {
-                actionResult.messageID = MsgBasic::RANGED_ATTACK_HIT;
+                actionResult.messageID = MsgBasic::RangedAttackHit;
             }
         }
 
@@ -2183,7 +2184,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         if (actionResult.param < 0)
         {
             actionResult.param     = -(actionResult.param);
-            actionResult.messageID = MsgBasic::RANGED_ATTACK_ABSORBS;
+            actionResult.messageID = MsgBasic::RangedAttackAbsorbs;
         }
 
         // add additional effects
@@ -2205,7 +2206,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     else if (shadowsTaken > 0)
     {
         // shadows took damage
-        actionResult.messageID  = MsgBasic::SHADOW_ABSORB;
+        actionResult.messageID  = MsgBasic::ShadowAbsorb;
         actionResult.resolution = ActionResolution::Miss;
         actionResult.param      = shadowsTaken;
     }
@@ -2215,11 +2216,11 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     {
         if (hitOccured)
         {
-            actionResult.messageID = isSange ? MsgBasic::USES_SANGE_TAKES_DAMAGE : MsgBasic::USES_BARRAGE_TAKES_DAMAGE;
+            actionResult.messageID = isSange ? MsgBasic::UsesSangeTakesDamage : MsgBasic::UsesBarrageTakesDamage;
         }
         else if (shadowsTaken == 0)
         {
-            actionResult.messageID = MsgBasic::ABILITY_MISSES;
+            actionResult.messageID = MsgBasic::AbilityMisses;
         }
     }
 
@@ -2490,7 +2491,7 @@ auto CCharEntity::OnItemFinish(CItemState& state, action_t& action) -> bool
     if (!PItem->isType(ITEM_EQUIPMENT) && (PItem->getQuantity() < 1 || PItem->getReserve() > 0))
     {
         ShowWarning("OnItemFinish: %s attempted to use reserved/insufficient %s (%u).", this->getName(), PItem->getName(), PItem->getID());
-        this->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, PItem->getID(), 0, MsgBasic::ITEM_FAILS_TO_ACTIVATE);
+        this->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, PItem->getID(), 0, MsgBasic::ItemFailsToActivate);
 
         return false;
     }
@@ -2606,12 +2607,12 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
             }
             else
             {
-                errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CANNOT_ON_THAT_TARG);
+                errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CannotOnThatTarget);
             }
         }
         else
         {
-            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::ALREADY_CLAIMED);
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::AlreadyClaimed);
         }
     }
     else
@@ -2621,11 +2622,11 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
         if (PEntity && PEntity->objtype == TYPE_MOB && static_cast<CMobEntity*>(PEntity)->allegiance == ALLEGIANCE_TYPE::PLAYER &&
             (static_cast<CMobEntity*>(PEntity)->m_Behavior & BEHAVIOR_NO_ASSIST))
         {
-            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CANNOT_ON_THAT_TARG);
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CannotOnThatTarget);
         }
         else
         {
-            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CANNOT_ATTACK_TARGET);
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CannotAttackTarget);
         }
     }
     return nullptr;
@@ -2637,11 +2638,11 @@ void CCharEntity::Die()
 
     if (auto* PLastAttacker = GetEntity(lastAttackerId_.targid); PLastAttacker && PLastAttacker->id == lastAttackerId_.id)
     {
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MsgBasic::PLAYER_DEFEATED_BY));
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MsgBasic::PlayerDefeatedBy));
     }
     else
     {
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::FALLS_TO_GROUND));
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::FallsToGround));
     }
 
     battleutils::RelinquishClaim(this);

@@ -68,7 +68,7 @@ public:
     void messagePublic(uint16 messageID, const CLuaBaseEntity* PEntity, const sol::object& arg2, const sol::object& arg3);
     void messageSpecial(uint16 messageID, sol::variadic_args va);
     void messageSystem(MsgStd messageID, const sol::object& p0, const sol::object& p1);
-    void messageCombat(const sol::object& speaker, int32 p0, int32 p1, int16 message);
+    void messageCombat(const sol::object& speaker, int32 p0, int32 p1, MsgBasic message) const;
     void messageStandard(uint16 messageID);
 
     void customMenu(const sol::object& obj);
@@ -778,7 +778,7 @@ public:
     auto   spawnTrust(uint16 trustId) -> CBaseEntity*;
     void   clearTrusts();
     uint32 getTrustID();
-    void   trustPartyMessage(uint32 message_id);
+    void   trustPartyMessage(uint32 message_id) const;
     auto   addGambit(uint16 targ, const sol::table& predicates, const sol::table& reactions, const sol::object& retry) -> std::string;
     void   removeGambit(const std::string& id);
     void   removeAllGambits();
@@ -809,22 +809,22 @@ public:
     void setPetMod(uint16 modID, int16 amount);
     void delPetMod(uint16 modID, int16 amount);
 
-    bool  hasAttachment(uint16 itemID);
-    auto  getAutomatonName() -> std::string;
-    uint8 getAutomatonFrame();
-    void  setAutomatonFrame(uint8 frameItemID);
-    uint8 getAutomatonHead();
-    void  setAutomatonHead(uint8 headItemID);
-    bool  unlockAttachment(uint16 itemID);
-    uint8 getActiveManeuverCount();
-    void  removeOldestManeuver();
-    void  removeAllManeuvers();
-    auto  getAttachment(uint8 slotId) const -> CItem*;
-    auto  getAttachments() -> sol::table;
-    void  setAttachment(uint8 attachmentItemID, uint8 slotID) const;
-    void  updateAttachments();
-    void  reduceBurden(float percentReduction, const sol::object& intReductionObj);
-    bool  isExceedingElementalCapacity();
+    auto hasAttachment(uint16 itemID) const -> bool;
+    auto getAutomatonName() const -> std::string;
+    auto getAutomatonFrame() const -> std::optional<AutomatonFrame>;
+    void setAutomatonFrame(AutomatonFrame frame) const;
+    auto getAutomatonHead() const -> std::optional<AutomatonHead>;
+    void setAutomatonHead(AutomatonHead head) const;
+    auto unlockAttachment(uint16 itemID) const -> bool;
+    auto getActiveManeuverCount() const -> uint8;
+    void removeOldestManeuver() const;
+    void removeAllManeuvers() const;
+    auto getAttachment(uint8 slotId) const -> CItem*;
+    auto getAttachments() const -> sol::table;
+    void setAttachment(uint8 attachmentItemID, uint8 slotID) const;
+    void updateAttachments() const;
+    void reduceBurden(float percentReduction, const sol::object& intReductionObj) const;
+    auto isExceedingElementalCapacity() const -> bool;
 
     auto   getAllRuneEffects() -> sol::table;
     uint8  getActiveRuneCount();
