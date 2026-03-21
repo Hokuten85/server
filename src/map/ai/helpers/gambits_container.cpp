@@ -309,7 +309,7 @@ void CGambitsContainer::Tick(timer::time_point tick)
         }
 
         // No target matched, continue to next gambit
-        if (!target)
+        if (!target || target == NULL || target == nullptr)
         {
             continue;
         }
@@ -320,6 +320,11 @@ void CGambitsContainer::Tick(timer::time_point tick)
         // - Casting 2 spells in a row does not yet work
         for (auto& action : gambit.actions)
         {
+            if (!target || target == NULL || target == nullptr)
+            {
+                break;
+            }
+
             if (action.reaction == G_REACTION::RATTACK)
             {
                 controller->RangedAttack(target->targid);
