@@ -593,6 +593,10 @@ void CGambitsContainer::Tick(timer::time_point tick)
 
                 if (action.select == G_SELECT::SPECIFIC)
                 {
+                    if (target == nullptr || target == NULL) 
+                    {
+                        break;
+                    }
                     controller->Ability(target->targid, PAbility->getID());
                 }
 
