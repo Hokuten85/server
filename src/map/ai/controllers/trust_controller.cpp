@@ -183,7 +183,7 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
                     {
                         PathOutToDistance(PTarget, std::max(0.0f, spelldistance - 2.5f)); // set path distance to inside casting range
                         POwner->PAI->PathFind->FollowPath(m_Tick);
-                        return;
+                        co_return;
                     }
                     else
                     {
@@ -205,7 +205,7 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
             actionQueue->pop();
         }
 
-        return;
+        co_return;
     }
 
     if (PTarget)
