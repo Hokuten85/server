@@ -266,8 +266,8 @@ INSERT INTO `mob_groups` VALUES (55,6812,5,'Little_Wingman',0,128,0,0,0,0,NULL);
 -- Bearclaw_Pinnacle (Zone 6)
 -- ------------------------------------------------------------
 INSERT INTO `mob_groups` VALUES (1,3684,6,'Snoll_Tzar',0,128,0,7000,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (2,384,6,'Bearclaw_Rabbit',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (3,383,6,'Bearclaw_Leveret',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (2,384,6,'Bearclaw_Rabbit',0,128,0,10000,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (3,383,6,'Bearclaw_Leveret',0,128,0,4500,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,7100,6,'Snow_Devil_war',0,128,0,2000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,7099,6,'Snow_Devil_blm',0,128,0,2000,4000,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,1190,6,'Eldertaur',0,128,0,5000,10000,0,NULL);
@@ -3226,8 +3226,8 @@ INSERT INTO `mob_groups` VALUES (15,94,59,'Almighty_Apkallu',0,128,52,0,0,0,NULL
 -- The_Ashu_Talif (Zone 60)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,1776,60,'Gowam',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (2,4468,60,'Yazquhl',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (1,1776,60,'Gowam',0,128,0,5750,3000,0,NULL);
+INSERT INTO `mob_groups` VALUES (2,4468,60,'Yazquhl',0,128,0,6750,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (3,1506,60,'Gessho',0,128,0,0,0,1,NULL);
 INSERT INTO `mob_groups` VALUES (4,5430,60,'Ashu_Talif_Crew_mnk',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,5431,60,'Ashu_Talif_Crew_rdm',0,128,0,0,0,0,NULL);
