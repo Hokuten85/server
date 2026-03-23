@@ -57,7 +57,7 @@ public:
     CTrustController(CCharEntity*, CTrustEntity*);
     ~CTrustController() override;
 
-    void Tick(timer::time_point) override;
+    auto Tick(timer::time_point) -> Task<void> override;
     void Despawn() override;
 
     bool Ability(uint16 targid, uint16 abilityid) override;
@@ -78,8 +78,8 @@ public:
     std::queue<QueueAction_t*>* actionQueue = new std::queue<QueueAction_t*>;
 
 private:
-    void DoCombatTick(timer::time_point tick) override;
-    void DoRoamTick(timer::time_point tick) override;
+    auto DoCombatTick(timer::time_point tick) -> Task<void> override;
+    auto DoRoamTick(timer::time_point tick) -> Task<void> override;
 
     void Declump(CCharEntity* PMaster, CBattleEntity* PTarget);
     void PathOutToDistance(CBattleEntity* PTarget, float amount);
