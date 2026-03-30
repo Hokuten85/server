@@ -28,7 +28,7 @@ INNER JOIN mob_pools mp
 	ON mg.poolid = mp.poolid
 INNER JOIN zone_settings zs
 	ON mg.zoneid = zs.zoneid
-SET mg.respawntime = 1800
+SET mg.respawntime = 180
 WHERE mg.spawntype = 0
 AND zs.zonetype = 128
 AND NOT (mp.mobType & 0x02);
