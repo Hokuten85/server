@@ -85,6 +85,7 @@ function Limbus:new(data)
     obj.serverVar     = '[' .. obj.name .. ']Time'
     obj.exitLocation  = data.exitLocation or 0
     obj.timeExtension = data.timeExtension or 0
+    obj.lootCrateId   = data.lootCrateId
 
     return obj
 end
@@ -204,7 +205,7 @@ end
 ---@diagnostic disable-next-line: duplicate-set-field
 function Limbus:onBattlefieldEnter(player, battlefield)
     Battlefield.onBattlefieldEnter(self, player, battlefield)
-    player:setCharVar('Cosmo_Cleanse_TIME', os.time())
+    player:setCharVar('Cosmo_Cleanse_TIME', GetSystemTime())
 end
 
 ---@diagnostic disable-next-line: duplicate-set-field

@@ -45,7 +45,7 @@ function content:onBattlefieldTick(battlefield, tick)
     end
 
     -- Do nothing if aggroTime hasn't been set or aggroTime hasn't been reached yet
-    local now       = os.time()
+    local now       = GetSystemTime()
     local aggroTime = battlefield:getLocalVar('AutoAggroTime')
 
     if aggroTime == 0 or aggroTime > now then
@@ -82,7 +82,7 @@ function content:onBattlefieldTick(battlefield, tick)
     local boss = GetMobByID(nextBoss)
     if player and boss then
         battlefield:setLocalVar('AutoAggro', boss:getID())
-        battlefield:setLocalVar('AutoAggroTime', os.time() + utils.minutes(7))
+        battlefield:setLocalVar('AutoAggroTime', GetSystemTime() + utils.minutes(7))
         battlefield:setLocalVar('AutoAggroTarget', player:getID())
 
         if boss:isAlive() then
@@ -137,7 +137,7 @@ function content.handleBossAutoAggro(mob, target)
     end
 
     mobBattlefield:setLocalVar('AutoAggro', mob:getID())
-    mobBattlefield:setLocalVar('AutoAggroTime', os.time() + utils.minutes(7))
+    mobBattlefield:setLocalVar('AutoAggroTime', GetSystemTime() + utils.minutes(7))
     mobBattlefield:setLocalVar('AutoAggroTarget', target:getID())
 end
 
@@ -279,18 +279,18 @@ content.loot =
     {
         {
             quantity = 5,
-            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { itemId = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { item = xi.item.NONE,              weight = xi.loot.weight.NORMAL },
-            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { itemId = xi.item.NONE,              weight = xi.loot.weight.NORMAL },
+            { itemId = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.item.NONE,       weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.item.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
+            { itemId = xi.item.NONE,       weight = xi.loot.weight.VERY_HIGH },
+            { itemId = xi.item.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
         },
     },
 }
