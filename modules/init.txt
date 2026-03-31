@@ -38,3 +38,4 @@
 
 custom/
 ivalice_custom/
+original_limbus/
