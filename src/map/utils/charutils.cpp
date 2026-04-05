@@ -3159,7 +3159,72 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
         return;
     }
 
-    // if player attempts to change thier ranged weapon during a ranged state then prevent equip
+    // slotID of zero = unequip
+    if (slotID > 0)
+    {
+        // skip the rest of the function if we are trying to equip the same item to a different slot
+        switch (static_cast<SLOTTYPE>(equipSlotID))
+        {
+            case SLOT_MAIN:
+            {
+                auto PSub = PChar->getEquip(SLOT_SUB);
+                if (PItem == PSub)
+                {
+                    return;
+                }
+                break;
+            }
+            case SLOT_SUB:
+            {
+                auto PMain = PChar->getEquip(SLOT_MAIN);
+                if (PItem == PMain)
+                {
+                    return;
+                }
+                break;
+            }
+            case SLOT_EAR1:
+            {
+                auto PEar2 = PChar->getEquip(SLOT_EAR2);
+                if (PItem == PEar2)
+                {
+                    return;
+                }
+                break;
+            }
+            case SLOT_EAR2:
+            {
+                auto PEar1 = PChar->getEquip(SLOT_EAR1);
+                if (PItem == PEar1)
+                {
+                    return;
+                }
+                break;
+            }
+            case SLOT_RING1:
+            {
+                auto PRing2 = PChar->getEquip(SLOT_RING2);
+                if (PItem == PRing2)
+                {
+                    return;
+                }
+                break;
+            }
+            case SLOT_RING2:
+            {
+                auto PRing1 = PChar->getEquip(SLOT_RING1);
+                if (PItem == PRing1)
+                {
+                    return;
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    // if player attempts to change their ranged weapon during a ranged state then prevent equip
     // this prevents players from starting a RA with short delay x-bow and ending with high dmg longbow
     if (equipSlotID == SLOT_RANGED || (equipSlotID == SLOT_AMMO && !PChar->getEquip(SLOT_RANGED)))
     {
@@ -3173,10 +3238,28 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
     {
         auto PItemWeapon = dynamic_cast<CItemWeapon*>(PItem);
         auto PMainItem   = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
+
         if (PItemWeapon && PItemWeapon->getSkillType() == SKILL_NONE && (!PMainItem || !PMainItem->isTwoHanded()))
         {
             PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::Requires2HForGrip);
             return;
+        }
+
+        if (PItemWeapon && PItemWeapon->getSkillType() != SKILL_NONE)
+        {
+            // Don't attempt to equip item in equip menu if you don't have dual wield trait (client sees BLU, THF, DNC, NIN, /DNC or /NIN etc as able to equip sub weapons even if sub is too low or no trait on BLU)
+            if (!PChar->hasTrait(TRAIT_DUAL_WIELD))
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PItemWeapon->getID(), 0, MsgBasic::NeedDualWield);
+                return;
+            }
+
+            // Don't allow Dual Wield injections to offhand when you dont have a mainahdn (this was visual only)
+            // Don't allow non-shields in offhand with no weapon
+            if ((PMainItem && PMainItem->isTwoHanded()) || !PMainItem)
+            {
+                return;
+            }
         }
 
         // Disallow everything but shields if you're using H2H
@@ -4577,8 +4660,8 @@ EMobDifficulty CheckMob(uint8 charlvl, CBattleEntity* PMob)
         }
     }
 
-    auto IEPLevel = IncrediblyEasyPreyCheck.first;
-    auto IEPExp   = IncrediblyEasyPreyCheck.second;
+    auto IEPExp   = IncrediblyEasyPreyCheck.first;
+    auto IEPLevel = IncrediblyEasyPreyCheck.second;
 
     if (baseExp >= IEPExp && moblvl > IEPLevel)
     {
@@ -6104,7 +6187,7 @@ void SaveCharStats(CCharEntity* PChar)
                      PChar->health.mp,
                      PChar->profile.mhflag,
                      PChar->GetMJob(),
-                     PChar->GetSJob(),
+                     PChar->GetSJob(true),
                      PChar->petZoningInfo.petID,
                      static_cast<uint8>(PChar->petZoningInfo.petType),
                      PChar->petZoningInfo.petHP,
@@ -7338,12 +7421,6 @@ bool AddWeaponSkillPoints(CCharEntity* PChar, SLOTTYPE slotid, int wspoints)
             PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         }
 
-        db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                         PWeapon->m_extra,
-                         PChar->id,
-                         PWeapon->getLocationID(),
-                         PWeapon->getSlotID());
-
         return true;
     }
     return false;
@@ -7994,18 +8071,6 @@ void loadDeathTimestamp(CCharEntity* PChar)
         {
             PChar->SetDeathTime(timer::time_point(timer::now() - secondsSinceDeath));
             PChar->Die(CCharEntity::death_duration - secondsSinceDeath);
-        }
-    }
-}
-
-void loadZoningFlag(CCharEntity* PChar)
-{
-    const auto rset = db::preparedStmt("SELECT pos_prevzone FROM chars WHERE charid = ? LIMIT 1", PChar->id);
-    if (rset && rset->rowsCount() && rset->next())
-    {
-        if (PChar->getZone() == rset->get<uint16>("pos_prevzone"))
-        {
-            PChar->loc.zoning = true;
         }
     }
 }

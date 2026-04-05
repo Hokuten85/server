@@ -567,7 +567,6 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- Do the extra hit for our offhand if applicable
     if calcParams.extraOffhandHit and hitsDone < 8 and finaldmg < targetHp then
-        calcParams.hitsLanded = 0
         local offhandDmg      = calcParams.weaponDamage[2] + calcParams.fSTR + wsc * alpha
         hitdmg, calcParams    = getSingleHitDamage(attacker, target, offhandDmg, ftp, wsParams, calcParams)
 
@@ -603,7 +602,6 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     while hitsDone < 8 and offhandMultiHitsDone < numOffhandMultis and finaldmg < targetHp do
         local offhandDmg      = calcParams.weaponDamage[2] + calcParams.fSTR + wsc * alpha
-        calcParams.hitsLanded = 0
         hitdmg, calcParams    = getSingleHitDamage(attacker, target, offhandDmg, ftp, wsParams, calcParams)
 
         if calcParams.melee then
@@ -836,6 +834,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
     local calcParams =
     {
         ['shadowsAbsorbed'] = 0,
+        ['hitsLanded']      = 1,
         ['tpHitsLanded']    = 1,
         ['extraHitsLanded'] = 0,
         ['bonusTP']         = wsParams.bonusTP or 0,
@@ -934,7 +933,7 @@ end
 xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, primaryMsg, attack, wsResults, action)
     local finaldmg = wsResults.finalDmg
 
-    if wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0 then
+    if wsResults.hitsLanded > 0 then
         if finaldmg >= 0 then
             if primaryMsg then
                 action:messageID(defender:getID(), xi.msg.basic.DAMAGE)
