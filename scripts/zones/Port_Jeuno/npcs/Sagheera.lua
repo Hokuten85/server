@@ -313,7 +313,14 @@ entity.onTrade = function(player, npc, trade)
         player:startEvent(361, xi.item.ANCIENT_BEASTCOIN, tier1ChipValue)
     elseif npcUtil.tradeSetInList(trade, tier2Chips) then
         player:startEvent(361, xi.item.ANCIENT_BEASTCOIN, tier2ChipValue)
+	elseif trade:getGil() == 1000 then
+		local cosmoTime = getCosmoCleanseTime(player)
+        local cost      = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 1000 or xi.settings.main.COSMO_CLEANSE_BASE_COST
 
+        if cosmoTime == cosmoReady and player:delGil(cost) then
+            player:setCharVar('SagheeraInteractions', utils.mask.setBit(player:getCharVar('SagheeraInteractions'), 0, false))
+            npcUtil.giveKeyItem(player, xi.ki.COSMO_CLEANSE)
+        end
     -- af and relic upgrade trades
     elseif afUpgrade == 0 then
         local tradedCombo = 0

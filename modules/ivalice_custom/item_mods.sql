@@ -507,7 +507,7 @@ REPLACE INTO item_mods VALUES (15574,888,5); -- Drachen Brais +1
 REPLACE INTO item_mods VALUES (14102,10,5); -- Drachen Greaves
 REPLACE INTO item_mods VALUES (14102,362,15); -- Drachen Greaves
 REPLACE INTO item_mods VALUES (15365,10,8); -- Drachen Greaves +1
-REPLACE INTO item_mods VALUES (15365,362,15); -- Drachen Greaves +1
+REPLACE INTO item_mods VALUES (15365,362,20); -- Drachen Greaves +1
 
 REPLACE INTO item_mods VALUES (15085,402,45); -- Wyrm Armet
 REPLACE INTO item_mods VALUES (15085,986,50); -- Wyrm Armet
