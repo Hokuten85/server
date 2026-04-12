@@ -300,7 +300,7 @@ void LoadItemList()
                                  "w.skill,w.subskill,w.ilvl_skill,w.ilvl_parry,"
                                  "w.ilvl_macc,w.delay,w.dmg,w.dmgType,"
                                  "w.hit,w.unlock_points,"
-                                 "f.storage,f.moghancement,f.element,f.aura,"
+                                 "f.storage,f.moghancement,f.element,f.aura,f.placement AS furn_placement,f.size_x,f.size_y,f.height AS furn_height,"
                                  "p.slot AS pup_slot,p.element AS pup_element "
                                  "FROM item_basic AS b "
                                  "LEFT JOIN item_usable AS u USING (itemId) "
@@ -318,7 +318,7 @@ void LoadItemList()
         {
             PItem->setName(rset->get<std::string>("name"));
             PItem->setStackSize(rset->get<uint32>("stackSize"));
-            PItem->setFlag(rset->get<uint16>("flags"));
+            PItem->setFlag(rset->get<ItemFlag>("flags"));
             PItem->setAHCat(rset->get<uint8>("aH"));
             PItem->setBasePrice(rset->get<uint32>("BaseSell"));
             PItem->setSubID(rset->get<uint16>("subid"));
@@ -335,7 +335,7 @@ void LoadItemList()
                 (!(PItem->isType(ITEM_EQUIPMENT) || PItem->isType(ITEM_WEAPON)) || !rset->isNull("validTargets")))
             {
                 static_cast<CItemUsable*>(PItem)->setValidTarget(rset->get<uint16>("validTargets"));
-                static_cast<CItemUsable*>(PItem)->setActivationTime(std::chrono::seconds(rset->get<uint32>("activation")));
+                static_cast<CItemUsable*>(PItem)->setActivationTime(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::duration<float>(rset->get<float>("activation"))));
                 static_cast<CItemUsable*>(PItem)->setAnimationID(rset->get<uint16>("animation"));
                 static_cast<CItemUsable*>(PItem)->setAnimationTime(std::chrono::seconds(rset->get<uint32>("animationTime")));
                 static_cast<CItemUsable*>(PItem)->setMaxCharges(rset->get<uint8>("maxCharges"));
@@ -416,10 +416,14 @@ void LoadItemList()
 
             if (PItem->isType(ITEM_FURNISHING))
             {
-                static_cast<CItemFurnishing*>(PItem)->setStorage(rset->get<uint8>("storage"));
-                static_cast<CItemFurnishing*>(PItem)->setMoghancement(rset->get<uint16>("moghancement"));
-                static_cast<CItemFurnishing*>(PItem)->setElement(rset->get<uint8>("element"));
-                static_cast<CItemFurnishing*>(PItem)->setAura(rset->get<uint8>("aura"));
+                auto* PFurnishing = static_cast<CItemFurnishing*>(PItem);
+                PFurnishing->setStorage(rset->get<uint8>("storage"));
+                PFurnishing->setMoghancement(rset->get<uint16>("moghancement"));
+                PFurnishing->setElement(rset->get<uint8>("element"));
+                PFurnishing->setAura(rset->get<uint8>("aura"));
+                PFurnishing->setSize(rset->get<uint8>("size_x"), rset->get<uint8>("size_y"));
+                PFurnishing->setHeight(rset->get<uint16>("furn_height"));
+                PFurnishing->setPlacement(rset->get<FurnishingPlacement>("furn_placement"));
             }
 
             g_pItemList[PItem->getID()] = PItem;
