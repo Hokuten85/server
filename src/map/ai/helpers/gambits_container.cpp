@@ -997,16 +997,15 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                     controller->Ability(target->targid, ability);
                     executedAnyAction = true;
                 }
-            }
-            else if (action.reaction == G_REACTION::MS)
-            {
-                if (action.select == G_SELECT::SPECIFIC)
+                else if (action.reaction == G_REACTION::MS)
                 {
-                    controller->MobSkill(target->targid, action.select_arg, std::nullopt);
-                    executedAnyAction = true;
+                    if (action.select == G_SELECT::SPECIFIC)
+                    {
+                        controller->MobSkill(target->targid, action.select_arg, std::nullopt);
+                        executedAnyAction = true;
+                    }
                 }
             }
-        }
 
         // If we executed any action and the gambit has a retry_delay, set last_used
         if (executedAnyAction && gambit.retry_delay != 0)

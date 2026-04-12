@@ -102,6 +102,7 @@ uint16 SelectItem(CCharEntity* player, uint8 dial)
     uint16 itemid = 0;
     uint16 aH     = 0;
     auto   flags  = ItemFlag::None;
+    uint16 level  = 0;
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -109,7 +110,7 @@ uint16 SelectItem(CCharEntity* player, uint8 dial)
             itemid = rset->get<uint16>("itemid");
             aH     = rset->get<uint16>("aH");
             flags  = rset->get<ItemFlag>("flags");
-            level = rset->getOrDefault<uint16>("level", 0);
+            level  = rset->getOrDefault<uint16>("level", 0);
 
             if (level >= 0 && level <= 75)
             {

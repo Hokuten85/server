@@ -50,6 +50,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     then
         player:setPos(643, 0.1, -600)
     end
+end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     local triggerAreaID = triggerArea:getTriggerAreaID()
