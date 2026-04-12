@@ -42,9 +42,22 @@ xi.mobSkill =
     WHEELING_THRUST               =  119,
     IMPULSE_DRIVE                 =  120,
 
+    SHINING_STRIKE_1              =  160,
+    SERAPH_STRIKE_1               =  161,
+    BRAINSHAKER_1                 =  162,
+
+    SKULLBREAKER_1               =   165,
+    TRUE_STRIKE_1                =   166,
+
     RANDGRITH_1                   =  170,
 
+    NETHERSPIKES_1                =  241,
+    CARNAL_NIGHTMARE_1            =  242,
+    AEGIS_SCHISM_1                =  243,
+    DANCING_CHAINS_1              =  244,
     BARBED_CRESCENT_1             =  245,
+
+    FOXFIRE                       =  247,
 
     FOOT_KICK_1                   =  257,
     DUST_CLOUD_1                  =  258,
@@ -262,6 +275,9 @@ xi.mobSkill =
     HYPOTHERMAL_COMBUSTION_2      =  602, -- Snoll Tzar
     COUNTERSTANCE_1               =  603, -- Geush Urvan
 
+    SHOULDER_TACKLE_1             =  606,
+    SLAM_DUNK_1                   =  607,
+
     NETHER_BLAST_1                =  610,
 
     RUINOUS_OMEN_1                =  616,
@@ -357,6 +373,12 @@ xi.mobSkill =
     FISSION                       =  755,
 
     GREAT_WHIRLWIND_1             =  803,
+    TORTOISE_SONG_1               =  804,
+    HEAD_BUTT_TURTLE_1            =  805,
+    TORTOISE_STOMP_1              =  806,
+    HARDEN_SHELL_1                =  807,
+    EARTH_BREATH_1                =  808,
+    AQUA_BREATH_1                 =  809,
 
     DISPELLING_WIND               =  813,
     DEADLY_DRIVE                  =  814,
@@ -605,6 +627,10 @@ xi.mobSkill =
     CROSSTHRASH_1                 = 1340,
     KNIFE_EDGE_CIRCLE             = 1341,
     TRAIN_FALL                    = 1342,
+    MOBLIN_EMOTE_1                = 1343,
+    MOBLIN_EMOTE_2                = 1344,
+    MOBLIN_EMOTE_3                = 1345,
+    MOBLIN_EMOTE_4                = 1346,
 
     MANTLE_PIERCE                 = 1349,
 
@@ -644,12 +670,38 @@ xi.mobSkill =
     RANGED_ATTACK_TENZEN_2        = 1400, -- Tenzen Bow Low
     SOUL_ACCRETION                = 1401,
 
+    OCHER_BLAST_ATTACK_2          = 1405,
+    TYPHOON_WING_2                = 1406,
+    SPIKE_FLAIL_7                 = 1407,
+    GEOTIC_BREATH_2               = 1408,
+    TOUCHDOWN_7                   = 1409,
+    OCHER_BLAST_2                 = 1410,
+    BAI_WING_2                    = 1411,
+    ABSOLUTE_TERROR_7             = 1412,
+    HORRID_ROAR_7                 = 1413,
+
+    MARIONETTE_DICE_2             = 1415,
+    MARIONETTE_DICE_3             = 1416,
+    MARIONETTE_DICE_4             = 1417,
+    MARIONETTE_DICE_5             = 1418,
+    MARIONETTE_DICE_6             = 1419,
+    MARIONETTE_DICE_7             = 1420,
+    MARIONETTE_DICE_8             = 1421,
+    MARIONETTE_DICE_9             = 1422,
+    MARIONETTE_DICE_10            = 1423,
+    MARIONETTE_DICE_11            = 1424,
+    MARIONETTE_DICE_12            = 1425,
+
+    MARIONETTE_DICE_14            = 1427,
+
     ACTINIC_BURST                 = 1441,
 
     HEXIDISCS                     = 1443,
     VORPAL_BLADE_GHRAH            = 1444,
     DAMNATION_DIVE_GHRAH          = 1445,
     SICKLE_SLASH                  = 1446,
+
+    MARIONETTE_DICE_15            = 1457,
 
     REACTOR_COOL                  = 1463,
     OPTIC_INDURATION_CHARGE       = 1464,
@@ -915,6 +967,14 @@ xi.mobSkill =
 
     -- AZURE_LORE                    = 3481,
     BOLSTER                       = 3482,
+
+    DAYBREAK_TRUST                = 3652, -- August Trust
+    TARTARIC_SIGIL_TRUST          = 3653, -- August Trust
+    NULL_FIELD_TRUST              = 3654, -- August Trust
+    ALABASTER_BURST_TRUST         = 3655, -- August Trust
+    NOBLE_FRENZY_TRUST            = 3656, -- August Trust
+    FULMINOUS_FURY_TRUST          = 3657, -- August Trust
+    NO_QUARTER_TRUST              = 3658, -- August Trust
 
     CROSS_REAVER_3                = 3706, -- Ark Angel HM Trust
 

@@ -1096,15 +1096,11 @@ void LoadInventory(CCharEntity* PChar)
                     {
                         static_cast<CItemLinkshell*>(PItem)->SetLSType((LSTYPE)(PItem->getID() - 0x200));
                     }
-                    char EncodedString[LinkshellStringLength] = {};
-                    EncodeStringLinkshell(rset->get<std::string>("signature").c_str(), EncodedString);
-                    PItem->setSignature(EncodedString);
+                    PItem->setSignature(rset->get<std::string>("signature"));
                 }
-                else if (PItem->getFlag() & (ITEM_FLAG_INSCRIBABLE))
+                else if (PItem->hasFlag(ItemFlag::Inscribable))
                 {
-                    char EncodedString[SignatureStringLength] = {};
-                    EncodeStringSignature(rset->get<std::string>("signature").c_str(), EncodedString);
-                    PItem->setSignature(EncodedString);
+                    PItem->setSignature(rset->get<std::string>("signature"));
                 }
 
                 if (auto PItemUsable = dynamic_cast<CItemUsable*>(PItem))
@@ -1727,7 +1723,7 @@ uint8 AddItem(CCharEntity* PChar, uint8 LocationID, CItem* PItem, bool silence)
         return 0;
     }
 
-    if (PItem->getFlag() & ITEM_FLAG_RARE)
+    if (PItem->hasFlag(ItemFlag::Rare))
     {
         if (HasItem(PChar, PItem->getID()))
         {
@@ -1755,17 +1751,7 @@ uint8 AddItem(CCharEntity* PChar, uint8 LocationID, CItem* PItem, bool silence)
                             "VALUES(?, ?, ?, ?, ?, ?, ?) "
                             "LIMIT 1";
 
-        char signature[DecodeStringLength];
-        if (PItem->isType(ITEM_LINKSHELL))
-        {
-            DecodeStringLinkshell(PItem->getSignature().c_str(), signature);
-        }
-        else
-        {
-            DecodeStringSignature(PItem->getSignature().c_str(), signature);
-        }
-
-        if (!db::preparedStmt(Query, PChar->id, LocationID, SlotID, PItem->getID(), PItem->getQuantity(), signature, PItem->m_extra))
+        if (!db::preparedStmt(Query, PChar->id, LocationID, SlotID, PItem->getID(), PItem->getQuantity(), PItem->getSignature(), PItem->m_extra))
         {
             ShowError("AddItem: Cannot insert item to database");
             PChar->getStorage(LocationID)->InsertItem(nullptr, SlotID);
@@ -2046,7 +2032,7 @@ bool CanTrade(CCharEntity* PChar, CCharEntity* PTarget)
     {
         CItem* PItem = PChar->UContainer->GetItem(slotid);
 
-        if (PItem != nullptr && PItem->getFlag() & ITEM_FLAG_RARE)
+        if (PItem != nullptr && PItem->hasFlag(ItemFlag::Rare))
         {
             if (HasItem(PTarget, PItem->getID()))
             {
@@ -2952,6 +2938,7 @@ void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uin
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(container), slotID);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_RECYCLEBIN, NewSlotID);
             PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway);
+            luautils::OnItemDrop(PChar, PItem, IsRecycleBin::Yes);
         }
         else
         {
@@ -2963,11 +2950,18 @@ void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uin
     else // Bin is full
     {
         // Evict recycle bin slot 1
+        CItem* PEvictedItem = RecycleBin->GetItem(1);
         RecycleBin->InsertItem(nullptr, 1);
         db::preparedStmt("DELETE FROM char_inventory WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
                          PChar->id,
                          LOC_RECYCLEBIN,
                          1);
+
+        if (PEvictedItem)
+        {
+            luautils::OnItemDrop(PChar, PEvictedItem);
+            destroy(PEvictedItem);
+        }
 
         // Move everything around to accomodate
         for (int i = 2; i <= 10; ++i)
@@ -3008,6 +3002,7 @@ void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uin
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PUpdatedItem, LOC_RECYCLEBIN, i);
         }
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway);
+        luautils::OnItemDrop(PChar, PItem, IsRecycleBin::Yes);
     }
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }
@@ -3017,6 +3012,15 @@ void EmptyRecycleBin(CCharEntity* PChar)
     TracyZoneScoped;
 
     CItemContainer* recycleBin = PChar->getStorage(LOC_RECYCLEBIN);
+
+    for (uint8 slotID = 1; slotID <= recycleBin->GetSize(); ++slotID)
+    {
+        if (CItem* PItem = recycleBin->GetItem(slotID))
+        {
+            luautils::OnItemDrop(PChar, PItem);
+        }
+    }
+
     db::preparedStmt("DELETE FROM char_inventory WHERE charid = ? AND location = 17", PChar->id);
     recycleBin->Clear();
 }
@@ -8099,30 +8103,6 @@ bool isOrchestrionPlaced(CCharEntity* PChar)
 
 void updateMannequins(CCharEntity* PChar)
 {
-    // Build Mannequin model id list
-    auto getModelIdFromStorageSlot = [](CCharEntity* PChar, uint8 slot) -> uint16
-    {
-        uint16 modelId = 0x0000;
-
-        if (slot == 0)
-        {
-            return modelId;
-        }
-
-        auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
-        if (PItem == nullptr)
-        {
-            return modelId;
-        }
-
-        if (auto* PItemEquipment = dynamic_cast<CItemEquipment*>(PItem))
-        {
-            modelId = PItemEquipment->getModelId();
-        }
-
-        return modelId;
-    };
-
     for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
     {
         CItemContainer* PContainer = PChar->getStorage(safeContainerId);
@@ -8134,27 +8114,14 @@ void updateMannequins(CCharEntity* PChar)
                 auto* PFurnishing = static_cast<CItemFurnishing*>(PContainerItem);
                 if (PFurnishing->isInstalled() && PFurnishing->isMannequin())
                 {
-                    auto* PMannequin = PFurnishing;
+                    auto& mannequin = PFurnishing->exdata<Exdata::Mannequin>();
 
-                    uint16 mainId  = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 0]);
-                    uint16 subId   = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 1]);
-                    uint16 rangeId = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 2]);
-                    uint16 headId  = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 3]);
-                    uint16 bodyId  = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 4]);
-                    uint16 handsId = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 5]);
-                    uint16 legId   = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 6]);
-                    uint16 feetId  = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 7]);
-                    uint8  race    = PMannequin->m_extra[10 + 8];
-                    uint8  pose    = PMannequin->m_extra[10 + 9];
-
-                    std::ignore = pose;
-
-                    if (race == 0)
+                    if (mannequin.Race == 0)
                     {
                         ShowWarning("Invalid Mannequin placed (race of 0 in exdata, when races start at 1). It will be unusable.");
                     }
 
-                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(safeContainerId, slotIndex, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(PChar, safeContainerId, slotIndex, mannequin);
                 }
             }
         }

@@ -86,7 +86,7 @@ uint16 SelectItem(CCharEntity* player, uint8 dial)
     uint16 selection = xirand::GetRandomElement(dialItems.get());
 
     // Check if Rare item is already owned and substitute with Goblin trash item.
-    if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
+    if (itemutils::GetItem(selection)->hasFlag(ItemFlag::Rare) && charutils::HasItem(player, selection))
     {
         dialItems = gobbieJunk;
         selection = xirand::GetRandomElement(dialItems.get());
@@ -99,101 +99,102 @@ uint16 SelectItem(CCharEntity* player, uint8 dial)
     {
         const auto rset = db::preparedStmt("SELECT ib.itemid, ib.aH, ib.flags, ie.level FROM item_basic ib LEFT OUTER JOIN item_equipment ie ON ib.itemid = ie.itemid WHERE flags & 4 > 0");
 
-        uint16 itemid = 0;
-        uint16 aH     = 0;
-        uint16 flags  = 0;
-        uint16 level  = 0;
-        if (rset && rset->rowsCount())
+    uint16 itemid = 0;
+    uint16 aH     = 0;
+    auto   flags  = ItemFlag::None;
+    if (rset && rset->rowsCount())
+    {
+        while (rset->next())
         {
-            while (rset->next())
+            itemid = rset->get<uint16>("itemid");
+            aH     = rset->get<uint16>("aH");
+            flags  = rset->get<ItemFlag>("flags");
+            level = rset->getOrDefault<uint16>("level", 0);
+
+            if (level >= 0 && level <= 75)
             {
-                itemid = rset->get<uint16>("itemid");
-                aH     = rset->get<uint16>("aH");
-                flags  = rset->get<uint16>("flags");
-                level  = rset->getOrDefault<uint16>("level", 0);
-                if (level >= 0 && level <= 75)
+                specialDialItems.emplace_back(itemid);
+            }
+
+            switch (aH)
+            {
+                /* Dial 1 (Materials) */
+                case 38: // Smithing
+                case 39: // Goldsmithing
+                case 40: // Clothcrafting
+                case 41: // Leathercrafting
+                case 42: // Bonecrafting
+                case 43: // Woodworking
+                case 44: // Alchemy
+                case 50: // Beast-Made
                 {
-                    specialDialItems.emplace_back(itemid);
+                    materialsDialItems.emplace_back(itemid);
+                    break;
                 }
-                
-                switch (aH)
+                /* Dial 2 (Food) */
+                case 52: // Meat & Eggs
+                case 53: // Seafood
+                case 54: // Vegetables
+                case 55: // Soups
+                case 56: // Breads & Rice
+                case 57: // Sweets
+                case 58: // Drinks
                 {
-                    /* Dial 1 (Materials) */
-                    case 38: // Smithing
-                    case 39: // Goldsmithing
-                    case 40: // Clothcrafting
-                    case 41: // Leathercrafting
-                    case 42: // Bonecrafting
-                    case 43: // Woodworking
-                    case 44: // Alchemy
-                    case 50: // Beast-Made
+                    foodDialItems.emplace_back(itemid);
+                    break;
+                }
+                /* Dial 3 (Medicine) */
+                case 33: // Medicine
+                {
+                    medicineDialItems.emplace_back(itemid);
+                    break;
+                }
+                /* Dial 4 (Sundries 1) */
+                case 15: // Ammunition
+                case 36: // Cards
+                case 49: // Ninja Tools
+                {
+                    if ((flags & ItemFlag::CanUse) != ItemFlag::None) // only usable (pouch, case, quiver, etc)
                     {
-                        materialsDialItems.emplace_back(itemid);
+                        sundries1DialItems.emplace_back(itemid);
+                    }
+                    break;
+                }
+                /* Dial 5 (Sundries 2) */
+                case 47: // Fishing Gear
+                case 51: // Fish
+                {
+                    if (itemid == 489 || itemid == 17386) // Lu Shang is probably only special dial
+                    {
                         break;
                     }
-                    /* Dial 2 (Food) */
-                    case 52: // Meat & Eggs
-                    case 53: // Seafood
-                    case 54: // Vegetables
-                    case 55: // Soups
-                    case 56: // Breads & Rice
-                    case 57: // Sweets
-                    case 58: // Drinks
+                    sundries2DialItems.emplace_back(itemid);
+                    break;
+                }
+                default:
+                {
+                    switch (itemid)
                     {
-                        foodDialItems.emplace_back(itemid);
-                        break;
-                    }
-                    /* Dial 3 (Medicine) */
-                    case 33: // Medicine
-                    {
-                        medicineDialItems.emplace_back(itemid);
-                        break;
-                    }
-                    /* Dial 4 (Sundries 1) */
-                    case 15: // Ammunition
-                    case 36: // Cards
-                    case 49: // Ninja Tools
-                    {
-                        if ((flags & ITEM_FLAG_CANUSE) > 0) // only usable (pouch, case, quiver, etc)
+                        case 605:   // pickaxe
+                        case 1020:  // sickle
+                        case 1021:  // hatchet
+                        case 1022:  // thief's tools
+                        case 1023:  // living key
+                        case 15453: // lugworm belt
+                        case 15454: // little worm belt
                         {
-                            sundries1DialItems.emplace_back(itemid);
-                        }
-                        break;
-                    }
-                    /* Dial 5 (Sundries 2) */
-                    case 47: // Fishing Gear
-                    case 51: // Fish
-                    {
-                        if (itemid == 489 || itemid == 17386) // Lu Shang is probably only special dial
-                        {
+                            sundries2DialItems.emplace_back(itemid);
                             break;
-                        }
-                        sundries2DialItems.emplace_back(itemid);
-                        break;
-                    }
-                    default:
-                    {
-                        switch (itemid)
-                        {
-                            case 605:   // pickaxe
-                            case 1020:  // sickle
-                            case 1021:  // hatchet
-                            case 1022:  // thief's tools
-                            case 1023:  // living key
-                            case 15453: // lugworm belt
-                            case 15454: // little worm belt
-                            {
-                                sundries2DialItems.emplace_back(itemid);
-                                break;
-                            }
                         }
                     }
                 }
             }
         }
-        else
-        {
-            ShowError("Failed to load daily tally items");
-        }
     }
+    else
+    {
+        ShowError("Failed to load daily tally items");
+    }
+}
+
 } // namespace daily
