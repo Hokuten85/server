@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -n \"^-- INSERT INTO \\\\`mob_spawn_points\\\\`.*,37,\" C:/Users/Kelly/source/repos/server/sql/mob_spawn_points.sql)",
+      "Bash(grep \"\\\\[error\\\\]\\\\|\\\\[warn\\\\]\" \"/c/Users/Kelly/source/repos/server/log/Main_Map_2026-04-07.log\")",
+      "Read(//tmp/**)",
+      "Bash(cat)",
+      "Bash(bash /tmp/extract_unique.sh)",
+      "Bash(bash /tmp/final_summary.sh)",
+      "Bash(python3 /tmp/categorize.py)",
+      "Bash(xargs grep:*)"
+    ]
+  }
+}

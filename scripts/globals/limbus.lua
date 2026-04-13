@@ -129,40 +129,53 @@ function Limbus:onBattlefieldInitialize(battlefield)
 
     local ID = zones[battlefield:getZoneID()][self.name]
 
-    -- Setup Item Crates
-    if ID.npc.ITEM_CRATES then
-        for i, crateID in ipairs(ID.npc.ITEM_CRATES) do
-            local crate = GetEntityByID(crateID)
+    if ID and ID.npc then
+        -- Setup Item Crates
+        if ID.npc.ITEM_CRATES then
+            for i, crateID in ipairs(ID.npc.ITEM_CRATES) do
+                local crate = GetEntityByID(crateID)
 
-            if crate then
-                xi.limbus.hideCrate(crate)
-                crate:addListener('ON_TRIGGER', 'TRIGGER_ITEM_CRATE', utils.bind(self.handleOpenItemCrate, self))
+                if crate then
+                    xi.limbus.hideCrate(crate)
+                    crate:addListener('ON_TRIGGER', 'TRIGGER_ITEM_CRATE', utils.bind(self.handleOpenItemCrate, self))
+                end
             end
         end
-    end
 
-    -- Setup Time Crates
-    if ID.npc.TIME_CRATES then
-        for i, crateID in ipairs(ID.npc.TIME_CRATES) do
-            local crate = GetEntityByID(crateID)
+        -- Setup Time Crates
+        if ID.npc.TIME_CRATES then
+            for i, crateID in ipairs(ID.npc.TIME_CRATES) do
+                local crate = GetEntityByID(crateID)
 
-            if crate then
-                xi.limbus.hideCrate(crate)
-                crate:addListener('ON_TRIGGER', 'TRIGGER_TIME_CRATE', utils.bind(self.handleOpenTimeCrate, self))
+                if crate then
+                    xi.limbus.hideCrate(crate)
+                    crate:addListener('ON_TRIGGER', 'TRIGGER_TIME_CRATE', utils.bind(self.handleOpenTimeCrate, self))
+                end
             end
         end
-    end
 
-    -- Setup Recover Crates
-    -- Recover crates are special in that they are mobs that perform a skill on the player when triggered
-    if ID.npc.RECOVER_CRATES then
-        for i, crateID in ipairs(ID.npc.RECOVER_CRATES) do
-            local crate = GetEntityByID(crateID)
+        -- Setup Recover Crates
+        -- Recover crates are special in that they are mobs that perform a skill on the player when triggered
+        if ID.npc.RECOVER_CRATES then
+            for i, crateID in ipairs(ID.npc.RECOVER_CRATES) do
+                local crate = GetEntityByID(crateID)
 
-            if crate then
-                xi.limbus.hideCrate(crate)
-                crate:setBattleID(1) -- Different battle ID prevents the crate from being hit by AOEs
-                crate:addListener('ON_TRIGGER', 'TRIGGER_RECOVER_CRATE', utils.bind(self.handleOpenRecoverCrate, self))
+                if crate then
+                    xi.limbus.hideCrate(crate)
+                    crate:setBattleID(1) -- Different battle ID prevents the crate from being hit by AOEs
+                    crate:addListener('ON_TRIGGER', 'TRIGGER_RECOVER_CRATE', utils.bind(self.handleOpenRecoverCrate, self))
+                end
+            end
+        end
+
+        -- Setup Linked Crates (can only open one)
+        if ID.LINKED_CRATES then
+            for crateID, _ in pairs(ID.LINKED_CRATES) do
+                local mainCrate = GetEntityByID(crateID)
+
+                if mainCrate then
+                    mainCrate:addListener('ON_TRIGGER', 'TRIGGER_LINKED_CRATE', utils.bind(self.handleLinkedCrate, self))
+                end
             end
         end
     end
@@ -174,17 +187,6 @@ function Limbus:onBattlefieldInitialize(battlefield)
         if crate then
             xi.limbus.hideCrate(crate)
             crate:addListener('ON_TRIGGER', 'TRIGGER_LOOT_CRATE', utils.bind(self.handleOpenLootCrate, self))
-        end
-    end
-
-    -- Setup Linked Crates (can only open one)
-    if ID.LINKED_CRATES then
-        for crateID, _ in pairs(ID.LINKED_CRATES) do
-            local mainCrate = GetEntityByID(crateID)
-
-            if mainCrate then
-                mainCrate:addListener('ON_TRIGGER', 'TRIGGER_LINKED_CRATE', utils.bind(self.handleLinkedCrate, self))
-            end
         end
     end
 end
@@ -299,7 +301,7 @@ function Limbus:openDoor(battlefield, floor)
 end
 
 function Limbus:closeDoors()
-    if self.ID.npc.PORTAL then
+    if self.ID and self.ID.npc and self.ID.npc.PORTAL then
         for _, doorID in ipairs(self.ID.npc.PORTAL) do
             GetNPCByID(doorID):setAnimation(xi.animation.CLOSE_DOOR)
         end

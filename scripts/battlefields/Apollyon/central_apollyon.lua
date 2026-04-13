@@ -43,7 +43,7 @@ content.groups =
     {
         mobs       = { 'Proto-Omega' },
         stationary = true,
-        death      = function(mob, count)
+        death      = function(battlefield, mob, count)
             npcUtil.showCrate(GetNPCByID(ID.npc.CENTRAL_LOOT_CRATE))
         end,
     },

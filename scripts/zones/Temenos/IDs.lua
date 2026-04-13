@@ -36,6 +36,13 @@ zones[xi.zone.TEMENOS] =
     },
     mob =
     {
+        -- Base mob IDs for Central Temenos floors, used for offset calculations in mob scripts.
+        -- Index is the floor number (2 = 2nd floor, 3 = 3rd floor).
+        TEMENOS_C_MOB =
+        {
+            [2] = 16929030, -- Mystic_Avatar_Carbuncle; Light_Elementals are at +1 (16929031) and +2 (16929032)
+            [3] = 16929005, -- Abyssdweller_Jhabdebb; Orichalcum_Quadav = +1, Pee_Qoho_the_Python = +2
+        },
     },
     npc =
     {
@@ -46,6 +53,13 @@ zones[xi.zone.TEMENOS] =
         CB_LOOT_CRATE = GetFirstID('CB_Loot_Crate'),
         N_LOOT_CRATE  = GetFirstID('N_Loot_Crate'),
         W_LOOT_CRATE  = GetFirstID('W_Loot_Crate'),
+
+        -- Loot crate IDs indexed by floor number, used in mob death scripts.
+        TEMENOS_C_CRATE =
+        {
+            [2] = GetFirstID('C2_Loot_Crate'),
+            [3] = GetFirstID('C3_Loot_Crate'),
+        },
     },
 
     TEMENOS_NORTHERN_TOWER =

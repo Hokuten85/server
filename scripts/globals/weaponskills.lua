@@ -406,13 +406,13 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     if attacker:getMainJob() == xi.job.THF then
         -- Add DEX/AGI bonus to base damage of first hit if THF main and valid Sneak/Trick Attack
         if calcParams.sneakApplicable then
-            local dexFactor = math.floor(attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX) / 100))
-            finaldmg = math.floor(finaldmg + calcParams.pdif * dexFactor)
+            local dexFactor = math.floor(attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX) / 100) * 1.2)
+            finaldmg = math.floor(finaldmg + (calcParams.pdif or 0) * dexFactor)
         end
 
         if calcParams.trickApplicable then
-            local agiFactor = math.floor(attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI) / 100))
-            finaldmg = math.floor(finaldmg + calcParams.pdif * agiFactor)
+            local agiFactor = math.floor(attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI) / 100) * 1.2)
+            finaldmg = math.floor(finaldmg + (calcParams.pdif or 0) * agiFactor)
         end
     end
 

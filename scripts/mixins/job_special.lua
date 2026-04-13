@@ -90,6 +90,19 @@ xi = xi or {}
 xi.mix = xi.mix or {}
 xi.mix.jobSpecial = xi.mix.jobSpecial or {}
 
+-- Shorthand table for mob job special ability IDs, mirrors xi.mobSkill without the _1 suffix.
+xi.jsa = xi.jsa or
+{
+    MIGHTY_STRIKES  = xi.mobSkill.MIGHTY_STRIKES_1,
+    HUNDRED_FISTS   = xi.mobSkill.HUNDRED_FISTS_1,
+    MANAFONT        = xi.mobSkill.MANAFONT_1,
+    CHAINSPELL      = xi.mobSkill.CHAINSPELL_1,
+    PERFECT_DODGE   = xi.mobSkill.PERFECT_DODGE_1,
+    INVINCIBLE      = xi.mobSkill.INVINCIBLE_1,
+    MEIKYO_SHISUI   = xi.mobSkill.MEIKYO_SHISUI_1,
+    CALL_WYVERN     = xi.mobSkill.CALL_WYVERN_1,
+}
+
 g_mixins = g_mixins or {}
 
 local job2hr =

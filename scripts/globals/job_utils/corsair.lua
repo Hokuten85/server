@@ -272,6 +272,7 @@ local rollWeights = {
 xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
     if caster:getID() == target:getID() then -- the COR handles all the calculations
         local duEffect = caster:getStatusEffect(xi.effect.DOUBLE_UP_CHANCE)
+        if not duEffect then return end -- effect expired between ability check and use
         local prevRoll = caster:getStatusEffect(duEffect:getSubPower())
         local roll     = prevRoll:getSubPower()
         local job      = duEffect:getTier()

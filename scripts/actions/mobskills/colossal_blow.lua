@@ -20,7 +20,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     local info =
     {
-        damage
+        damage = damage
     }
 
     local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)

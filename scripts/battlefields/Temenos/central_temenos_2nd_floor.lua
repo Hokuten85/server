@@ -257,7 +257,7 @@ content.groups =
 
     {
         mobs  = { 'Light_Elemental' },
-        death = utils.bind(weakenCarbuncle, content, xi.mod.NONE, xi.mod.DARK_SDT, 2500),
+        death = utils.bind(weakenCarbuncle, xi.mod.NONE, xi.mod.DARK_SDT, 2500),
     },
 
     {
