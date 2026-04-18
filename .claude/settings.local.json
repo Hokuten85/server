@@ -8,7 +8,12 @@
       "Bash(bash /tmp/extract_unique.sh)",
       "Bash(bash /tmp/final_summary.sh)",
       "Bash(python3 /tmp/categorize.py)",
-      "Bash(xargs grep:*)"
+      "Bash(xargs grep:*)",
+      "Bash(mysql *)",
+      "Bash(gh api *)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl *)"
     ]
   }
 }
