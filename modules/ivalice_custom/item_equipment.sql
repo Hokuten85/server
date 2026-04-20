@@ -129,3 +129,5 @@ UPDATE item_equipment SET jobs = jobs | 65536 | 8192 | 64 | 32 WHERE itemid = 12
 UPDATE item_equipment SET jobs = jobs | 65536 | 8192 | 64 | 32 WHERE itemid = 12562; -- Kirin's Osode add THF, PLD, DRG, COR
 
 UPDATE item_equipment SET jobs = jobs | 64 | 1 WHERE itemid = 15223; -- Ace's Helm add WAR, PLD
+
+REPLACE INTO `item_equipment` VALUES (15764,'virtuous_torque',75,0,4194303,0,0,0,512,0,0,0);
