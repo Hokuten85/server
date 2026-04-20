@@ -13324,6 +13324,7 @@ return {
     [15761] = {id=15761,article=0,plural="Chariot bands"},
     [15762] = {id=15762,article=1,plural="Empress bands"},
     [15763] = {id=15763,article=1,plural="Emperor bands"},
+    [15764] = {id=15764,article=0,plural="virtuous torques"},
     [15769] = {id=15769,article=1,plural="Olduum rings"},
     [15770] = {id=15770,article=0,plural="random ring"},
     [15771] = {id=15771,article=0,plural="shining rings"},

@@ -73,7 +73,7 @@ local synergyRecipes = {
 	{ ingredients = {2809,12150}, result = 12150 }, -- furia-pigment,ebon-haubert = furia-haubert 
 	{ ingredients = {2809,12152}, result = 12150 }, -- furia-pigment,ebur-haubert = furia-haubert
 	
-	
+	{ ingredients = {15508,15509,15510,15511,15512,15513,15514}, result = 15764 }, -- virtuous torque
 }
 
 xi.synergy.onTrade = function(player, npc, trade)
