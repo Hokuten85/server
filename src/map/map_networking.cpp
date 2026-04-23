@@ -191,8 +191,28 @@ void MapNetworking::handle_incoming_packet(ByteSpan buffer, const IPP& ipp)
             const int32 burstMax    = std::clamp<int32>(burstMaxRaw, 1, static_cast<int32>(kMaxBurstSends));
             const int32 threshold   = std::max<int32>(1, settings::get<int32>("network.BURST_SEND_THRESHOLD"));
 
+            // Gate: only burst for sessions that have announced themselves
+            // via a recent XIOverclock heartbeat (0x1FF). This ensures the
+            // client-side drain loop is present to absorb the extra
+            // datagrams; a stock client would just drop them to kernel
+            // overflow. Stale sessions (no heartbeat in 3x the reported
+            // interval) decay back to the stock 1:1 behaviour automatically.
+            const auto  now          = timer::now();
+            const auto  staleCutoff  = std::chrono::seconds(PSession->burst_heartbeat_interval_s * 3);
+            const bool  heartbeatOk  = PSession->burst_enabled &&
+                                       (now - PSession->burst_heartbeat_last) < staleCutoff;
+            if (!heartbeatOk && PSession->burst_enabled)
+            {
+                // First tick after decay — log once and clear the flag so
+                // subsequent ticks skip cleanly.
+                PSession->burst_enabled = false;
+                DebugPacketsFmt("XIOC heartbeat stale for char {}; burst disabled",
+                                PSession->PChar->getName());
+            }
+
             uint32 bursts = 0;
-            while (bursts + 1 < static_cast<uint32>(burstMax) &&
+            while (heartbeatOk &&
+                   bursts + 1 < static_cast<uint32>(burstMax) &&
                    PSession->PChar &&
                    static_cast<int32>(PSession->PChar->getPacketCount()) >= threshold)
             {

@@ -80,6 +80,17 @@ struct MapSession
     // when the id isn't in the cache (happened too far in the past, or
     // was never sent).
     const ServerPacketCacheEntry* findCachedOutgoing(uint16 id) const;
+
+    // ---- Burst-send opt-in (XIOverclock heartbeat) ----------------------
+    // Flipped true by the 0x1FF heartbeat handler; the burst-send loop in
+    // handle_incoming_packet only fires when this is true AND the most
+    // recent heartbeat was within ~3 heartbeat intervals. Stale sessions
+    // decay back to stock 1:1 automatically — no explicit "disable"
+    // handshake required when the client plugin unloads or crashes.
+    bool              burst_enabled              = false;
+    timer::time_point burst_heartbeat_last       = {};
+    uint16            burst_heartbeat_interval_s = 20;   // from last heartbeat
+    uint8             burst_client_flags         = 0;    // bits reported by client
     timer::time_point            last_update        = {}; // time of last packet recv
     blowfish_t                   blowfish           = {}; // unique decypher keys, these are the currently expected keys
     std::unique_ptr<CCharEntity> PChar;                   // game char
