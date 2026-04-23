@@ -71,3 +71,15 @@ static constexpr auto kIPCPumpInterval = 100ms;
 static constexpr auto kMaxBufferSize           = 2500U;
 static constexpr auto kMaxPacketPerCompression = 32U;
 static constexpr auto kMaxPacketBacklogSize    = kMaxPacketPerCompression * 6U; // If we hit this number, things are going very very badly.
+
+// Burst send: when a single c->s datagram leaves the player with leftover
+// chunks in PChar->PacketList, send up to (kMaxBurstSends - 1) additional
+// datagrams in the same handle_incoming_packet call rather than waiting for
+// the next client poll. Each extra send drains another kMaxPacketPerCompression
+// chunks and increments the s->c sync counter.
+//
+// 1  -> stock behaviour (no burst, exactly 1 datagram per c->s, identical to
+//       upstream LSB).
+// >1 -> opt-in throughput boost. Bounded by both this cap AND the runtime
+//       BURST_SEND_MAX setting in network.lua (whichever is lower wins).
+static constexpr auto kMaxBurstSends = 16U;

@@ -42,6 +42,8 @@ auto MapStatistics::toString(Key key)
             return "Total Packets Sent Per Tick";
         case Key::TotalPacketsDelayedPerTick:
             return "Total Packets Delayed Per Tick";
+        case Key::TotalBurstSendsPerTick:
+            return "Total Burst Sends Per Tick";
         case Key::TasksTickTime:
             return "Tasks Tick Time (ms)";
         case Key::NetworkTickTime:

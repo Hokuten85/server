@@ -32,6 +32,7 @@ public:
         TotalPacketsToSendPerTick,
         TotalPacketsSentPerTick,
         TotalPacketsDelayedPerTick,
+        TotalBurstSendsPerTick,
         TasksTickTime,
         NetworkTickTime,
         TotalTickTime,

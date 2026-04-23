@@ -21,6 +21,8 @@
 
 #include "map_networking.h"
 
+#include <algorithm>
+
 #include <common/arguments.h>
 #include <common/md52.h>
 #include <common/tracy.h>
@@ -151,6 +153,85 @@ void MapNetworking::handle_incoming_packet(ByteSpan buffer, const IPP& ipp)
         }
 
         mapSocket_->send(ipp, { PBuff.data(), size });
+
+        // Stamp the datagram we just sent into the per-session cache so
+        // parse()'s retransmit path can look it up by sync id later. The
+        // datagram's s->c sync counter lives in ref<uint16>(PBuff, 0).
+        PSession->cacheOutgoingPacket(ref<uint16>(PBuff.data(), 0), PBuff, size);
+
+        // ---------------------------------------------------------------
+        // Burst send: when there are still chunks queued in PChar->PacketList
+        // after the first datagram, optionally drain more datagrams in this
+        // same call rather than waiting for the next client poll. Stock LSB
+        // ships exactly one s->c per c->s; this is opt-in via network.lua.
+        //
+        // Skipped for the BLOWFISH_PENDING_ZONE special path (decryptCount
+        // == 1) because that path manually crafts a logout packet and isn't
+        // a normal backlog drain.
+        //
+        // Each iteration:
+        //   1. Bumps server_packet_id so the next datagram carries the
+        //      correct distinct sync counter. (Without this, every burst
+        //      datagram would ship with the same id the first send used,
+        //      and the client couldn't distinguish them for resend.)
+        //   2. Calls send_parse, which packs up to kMaxPacketPerCompression
+        //      more chunks and stamps them with the new id.
+        //   3. Sends.
+        //   4. Caches the sent datagram in the session's retransmit ring.
+        //
+        // Bounded by:
+        //   - kMaxBurstSends              (compile-time hard ceiling)
+        //   - network.BURST_SEND_MAX      (runtime, defaults to 1 = off)
+        //   - network.BURST_SEND_THRESHOLD(skip burst until backlog >= N)
+        //   - PChar->getPacketCount() == 0(nothing left to drain)
+        // ---------------------------------------------------------------
+        if (decryptCount == 0 && PSession->PChar)
+        {
+            const int32 burstMaxRaw = settings::get<int32>("network.BURST_SEND_MAX");
+            const int32 burstMax    = std::clamp<int32>(burstMaxRaw, 1, static_cast<int32>(kMaxBurstSends));
+            const int32 threshold   = std::max<int32>(1, settings::get<int32>("network.BURST_SEND_THRESHOLD"));
+
+            uint32 bursts = 0;
+            while (bursts + 1 < static_cast<uint32>(burstMax) &&
+                   PSession->PChar &&
+                   static_cast<int32>(PSession->PChar->getPacketCount()) >= threshold)
+            {
+                // Advance the s->c sync counter BEFORE build. send_parse's
+                // preparePacket() stamps this value into the datagram
+                // header and into every chunk's sequence field.
+                PSession->server_packet_id += 1;
+
+                size_t burstSize = kMaxBufferSize;
+                if (send_parse(PBuff.data(), &burstSize, PSession, UsePreviousKey::No) != 0 || burstSize == 0)
+                {
+                    // Rollback the speculative increment since we didn't
+                    // actually ship anything under this id. Keeps the
+                    // counter space contiguous for the retransmit ring.
+                    PSession->server_packet_id -= 1;
+                    break;
+                }
+                mapSocket_->send(ipp, { PBuff.data(), burstSize });
+
+                // Cache this burst datagram for targeted retransmit. Uses
+                // the actual stamped id in case anything between the
+                // increment and preparePacket mutated it (shouldn't, but
+                // the invariant is cheaper than an assertion).
+                PSession->cacheOutgoingPacket(
+                    ref<uint16>(PBuff.data(), 0), PBuff, burstSize);
+                ++bursts;
+
+                // Reflect the final burst datagram in `size` so the swap
+                // below keeps the legacy server_packet_data pointed at the
+                // most-recent send (fallback path when a retransmit id
+                // isn't in the cache for some reason).
+                size = burstSize;
+            }
+
+            if (bursts > 0)
+            {
+                mapStatistics_.increment(MapStatistics::Key::TotalBurstSendsPerTick, bursts);
+            }
+        }
 
         std::swap(PBuff, PSession->server_packet_data);
         std::swap(size, PSession->server_packet_size);
@@ -483,6 +564,36 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession)
             return 0;
         }
 
+        // The client's byte-2 is "the last server packet id I received."
+        // It's asking for (that + 1). Under burst send, the lost datagram
+        // can be in the middle of a multi-datagram send, so we must look
+        // up the specific id rather than just resending our most recent
+        // datagram (which would be the LAST of the burst, not the gap).
+        const uint16 wantedId = static_cast<uint16>(ref<uint16>(buff, 2) + 1);
+
+        if (const auto* cached = PSession->findCachedOutgoing(wantedId))
+        {
+            // Copy the cached datagram into PBuff for the caller to send.
+            // Patch byte-2 (s->c ack of client's latest c->s id) and byte-8
+            // (timestamp) so the re-sent datagram looks fresh.
+            PBuff     = cached->data;
+            *buffsize = cached->size;
+
+            ref<uint16>(PBuff.data(), 2) = SmallPD_Code;
+            ref<uint16>(PBuff.data(), 8) = earth_time::timestamp();
+
+            // NB: we deliberately don't touch server_packet_data here.
+            // The stock retransmit path overwrote it with the incoming
+            // client buffer as a side effect of its swap bookkeeping; with
+            // the ring cache present, targeted resends come from the ring
+            // and server_packet_data is only consulted on cache miss.
+            return -1;
+        }
+
+        // Cache miss: this can happen if the gap is older than the ring
+        // (a very long drop) or if the client's bookkeeping got confused.
+        // Fall back to the stock "resend whatever was last" behaviour; may
+        // or may not satisfy the client but at least maintains liveness.
         ref<uint16>(PSession->server_packet_data.data(), 2) = SmallPD_Code;
         ref<uint16>(PSession->server_packet_data.data(), 8) = earth_time::timestamp();
 

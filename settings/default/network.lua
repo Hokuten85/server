@@ -28,6 +28,24 @@ xi.settings.network =
 
     MAP_PORT = 54230,
 
+    -- Maximum number of UDP datagrams the map server may send per inbound
+    -- client packet. Stock LSB sends exactly 1 per c->s, which couples
+    -- effective ingress bandwidth to the client's poll rate. Setting this
+    -- above 1 lets the server flush the player's outbound chunk backlog
+    -- across multiple datagrams in a single handle_incoming_packet call.
+    --
+    -- Each extra datagram drains another `kMaxPacketPerCompression` chunks
+    -- (default 32) from the backlog and increments the s->c sync counter.
+    -- The hard ceiling is `kMaxBurstSends` in src/map/map_constants.h.
+    --
+    -- 1  = stock (no burst). 4-8 is a reasonable starting point for testing.
+    -- 0 / negative values are clamped to 1.
+    BURST_SEND_MAX = 8,
+
+    -- Only burst when the player has at least this many chunks queued AFTER
+    -- the initial datagram was built. 1 = burst whenever any backlog remains.
+    BURST_SEND_THRESHOLD = 1,
+
     SEARCH_PORT = 54002,
 
     -- DB queries will attempt each query once, and reconnect and retry up to `SQL_QUERY_RETRY_COUNT` times.

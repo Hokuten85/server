@@ -51,3 +51,25 @@ auto MapSession::toString() -> std::string
 {
     return fmt::format("MapSession: client_ipp: {}", client_ipp.toString());
 }
+
+void MapSession::cacheOutgoingPacket(uint16 id, const NetworkBuffer& src, size_t srcSize)
+{
+    auto& slot = server_packet_cache[server_packet_cache_next];
+    slot.id    = id;
+    slot.valid = true;
+    slot.data  = src;
+    slot.size  = srcSize;
+    server_packet_cache_next = (server_packet_cache_next + 1) % kServerPacketCacheSize;
+}
+
+const ServerPacketCacheEntry* MapSession::findCachedOutgoing(uint16 id) const
+{
+    for (const auto& slot : server_packet_cache)
+    {
+        if (slot.valid && slot.id == id)
+        {
+            return &slot;
+        }
+    }
+    return nullptr;
+}
