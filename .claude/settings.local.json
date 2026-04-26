@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmake --build . --target map_obj)",
+      "Bash(cmake --build . --target help)",
+      "Bash(grep \"XIOC-METRICS\" \"//Desktop-fl82f8v/h/FFIvalice/Process Logs/Main_Map_2026-04-25.log\")",
+      "Read(//tmp/**)",
+      "Bash(awk 'NR>185')",
+      "Bash(sort -t= -k2 -n -r)",
+      "Bash(awk -F'maxBacklog=' '{print $2}')",
+      "Bash(awk '{print $1}')",
+      "Bash(awk -F'[' '{print $2}')",
+      "Bash(awk '{ *)"
+    ]
+  }
+}

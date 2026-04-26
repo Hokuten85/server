@@ -83,6 +83,12 @@ void MapNetworking::handle_incoming_packet(ByteSpan buffer, const IPP& ipp)
 {
     TracyZoneScoped;
 
+    // Server-side turnaround timer: c->s arrival → s->c send returning.
+    // Used to populate the Turnaround_* histogram in MapStatistics so we
+    // know whether lowering the client's PacketFlow MIN below 250 ms is
+    // even feasible without the server becoming the bottleneck.
+    const auto turnaroundStart = timer::now();
+
     // find player session. May be null if there is a pending session for that char id
     MapSession* PSession = mapSessions_.getSessionByIPP(ipp);
 
@@ -251,6 +257,67 @@ void MapNetworking::handle_incoming_packet(ByteSpan buffer, const IPP& ipp)
             {
                 mapStatistics_.increment(MapStatistics::Key::TotalBurstSendsPerTick, bursts);
             }
+
+            // BurstPerPoll histogram: total datagrams shipped for this
+            // inbound poll = 1 (initial) + bursts. _1 means stock 1:1
+            // behavior (no burst, or burst gated off). Anything else
+            // means burst-send fired.
+            const uint32 totalSends = 1u + bursts;
+            if (totalSends == 1u)
+            {
+                mapStatistics_.increment(MapStatistics::Key::BurstPerPoll_1);
+            }
+            else if (totalSends == 2u)
+            {
+                mapStatistics_.increment(MapStatistics::Key::BurstPerPoll_2);
+            }
+            else if (totalSends <= 4u)
+            {
+                mapStatistics_.increment(MapStatistics::Key::BurstPerPoll_3_4);
+            }
+            else
+            {
+                mapStatistics_.increment(MapStatistics::Key::BurstPerPoll_5_8);
+            }
+        }
+        else
+        {
+            // Non-burst send paths (e.g. BLOWFISH_PENDING_ZONE rebuild)
+            // still ship exactly one datagram — bucket them as _1 so the
+            // histogram totals match TotalPacketsSentPerTick.
+            mapStatistics_.increment(MapStatistics::Key::BurstPerPoll_1);
+        }
+
+        // Turnaround histogram: only count when we actually sent something
+        // (decryptCount != -1 path). Skips invalid/dropped inbound polls
+        // so the latency distribution reflects real responses, not
+        // protocol noise.
+        const auto turnaroundMs = std::chrono::duration_cast<std::chrono::milliseconds>(
+                                      timer::now() - turnaroundStart)
+                                      .count();
+        if (turnaroundMs < 5)
+        {
+            mapStatistics_.increment(MapStatistics::Key::Turnaround_LT_5ms);
+        }
+        else if (turnaroundMs < 20)
+        {
+            mapStatistics_.increment(MapStatistics::Key::Turnaround_5_19ms);
+        }
+        else if (turnaroundMs < 50)
+        {
+            mapStatistics_.increment(MapStatistics::Key::Turnaround_20_49ms);
+        }
+        else if (turnaroundMs < 100)
+        {
+            mapStatistics_.increment(MapStatistics::Key::Turnaround_50_99ms);
+        }
+        else if (turnaroundMs < 200)
+        {
+            mapStatistics_.increment(MapStatistics::Key::Turnaround_100_199ms);
+        }
+        else
+        {
+            mapStatistics_.increment(MapStatistics::Key::Turnaround_GTE_200ms);
         }
 
         std::swap(PBuff, PSession->server_packet_data);
@@ -584,6 +651,8 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession)
             return 0;
         }
 
+        mapStatistics_.increment(MapStatistics::Key::RetransmitRequestsPerTick);
+
         // The client's byte-2 is "the last server packet id I received."
         // It's asking for (that + 1). Under burst send, the lost datagram
         // can be in the middle of a multi-datagram send, so we must look
@@ -593,6 +662,8 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession)
 
         if (const auto* cached = PSession->findCachedOutgoing(wantedId))
         {
+            mapStatistics_.increment(MapStatistics::Key::RetransmitRingHitsPerTick);
+
             // Copy the cached datagram into PBuff for the caller to send.
             // Patch byte-2 (s->c ack of client's latest c->s id) and byte-8
             // (timestamp) so the re-sent datagram looks fresh.
@@ -609,6 +680,8 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession)
             // and server_packet_data is only consulted on cache miss.
             return -1;
         }
+
+        mapStatistics_.increment(MapStatistics::Key::RetransmitRingMissesPerTick);
 
         // Cache miss: this can happen if the gap is older than the ring
         // (a very long drop) or if the client's bookkeeping got confused.
@@ -651,10 +724,17 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSess
 
     mapStatistics_.increment(MapStatistics::Key::TotalPacketsToSendPerTick, static_cast<uint32>(PChar->getPacketCount()));
 
+    // Inner-loop iteration counter. Used after the loops to derive how
+    // many times the 1256-byte (post-compress) cap forced a rebuild with
+    // fewer chunks. Iterations >= 2 means the cap was binding for this
+    // datagram. See DatagramRebuildsPerTick in map_statistics.h.
+    uint32 innerIterations = 0;
+
     do
     {
         do
         {
+            ++innerIterations;
             *buffsize       = FFXI_HEADER_SIZE;
             auto packetList = PChar->getPacketListCopy();
             packets         = 0;
@@ -721,10 +801,85 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSess
     mapStatistics_.increment(MapStatistics::Key::TotalPacketsSentPerTick, static_cast<uint32>(packets));
     TracyZoneString(fmt::format("Sending {} packets", packets));
 
+    // ---- XIOC instrumentation -----------------------------------------
+    // Each iteration past the first means the inner loop had to rebuild
+    // because the post-compress size exceeded 1256 bytes. Zero across a
+    // session = the 1300-byte wire cap is not binding.
+    if (innerIterations > 1)
+    {
+        mapStatistics_.increment(MapStatistics::Key::DatagramRebuildsPerTick,
+                                 static_cast<int64>(innerIterations - 1));
+    }
+
+    // Chunks-per-datagram histogram. Buckets are non-overlapping; the
+    // sum across all ChunksPerDatagram_* equals datagram count.
+    if (packets <= 1)
+    {
+        mapStatistics_.increment(MapStatistics::Key::ChunksPerDatagram_1);
+    }
+    else if (packets <= 4)
+    {
+        mapStatistics_.increment(MapStatistics::Key::ChunksPerDatagram_2_4);
+    }
+    else if (packets <= 8)
+    {
+        mapStatistics_.increment(MapStatistics::Key::ChunksPerDatagram_5_8);
+    }
+    else if (packets <= 16)
+    {
+        mapStatistics_.increment(MapStatistics::Key::ChunksPerDatagram_9_16);
+    }
+    else if (packets <= 32)
+    {
+        mapStatistics_.increment(MapStatistics::Key::ChunksPerDatagram_17_32);
+    }
+    else
+    {
+        mapStatistics_.increment(MapStatistics::Key::ChunksPerDatagram_33_64);
+    }
+
+    // Post-compress, pre-encrypt size histogram. The cap is 1256 bytes
+    // (1300 - FFXI_HEADER_SIZE(28) - md5(16)). _1240Plus near the cap
+    // indicates pressure on the wire size.
+    if (PacketSize < 500)
+    {
+        mapStatistics_.increment(MapStatistics::Key::DatagramSize_LT_500);
+    }
+    else if (PacketSize < 800)
+    {
+        mapStatistics_.increment(MapStatistics::Key::DatagramSize_500_799);
+    }
+    else if (PacketSize < 1000)
+    {
+        mapStatistics_.increment(MapStatistics::Key::DatagramSize_800_999);
+    }
+    else if (PacketSize < 1200)
+    {
+        mapStatistics_.increment(MapStatistics::Key::DatagramSize_1000_1199);
+    }
+    else if (PacketSize < 1240)
+    {
+        mapStatistics_.increment(MapStatistics::Key::DatagramSize_1200_1239);
+    }
+    else
+    {
+        mapStatistics_.increment(MapStatistics::Key::DatagramSize_1240Plus);
+    }
+
     finalizePacket(buff, buffsize, PacketSize, PSession, usePreviousKey);
 
     auto remainingPackets = PChar->getPacketCount();
     mapStatistics_.increment(MapStatistics::Key::TotalPacketsDelayedPerTick, static_cast<uint32>(remainingPackets));
+
+    // Track high-water across the period, not a sum. set() on increase
+    // only — leave the field alone if a smaller backlog appears later
+    // in the same period.
+    if (static_cast<int64>(remainingPackets) >
+        mapStatistics_.get(MapStatistics::Key::MaxBacklogObservedPerTick))
+    {
+        mapStatistics_.set(MapStatistics::Key::MaxBacklogObservedPerTick,
+                           static_cast<int64>(remainingPackets));
+    }
 
     if (settings::get<bool>("logging.DEBUG_PACKET_BACKLOG"))
     {
@@ -882,6 +1037,13 @@ void MapNetworking::flushStatistics()
                              : 0.0;
 
     mapStatistics_.set(MapStatistics::Key::DynamicTargIdUsagePercent, static_cast<int64>(percent));
+
+    // Optional structured dump of XIOC network counters. Quiet by default.
+    // Toggle in settings/default/logging.lua: logging.NETWORK_METRICS = true
+    if (settings::get<bool>("logging.NETWORK_METRICS"))
+    {
+        mapStatistics_.dumpXiocMetrics();
+    }
 
     // This also zeroes out all the stats
     mapStatistics_.flush();
