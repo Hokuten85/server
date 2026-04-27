@@ -32,7 +32,6 @@ public:
         TotalPacketsToSendPerTick,
         TotalPacketsSentPerTick,
         TotalPacketsDelayedPerTick,
-        TotalBurstSendsPerTick,
         TasksTickTime,
         NetworkTickTime,
         TotalTickTime,
@@ -42,17 +41,9 @@ public:
         ActiveMobs,
         DynamicTargIdUsagePercent,
 
-        // ---- XIOC instrumentation (Phase 2) ---------------------------
+        // ---- XIOC instrumentation (general-purpose, retained post-trim) ----
         // All counters are per-flush-period; reset() zeros them at flush.
         // Read alongside TotalPacketsSentPerTick to derive ratios.
-
-        // c->s arrived with byte-2 != server_packet_id, i.e. client is
-        // asking for a resend of some s->c sync id.
-        RetransmitRequestsPerTick,
-        // ...and we found that id in the per-session ring.
-        RetransmitRingHitsPerTick,
-        // ...and we did NOT — fell back to "resend last datagram".
-        RetransmitRingMissesPerTick,
 
         // Peak PChar->getPacketCount() observed (post-send leftover) across
         // any session in the period. Tracks pressure on the backlog cap.
@@ -87,18 +78,9 @@ public:
         // zero across a session, the cap is not binding.
         DatagramRebuildsPerTick,
 
-        // Distribution of total datagrams shipped per inbound c->s
-        // (initial + bursts). Bucket _1 means no burst (stock 1:1
-        // behavior). Anything else means burst-send fired.
-        BurstPerPoll_1,
-        BurstPerPoll_2,
-        BurstPerPoll_3_4,
-        BurstPerPoll_5_8,
-
         // Round-trip latency from c->s arrival into handle_incoming_packet
         // to s->c send returning. Measures server-side processing only,
-        // not client-side recv handling. If most polls are <50ms, lowering
-        // PacketFlow's 250ms MIN to 100-150ms is plausible.
+        // not client-side recv handling.
         Turnaround_LT_5ms,
         Turnaround_5_19ms,
         Turnaround_20_49ms,

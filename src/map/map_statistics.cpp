@@ -43,8 +43,6 @@ auto MapStatistics::toString(Key key)
             return "Total Packets Sent Per Tick";
         case Key::TotalPacketsDelayedPerTick:
             return "Total Packets Delayed Per Tick";
-        case Key::TotalBurstSendsPerTick:
-            return "Total Burst Sends Per Tick";
         case Key::TasksTickTime:
             return "Tasks Tick Time (ms)";
         case Key::NetworkTickTime:
@@ -61,12 +59,6 @@ auto MapStatistics::toString(Key key)
             return "Active Mobs (Process)";
         case Key::DynamicTargIdUsagePercent:
             return "Dynamic TargID Usage (%)";
-        case Key::RetransmitRequestsPerTick:
-            return "Retransmit Requests";
-        case Key::RetransmitRingHitsPerTick:
-            return "Retransmit Ring Hits";
-        case Key::RetransmitRingMissesPerTick:
-            return "Retransmit Ring Misses";
         case Key::MaxBacklogObservedPerTick:
             return "Max Backlog Observed";
         case Key::ChunksPerDatagram_1:
@@ -95,14 +87,6 @@ auto MapStatistics::toString(Key key)
             return "DatagramSize[1240+]";
         case Key::DatagramRebuildsPerTick:
             return "Datagram Rebuilds (cap-induced)";
-        case Key::BurstPerPoll_1:
-            return "BurstPerPoll[1]";
-        case Key::BurstPerPoll_2:
-            return "BurstPerPoll[2]";
-        case Key::BurstPerPoll_3_4:
-            return "BurstPerPoll[3-4]";
-        case Key::BurstPerPoll_5_8:
-            return "BurstPerPoll[5-8]";
         case Key::Turnaround_LT_5ms:
             return "Turnaround[<5ms]";
         case Key::Turnaround_5_19ms:
@@ -194,20 +178,12 @@ void MapStatistics::dumpXiocMetrics() const
         return;
     }
 
-    const auto rxReq = get(Key::RetransmitRequestsPerTick);
-    const auto rxHit = get(Key::RetransmitRingHitsPerTick);
-    const auto rxMis = get(Key::RetransmitRingMissesPerTick);
-    const auto bursts = get(Key::TotalBurstSendsPerTick);
     const auto maxBacklog = get(Key::MaxBacklogObservedPerTick);
 
-    ShowInfoFmt("[XIOC-METRICS] sent={} delayed={} bursts={} maxBacklog={} retransmit={{req={} hit={} miss={}}}",
+    ShowInfoFmt("[XIOC-METRICS] sent={} delayed={} maxBacklog={}",
                 sent,
                 get(Key::TotalPacketsDelayedPerTick),
-                bursts,
-                maxBacklog,
-                rxReq,
-                rxHit,
-                rxMis);
+                maxBacklog);
 
     ShowInfoFmt("[XIOC-METRICS] chunksPerDatagram=[1:{} 2-4:{} 5-8:{} 9-16:{} 17-32:{} 33-64:{}]",
                 get(Key::ChunksPerDatagram_1),
@@ -225,12 +201,6 @@ void MapStatistics::dumpXiocMetrics() const
                 get(Key::DatagramSize_1200_1239),
                 get(Key::DatagramSize_1240Plus),
                 get(Key::DatagramRebuildsPerTick));
-
-    ShowInfoFmt("[XIOC-METRICS] burstPerPoll=[1:{} 2:{} 3-4:{} 5-8:{}]",
-                get(Key::BurstPerPoll_1),
-                get(Key::BurstPerPoll_2),
-                get(Key::BurstPerPoll_3_4),
-                get(Key::BurstPerPoll_5_8));
 
     ShowInfoFmt("[XIOC-METRICS] turnaround=[<5:{} 5-19:{} 20-49:{} 50-99:{} 100-199:{} >=200:{}] ms",
                 get(Key::Turnaround_LT_5ms),

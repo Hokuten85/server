@@ -263,7 +263,5 @@ set(PACKET_C2S_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/0x11c_party_request.h
         ${CMAKE_CURRENT_SOURCE_DIR}/0x11d_jump.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/0x11d_jump.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/0x1ff_xioc_heartbeat.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/0x1ff_xioc_heartbeat.h
         PARENT_SCOPE
 )

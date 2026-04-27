@@ -28,15 +28,6 @@
 // Note: Some packets are not explicitly named in XiPackets and have been given tentative names.
 enum class PacketC2S : uint16_t
 {
-    // --- XIOverclock heartbeat --------------------------------------------
-    // Custom opcode (0x1FF, the max of the 9-bit opcode range) used by the
-    // XIOverclock client plugin to announce itself to the server. The
-    // server enables burst send per-session only while these heartbeats
-    // are arriving regularly; a stale session decays back to stock 1:1
-    // behaviour automatically. SE's retail client only uses opcodes up to
-    // ~0x11D in practice, so 0x1FF is a collision-free sentinel.
-    GP_CLI_COMMAND_XIOC_HEARTBEAT       = 0x1FF,
-
     GP_CLI_COMMAND_LOGIN                = 0x00A,
     GP_CLI_COMMAND_GAMEOK               = 0x00C,
     GP_CLI_COMMAND_NETEND               = 0x00D,
