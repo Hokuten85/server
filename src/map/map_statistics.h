@@ -40,6 +40,53 @@ public:
         ConnectedPlayers,
         ActiveMobs,
         DynamicTargIdUsagePercent,
+
+        // ---- XIOC instrumentation (general-purpose, retained post-trim) ----
+        // All counters are per-flush-period; reset() zeros them at flush.
+        // Read alongside TotalPacketsSentPerTick to derive ratios.
+
+        // Peak PChar->getPacketCount() observed (post-send leftover) across
+        // any session in the period. Tracks pressure on the backlog cap.
+        MaxBacklogObservedPerTick,
+
+        // Distribution of chunks packed into one outbound datagram in
+        // send_parse. Buckets are non-overlapping; sum across all
+        // ChunksPerDatagram_* equals datagram count for the period.
+        ChunksPerDatagram_1,
+        ChunksPerDatagram_2_4,
+        ChunksPerDatagram_5_8,
+        ChunksPerDatagram_9_16,
+        ChunksPerDatagram_17_32,
+        ChunksPerDatagram_33_64,
+
+        // Distribution of post-compress, pre-encrypt datagram sizes (bytes,
+        // not counting FFXI_HEADER_SIZE+md5). The cap is 1256 bytes
+        // (= 1300 - FFXI_HEADER_SIZE(28) - md5(16)). If _1240Plus
+        // dominates, the 1300 wire cap is binding and an MTU bump pays.
+        // If _LT_500 dominates, MTU bump is wasted.
+        DatagramSize_LT_500,
+        DatagramSize_500_799,
+        DatagramSize_800_999,
+        DatagramSize_1000_1199,
+        DatagramSize_1200_1239,
+        DatagramSize_1240Plus,
+
+        // Number of times send_parse's inner do-while had to rebuild the
+        // datagram with fewer chunks because the post-compress size
+        // exceeded the 1256-byte cap. Cleanest single signal for "is the
+        // 1300 wire cap actively limiting throughput?" — if zero or near
+        // zero across a session, the cap is not binding.
+        DatagramRebuildsPerTick,
+
+        // Round-trip latency from c->s arrival into handle_incoming_packet
+        // to s->c send returning. Measures server-side processing only,
+        // not client-side recv handling.
+        Turnaround_LT_5ms,
+        Turnaround_5_19ms,
+        Turnaround_20_49ms,
+        Turnaround_50_99ms,
+        Turnaround_100_199ms,
+        Turnaround_GTE_200ms,
     };
 
     MapStatistics();
@@ -54,6 +101,12 @@ public:
 
     void print();
     void flush();
+
+    // Periodic structured dump of the XIOC network counters to ShowInfo.
+    // Called from MapNetworking::flushStatistics() when
+    // logging.NETWORK_METRICS is true. Emits one line per logical group
+    // so logs grep cleanly: [XIOC-METRICS] sends=... bursts=... etc.
+    void dumpXiocMetrics() const;
 
 private:
     void reset();

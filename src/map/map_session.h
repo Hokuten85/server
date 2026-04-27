@@ -29,8 +29,6 @@
 #include "map_constants.h"
 #include "packets/s2c/0x00b_logout.h"
 
-#include <array>
-
 enum class GP_GAME_LOGOUT_STATE : uint8_t;
 class CCharEntity;
 class Scheduler;
@@ -46,6 +44,7 @@ struct MapSession
     uint16                       server_packet_id   = 0;  // id of the last packet sent by the server
     NetworkBuffer                server_packet_data = {}; // data of the packet, which was previously sent to the client
     size_t                       server_packet_size = 0;  // the size of the packet that was previously sent to the client
+
     timer::time_point            last_update        = {}; // time of last packet recv
     blowfish_t                   blowfish           = {}; // unique decypher keys, these are the currently expected keys
     std::unique_ptr<CCharEntity> PChar;                   // game char

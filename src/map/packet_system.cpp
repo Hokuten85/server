@@ -157,6 +157,7 @@
 #include "packets/c2s/0x11b_mastery_display.h"
 #include "packets/c2s/0x11c_party_request.h"
 #include "packets/c2s/0x11d_jump.h"
+
 #include "utils/moduleutils.h"
 
 namespace

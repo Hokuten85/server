@@ -53,6 +53,7 @@ xi.settings.logging =
     DEBUG_ID_LOOKUP      = false, -- Calls in C++: DebugIDLookup(...)
     DEBUG_MODULES        = false, -- Calls in C++: DebugModules(...)
     DEBUG_PACKET_BACKLOG = false, -- Special logic in map.cpp::send_parse
+    NETWORK_METRICS      = false, -- XIOC: per-flush dump of [XIOC-METRICS] counters from MapStatistics::dumpXiocMetrics
     DEBUG_AUCTIONS       = false, -- Special logic in auctionutils.cpp
     DEBUG_DELIVERY_BOX   = false, -- Special logic in dboxutils.cpp
     DEBUG_BAZAARS        = false, -- Additional debug logs for bazaar interactions in packet_system.cpp
