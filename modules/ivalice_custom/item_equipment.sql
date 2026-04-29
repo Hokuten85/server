@@ -131,3 +131,9 @@ UPDATE item_equipment SET jobs = jobs | 65536 | 8192 | 64 | 32 WHERE itemid = 12
 UPDATE item_equipment SET jobs = jobs | 64 | 1 WHERE itemid = 15223; -- Ace's Helm add WAR, PLD
 
 REPLACE INTO `item_equipment` VALUES (15764,'virtuous_torque',75,0,4194303,0,0,0,512,0,0,0);
+
+-- New melee filler staves (DNC only, staff-revamp)
+-- jobs = 262144 (DNC only: job 19, bit 18 = 2^18)
+-- slot = 1 (Main hand), MId 302 = ash_pole model, 299 = elm_pole model
+REPLACE INTO `item_equipment` VALUES (17055, 'willow_pole', 10, 0, 262144, 302, 0, 0, 1, 0, 0, 0);
+REPLACE INTO `item_equipment` VALUES (17084, 'teak_pole',   35, 0, 262144, 299, 0, 0, 1, 0, 0, 0);

@@ -145,6 +145,10 @@ UPDATE item_basic SET flags = flags & (~0x8000) WHERE itemid BETWEEN 4258 AND 42
 
 REPLACE INTO `item_basic` VALUES (15764,0,'virtuous_torque','virtuous_torque','高潔なトルク',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 
+-- New melee filler staves (DNC only, staff-revamp)
+REPLACE INTO `item_basic` VALUES (17055, 0, 'willow_pole', 'willow_pole', '', @WEAPON_TYPE, 1, @FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP, @STAFF, 300);
+REPLACE INTO `item_basic` VALUES (17084, 0, 'teak_pole',   'teak_pole',   '', @WEAPON_TYPE, 1, @FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP, @STAFF, 1000);
+
 -- Remove EX
 -- update item_basic set flags = flags ^ 0x4000
 -- where itemid in (4064,4065,4066,4067,4068,4069,4070,4071,4072,4073); -- chapters 1-10
