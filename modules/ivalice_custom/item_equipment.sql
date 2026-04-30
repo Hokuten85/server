@@ -198,3 +198,24 @@ UPDATE item_equipment SET jobs = jobs | 64 WHERE itemid IN (
     18874, 18873, 18856,                                   -- brise-os family + deae_gratia (L74)
     18324                                                  -- mjollnir (L75)
 );
+
+-- Add DNC (262144) to wave-3 melee staves
+-- Note: elemental staves (17557-18633) already have jobs=4194303 (all jobs)
+-- Note: laevateinn (18994), nirvana (19005), tupsimati (18990) are magic-job mythics – no DNC
+UPDATE item_equipment SET jobs = jobs | 262144 WHERE itemid IN (
+    18599,                                                 -- pestle (L15)
+    17116,                                                 -- misery_staff (L20)
+    17117,                                                 -- hypno_staff (L30)
+    18589, 18590, 18592                                    -- mages_staff/scepter_staff/elder_staff (L75)
+);
+
+-- Add PLD (64) to wave-3 melee clubs
+-- Note: holy_mace family (17041/17411), kraken_club (17440), martial_wand (17467) already have PLD
+UPDATE item_equipment SET jobs = jobs | 64 WHERE itemid IN (
+    17076,                                                 -- earth_wand (L21)
+    17071,                                                 -- heat_rod (L27)
+    17080, 17114, 18392, 18853,                            -- holy_maul family + sacred/spirit_maul (L38)
+    17083,                                                 -- time_hammer (L47)
+    18851,                                                 -- werebuster (L75)
+    18993                                                  -- yagrush_75 (L75 mythic)
+);

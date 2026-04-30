@@ -150,8 +150,8 @@ UPDATE item_weapon SET dmg = 70 WHERE itemid = 18585; -- kinnara_pole
 UPDATE item_weapon SET dmg = 78 WHERE itemid = 17564; -- cocytus_pole
 
 -- L70 – ref: zaide (L72) DPS 11.67
--- mercurial_pole hits 2-5 times/round (avg 3.5x); per-hit dmg = round(11.67/3.5 * 366/60) = 20
-UPDATE item_weapon SET dmg = 20 WHERE itemid = 17586; -- mercurial_pole
+-- mercurial_pole hits 1-5 times/round (avg 3.0x); per-hit dmg = round(11.67/3.0 * 366/60) = 24
+UPDATE item_weapon SET dmg = 24 WHERE itemid = 17586; -- mercurial_pole
 UPDATE item_weapon SET dmg = 76 WHERE itemid = 17526; -- mythic_pole_+1
 UPDATE item_weapon SET dmg = 75 WHERE itemid = 17101; -- mythic_pole
 
@@ -233,19 +233,87 @@ UPDATE item_weapon SET dmg = 54 WHERE itemid = 17470; -- pealing_buzdygan
 UPDATE item_weapon SET dmg = 51 WHERE itemid = 17458; -- rsv.cpt._mace
 UPDATE item_weapon SET dmg = 51 WHERE itemid = 17457; -- snr.msk._rod
 
--- L72 – ref: guttler (L75) DPS 11.36
-UPDATE item_weapon SET dmg = 53 WHERE itemid = 17459; -- scepter_+1
-UPDATE item_weapon SET dmg = 52 WHERE itemid = 17064; -- scepter
-UPDATE item_weapon SET dmg = 59 WHERE itemid = 18404; -- ramuhs_mace
-UPDATE item_weapon SET dmg = 61 WHERE itemid = 18865; -- zonure
+-- L72 – ref: tabarzin_+1 (L71) DPS 10.71
+UPDATE item_weapon SET dmg = 50 WHERE itemid = 17459; -- scepter_+1
+UPDATE item_weapon SET dmg = 49 WHERE itemid = 17064; -- scepter
+UPDATE item_weapon SET dmg = 55 WHERE itemid = 18404; -- ramuhs_mace
+UPDATE item_weapon SET dmg = 58 WHERE itemid = 18865; -- zonure
 
 -- L74 – ref: glyph_axe (L77) DPS 12.39
 UPDATE item_weapon SET dmg = 69 WHERE itemid = 18874; -- brise-os_+1
 UPDATE item_weapon SET dmg = 68 WHERE itemid = 18873; -- brise-os
 UPDATE item_weapon SET dmg = 62 WHERE itemid = 18856; -- deae_gratia
 
--- L75 – ref: glyph_axe (L77) DPS 12.39
-UPDATE item_weapon SET dmg = 64 WHERE itemid = 18324; -- mjollnir
+-- L75 (relic) – ref: guttler_75 (L75) DPS 11.36
+UPDATE item_weapon SET dmg = 58 WHERE itemid = 18324; -- mjollnir
+
+-- ============================================================
+-- Wave-3: Additional melee staves (DPS parity with polearms)
+-- Same methodology as wave-1/wave-2.
+-- ============================================================
+
+-- L15 – ref: ryl.spr._spear (L18) DPS 4.24
+UPDATE item_weapon SET dmg = 26 WHERE itemid = 18599; -- pestle
+
+-- L20 – ref: kingdom_spear (L23) DPS 4.81
+UPDATE item_weapon SET dmg = 29 WHERE itemid = 17116; -- misery_staff
+
+-- L30 – ref: lizard_piercer (L32) DPS 5.92
+UPDATE item_weapon SET dmg = 36 WHERE itemid = 17117; -- hypno_staff
+
+-- L51 – ref: holy_lance_+1 (L53) DPS 9.41  (HQ=56 delay 356; NQ=HQ-1=55 delay 366)
+UPDATE item_weapon SET dmg = 56 WHERE itemid = 17558; -- apollos_staff (+1, delay 356)
+UPDATE item_weapon SET dmg = 55 WHERE itemid = 17557; -- light_staff (delay 366)
+UPDATE item_weapon SET dmg = 56 WHERE itemid = 17560; -- plutos_staff (+1, delay 356)
+UPDATE item_weapon SET dmg = 55 WHERE itemid = 17559; -- dark_staff (delay 366)
+UPDATE item_weapon SET dmg = 56 WHERE itemid = 18633; -- chatoyant_staff (+1, delay 356)
+UPDATE item_weapon SET dmg = 55 WHERE itemid = 18632; -- iridal_staff (delay 366)
+
+-- L75 non-relic – ref: guisarme_+1 (L77) DPS 12.05
+UPDATE item_weapon SET dmg = 81 WHERE itemid = 18589; -- mages_staff
+UPDATE item_weapon SET dmg = 81 WHERE itemid = 18590; -- scepter_staff
+UPDATE item_weapon SET dmg = 81 WHERE itemid = 18592; -- elder_staff
+
+-- L75 mythic – ref: ryunohige_75 (L75) DPS 11.10
+UPDATE item_weapon SET dmg = 74 WHERE itemid = 18994; -- laevateinn_75
+UPDATE item_weapon SET dmg = 74 WHERE itemid = 19005; -- nirvana_75
+UPDATE item_weapon SET dmg = 74 WHERE itemid = 18990; -- tupsimati_75
+
+-- ============================================================
+-- Wave-3: Additional melee clubs (DPS parity with axes)
+-- Same methodology as wave-1 clubs.
+-- ============================================================
+
+-- L21 – ref: battleaxe_+1 (L20) DPS 4.70
+UPDATE item_weapon SET dmg = 17 WHERE itemid = 17076; -- earth_wand
+
+-- L27 – ref: military_pick (L28) DPS 5.54
+UPDATE item_weapon SET dmg = 27 WHERE itemid = 17071; -- heat_rod
+
+-- L38 – ref: orc_piercer (L41) DPS 7.27
+UPDATE item_weapon SET dmg = 38 WHERE itemid = 17114; -- holy_maul_+1 (HQ, delay 315)
+UPDATE item_weapon SET dmg = 37 WHERE itemid = 17080; -- holy_maul (NQ, delay 324)
+UPDATE item_weapon SET dmg = 39 WHERE itemid = 18392; -- sacred_maul (standalone, delay 324)
+UPDATE item_weapon SET dmg = 39 WHERE itemid = 18853; -- spirit_maul (standalone, delay 324)
+
+-- L43 – ref: combat_casters_axe_+2 (L43) DPS 7.95
+UPDATE item_weapon SET dmg = 39 WHERE itemid = 17411; -- holy_mace_+1 (HQ, delay 291)
+UPDATE item_weapon SET dmg = 38 WHERE itemid = 17041; -- holy_mace (NQ, delay 300)
+
+-- L47 – ref: mythril_pick_+1 (L50) DPS 7.92
+UPDATE item_weapon SET dmg = 43 WHERE itemid = 17083; -- time_hammer
+
+-- L63 – ref: darksteel_tabar_+1 (L65) DPS 9.58; hit=8, avg_hits=(1+8)/2=4.5; per-hit dmg=9
+UPDATE item_weapon SET dmg = 9 WHERE itemid = 17440; -- kraken_club
+
+-- L72 – ref: tabarzin_+1 (L71) DPS 10.71
+UPDATE item_weapon SET dmg = 52 WHERE itemid = 17467; -- martial_wand
+
+-- L75 non-relic – ref: glyph_axe (L77) DPS 12.39
+UPDATE item_weapon SET dmg = 55 WHERE itemid = 18851; -- werebuster
+
+-- L75 mythic – ref: aymur_75 (L75) DPS 9.62
+UPDATE item_weapon SET dmg = 43 WHERE itemid = 18993; -- yagrush_75
 
 -- New filler staves (DNC only): willow_pole L10, teak_pole L35
 -- skill=12 (Staff), dmgType=3, hit=1
