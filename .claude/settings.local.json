@@ -10,7 +10,20 @@
       "Bash(awk -F'maxBacklog=' '{print $2}')",
       "Bash(awk '{print $1}')",
       "Bash(awk -F'[' '{print $2}')",
-      "Bash(awk '{ *)"
+      "Bash(awk '{ *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(mysql --version)",
+      "Bash(mysql -h 127.0.0.1 -P 3306 -u root -pHokuten1 -D xidb -e \"SELECT COUNT\\(*\\) AS total_weapons FROM item_weapon; SELECT COUNT\\(*\\) AS staffs FROM item_weapon WHERE skill = 12; SELECT COUNT\\(*\\) AS polearms FROM item_weapon WHERE skill = 5;\")",
+      "Bash(git checkout *)",
+      "Bash(mysql *)",
+      "Bash(grep -A 50 \"^- id: 17055$\" \"C:/Users/Kelly/source/repos/FFXICustomDats/FFXICustomDats/bin/Debug/net8.0/DatProject/raw_data/items/weapons.yml\")",
+      "Bash(grep -A 50 \"^- id: 17084$\" \"C:/Users/Kelly/source/repos/FFXICustomDats/FFXICustomDats/bin/Debug/net8.0/DatProject/raw_data/items/weapons.yml\")",
+      "Bash(grep -A 80 \"^- id: 17095$\" \"C:/Users/Kelly/source/repos/FFXICustomDats/FFXICustomDats/bin/Debug/net8.0/DatProject/raw_data/items/weapons.yml\")",
+      "Bash(grep -A 5 \"^- id: 17097$\" \"C:/Users/Kelly/source/repos/FFXICustomDats/FFXICustomDats/bin/Debug/net8.0/DatProject/raw_data/items/weapons.yml\")",
+      "Bash(cp \"//Desktop-fl82f8v/h/ffxiahbot/bin/items75.csv\" \"//Desktop-fl82f8v/h/ffxiahbot/bin/items75.csv.bak\")",
+      "Read(///Desktop-fl82f8v/h/ffxiahbot/bin/**)",
+      "Bash(printf \"17055,willow_pole,1,1,300,30,0,1,1,30\\\\n17084,teak_pole,1,1,1000,30,0,1,1,30\\\\n\")"
     ]
   }
 }
