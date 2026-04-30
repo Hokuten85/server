@@ -183,10 +183,10 @@ xi.combat.tp.calculateTPGainOnPhysicalDamage = function(actor, target, totalDama
     local inhibitTPModifier  = (100 - target:getMod(xi.mod.INHIBIT_TP)) / 100                    -- no known cap: https://www.bg-wiki.com/ffxi/Monster_TP_gain#Inhibit_TP
     local dAGIModifier       = utils.clamp(200 - (dAGI + 30) / 200, 0.5, 1)                      -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
     local subtleBlowMerits   = actor:getMerit(xi.merit.SUBTLE_BLOW_EFFECT)
-    local subtleBlowI        = math.min(actor:getMod(xi.mod.SUBTLE_BLOW) + subtleBlowMerits, 50) -- cap of 50% https://www.bg-wiki.com/ffxi/Subtle_Blow
+    local subtleBlowI        = math.min(actor:getMod(xi.mod.SUBTLE_BLOW) + subtleBlowMerits, 60) -- cap of 50% https://www.bg-wiki.com/ffxi/Subtle_Blow
     local tandemBlowBonus    = xi.combat.tp.getTandemBlowBonus(actor)
     local subtleBlowII       = actor:getMod(xi.mod.SUBTLE_BLOW_II) + tandemBlowBonus             -- no known cap
-    local subtleBlowModifier = math.max((100 - subtleBlowI + subtleBlowII) / 100, 0.25)          -- combined cap of 75% reduction: https://www.bg-wiki.com/ffxi/Subtle_Blow
+    local subtleBlowModifier = math.max((100 - subtleBlowI + subtleBlowII) / 100, 0.15)          -- combined cap of 75% reduction: https://www.bg-wiki.com/ffxi/Subtle_Blow
     local storeTPModifier    = 1 + target:getMod(xi.mod.STORETP) / 100
 
     -- TODO: unknown where/how many floor steps there are. Napkin math seems to be a single floor step, but given x/256 it's hard to tell
@@ -199,7 +199,7 @@ xi.combat.tp.calculateTPGainOnPhysicalDamage = function(actor, target, totalDama
         actor:getObjType() ~= xi.objType.MOB
     then
         -- +30 sourced from http://wiki.ffo.jp/html/2621.html and tested in game
-        return math.floor((baseTPGain + 30) * inhibitTPModifier * dAGIModifier * subtleBlowModifier * storeTPModifier)
+        return math.floor(baseTPGain * inhibitTPModifier * dAGIModifier * subtleBlowModifier * storeTPModifier)
     else
         -- 1/3rd sourced from https://www.bg-wiki.com/ffxi/Tactical_Points and tested in game
         return math.floor(baseTPGain * inhibitTPModifier * subtleBlowModifier * storeTPModifier * (1 / 3))
