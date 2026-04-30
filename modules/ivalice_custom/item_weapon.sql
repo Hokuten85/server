@@ -102,6 +102,79 @@ UPDATE item_weapon SET dmg = 77 WHERE itemid = 17102; -- eight-sided_pole
 -- L75 (claustrum) – ref: gungnir (L75) DPS 12.20  (user-confirmed OK for claustrum)
 UPDATE item_weapon SET dmg = 79 WHERE itemid = 18330; -- claustrum
 
+-- ============================================================
+-- Additional melee staves / poles (wave 2)
+-- Same methodology: HQ matches ref polearm DPS; standalone or
+-- normal quality = HQ dmg - 1.  Only dmg is changed.
+-- ============================================================
+
+-- L16 – ref: ryl.spr._spear (L18) DPS 4.24
+UPDATE item_weapon SET dmg = 28 WHERE itemid = 18586; -- flexible_pole
+
+-- L20 – ref: kingdom_spear (L23) DPS 4.81
+UPDATE item_weapon SET dmg = 29 WHERE itemid = 17571; -- platoon_pole
+
+-- L27 – ref: military_spear (L28) DPS 5.78
+UPDATE item_weapon SET dmg = 35 WHERE itemid = 17134; -- dolphin_staff
+
+-- L32 – ref: lance_+1 (L34) DPS 6.53
+UPDATE item_weapon SET dmg = 39 WHERE itemid = 17534; -- whale_staff_+1
+UPDATE item_weapon SET dmg = 38 WHERE itemid = 17533; -- whale_staff
+
+-- L33 – ref: halberd_+1 (L36) DPS 6.70
+UPDATE item_weapon SET dmg = 42 WHERE itemid = 17580; -- military_pole
+
+-- L50 – ref: holy_lance_+1 (L53) DPS 9.41
+UPDATE item_weapon SET dmg = 57 WHERE itemid = 17135; -- walrus_staff
+
+-- L51 – ref: holy_lance_+1 (L53) DPS 9.41
+UPDATE item_weapon SET dmg = 56 WHERE itemid = 17546; -- vulcans_staff (+1)
+UPDATE item_weapon SET dmg = 55 WHERE itemid = 17545; -- fire_staff
+UPDATE item_weapon SET dmg = 56 WHERE itemid = 17550; -- austers_staff (+1)
+UPDATE item_weapon SET dmg = 55 WHERE itemid = 17549; -- wind_staff
+UPDATE item_weapon SET dmg = 56 WHERE itemid = 17552; -- terras_staff (+1)
+UPDATE item_weapon SET dmg = 55 WHERE itemid = 17551; -- earth_staff
+UPDATE item_weapon SET dmg = 56 WHERE itemid = 17554; -- jupiters_staff (+1)
+UPDATE item_weapon SET dmg = 55 WHERE itemid = 17553; -- thunder_staff
+
+-- L56 – ref: partisan_+1 (L57) DPS 9.68
+UPDATE item_weapon SET dmg = 65 WHERE itemid = 17106; -- rockmasher
+
+-- L57 – ref: dark_mezraq_+1 (L60) DPS 10.29
+UPDATE item_weapon SET dmg = 63 WHERE itemid = 17561; -- revenging_staff
+
+-- L68 – ref: imperial_neza (L71) DPS 11.55
+UPDATE item_weapon SET dmg = 70 WHERE itemid = 18585; -- kinnara_pole
+
+-- L69 – ref: zaide (L72) DPS 11.67
+UPDATE item_weapon SET dmg = 78 WHERE itemid = 17564; -- cocytus_pole
+
+-- L70 – ref: zaide (L72) DPS 11.67
+-- mercurial_pole hits 2-5 times/round (avg 3.5x); per-hit dmg = round(11.67/3.5 * 366/60) = 20
+UPDATE item_weapon SET dmg = 20 WHERE itemid = 17586; -- mercurial_pole
+UPDATE item_weapon SET dmg = 76 WHERE itemid = 17526; -- mythic_pole_+1
+UPDATE item_weapon SET dmg = 75 WHERE itemid = 17101; -- mythic_pole
+
+-- L71 – ref: achilles_spear (L74) DPS 11.97
+UPDATE item_weapon SET dmg = 80 WHERE itemid = 18608; -- atesh_pole
+UPDATE item_weapon SET dmg = 80 WHERE itemid = 18583; -- imperial_pole
+UPDATE item_weapon SET dmg = 73 WHERE itemid = 17530; -- mst.cst._pole
+UPDATE item_weapon SET dmg = 80 WHERE itemid = 17527; -- pole_of_trials
+UPDATE item_weapon SET dmg = 80 WHERE itemid = 17582; -- prelatic_pole
+
+-- L72 – ref: achilles_spear (L74) DPS 11.97
+UPDATE item_weapon SET dmg = 80 WHERE itemid = 18581; -- carbuncles_pole
+UPDATE item_weapon SET dmg = 78 WHERE itemid = 17593; -- martial_staff
+UPDATE item_weapon SET dmg = 80 WHERE itemid = 17581; -- mighty_pole
+UPDATE item_weapon SET dmg = 80 WHERE itemid = 17578; -- zen_pole
+
+-- L73 – ref: achilles_spear (L74) DPS 11.97
+UPDATE item_weapon SET dmg = 82 WHERE itemid = 18609; -- lyft_pole
+
+-- L75 – ref: achilles_spear (L74) DPS 11.97
+UPDATE item_weapon SET dmg = 80 WHERE itemid = 17599; -- diaboloss_pole
+UPDATE item_weapon SET dmg = 80 WHERE itemid = 17567; -- kirins_pole
+
 -- New filler staves (DNC only): willow_pole L10, teak_pole L35
 -- skill=12 (Staff), dmgType=3, hit=1
 REPLACE INTO item_weapon VALUES (17055, 'willow_pole', 12, 0, 0, 0, 0, 3, 1, 402, 23, 0);

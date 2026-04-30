@@ -138,7 +138,7 @@ REPLACE INTO `item_equipment` VALUES (15764,'virtuous_torque',75,0,4194303,0,0,0
 REPLACE INTO `item_equipment` VALUES (17055, 'willow_pole', 10, 0, 262144, 302, 0, 0, 1, 0, 0, 0);
 REPLACE INTO `item_equipment` VALUES (17084, 'teak_pole',   35, 0, 262144, 299, 0, 0, 1, 0, 0, 0);
 
--- Add DNC (job 19, bit 18 = 262144) to all melee-adjusted staves (staff-revamp)
+-- Add DNC (job 19, bit 18 = 262144) to all melee-adjusted staves (staff-revamp, wave 1)
 UPDATE item_equipment SET jobs = jobs | 262144 WHERE itemid IN (
     17122, 17095,                                          -- ash_pole family (L5)
     17541, 17538, 17542, 17537,                            -- city staves (L15)
@@ -159,4 +159,24 @@ UPDATE item_equipment SET jobs = jobs | 262144 WHERE itemid IN (
     17570, 17569, 17575, 17596,                            -- iron-splitter family + somnus/steel (L72)
     17595, 17592, 18595, 17591, 17590, 17589, 18588, 18618, -- L73 staves
     17568, 17102, 18330                                    -- eight-sided_pole family + claustrum (L75)
+);
+
+-- Add DNC (262144) to wave-2 melee-adjusted staves/poles
+UPDATE item_equipment SET jobs = jobs | 262144 WHERE itemid IN (
+    18586,                                                 -- flexible_pole (L16)
+    17571,                                                 -- platoon_pole (L20)
+    17134,                                                 -- dolphin_staff (L27)
+    17533, 17534,                                          -- whale_staff family (L32)
+    17580,                                                 -- military_pole (L33)
+    17135,                                                 -- walrus_staff (L50)
+    17545, 17546, 17549, 17550, 17551, 17552, 17553, 17554, -- elemental staves (L51)
+    17106,                                                 -- rockmasher (L56)
+    17561,                                                 -- revenging_staff (L57)
+    18585,                                                 -- kinnara_pole (L68)
+    17564,                                                 -- cocytus_pole (L69)
+    17586, 17526, 17101,                                   -- mercurial/mythic_pole family (L70)
+    18608, 18583, 17530, 17527, 17582,                     -- L71 poles
+    18581, 17593, 17581, 17578,                            -- L72 poles + martial_staff
+    18609,                                                 -- lyft_pole (L73)
+    17599, 17567                                           -- L75 poles
 );
