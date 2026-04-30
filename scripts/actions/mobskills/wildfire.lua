@@ -13,7 +13,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage       = mob:getWeaponDmg()
+    params.baseDamage       = mob:getMainLvl() + 2
     params.fTP              = { 5.5, 5.5, 5.5 }
     -- params.agi_wSC          = 0.6 -- TODO: Capture if mobskill weaponskills have wSC.
     params.element          = xi.element.FIRE
