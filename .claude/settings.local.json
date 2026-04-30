@@ -23,7 +23,10 @@
       "Bash(grep -A 5 \"^- id: 17097$\" \"C:/Users/Kelly/source/repos/FFXICustomDats/FFXICustomDats/bin/Debug/net8.0/DatProject/raw_data/items/weapons.yml\")",
       "Bash(cp \"//Desktop-fl82f8v/h/ffxiahbot/bin/items75.csv\" \"//Desktop-fl82f8v/h/ffxiahbot/bin/items75.csv.bak\")",
       "Read(///Desktop-fl82f8v/h/ffxiahbot/bin/**)",
-      "Bash(printf \"17055,willow_pole,1,1,300,30,0,1,1,30\\\\n17084,teak_pole,1,1,1000,30,0,1,1,30\\\\n\")"
+      "Bash(printf \"17055,willow_pole,1,1,300,30,0,1,1,30\\\\n17084,teak_pole,1,1,1000,30,0,1,1,30\\\\n\")",
+      "Bash(xargs grep *)",
+      "WebFetch(domain:www.bg-wiki.com)",
+      "Bash(grep -v \"^$\")"
     ]
   }
 }
