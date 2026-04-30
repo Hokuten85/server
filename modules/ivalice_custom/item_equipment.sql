@@ -180,3 +180,21 @@ UPDATE item_equipment SET jobs = jobs | 262144 WHERE itemid IN (
     18609,                                                 -- lyft_pole (L73)
     17599, 17567                                           -- L75 poles
 );
+
+-- Add PLD (job 7, bit 6 = 64) to all melee-adjusted clubs
+UPDATE item_equipment SET jobs = jobs | 64 WHERE itemid IN (
+    17452, 17453,                                          -- bastokan/republic_hammer (L23)
+    17414,                                                 -- pixie_mace (L24)
+    17150,                                                 -- ryl.sqr._mace (L30)
+    17449, 17448,                                          -- kingdom/san_dorian_mace (L34)
+    18867,                                                 -- daedalus_hammer (L62)
+    17432, 17046, 17438,                                   -- darksteel_maul family + titans_cudgel (L65)
+    17431, 17039,                                          -- platinum_mace family (L67)
+    18843, 18395, 18396,                                   -- flan_smasher + cudgels (L68)
+    18862, 18861, 18406, 18405,                            -- clearpath, grandeur, jadagna family (L69)
+    17464,                                                 -- purgatory_mace (L70)
+    18849, 18848, 17460, 17038, 17470, 17458, 17457,       -- L71 clubs
+    17459, 17064, 18404, 18865,                            -- L72 clubs
+    18874, 18873, 18856,                                   -- brise-os family + deae_gratia (L74)
+    18324                                                  -- mjollnir (L75)
+);

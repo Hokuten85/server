@@ -175,6 +175,78 @@ UPDATE item_weapon SET dmg = 82 WHERE itemid = 18609; -- lyft_pole
 UPDATE item_weapon SET dmg = 80 WHERE itemid = 17599; -- diaboloss_pole
 UPDATE item_weapon SET dmg = 80 WHERE itemid = 17567; -- kirins_pole
 
+-- ============================================================
+-- Melee club damage adjustments
+-- Target: bring melee-oriented clubs to parity with the highest-DPS
+-- axe (skill=5) within +/-3 levels.
+-- HQ (+1) matches axe DPS; standalone or normal quality = HQ dmg - 1.
+-- Penalty-stat clubs (club_hammer, sloth_wand, curse_wand) excluded.
+-- Only dmg is changed; delay is untouched.
+-- ============================================================
+
+-- L23 – ref: tigerhunter (L26) DPS 4.78
+UPDATE item_weapon SET dmg = 25 WHERE itemid = 17452; -- bastokan_hammer
+UPDATE item_weapon SET dmg = 24 WHERE itemid = 17453; -- republic_hammer
+
+-- L24 – ref: tigerhunter (L26) DPS 4.78
+UPDATE item_weapon SET dmg = 24 WHERE itemid = 17414; -- pixie_mace
+
+-- L30 – ref: military_pick (L28) DPS 5.54
+UPDATE item_weapon SET dmg = 27 WHERE itemid = 17150; -- ryl.sqr._mace
+
+-- L34 – ref: mythril_axe_+1 (L37) DPS 6.72
+UPDATE item_weapon SET dmg = 31 WHERE itemid = 17449; -- kingdom_mace
+UPDATE item_weapon SET dmg = 32 WHERE itemid = 17448; -- san_dorian_mace
+
+-- L62 – ref: dst._tabar_+1 (L65) DPS 9.58
+UPDATE item_weapon SET dmg = 48 WHERE itemid = 18867; -- daedalus_hammer
+
+-- L65 – ref: dst._tabar_+1 (L65) DPS 9.58
+UPDATE item_weapon SET dmg = 53 WHERE itemid = 17432; -- darksteel_maul_+1
+UPDATE item_weapon SET dmg = 52 WHERE itemid = 17046; -- darksteel_maul
+UPDATE item_weapon SET dmg = 44 WHERE itemid = 17438; -- titans_cudgel
+
+-- L67 – ref: kriegsbeil (L70) DPS 10.43
+UPDATE item_weapon SET dmg = 51 WHERE itemid = 17431; -- platinum_mace_+1
+UPDATE item_weapon SET dmg = 50 WHERE itemid = 17039; -- platinum_mace
+
+-- L68 – ref: tabarzin_+1 (L71) DPS 10.71
+UPDATE item_weapon SET dmg = 52 WHERE itemid = 18843; -- flan_smasher
+UPDATE item_weapon SET dmg = 61 WHERE itemid = 18395; -- seawolf_cudgel
+UPDATE item_weapon SET dmg = 61 WHERE itemid = 18396; -- sea_rob._cudgel
+
+-- L69 – ref: tabarzin_+1 (L71) DPS 10.71
+UPDATE item_weapon SET dmg = 51 WHERE itemid = 18862; -- clearpath
+UPDATE item_weapon SET dmg = 55 WHERE itemid = 18861; -- grandeur
+UPDATE item_weapon SET dmg = 60 WHERE itemid = 18406; -- jadagna_+1
+UPDATE item_weapon SET dmg = 59 WHERE itemid = 18405; -- jadagna
+
+-- L70 – ref: tabarzin_+1 (L71) DPS 10.71
+UPDATE item_weapon SET dmg = 58 WHERE itemid = 17464; -- purgatory_mace
+
+-- L71 – ref: tabarzin_+1 (L71) DPS 10.71
+UPDATE item_weapon SET dmg = 60 WHERE itemid = 18849; -- brass_jadagna_+1
+UPDATE item_weapon SET dmg = 59 WHERE itemid = 18848; -- brass_jadagna
+UPDATE item_weapon SET dmg = 52 WHERE itemid = 17460; -- buzdygan_+1
+UPDATE item_weapon SET dmg = 51 WHERE itemid = 17038; -- buzdygan
+UPDATE item_weapon SET dmg = 54 WHERE itemid = 17470; -- pealing_buzdygan
+UPDATE item_weapon SET dmg = 51 WHERE itemid = 17458; -- rsv.cpt._mace
+UPDATE item_weapon SET dmg = 51 WHERE itemid = 17457; -- snr.msk._rod
+
+-- L72 – ref: guttler (L75) DPS 11.36
+UPDATE item_weapon SET dmg = 53 WHERE itemid = 17459; -- scepter_+1
+UPDATE item_weapon SET dmg = 52 WHERE itemid = 17064; -- scepter
+UPDATE item_weapon SET dmg = 59 WHERE itemid = 18404; -- ramuhs_mace
+UPDATE item_weapon SET dmg = 61 WHERE itemid = 18865; -- zonure
+
+-- L74 – ref: glyph_axe (L77) DPS 12.39
+UPDATE item_weapon SET dmg = 69 WHERE itemid = 18874; -- brise-os_+1
+UPDATE item_weapon SET dmg = 68 WHERE itemid = 18873; -- brise-os
+UPDATE item_weapon SET dmg = 62 WHERE itemid = 18856; -- deae_gratia
+
+-- L75 – ref: glyph_axe (L77) DPS 12.39
+UPDATE item_weapon SET dmg = 64 WHERE itemid = 18324; -- mjollnir
+
 -- New filler staves (DNC only): willow_pole L10, teak_pole L35
 -- skill=12 (Staff), dmgType=3, hit=1
 REPLACE INTO item_weapon VALUES (17055, 'willow_pole', 12, 0, 0, 0, 0, 3, 1, 402, 23, 0);
