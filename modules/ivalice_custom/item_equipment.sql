@@ -137,3 +137,26 @@ REPLACE INTO `item_equipment` VALUES (15764,'virtuous_torque',75,0,4194303,0,0,0
 -- slot = 1 (Main hand), MId 302 = ash_pole model, 299 = elm_pole model
 REPLACE INTO `item_equipment` VALUES (17055, 'willow_pole', 10, 0, 262144, 302, 0, 0, 1, 0, 0, 0);
 REPLACE INTO `item_equipment` VALUES (17084, 'teak_pole',   35, 0, 262144, 299, 0, 0, 1, 0, 0, 0);
+
+-- Add DNC (job 19, bit 18 = 262144) to all melee-adjusted staves (staff-revamp)
+UPDATE item_equipment SET jobs = jobs | 262144 WHERE itemid IN (
+    17122, 17095,                                          -- ash_pole family (L5)
+    17541, 17538, 17542, 17537,                            -- city staves (L15)
+    17124, 17096,                                          -- holly_pole family (L16)
+    17103,                                                 -- mercenarys_pole (L18)
+    17536, 17535,                                          -- federation/windurstian pole (L23)
+    17425, 17424,                                          -- spiked_club family (L25)
+    17119, 17097,                                          -- elm_pole family (L30)
+    17120, 17098,                                          -- oak_pole family (L40)
+    17524, 18591, 17523,                                   -- footmans/pastoral/quarterstaff (L45)
+    17129,                                                 -- musketeers_pole (L50)
+    17540, 17539, 17529,                                   -- msk._pole family + sunlight_pole (L52)
+    17521, 17099,                                          -- mahogany_pole family (L59)
+    17574, 17544, 17543,                                   -- archalauss/battle_staff family (L60)
+    17525, 17100, 17531,                                   -- ebony_pole family + ramuhs_staff (L65)
+    17563,                                                 -- power_staff (L66)
+    17576,                                                 -- grim_staff (L71)
+    17570, 17569, 17575, 17596,                            -- iron-splitter family + somnus/steel (L72)
+    17595, 17592, 18595, 17591, 17590, 17589, 18588, 18618, -- L73 staves
+    17568, 17102, 18330                                    -- eight-sided_pole family + claustrum (L75)
+);
