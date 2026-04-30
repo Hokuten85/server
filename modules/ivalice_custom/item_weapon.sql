@@ -104,5 +104,5 @@ UPDATE item_weapon SET dmg = 79 WHERE itemid = 18330; -- claustrum
 
 -- New filler staves (DNC only): willow_pole L10, teak_pole L35
 -- skill=12 (Staff), dmgType=3, hit=1
-INSERT IGNORE INTO item_weapon VALUES (17055, 'willow_pole', 12, 0, 0, 0, 0, 3, 1, 402, 23, 0);
-INSERT IGNORE INTO item_weapon VALUES (17084, 'teak_pole',   12, 0, 0, 0, 0, 3, 1, 366, 44, 0);
+REPLACE INTO item_weapon VALUES (17055, 'willow_pole', 12, 0, 0, 0, 0, 3, 1, 402, 23, 0);
+REPLACE INTO item_weapon VALUES (17084, 'teak_pole',   12, 0, 0, 0, 0, 3, 1, 366, 44, 0);

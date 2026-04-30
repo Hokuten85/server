@@ -125,6 +125,8 @@ return {
     [136] = {id=136,en="Shield Barrier",ja="シールドバリア",element=6,icon_id=46,range=0,targets=0},
     [137] = {id=137,en="Tandem Strike",ja="タンデムヒット",element=4,icon_id=44,range=0,targets=0},
     [138] = {id=138,en="Tandem Blow",ja="タンデムモクシャ",element=2,icon_id=42,range=0,targets=0},
+    [150] = {id=150,en="Crit Rate Bonus",ja=".",element=6,icon_id=46,range=0,targets=0},
+    [151] = {id=151,en="Enmity Cap Bonus",ja=".",element=6,icon_id=46,range=0,targets=0},
 }, {"id", "en", "ja", "element", "icon_id", "range", "targets"}
 
 --[[

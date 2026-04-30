@@ -1,4 +1,4 @@
-/************************************************************************
+﻿/************************************************************************
  * Auction House Announcements
  *
  * This will send a message to the seller of an item when it is bought,
@@ -46,7 +46,7 @@ class AHAnnouncementModule : public CPPModule
         const uint16 itemid   = packet->Param.Bid.ItemNo;
         const uint8  quantity = packet->Param.Bid.ItemStacks;
 
-        CItem* PItem = itemutils::GetItemPointer(itemid);
+        const CItem* PItem = xi::items::lookup(itemid);
         if (!PItem)
         {
             return false;
