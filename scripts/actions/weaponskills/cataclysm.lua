@@ -20,7 +20,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.ftpMod = { 3.0, 3.0, 3.0 }
-    params.str_wsc = 0.3 params.mnd_wsc = 0.3
+    params.str_wsc = 0.5 params.mnd_wsc = 0.5
     params.ele = xi.element.DARK
     params.skill = xi.skill.STAFF
     params.includemab = true
