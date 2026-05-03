@@ -2722,6 +2722,11 @@ function CBaseEntity:isUsingH2H()
 end
 
 ---@nodiscard
+---@return boolean
+function CBaseEntity:isUsingStaff()
+end
+
+---@nodiscard
 ---@param slot integer
 ---@return integer
 function CBaseEntity:getBaseWeaponDelay(slot)

@@ -110,6 +110,12 @@ UPDATE traits SET level = 50 WHERE traitid = 100 and job = 19 and rank = 1;
 UPDATE traits SET level = 75 WHERE traitid = 100 and job = 19 and rank = 2;
 -- GIVE DNC CONSERVE TP
 UPDATE traits SET level = 75 WHERE traitid = 108 and job = 19 and rank = 1;
+-- GIVE DNC martial arts
+REPLACE INTO `traits` VALUES (23,'martial arts', 19, 25, 1, 173,  80,NULL,0);
+REPLACE INTO `traits` VALUES (23,'martial arts', 19, 50, 2, 173, 100,NULL,0);
+REPLACE INTO `traits` VALUES (23,'martial arts', 19, 75, 3, 173, 120,NULL,0);
+REPLACE INTO `traits` VALUES (23,'martial arts', 19, 87, 4, 173, 140,NULL,0);
+REPLACE INTO `traits` VALUES (23,'martial arts', 19, 97, 5, 173, 160,NULL,0);
 
 -- GIVE SCH Magic Burst Bonus
 UPDATE traits SET level = 75 WHERE traitid = 110 and job = 20 and rank = 1;

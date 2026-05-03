@@ -13011,6 +13011,46 @@ bool CLuaBaseEntity::isUsingH2H()
 }
 
 /************************************************************************
+ *  Function: isUsingStaff()
+ *  Purpose : Returns true if entity is using a staff
+ *  Example : if player:isUsingStaff() then
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::isUsingStaff()
+{
+    CCharEntity* PCharEntity = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    CMobEntity* PBattleEntity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+
+    if (PCharEntity)
+    {
+        CItemWeapon* PMainWeapon = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_MAIN));
+
+        if (PMainWeapon)
+        {
+            if (PMainWeapon->getSkillType() == SKILLTYPE::SKILL_STAFF)
+            {
+                return true;
+            }
+        }
+        else // bare handed
+        {
+            return true;
+        }
+    }
+    else if (PBattleEntity)
+    {
+        CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PBattleEntity->m_Weapons[SLOT_MAIN]);
+        if (PWeapon && PWeapon->getSkillType() == SKILLTYPE::SKILL_STAFF)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/************************************************************************
  *  Function: getBaseWeaponDelay(bool offhand)
  *  Purpose : Returns the unmodified base delay of an PCs's melee attack without any form of delay reduction
  *  Example : local delay = player:getBaseWeaponDelay(false)

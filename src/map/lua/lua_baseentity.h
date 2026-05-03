@@ -651,6 +651,7 @@ public:
 
     bool   isDualWielding();
     bool   isUsingH2H();
+    bool   isUsingStaff();
     uint16 getBaseWeaponDelay(uint16 slot); // get base delay of weapon
     auto   getBaseDelay() -> uint16;        // get base delay of entity, melee only
     auto   getBaseRangedDelay() -> uint16;  // get base delay of entity, ranged only
