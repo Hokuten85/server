@@ -259,6 +259,7 @@ xi.weaponskill =
     SHATTERSOUL         = 191,
     OSHALA              = 235,
     TARTARUS_TORPOR     = 240,
+	ROKUSHAKUBO         = 206,
 
     -----------------------------------
     -- ARCHERY
