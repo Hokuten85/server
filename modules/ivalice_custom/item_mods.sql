@@ -629,7 +629,13 @@ REPLACE INTO item_mods VALUES (11389,23,10); -- Pantin Babouches +1
 REPLACE INTO item_mods VALUES (16138,490,60); -- Dancer's Tiara
 REPLACE INTO item_mods VALUES (11475,490,60); -- Dancer's Tiara +1
 REPLACE INTO item_mods VALUES (14578,491,20); -- Dancer's Casaque
+REPLACE INTO item_mods VALUES (14578,91,15); -- Dancer's Casaque
+REPLACE INTO item_mods VALUES (14578,173,10); -- Dancer's Casaque
+DELETE FROM item_mods WHERE itemid = 14578 AND modid = 27;
 REPLACE INTO item_mods VALUES (11302,491,20); -- Dancer's Casaque +1
+REPLACE INTO item_mods VALUES (11302,91,20); -- Dancer's Casaque +1
+REPLACE INTO item_mods VALUES (11302,173,10); -- Dancer's Casaque +1
+DELETE FROM item_mods WHERE itemid = 11302 AND modid = 27;
 REPLACE INTO item_mods VALUES (15003,403,50); -- Dancer's Bangles
 REPLACE INTO item_mods VALUES (15035,403,50); -- Dancer's Bangles +1
 REPLACE INTO item_mods VALUES (15659,259,10); -- Dancer's Tights

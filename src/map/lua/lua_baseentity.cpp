@@ -20220,6 +20220,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("isDualWielding", CLuaBaseEntity::isDualWielding);
     SOL_REGISTER("isUsingH2H", CLuaBaseEntity::isUsingH2H);
+    SOL_REGISTER("isUsingStaff", CLuaBaseEntity::isUsingStaff);
     SOL_REGISTER("getBaseWeaponDelay", CLuaBaseEntity::getBaseWeaponDelay);
     SOL_REGISTER("getBaseDelay", CLuaBaseEntity::getBaseDelay);
     SOL_REGISTER("getBaseRangedDelay", CLuaBaseEntity::getBaseRangedDelay);
