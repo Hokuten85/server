@@ -4229,7 +4229,7 @@ uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage)
 
 uint16 doConsumeManaEffect(CCharEntity* m_PChar)
 {
-    auto bonusDmg = 0;
+    auto bonusDmg = 10;
     if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_CONSUME_MANA))
     {
         bonusDmg += (uint32)(floor(m_PChar->health.mp / 10));
