@@ -198,7 +198,7 @@ return {
     [202] = {id=202,en="Jishnu's Radiance",ja="ジシュヌの光輝",element=6,icon_id=637,prefix="/weaponskill",range=12,skill=25,skillchain_a="Light",skillchain_b="Fusion",skillchain_c="",targets=32},
     [203] = {id=203,en="Apex Arrow",ja="エイペクスアロー",element=6,icon_id=637,prefix="/weaponskill",range=12,skill=25,skillchain_a="Fragmentation",skillchain_b="Transfixion",skillchain_c="",targets=32},
     [204] = {id=204,en="Sarv",ja="シャルヴ",element=6,icon_id=637,prefix="/weaponskill",range=12,skill=25,skillchain_a="Transfixion",skillchain_b="Scission",skillchain_c="Gravitation",targets=32},
-    [206] = {id=206,en="Rokushakubo",ja=".",element=6,icon_id=628,prefix="/weaponskill",range=2,skillchain_a="Fusion",skillchain_b="Liquefaction",skillchain_c="",targets=32},
+    [206] = {id=206,en="Rokushakubo",ja=".",element=6,icon_id=46,prefix="/weaponskill",range=12,skillchain_a="Fusion",skillchain_b="Liquefaction",skillchain_c="",targets=32},
     [208] = {id=208,en="Hot Shot",ja="ホットショット",element=0,icon_id=638,prefix="/weaponskill",range=12,skill=26,skillchain_a="Reverberation",skillchain_b="Transfixion",skillchain_c="",targets=32},
     [209] = {id=209,en="Split Shot",ja="スプリットショット",element=2,icon_id=639,prefix="/weaponskill",range=12,skill=26,skillchain_a="Reverberation",skillchain_b="Transfixion",skillchain_c="",targets=32},
     [210] = {id=210,en="Sniper Shot",ja="スナイパーショット",element=0,icon_id=638,prefix="/weaponskill",range=12,skill=26,skillchain_a="Liquefaction",skillchain_b="Transfixion",skillchain_c="",targets=32},

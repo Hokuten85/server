@@ -289,20 +289,35 @@ REPLACE INTO item_mods VALUES (12516,116,15); -- Chaos Burgeonet
 REPLACE INTO item_mods VALUES (15232,8,10); -- Chaos Burgeonet +1
 REPLACE INTO item_mods VALUES (15232,96,5); -- Chaos Burgeonet +1
 REPLACE INTO item_mods VALUES (12516,116,17); -- Chaos Burgeonet +1
-REPLACE INTO item_mods VALUES (12645,23,15); -- Chaos Cuirass
-REPLACE INTO item_mods VALUES (12645,25,15); -- Chaos Cuirass
-REPLACE INTO item_mods VALUES (12645,114,15); -- Chaos Cuirass
-REPLACE INTO item_mods VALUES (14480,23,15); -- Chaos Cuirass +1
-REPLACE INTO item_mods VALUES (14480,25,20); -- Chaos Cuirass +1
-REPLACE INTO item_mods VALUES (14480,114,17); -- Chaos Cuirass +1
+
+DELETE FROM item_mods WHERE itemid = 12645 AND modid = 23; -- Chaos Cuirass att
+DELETE FROM item_mods WHERE itemid = 12645 AND modid = 114; -- enfeebling magic skill
+REPLACE INTO item_mods VALUES (12645,8,3); -- str
+REPLACE INTO item_mods VALUES (12645,86,15); -- scythe skill
+
+DELETE FROM item_mods WHERE itemid = 14480 AND modid = 23; -- Chaos Cuirass +1 att
+DELETE FROM item_mods WHERE itemid = 14480 AND modid = 114; -- enfeebling magic skill
+REPLACE INTO item_mods VALUES (14480,8,8); -- str
+REPLACE INTO item_mods VALUES (14480,10,8); -- vit
+REPLACE INTO item_mods VALUES (14480,86,20); -- scythe skill
+
 REPLACE INTO item_mods VALUES (13968,23,15); -- Chaos Gauntlets
 REPLACE INTO item_mods VALUES (13968,27,-5); -- Chaos Gauntlets
 REPLACE INTO item_mods VALUES (14897,23,15); -- Chaos Gauntlets +1
 REPLACE INTO item_mods VALUES (14897,27,-5); -- Chaos Gauntlets +1
-REPLACE INTO item_mods VALUES (14221,12,10); -- Chaos Flanchard
-REPLACE INTO item_mods VALUES (14221,30,10); -- Chaos Flanchard
+
+DELETE FROM item_mods WHERE itemid = 14221 AND modid = 9; -- Abyss Cuirass DEX
+REPLACE INTO item_mods VALUES (14221,8,3); -- Chaos Flanchard -- STR
+REPLACE INTO item_mods VALUES (14221,1144,18); -- Chaos Flanchard sftp+7%
+
+DELETE FROM item_mods WHERE itemid = 15568 AND modid = 9; -- Abyss Cuirass DEX
+DELETE FROM item_mods WHERE itemid = 15568 AND modid = 12; -- Abyss Cuirass INT
+REPLACE INTO item_mods VALUES (15568,8,5); -- Chaos Flanchard -- STR
+REPLACE INTO item_mods VALUES (15568,1144,25); -- Chaos Flanchard -- sftp+7%
+
 REPLACE INTO item_mods VALUES (15568,12,15); -- Chaos Flanchard +1
 REPLACE INTO item_mods VALUES (15568,30,15); -- Chaos Flanchard +1
+
 REPLACE INTO item_mods VALUES (14096,8,7); -- Chaos Sollerets
 REPLACE INTO item_mods VALUES (14096,1069,5); -- Chaos Sollerets
 REPLACE INTO item_mods VALUES (15359,8,12); -- Chaos Sollerets +1
@@ -314,20 +329,41 @@ REPLACE INTO item_mods VALUES (15079,242,300); -- Abyss Burgeonet
 REPLACE INTO item_mods VALUES (15252,10,18); -- Abyss Burgeonet +1
 REPLACE INTO item_mods VALUES (15252,23,25); -- Abyss Burgeonet +1
 REPLACE INTO item_mods VALUES (15252,242,300); -- Abyss Burgeonet +1
-REPLACE INTO item_mods VALUES (15094,12,4); -- Abyss Cuirass
-REPLACE INTO item_mods VALUES (15094,25,15); -- Abyss Cuirass
-REPLACE INTO item_mods VALUES (15094,30,15); -- Abyss Cuirass
-REPLACE INTO item_mods VALUES (14507,12,4); -- Abyss Cuirass +1
-REPLACE INTO item_mods VALUES (14507,25,17); -- Abyss Cuirass +1
-REPLACE INTO item_mods VALUES (14507,30,17); -- Abyss Cuirass +1
+
+DELETE FROM item_mods WHERE itemid = 12645 AND modid = 13; -- Abyss Cuirass mnd
+DELETE FROM item_mods WHERE itemid = 12645 AND modid = 25; -- acc
+REPLACE INTO item_mods VALUES (12645,8,6); -- str
+REPLACE INTO item_mods VALUES (12645,10,6); -- str
+REPLACE INTO item_mods VALUES (12645,30,15); -- MAcc
+REPLACE INTO item_mods VALUES (12645,83,15); -- GSword
+
+DELETE FROM item_mods WHERE itemid = 14507 AND modid = 13; -- Abyss Cuirass +1 mnd
+DELETE FROM item_mods WHERE itemid = 14507 AND modid = 25; -- acc
+REPLACE INTO item_mods VALUES (14507,8,8); -- str
+REPLACE INTO item_mods VALUES (14507,10,8); -- str
+REPLACE INTO item_mods VALUES (14507,30,20); -- MAcc
+REPLACE INTO item_mods VALUES (14507,83,20); -- GSword
+
 REPLACE INTO item_mods VALUES (15109,116,15); -- Abyss Gauntlets
+REPLACE INTO item_mods VALUES (15109,1071,-25); -- Abyss Gauntlets
 REPLACE INTO item_mods VALUES (14916,116,17); -- Abyss Gauntlets +1
+REPLACE INTO item_mods VALUES (14916,1071,-30); -- Abyss Gauntlets +1
+
 REPLACE INTO item_mods VALUES (15124,12,5); -- Abyss Flanchard
 REPLACE INTO item_mods VALUES (15124,116,15); -- Abyss Flanchard
+REPLACE INTO item_mods VALUES (15124,1083,20); -- Abyss Flanchard
 REPLACE INTO item_mods VALUES (15587,12,5); -- Abyss Flanchard +1
 REPLACE INTO item_mods VALUES (15587,116,17); -- Abyss Flanchard +1
+REPLACE INTO item_mods VALUES (15587,1083,25); -- Abyss Flanchard +1
+
+DELETE FROM item_mods WHERE itemid = 14507 AND modid = 114; -- Abyss Sollerets Enfeebling skill
 REPLACE INTO item_mods VALUES (15139,27,-5); -- Abyss Sollerets
+REPLACE INTO item_mods VALUES (15139,384,500); -- Abyss Sollerets
+
+DELETE FROM item_mods WHERE itemid = 15672 AND modid = 114; -- Abyss Sollerets +1 Enfeebling skill
+REPLACE INTO item_mods VALUES (15672,25,5); -- Abyss Sollerets +1
 REPLACE INTO item_mods VALUES (15672,27,-5); -- Abyss Sollerets +1
+REPLACE INTO item_mods VALUES (15672,384,500); -- Abyss Sollerets +1
 
 REPLACE INTO item_mods VALUES (13857,384,500); -- Choral Roundlet
 REPLACE INTO item_mods VALUES (15234,384,600); -- Chl. Roundlet +1
