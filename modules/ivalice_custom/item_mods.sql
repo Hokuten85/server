@@ -306,17 +306,14 @@ REPLACE INTO item_mods VALUES (13968,27,-5); -- Chaos Gauntlets
 REPLACE INTO item_mods VALUES (14897,23,15); -- Chaos Gauntlets +1
 REPLACE INTO item_mods VALUES (14897,27,-5); -- Chaos Gauntlets +1
 
-DELETE FROM item_mods WHERE itemid = 14221 AND modid = 9; -- Abyss Cuirass DEX
+DELETE FROM item_mods WHERE itemid = 14221 AND modid = 9; -- Chaos Flanchard DEX
 REPLACE INTO item_mods VALUES (14221,8,3); -- Chaos Flanchard -- STR
 REPLACE INTO item_mods VALUES (14221,1144,18); -- Chaos Flanchard sftp+7%
 
-DELETE FROM item_mods WHERE itemid = 15568 AND modid = 9; -- Abyss Cuirass DEX
-DELETE FROM item_mods WHERE itemid = 15568 AND modid = 12; -- Abyss Cuirass INT
+DELETE FROM item_mods WHERE itemid = 15568 AND modid = 9; -- Chaos Flanchard DEX
+DELETE FROM item_mods WHERE itemid = 15568 AND modid = 12; -- Chaos Flanchard INT
 REPLACE INTO item_mods VALUES (15568,8,5); -- Chaos Flanchard -- STR
 REPLACE INTO item_mods VALUES (15568,1144,25); -- Chaos Flanchard -- sftp+7%
-
-REPLACE INTO item_mods VALUES (15568,12,15); -- Chaos Flanchard +1
-REPLACE INTO item_mods VALUES (15568,30,15); -- Chaos Flanchard +1
 
 REPLACE INTO item_mods VALUES (14096,8,7); -- Chaos Sollerets
 REPLACE INTO item_mods VALUES (14096,1069,5); -- Chaos Sollerets
@@ -330,12 +327,12 @@ REPLACE INTO item_mods VALUES (15252,10,18); -- Abyss Burgeonet +1
 REPLACE INTO item_mods VALUES (15252,23,25); -- Abyss Burgeonet +1
 REPLACE INTO item_mods VALUES (15252,242,300); -- Abyss Burgeonet +1
 
-DELETE FROM item_mods WHERE itemid = 12645 AND modid = 13; -- Abyss Cuirass mnd
-DELETE FROM item_mods WHERE itemid = 12645 AND modid = 25; -- acc
-REPLACE INTO item_mods VALUES (12645,8,6); -- str
-REPLACE INTO item_mods VALUES (12645,10,6); -- str
-REPLACE INTO item_mods VALUES (12645,30,15); -- MAcc
-REPLACE INTO item_mods VALUES (12645,83,15); -- GSword
+DELETE FROM item_mods WHERE itemid = 15094 AND modid = 13; -- Abyss Cuirass mnd
+DELETE FROM item_mods WHERE itemid = 15094 AND modid = 25; -- acc
+REPLACE INTO item_mods VALUES (15094,8,6); -- str
+REPLACE INTO item_mods VALUES (15094,10,6); -- str
+REPLACE INTO item_mods VALUES (15094,30,15); -- MAcc
+REPLACE INTO item_mods VALUES (15094,83,15); -- GSword
 
 DELETE FROM item_mods WHERE itemid = 14507 AND modid = 13; -- Abyss Cuirass +1 mnd
 DELETE FROM item_mods WHERE itemid = 14507 AND modid = 25; -- acc
