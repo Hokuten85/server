@@ -256,7 +256,7 @@ void CMobController::TryLink()
             // Handle the case where a mob doesn't link with its own family but has a sublink
             // This is needed because the sublink will cause like family members to be in the same
             // party so that they are linked with sublinked families.
-            if (!PMob->ShouldForceLink() && !PMob->m_Link && PMob->m_Family == PPartyMember->m_Family)
+            if (!PMob->ShouldForceLink() && !PMob->m_Link && PMob->m_SuperFamily == PPartyMember->m_SuperFamily)
             {
                 continue;
             }
@@ -740,7 +740,8 @@ auto CMobController::DoCombatTick(timer::time_point tick) -> Task<void>
 
     if (PTarget)
     {
-        const float currentDistance = distance(PMob->loc.p, PTarget->loc.p);
+        const float currentDistance   = distance(PMob->loc.p, PTarget->loc.p);
+        const float rangedAttackRange = PMob->GetRangedAttackRange();
 
         if (IsSpecialSkillReady(currentDistance) && TrySpecialSkill())
         {
@@ -756,6 +757,20 @@ auto CMobController::DoCombatTick(timer::time_point tick) -> Task<void>
         {
             m_tpThreshold = xirand::GetRandomNumber(1000, 3000);
             co_return;
+        }
+
+        if (IsRangedAttackEnabled() && currentDistance <= rangedAttackRange && m_Tick >= PMob->m_LastRangedAttackTime && PMob->PAI->CanChangeState())
+        {
+            if (PTarget != nullptr)
+            {
+                FaceTarget(PTarget->targid);
+                if (POwner->PAI->Internal_RangedAttack(PTarget->targid))
+                {
+                    TapDeaggroTime();
+                    PMob->m_LastRangedAttackTime = m_Tick;
+                    co_return;
+                }
+            }
         }
     }
 
@@ -789,17 +804,8 @@ void CMobController::Move()
         return;
     }
 
-    const bool  move          = PMob->PAI->PathFind->IsFollowingPath();
-    float       attack_range  = PMob->GetMeleeRange(PTarget);
-    const int16 offsetMod     = PMob->getMobMod(MOBMOD_TARGET_DISTANCE_OFFSET);
-    const float offset        = static_cast<float>(offsetMod) / 10.0f;
-    float       closeDistance = attack_range - (offsetMod == 0 ? 0.4f : offset);
-
-    // No going negative on the final value.
-    if (closeDistance < 0.0f)
-    {
-        closeDistance = 0.0f;
-    }
+    const bool move         = PMob->PAI->PathFind->IsFollowingPath();
+    float      attack_range = PMob->GetMeleeRange(PTarget);
 
     if (PMob->getMobMod(MOBMOD_ATTACK_SKILL_LIST) > 0)
     {
@@ -813,6 +819,22 @@ void CMobController::Move()
                 attack_range = skill->getDistance();
             }
         }
+    }
+
+    if (IsRangedAttackEnabled())
+    {
+        // We need to set the range manually because the skill lists on mobs are not audited fully
+        attack_range = PMob->GetRangedAttackRange();
+    }
+
+    const int16 offsetMod     = PMob->getMobMod(MOBMOD_TARGET_DISTANCE_OFFSET);
+    const float offset        = static_cast<float>(offsetMod) / 10.0f;
+    float       closeDistance = attack_range - (offsetMod == 0 ? 0.4f : offset);
+
+    // No going negative on the final value.
+    if (closeDistance < 0.0f)
+    {
+        closeDistance = 0.0f;
     }
 
     if (PMob->getMobMod(MOBMOD_SHARE_POS) > 0)
@@ -1049,11 +1071,23 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
 
     if (PFollowTarget != nullptr && m_followType == FollowType::Roam)
     {
+        float followRoamDistance = 4.0f;
+
+        if (PMob->getMobMod(MOBMOD_FOLLOW_LEASH_RANGE) > 0)
+        {
+            followRoamDistance = PMob->getMobMod(MOBMOD_FOLLOW_LEASH_RANGE);
+        }
         // Only path to leader if they're moving
-        if (distance(PMob->loc.p, PFollowTarget->loc.p) > FollowRoamDistance &&
+        if (distance(PMob->loc.p, PFollowTarget->loc.p) > followRoamDistance &&
             PFollowTarget->PAI->PathFind->IsFollowingPath())
         {
-            PMob->PAI->PathFind->PathAround(PFollowTarget->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+            float followStopRange = 2.0f;
+
+            if (PMob->getMobMod(MOBMOD_FOLLOW_STOP_RANGE) > 0)
+            {
+                followStopRange = PMob->getMobMod(MOBMOD_FOLLOW_STOP_RANGE);
+            }
+            PMob->PAI->PathFind->PathAround(PFollowTarget->loc.p, followStopRange, PATHFLAG_RUN | PATHFLAG_WALLHACK);
         }
 
         if (!PMob->PAI->PathFind->IsFollowingPath())
@@ -1437,7 +1471,7 @@ auto CMobController::CanAggroTarget(CBattleEntity* PTarget) const -> bool
         }
 
         // Do not aggro if a normal CoP Fomor and the player has low enough fomor hate
-        if (PMob->m_Family == 115 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) &&
+        if (PMob->m_SuperFamily == 172 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) &&
             (PMob->getZone() >= ZONE_LUFAISE_MEADOWS && PMob->getZone() <= ZONE_SACRARIUM) &&
             PTarget->objtype == TYPE_PC)
         {
@@ -1541,13 +1575,16 @@ auto CMobController::CanMoveForward(const float currentDistance) -> bool
         standbackRange = PMob->getMobMod(MOBMOD_STANDBACK_RANGE);
     }
 
-    if (PMob->m_Behavior & BEHAVIOR_STANDBACK && currentDistance < standbackRange && PMob->CanSeeTarget(PTarget))
+    const bool isClosingToRangedAttackRange = IsRangedAttackEnabled() && currentDistance > PMob->GetRangedAttackRange();
+
+    if (!isClosingToRangedAttackRange && PMob->m_Behavior & BEHAVIOR_STANDBACK && currentDistance < standbackRange && PMob->CanSeeTarget(PTarget))
     {
         return false;
     }
 
     auto standbackThreshold = PMob->getMobMod(MOBMOD_HP_STANDBACK);
-    if (currentDistance < standbackRange &&
+    if (!isClosingToRangedAttackRange &&
+        currentDistance < standbackRange &&
         standbackThreshold > 0 &&
         PMob->getMobMod(MOBMOD_NO_STANDBACK) == 0 &&
         PMob->GetHPP() >= standbackThreshold &&
