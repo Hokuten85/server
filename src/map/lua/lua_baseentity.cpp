@@ -24,6 +24,7 @@
 #include "lua_battlefield.h"
 #include "lua_instance.h"
 #include "lua_item.h"
+#include "lua_item_puppet.h"
 
 #include "items/exdata/worn_item.h"
 #include "lua_spell.h"
@@ -69,7 +70,6 @@
 #include "treasure_pool.h"
 #include "weapon_skill.h"
 #include "zone.h"
-#include "zone_mesh.h"
 
 #include "ai/ai_container.h"
 
@@ -104,6 +104,7 @@
 #include "items/exdata.h"
 #include "items/item_furnishing.h"
 #include "items/item_linkshell.h"
+#include "items/item_puppet.h"
 
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
@@ -2230,6 +2231,37 @@ void CLuaBaseEntity::setCarefulPathing(bool careful)
 }
 
 /************************************************************************
+ *  Function: canSee(...)
+ *  Purpose : Execute a raycast between ENTITY_HEIGHT and the found at target's feet
+ *  Example : player:canSee(mob)
+ ************************************************************************/
+
+bool CLuaBaseEntity::canSee(const CLuaBaseEntity* PTarget)
+{
+    if (!PTarget)
+    {
+        ShowWarning("Attempting to see invalid entity (from %s).", m_PBaseEntity->getName());
+        return false;
+    }
+
+    return m_PBaseEntity->CanSeeTarget(PTarget->GetBaseEntity());
+}
+
+/************************************************************************
+ *  Function: inWater()
+ *  Purpose : Execute an ximesh cell search downwards to check if entity is in water
+ *  Example : if player:inWater() then ...
+ ************************************************************************/
+
+bool CLuaBaseEntity::inWater()
+{
+    // NOTE: Same logic as in PathFind::InWater
+    const auto& pos     = m_PBaseEntity->loc.p;
+    const auto  terrain = m_PBaseEntity->loc.zone->xiMesh()->getTerrainAt(pos.x, pos.y, pos.z);
+    return terrain == TerrainType::ShallowWater || terrain == TerrainType::DeepWater;
+}
+
+/************************************************************************
  *  Function: openDoor()
  *  Purpose : Opens a door for 7 seconds; different time can be specified
  *  Example : npc:openDoor(30) -- Open for 30 sec; npc:openDoor() -- 7 sec
@@ -3890,6 +3922,82 @@ void CLuaBaseEntity::setHomePoint()
                      PChar->profile.home_point.p.y,
                      PChar->profile.home_point.p.z,
                      PChar->id);
+}
+
+/************************************************************************
+ *  Function: learnMazeVoucher(uint8)
+ *  Purpose : Marks a Moblin Maze Mongers voucher as learned, persists it,
+ *            and refreshes the client's voucher/rune list.
+ *  Example : player:learnMazeVoucher(xi.maze.voucher.SANITIZATION_TEAM_ALPHA)
+ ************************************************************************/
+
+void CLuaBaseEntity::learnMazeVoucher(uint8 voucherId)
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        ShowWarningFmt("CLuaBaseEntity::learnMazeVoucher called on non-PC entity ({}).", m_PBaseEntity->getName());
+        return;
+    }
+
+    PChar->maze().learnVoucher(voucherId);
+    charutils::SaveMazeUnlocks(PChar);
+}
+
+/************************************************************************
+ *  Function: hasMazeVoucher(uint8)
+ *  Purpose : Returns true if the player has learned the given voucher.
+ *  Example : player:hasMazeVoucher(xi.maze.voucher.SANITIZATION_TEAM_ALPHA)
+ ************************************************************************/
+
+auto CLuaBaseEntity::hasMazeVoucher(uint8 voucherId) -> bool
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        ShowWarningFmt("CLuaBaseEntity::hasMazeVoucher called on non-PC entity ({}).", m_PBaseEntity->getName());
+        return false;
+    }
+
+    return PChar->maze().hasVoucher(voucherId);
+}
+
+/************************************************************************
+ *  Function: learnMazeRune(uint8)
+ *  Purpose : Marks a Moblin Maze Mongers rune as learned, persists it,
+ *            and refreshes the client's voucher/rune list.
+ *  Example : player:learnMazeRune(xi.maze.rune.GUIDANCE_CONTRACT)
+ ************************************************************************/
+
+void CLuaBaseEntity::learnMazeRune(uint16 runeId)
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        ShowWarningFmt("CLuaBaseEntity::learnMazeRune called on non-PC entity ({}).", m_PBaseEntity->getName());
+        return;
+    }
+
+    PChar->maze().learnRune(runeId);
+    charutils::SaveMazeUnlocks(PChar);
+}
+
+/************************************************************************
+ *  Function: hasMazeRune(uint16)
+ *  Purpose : Returns true if the player has learned the given rune.
+ *  Example : player:hasMazeRune(xi.maze.rune.GUIDANCE_CONTRACT)
+ ************************************************************************/
+
+auto CLuaBaseEntity::hasMazeRune(uint16 runeId) -> bool
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        ShowWarningFmt("CLuaBaseEntity::hasMazeRune called on non-PC entity ({}).", m_PBaseEntity->getName());
+        return false;
+    }
+
+    return PChar->maze().hasRune(runeId);
 }
 
 /************************************************************************
@@ -6706,16 +6814,16 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
 
         // Change weapon type based on new job
         CItemWeapon* PWeapon = std::make_unique<CItemWeapon>(0).release();
-        PWeapon->setDelay(4000);
-        PWeapon->setBaseDelay(4000);
+        PWeapon->setDelay(240);
+        PWeapon->setBaseDelay(240);
 
         switch (newJob)
         {
             case JOB_MNK:
             case JOB_PUP:
                 PWeapon->setSkillType(SKILL_HAND_TO_HAND);
-                PWeapon->setBaseDelay(8000);
-                PWeapon->setDelay(8000);
+                PWeapon->setBaseDelay(480);
+                PWeapon->setDelay(480);
                 break;
             case JOB_THF:
             case JOB_BRD:
@@ -6730,8 +6838,8 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
                 break;
             case JOB_RUN:
                 PWeapon->setSkillType(SKILL_GREAT_SWORD);
-                PWeapon->setDelay(8000);
-                PWeapon->setBaseDelay(8000);
+                PWeapon->setDelay(480);
+                PWeapon->setBaseDelay(480);
                 break;
             case JOB_WAR:
             case JOB_BST:
@@ -6739,21 +6847,21 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
                 break;
             case JOB_DRK:
                 PWeapon->setSkillType(SKILL_SCYTHE);
-                PWeapon->setDelay(8000);
-                PWeapon->setBaseDelay(8000);
+                PWeapon->setDelay(480);
+                PWeapon->setBaseDelay(480);
                 break;
             case JOB_DRG:
                 PWeapon->setSkillType(SKILL_POLEARM);
-                PWeapon->setDelay(8000);
-                PWeapon->setBaseDelay(8000);
+                PWeapon->setDelay(480);
+                PWeapon->setBaseDelay(480);
                 break;
             case JOB_NIN:
                 PWeapon->setSkillType(SKILL_KATANA);
                 break;
             case JOB_SAM:
                 PWeapon->setSkillType(SKILL_GREAT_KATANA);
-                PWeapon->setDelay(8000);
-                PWeapon->setBaseDelay(8000);
+                PWeapon->setDelay(480);
+                PWeapon->setBaseDelay(480);
                 break;
             case JOB_WHM:
             case JOB_BLM:
@@ -6762,8 +6870,8 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
                 break;
             case JOB_SMN:
                 PWeapon->setSkillType(SKILL_STAFF);
-                PWeapon->setDelay(8000);
-                PWeapon->setBaseDelay(8000);
+                PWeapon->setDelay(480);
+                PWeapon->setBaseDelay(480);
                 break;
             default:
                 break;
@@ -12955,7 +13063,7 @@ bool CLuaBaseEntity::isDualWielding()
     CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (PBattleEntity)
     {
-        return PBattleEntity->m_dualWield;
+        return PBattleEntity->IsDualWielding();
     }
     else
     {
@@ -16734,7 +16842,7 @@ auto CLuaBaseEntity::getAttachments() const -> sol::table
 
         if (attachmentItemId != 0)
         {
-            attachmentTable[attachmentSlot] = CLuaItem(xi::items::lookup(0x2100 + attachmentItemId));
+            attachmentTable[attachmentSlot] = CLuaItemPuppet(xi::items::lookup<CItemPuppet>(0x2100 + attachmentItemId));
         }
     }
 
@@ -17715,7 +17823,7 @@ bool CLuaBaseEntity::isAggroable()
 /************************************************************************
  *  Function: setDelay()
  *  Purpose : Override default delay settings for a Mob
- *  Example : mob:setDelay(2400)
+ *  Example : mob:setDelay(240) -- 240 raw game delay units
  ************************************************************************/
 
 void CLuaBaseEntity::setDelay(uint16 delay)
@@ -17825,6 +17933,41 @@ void CLuaBaseEntity::setAutoAttackEnabled(bool state)
     }
 
     m_PBaseEntity->PAI->GetController()->SetAutoAttackEnabled(state);
+}
+
+/************************************************************************
+ *  Function: setRangedAttackEnabled()
+ *  Purpose : Enables/disables ranged auto-attacks for a Mob
+ *  Example : mob:setRangedAttackEnabled(true)
+ *  Notes   : Used for mobs that should fire ranged attacks instead of ranged special skills
+ ************************************************************************/
+
+void CLuaBaseEntity::setRangedAttackEnabled(bool state)
+{
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
+
+    m_PBaseEntity->PAI->GetController()->SetRangedAttackEnabled(state);
+}
+
+/************************************************************************
+ *  Function: isRangedAttackEnabled()
+ *  Purpose : Returns whether ranged auto-attacks are enabled for a Mob
+ *  Example : mob:isRangedAttackEnabled()
+ ************************************************************************/
+
+bool CLuaBaseEntity::isRangedAttackEnabled()
+{
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return false;
+    }
+
+    return m_PBaseEntity->PAI->GetController()->IsRangedAttackEnabled();
 }
 
 /************************************************************************
@@ -19679,6 +19822,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("hasFollowTarget", CLuaBaseEntity::hasFollowTarget);
     SOL_REGISTER("unfollow", CLuaBaseEntity::unfollow);
     SOL_REGISTER("setCarefulPathing", CLuaBaseEntity::setCarefulPathing);
+    SOL_REGISTER("canSee", CLuaBaseEntity::canSee);
+    SOL_REGISTER("inWater", CLuaBaseEntity::inWater);
 
     SOL_REGISTER("openDoor", CLuaBaseEntity::openDoor);
     SOL_REGISTER("closeDoor", CLuaBaseEntity::closeDoor);
@@ -19739,6 +19884,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setTeleportMenu", CLuaBaseEntity::setTeleportMenu);
     SOL_REGISTER("getTeleportMenu", CLuaBaseEntity::getTeleportMenu);
     SOL_REGISTER("setHomePoint", CLuaBaseEntity::setHomePoint);
+    SOL_REGISTER("learnMazeVoucher", CLuaBaseEntity::learnMazeVoucher);
+    SOL_REGISTER("hasMazeVoucher", CLuaBaseEntity::hasMazeVoucher);
+    SOL_REGISTER("learnMazeRune", CLuaBaseEntity::learnMazeRune);
+    SOL_REGISTER("hasMazeRune", CLuaBaseEntity::hasMazeRune);
     SOL_REGISTER("resetPlayer", CLuaBaseEntity::resetPlayer);
 
     SOL_REGISTER("gotoEntity", CLuaBaseEntity::gotoEntity);
@@ -20384,6 +20533,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("hasSpellList", CLuaBaseEntity::hasSpellList);
     SOL_REGISTER("setSpellList", CLuaBaseEntity::setSpellList);
     SOL_REGISTER("setAutoAttackEnabled", CLuaBaseEntity::setAutoAttackEnabled);
+    SOL_REGISTER("setRangedAttackEnabled", CLuaBaseEntity::setRangedAttackEnabled);
+    SOL_REGISTER("isRangedAttackEnabled", CLuaBaseEntity::isRangedAttackEnabled);
     SOL_REGISTER("setMagicCastingEnabled", CLuaBaseEntity::setMagicCastingEnabled);
     SOL_REGISTER("setMobAbilityEnabled", CLuaBaseEntity::setMobAbilityEnabled);
     SOL_REGISTER("setMobSkillAttack", CLuaBaseEntity::setMobSkillAttack);
