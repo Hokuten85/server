@@ -26,7 +26,17 @@
       "Bash(printf \"17055,willow_pole,1,1,300,30,0,1,1,30\\\\n17084,teak_pole,1,1,1000,30,0,1,1,30\\\\n\")",
       "Bash(xargs grep *)",
       "WebFetch(domain:www.bg-wiki.com)",
-      "Bash(grep -v \"^$\")"
+      "Bash(grep -v \"^$\")",
+      "Bash(Get-Content *)",
+      "Bash(sed \"s/'s .*$//\")",
+      "Bash(sed \"s/'s.*$//\")",
+      "Bash(sed \"s/Hokuten's //\")",
+      "Bash(sed \"s/ Boost.*$//\")",
+      "Bash(sed \"s/Ygritte's //\")",
+      "Bash(grep -v \":0$\")",
+      "Bash(sort -k2)",
+      "Bash(/c/Program Files/MariaDB 10.6/bin/mysql *)",
+      "Bash(\"/c/Program Files/MariaDB 10.6/bin/mysql\" -h 192.168.1.10 -u root -pHokuten1 xidb -e \"DESCRIBE chars;\")"
     ]
   }
 }

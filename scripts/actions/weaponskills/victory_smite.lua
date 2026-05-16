@@ -32,8 +32,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.str_wsc = 0.8
     end
 
-	params.multiHitfTP = true
-
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.EMPYREAN)
 
