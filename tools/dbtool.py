@@ -230,6 +230,7 @@ player_data = [
     "linkshells.sql",
     "server_variables.sql",
     "unity_system.sql",
+    "char_mods.sql",
 ]
 
 import_files = []
