@@ -67,7 +67,7 @@ struct TrustData
     uint8  name_prefix{};
     uint8  modelSize{ 0 };
     float  modelHitboxSize{ 0.0f };
-    uint16 m_Family{};
+    uint16 m_Species{};
 
     uint8 mJob{};
     uint8 sJob{};
@@ -195,7 +195,7 @@ void BuildTrustData(uint32 TrustID)
                                        "mob_pools.name, "
                                        "mob_pools.packet_name, "
                                        "mob_pools.modelid, "
-                                       "mob_pools.familyid, "
+                                       "mob_pools.speciesid, "
                                        "mob_pools.mJob, "
                                        "mob_pools.sJob, "
                                        "mob_pools.spellList, "
@@ -241,7 +241,7 @@ void BuildTrustData(uint32 TrustID)
                                        "WHERE spell_list.spellid = ? "
                                        "AND (spell_list.spellid + 5000) = mob_pools.poolid "
                                        "AND mob_pools.resist_id = mob_resistances.resist_id "
-                                       "AND mob_pools.familyid = mob_family_system.familyID "
+                                       "AND mob_pools.speciesid = mob_family_system.speciesID "
                                        "ORDER BY spell_list.spellid",
                                        TrustID);
 
@@ -259,7 +259,7 @@ void BuildTrustData(uint32 TrustID)
 
             db::extractFromBlob(rset, "modelid", data->look);
 
-            data->m_Family  = rset->get<uint16>("familyid");
+            data->m_Species = rset->get<uint16>("speciesid");
             data->mJob      = rset->get<uint8>("mJob");
             data->sJob      = rset->get<uint8>("sJob");
             data->spellList = rset->get<uint16>("spellList");
@@ -357,7 +357,7 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
     PTrust->m_Pool         = trustData->pool;
     PTrust->packetName     = trustData->packet_name;
     PTrust->m_name_prefix  = trustData->name_prefix;
-    PTrust->m_Family       = trustData->m_Family;
+    PTrust->m_Species      = trustData->m_Species;
     PTrust->m_MobSkillList = trustData->m_MobSkillList;
     PTrust->HPscale        = trustData->HPscale;
     PTrust->MPscale        = trustData->MPscale;

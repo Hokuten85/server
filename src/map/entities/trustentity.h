@@ -38,6 +38,8 @@ public:
     explicit CTrustEntity(CCharEntity*);
     ~CTrustEntity() override;
 
+    auto getShieldSize() -> int8;
+
     void PostTick() override;
     void FadeOut() override;
     void Die() override;
@@ -54,6 +56,9 @@ public:
     uint32 m_TrustID{};
 
     uint8 m_Abilities[62];
+
+private:
+    static constexpr int8 m_defaultShieldSize = 3;
 };
 
 #endif

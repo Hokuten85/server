@@ -1867,7 +1867,7 @@ auto GetBaseRangedDelay(CBattleEntity* PEntity) -> uint16
     return baseDelay;
 }
 
-auto CalculateTPFromDamageDealt(CBattleEntity* PAttacker, bool isZanshin) -> int32
+auto CalculateTPFromDamageDealt(CBattleEntity* PAttacker, const bool& isZanshin, const SLOTTYPE& slot) -> int32
 {
     if (PAttacker == nullptr)
     {
@@ -1875,9 +1875,14 @@ auto CalculateTPFromDamageDealt(CBattleEntity* PAttacker, bool isZanshin) -> int
         return 0;
     }
 
-    int32 tpReturn = luautils::callGlobal<int32>("xi.combat.tp.getSingleMeleeHitTPReturn", PAttacker, isZanshin);
-
-    return tpReturn;
+    if (slot == SLOT_RANGED || slot == SLOT_AMMO)
+    {
+        return luautils::callGlobal<int32>("xi.combat.tp.getSingleRangedHitTPReturn", PAttacker);
+    }
+    else
+    {
+        return luautils::callGlobal<int32>("xi.combat.tp.getSingleMeleeHitTPReturn", PAttacker, isZanshin);
+    }
 }
 
 auto CalculateTPFromDamageTaken(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage, uint16 delay) -> int32
@@ -2270,7 +2275,7 @@ int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHY
         {
             bool isZanshin = physicalAttackType == PHYSICAL_ATTACK_TYPE::ZANSHIN;
 
-            int16 attackerTPReturn = CalculateTPFromDamageDealt(PAttacker, isZanshin);
+            int16 attackerTPReturn = CalculateTPFromDamageDealt(PAttacker, isZanshin, static_cast<SLOTTYPE>(slot));
 
             PAttacker->addTP((int16)(tpMultiplier * attackerTPReturn));
         }
@@ -2399,7 +2404,7 @@ int32 TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, 
         if (primary)
         // Calculate TP Return from WS
         {
-            int16 baseTp = CalculateTPFromDamageDealt(PAttacker, false);
+            int16 baseTp = CalculateTPFromDamageDealt(PAttacker, false, static_cast<SLOTTYPE>(slot));
 
             standbyTp = bonusTP + (int16)((tpMultiplier * baseTp));
         }
