@@ -36,7 +36,14 @@
       "Bash(grep -v \":0$\")",
       "Bash(sort -k2)",
       "Bash(/c/Program Files/MariaDB 10.6/bin/mysql *)",
-      "Bash(\"/c/Program Files/MariaDB 10.6/bin/mysql\" -h 192.168.1.10 -u root -pHokuten1 xidb -e \"DESCRIBE chars;\")"
+      "Bash(\"/c/Program Files/MariaDB 10.6/bin/mysql\" -h 192.168.1.10 -u root -pHokuten1 xidb -e \"DESCRIBE chars;\")",
+      "Bash(cd C:\\\\Users\\\\Kelly\\\\source\\\\repos\\\\server *)",
+      "Bash(gh api *)",
+      "Bash(grep -iE \"^\\(sql|modules\\).*\\\\.\\(sql\\)$\")",
+      "WebFetch(domain:github.com)",
+      "Bash(gh repo *)",
+      "Bash(pip install *)",
+      "Bash(git push *)"
     ]
   }
 }
