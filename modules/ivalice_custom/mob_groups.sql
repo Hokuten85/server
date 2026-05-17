@@ -3,7 +3,7 @@ UPDATE mob_groups mg
 INNER JOIN mob_pools mp
 	ON mg.poolid = mp.poolid
 INNER JOIN mob_family_system mfs
-	ON mp.familyid = mfs.familyid
+	ON mp.speciesid = mfs.speciesID
 INNER JOIN zone_settings zs
 	ON mg.zoneid = zs.zoneid
 SET respawntime = 180
