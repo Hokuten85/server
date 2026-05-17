@@ -51,8 +51,6 @@ public:
     void OnMobSkillFinished(CMobSkillState& state, action_t& action) override;
     void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action) override;
 
-    int8 getShieldSize();
-
     uint32 m_TrustID{};
 
     uint8 m_Abilities[62];

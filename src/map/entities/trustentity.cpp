@@ -291,8 +291,3 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
 
     this->processActionEffectFlags(action);
 }
-
-int8 CTrustEntity::getShieldSize()
-{
-    return 3;
-}
