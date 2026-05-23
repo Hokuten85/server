@@ -70,6 +70,7 @@ public:
     void resetStartTime();
 
     void   addMod(uint16 mod, int16 amount);
+    void   delMod(uint16 mod, int16 amount);
     uint32 getEffectFlags();
     void   setEffectFlags(uint32 flags);
     void   addEffectFlag(uint32 flag);

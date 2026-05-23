@@ -65,9 +65,9 @@ uint16 CLuaItem::getSubID()
     return m_readItem->getSubID();
 }
 
-auto CLuaItem::getFlag() const -> ItemFlag
+uint32 CLuaItem::getFlag() const
 {
-    return m_readItem->getFlag();
+    return static_cast<uint32>(m_readItem->getFlag());
 }
 
 uint8 CLuaItem::getAHCat()

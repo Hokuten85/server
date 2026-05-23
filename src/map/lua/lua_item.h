@@ -46,8 +46,8 @@ public:
     uint16 getID();    // get the item's id
     uint16 getSubID(); // get the item's subid
 
-    auto  getFlag() const -> ItemFlag; // get the item flag
-    uint8 getAHCat();                  // get the ah category
+    uint32 getFlag() const; // get the item flag (returned as uint32 so Lua bit ops work)
+    uint8  getAHCat();      // get the ah category
 
     uint32 getQuantity(); // get the quantity of item
 

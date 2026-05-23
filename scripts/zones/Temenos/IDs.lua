@@ -7,6 +7,8 @@ zones[xi.zone.TEMENOS] =
 {
     text =
     {
+        -- NOTE: Limbus-specific IDs restored after April 29 2026 text shift dropped them.
+        -- +3 shift applied from prior known values; verify in-game text if anything looks off.
         ITEM_CANNOT_BE_OBTAINED       = 6385, -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED                 = 6393, -- Obtained: <item>.
         GIL_OBTAINED                  = 6394, -- Obtained <number> gil.
@@ -16,7 +18,20 @@ zones[xi.zone.TEMENOS] =
         LOGIN_NUMBER                  = 7006, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7026, -- Your party is unable to participate because certain members' levels are restricted.
         CHIP_TRADE_T                  = 7033, -- What do you wish to do? Show me the cutscene again. Skip the cutscene and continue.
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7068, -- You have exceeded the time limit. Exiting Limbus now.
+        PARTY_MEMBERS_ARE_ENGAGED     = 7069, -- You have clearance to enter Limbus, but cannot enter while you or a party member is engaged in battle.
         CONQUEST_BASE                 = 7071, -- Tallying conquest results...
+        HUM                           = 7085, -- You hear a faint hum.
+        NO_BATTLEFIELD_ENTRY          = 7090, -- There is a disc here inscribed with strange letters. There are several six-sided indentations and a thin slot in the center.
+        MEMBERS_OF_YOUR_PARTY         = 7342, -- Currently, <number> party members in this area have clearance to enter Limbus.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7345, -- You may stay in Limbus for <number> [minute/minutes].
+        PARTY_MEMBERS_HAVE_FALLEN     = 7368, -- All party members in Limbus have fallen in battle. Exiting now.
+        THE_PARTY_WILL_BE_REMOVED     = 7378, -- All party members in Limbus have fallen in battle. Exiting in <number> [minute/minutes].
+        YOU_INSERT_THE_CARD_POLISHED  = 7383, -- You insert the <keyitem> polished with <keyitem> into the slot!
+        CHIP_TRADE                    = 7384, -- The light in the <item> has grown dim.
+        TIME_EXTENDED                 = 7386, -- Your time in Limbus has been extended <number> [minute/minutes].
+        TIME_LEFT                     = 7387, -- You have <number> [minute/minutes] left in Limbus.
+        ENTERING_THE_BATTLEFIELD_FOR  = 7552, -- You have entered [Temenos - Northern Tower/Temenos - Western Tower/Temenos - Eastern Tower/Central Temenos].
     },
     mob =
     {

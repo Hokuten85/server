@@ -206,6 +206,13 @@ void CLuaStatusEffect::addMod(uint16 mod, int16 amount)
 
 //======================================================//
 
+void CLuaStatusEffect::delMod(uint16 mod, int16 amount)
+{
+    m_PLuaStatusEffect->addMod(static_cast<Mod>(mod), -amount);
+}
+
+//======================================================//
+
 uint32 CLuaStatusEffect::getEffectFlags()
 {
     return m_PLuaStatusEffect->GetEffectFlags();
@@ -274,6 +281,7 @@ void CLuaStatusEffect::Register()
     SOL_REGISTER("getTickCount", CLuaStatusEffect::getTickCount);
     SOL_REGISTER("resetStartTime", CLuaStatusEffect::resetStartTime);
     SOL_REGISTER("addMod", CLuaStatusEffect::addMod);
+    SOL_REGISTER("delMod", CLuaStatusEffect::delMod);
     SOL_REGISTER("getSubPower", CLuaStatusEffect::getSubPower);
     SOL_REGISTER("setSubPower", CLuaStatusEffect::setSubPower);
     SOL_REGISTER("getTier", CLuaStatusEffect::getTier);
