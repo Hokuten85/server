@@ -25,6 +25,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.ftpMod = { 1.375, 1.375, 1.375 }
         params.multiHitfTP = true -- https://www.bg-wiki.com/ffxi/Blade:_Jin
     end
+	
+	params.ftpMod = { 1.375, 1.375, 1.375 }
+	params.multiHitfTP = true -- https://www.bg-wiki.com/ffxi/Blade:_Jin
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
